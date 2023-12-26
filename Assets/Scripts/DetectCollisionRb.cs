@@ -11,7 +11,11 @@ public class DetectCollisionRb : MonoBehaviour
     }
     public void OnCollisionStay(Collision collision)
     {
-        isColliding = true;
+        //Check if it's not colliding with hand layers
+        if (collision.gameObject.layer != 6 && collision.gameObject.layer != 7)
+        {
+            isColliding = true;
+        }
     }
     IEnumerator UnCollide()
     {

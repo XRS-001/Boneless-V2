@@ -8,7 +8,9 @@ using UnityEngine.UIElements;
 
 public class ContinuousMovementPhysics : MonoBehaviour
 {
-    public float speed = 1;
+    public float minSpeed = 1f;
+    public float maxSpeed = 2.5f;
+    private float speed = 0;
     public float turnSpeed = 60;
     private float jumpVelocity;
     public float jumpHeight = 1.5f;
@@ -24,12 +26,40 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private bool isClimbing;
     private bool isJumping;
 
+    public Rigidbody leftHand;
+    private Vector3 previousLeftPosition;
+    public Rigidbody rightHand;
+    private Vector3 previousRightPosition;
+
     public DetectCollisionNoRb[] feetDetection;
     public DetectCollisionRb[] handDetection;
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 leftVelocity = Quaternion.Inverse(rb.rotation) * (leftHand.position - previousLeftPosition);
+        float leftVelocityMagnitude = leftVelocity.magnitude / Time.deltaTime;
+        previousLeftPosition = leftHand.position;
+        if (leftVelocityMagnitude < 2)
+        {
+            leftVelocityMagnitude = 0;
+        }
+
+        Vector3 rightVelocity = Quaternion.Inverse(rb.rotation) * (rightHand.position - previousRightPosition);
+        float rightVelocityMagnitude = rightVelocity.magnitude / Time.deltaTime;
+        if (rightVelocityMagnitude < 2)
+        {
+            rightVelocityMagnitude = 0;
+        }
+        previousRightPosition = rightHand.position;
+
+        //Calculate running speed based on hand movement
+        speed = Mathf.Lerp(0, maxSpeed, (leftVelocityMagnitude + rightVelocityMagnitude) / 8);
+        if(speed < minSpeed)
+        {
+            speed = minSpeed;
+        }
+
         inputMoveAxis = moveInputSource.action.ReadValue<Vector2>();
         inputTurnAxis = turnInputSource.action.ReadValue<Vector2>().x;
 
@@ -68,9 +98,9 @@ public class ContinuousMovementPhysics : MonoBehaviour
             isJumping = true;
             //bouncing the parent of the tracked objects to simulate jumping
             float timer = 0;
-            while (timer < 0.1f)
+            while (timer < 0.2f)
             {
-                directionSource.parent.transform.localPosition = Vector3.Lerp(new Vector3(0, 0, 0), (new Vector3(0, 0, 0) - Vector3.up / 3f) * directionSource.localPosition.y, timer / 0.1f);
+                directionSource.parent.transform.localPosition = Vector3.Lerp(new Vector3(0, 0, 0), (new Vector3(0, 0, 0) - Vector3.up / 5f) * directionSource.localPosition.y, timer / 0.1f);
                 timer += Time.deltaTime;
                 yield return null;
             }
