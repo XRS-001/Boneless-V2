@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class ContinuousMovementPhysics : MonoBehaviour
 {
@@ -54,7 +50,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
         previousRightPosition = rightHand.position;
 
         //Calculate running speed based on hand movement
-        speed = Mathf.Lerp(0, maxSpeed, (leftVelocityMagnitude + rightVelocityMagnitude) / 8);
+        speed = Mathf.Lerp(0, maxSpeed, (leftVelocityMagnitude + rightVelocityMagnitude) / 5);
         if(speed < minSpeed)
         {
             speed = minSpeed;

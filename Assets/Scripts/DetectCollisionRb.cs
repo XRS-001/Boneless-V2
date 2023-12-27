@@ -11,8 +11,8 @@ public class DetectCollisionRb : MonoBehaviour
     }
     public void OnCollisionStay(Collision collision)
     {
-        //Check if it's not colliding with hand layers
-        if (collision.gameObject.layer != 6 && collision.gameObject.layer != 7)
+        //Check if it's not colliding with hand/body layers
+        if (collision.gameObject.layer != LayerMask.NameToLayer("LeftHand") && collision.gameObject.layer != LayerMask.NameToLayer("RightHand") && collision.gameObject.layer != LayerMask.NameToLayer("Body"))
         {
             isColliding = true;
         }

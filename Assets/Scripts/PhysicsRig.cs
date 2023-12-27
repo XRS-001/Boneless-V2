@@ -9,7 +9,9 @@ public class PhysicsRig : MonoBehaviour
     public Transform rightHandTarget;
 
     public ConfigurableJoint leftHandJoint;
+    private Rigidbody leftHand;
     public ConfigurableJoint rightHandJoint;
+    private Rigidbody rightHand;
 
     public ConfigurableJoint rightJoint;
     public Collider[] rightJointColliders;
@@ -46,7 +48,11 @@ public class PhysicsRig : MonoBehaviour
 
     public ConfigurableJoint leftLegJoint;
     public Transform leftLegTarget;
-
+    private void Start()
+    {
+        leftHand = leftHandJoint.GetComponent<Rigidbody>();
+        rightHand = rightHandJoint.GetComponent<Rigidbody>();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
