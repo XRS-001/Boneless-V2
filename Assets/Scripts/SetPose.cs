@@ -16,7 +16,11 @@ public class SetPose : MonoBehaviour
     private Quaternion[] startingFingerRotations;
     private Quaternion[] finalFingerRotations;
     private Vector3[] finalFingerPositions;
-
+    private GrabPhysics grabPhysics;
+    private void Start()
+    {
+        grabPhysics = GetComponent<GrabPhysics>();
+    }
     public void SetupPose()
     {
         handData.thumbAnimator.enabled = false;
@@ -75,7 +79,7 @@ public class SetPose : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        if (enableAnimators)
+        if (enableAnimators && !grabPhysics.isGrabbing)
         {
             handData.thumbAnimator.enabled = true;
             handData.animator.enabled = true;

@@ -9,37 +9,45 @@ using static GrabPhysics;
 
 public class GrabTwoAttach : BaseGrab
 {
-    [Header("RightAttach")]
-    public HandData rightPose;
-    public Vector3 rightAttachPosition;
-    public Vector3 rightAttachRotation;
-    [Header("LeftAttach")]
-    public HandData leftPose;
-    public Vector3 leftAttachPosition;
-    public Vector3 leftAttachRotation;
+    [System.Serializable]
+    public class LeftAttach
+    {
+        public HandData leftPose;
+        public Vector3 leftAttachPosition;
+        public Vector3 leftAttachRotation;
+    }
+    [System.Serializable]
+    public class RightAttach
+    {
+        public HandData rightPose;
+        public Vector3 rightAttachPosition;
+        public Vector3 rightAttachRotation;
+    }
+    public LeftAttach leftAttach;
+    public RightAttach rightAttach;
     public bool twoHanded;
     public void SetAttachPoint(handTypeEnum handType)
     {
         if(handType == handTypeEnum.Left)
         {
-            attachPoint = leftAttachPosition;
-            attachRotation = leftAttachRotation;
+            attachPoint = leftAttach.leftAttachPosition;
+            attachRotation = leftAttach.leftAttachRotation;
         }
         else
         {
-            attachPoint = rightAttachPosition;
-            attachRotation = rightAttachRotation;
+            attachPoint = rightAttach.rightAttachPosition;
+            attachRotation = rightAttach.rightAttachRotation;
         }
     }
     public void SetPose(handTypeEnum handType)
     {
         if (handType == handTypeEnum.Left)
         {
-            pose = leftPose;
+            pose = leftAttach.leftPose;
         }
         else
         {
-            pose = rightPose;
+            pose = rightAttach.rightPose;
         }
     }
 #if UNITY_EDITOR
@@ -48,7 +56,7 @@ public class GrabTwoAttach : BaseGrab
     public static void MirrorRightPose()
     {
         GrabTwoAttach handPose = Selection.activeGameObject.GetComponent<GrabTwoAttach>();
-        handPose.MirrorPose(handPose.leftPose, handPose.rightPose);
+        handPose.MirrorPose(handPose.leftAttach.leftPose, handPose.rightAttach.rightPose);
     }
 #endif
     public void MirrorPose(HandData poseToMirror, HandData poseUsedToMirror)

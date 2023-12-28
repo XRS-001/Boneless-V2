@@ -1,95 +1,117 @@
+using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PhysicsRig : MonoBehaviour
 {
-    public Transform playerHead;
-    public Transform leftHandTarget;
-    public Transform rightHandTarget;
+    [Tooltip("The players real world height in meters")]
+    public float height;
+    public VRIK playerModel;
+    public VRIK followIk;
+
+    public Transform leftHandPhysicsTarget;
+    public Transform rightHandPhysicsTarget;
 
     public ConfigurableJoint leftHandJoint;
-    private Rigidbody leftHand;
+    private GrabPhysics leftHandGrab;
     public ConfigurableJoint rightHandJoint;
-    private Rigidbody rightHand;
+    private GrabPhysics rightHandGrab;
 
-    public ConfigurableJoint rightJoint;
-    public Collider[] rightJointColliders;
+    [System.Serializable]
+    public class Joints
+    {
+        public ConfigurableJoint headJoint;
+        public Transform headTarget;
 
-    public ConfigurableJoint leftJoint;
-    public Collider[] leftJointColliders;
+        public ConfigurableJoint chestJoint;
+        public Transform chestTarget;
 
-    public ConfigurableJoint headJoint;
-    public Transform headTarget;
+        public ConfigurableJoint rightArmJoint;
+        public Transform rightArmTarget;
 
-    public ConfigurableJoint chestJoint;
-    public Transform chestTarget;
+        public ConfigurableJoint rightForearmJoint;
+        public Transform rightForearmTarget;
 
-    public ConfigurableJoint rightArmJoint;
-    public Transform rightArmTarget;
+        public ConfigurableJoint leftArmJoint;
+        public Transform leftArmTarget;
 
-    public ConfigurableJoint rightForearmJoint;
-    public Transform rightForearmTarget;
+        public ConfigurableJoint leftForearmJoint;
+        public Transform leftForearmTarget;
 
-    public ConfigurableJoint leftArmJoint;
-    public Transform leftArmTarget;
+        public ConfigurableJoint rightThighJoint;
+        public Transform rightThighTarget;
 
-    public ConfigurableJoint leftForearmJoint;
-    public Transform leftForearmTarget;
+        public ConfigurableJoint rightLegJoint;
+        public Transform rightLegTarget;
 
-    public ConfigurableJoint rightThighJoint;
-    public Transform rightThighTarget;
+        public ConfigurableJoint leftThighJoint;
+        public Transform leftThighTarget;
 
-    public ConfigurableJoint rightLegJoint;
-    public Transform rightLegTarget;
-
-    public ConfigurableJoint leftThighJoint;
-    public Transform leftThighTarget;
-
-    public ConfigurableJoint leftLegJoint;
-    public Transform leftLegTarget;
+        public ConfigurableJoint leftLegJoint;
+        public Transform leftLegTarget;
+    }
+    public Joints joints;
     private void Start()
     {
-        leftHand = leftHandJoint.GetComponent<Rigidbody>();
-        rightHand = rightHandJoint.GetComponent<Rigidbody>();
+        //calculate IK scale based on real world height
+        playerModel.solver.scale /= 1.75f / height;
+        followIk.solver.scale /= 1.75f / height;
+
+        leftHandGrab = leftHandJoint.GetComponent<GrabPhysics>();
+        rightHandGrab = rightHandJoint.GetComponent<GrabPhysics>();
+    }
+    public Vector3 CalculateWeight(Vector3 currentPosition, Vector3 targetPosition, float weight)
+    {
+        if (weight > 1)
+        {
+            //calculate the damping of the position to simulate weight
+            float dampingFactor = Mathf.Clamp(1 / (weight * 2), float.NegativeInfinity, 1);
+            return Vector3.Lerp(currentPosition, targetPosition, dampingFactor);
+        }
+        else
+        {
+            return targetPosition;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        leftHandJoint.targetPosition = leftHandTarget.localPosition;
-        leftHandJoint.targetRotation = leftHandTarget.localRotation;
+        leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
+        leftHandJoint.targetRotation = leftHandPhysicsTarget.localRotation;
 
-        rightHandJoint.targetPosition = rightHandTarget.localPosition;
-        rightHandJoint.targetRotation = rightHandTarget.localRotation;
+        rightHandJoint.targetPosition = CalculateWeight(rightHandJoint.targetPosition, rightHandPhysicsTarget.localPosition, rightHandGrab.connectedMass);
+        rightHandJoint.targetRotation = rightHandPhysicsTarget.localRotation;
 
-        headJoint.targetPosition = headTarget.localPosition;
-        headJoint.targetRotation = headTarget.localRotation;
+        joints.headJoint.targetPosition = joints.headTarget.localPosition;
+        joints.headJoint.targetRotation = joints.headTarget.localRotation;
 
-        chestJoint.targetPosition = chestTarget.localPosition;
-        chestJoint.targetRotation = chestTarget.localRotation;
+        joints.chestJoint.targetPosition = joints.chestTarget.localPosition;
+        joints.chestJoint.targetRotation = joints.chestTarget.localRotation;
 
-        rightArmJoint.targetPosition = rightArmTarget.localPosition;
-        rightArmJoint.targetRotation = rightArmTarget.localRotation;
+        joints.rightArmJoint.targetPosition = joints.rightArmTarget.localPosition;
+        joints.rightArmJoint.targetRotation = joints.rightArmTarget.localRotation;
 
-        rightForearmJoint.targetPosition = rightForearmTarget.localPosition;
-        rightForearmJoint.targetRotation = rightForearmTarget.localRotation;
+        joints.rightForearmJoint.targetPosition = joints.rightForearmTarget.localPosition;
+        joints.rightForearmJoint.targetRotation = joints.rightForearmTarget.localRotation;
 
-        leftArmJoint.targetPosition = leftArmTarget.localPosition;
-        leftArmJoint.targetRotation = leftArmTarget.localRotation;
+        joints.leftArmJoint.targetPosition = joints.leftArmTarget.localPosition;
+        joints.leftArmJoint.targetRotation = joints.leftArmTarget.localRotation;
 
-        leftForearmJoint.targetPosition = leftForearmTarget.localPosition;
-        leftForearmJoint.targetRotation = leftForearmTarget.localRotation;
+        joints.leftForearmJoint.targetPosition = joints.leftForearmTarget.localPosition;
+        joints.leftForearmJoint.targetRotation = joints.leftForearmTarget.localRotation;
 
-        rightThighJoint.targetPosition = rightThighTarget.localPosition;
-        rightThighJoint.targetRotation = rightThighTarget.localRotation;
+        joints.rightThighJoint.targetPosition = joints.rightThighTarget.localPosition;
+        joints.rightThighJoint.targetRotation = joints.rightThighTarget.localRotation;
 
-        rightLegJoint.targetPosition = rightLegTarget.localPosition;
-        rightLegJoint.targetRotation = rightLegTarget.localRotation;
+        joints.rightLegJoint.targetPosition = joints.rightLegTarget.localPosition;
+        joints.rightLegJoint.targetRotation = joints.rightLegTarget.localRotation;
 
-        leftThighJoint.targetPosition = leftThighTarget.localPosition;
-        leftThighJoint.targetRotation = leftThighTarget.localRotation;
+        joints.leftThighJoint.targetPosition = joints.leftThighTarget.localPosition;
+        joints.leftThighJoint.targetRotation = joints.leftThighTarget.localRotation;
 
-        leftLegJoint.targetPosition = leftLegTarget.localPosition;
-        leftLegJoint.targetRotation = leftLegTarget.localRotation;
+        joints.leftLegJoint.targetPosition = joints.leftLegTarget.localPosition;
+        joints.leftLegJoint.targetRotation = joints.leftLegTarget.localRotation;
     }
 }

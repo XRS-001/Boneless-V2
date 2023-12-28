@@ -43,7 +43,7 @@ public class HandAnimator : MonoBehaviour
             handAnimator.SetFloat("Trigger", 0);
             handAnimatorPhysics.SetFloat("Trigger", 0);
         }
-        if (triggerValue > 0.3f)
+        if (triggerValue > 0f)
         {
             handAnimator.SetFloat("Trigger", Mathf.Lerp(0.3f, 1f, triggerValue));
             handAnimatorPhysics.SetFloat("Trigger", Mathf.Lerp(0.3f, 1f, triggerValue));

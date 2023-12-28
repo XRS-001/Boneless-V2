@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 
 public class ContinuousMovementPhysics : MonoBehaviour
 {
-    public float minSpeed = 1f;
-    public float maxSpeed = 2.5f;
-    private float speed = 0;
+    public float speed = 1.5f;
+    public float runningSpeed = 2.5f;
     public float turnSpeed = 60;
     private float jumpVelocity;
     public float jumpHeight = 1.5f;
     public InputActionProperty moveInputSource;
+    public InputActionProperty runInputSource;
     public InputActionProperty turnInputSource;
     public InputActionProperty jumpInputSource;
     public Rigidbody rb;
@@ -22,40 +22,12 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private bool isClimbing;
     private bool isJumping;
 
-    public Rigidbody leftHand;
-    private Vector3 previousLeftPosition;
-    public Rigidbody rightHand;
-    private Vector3 previousRightPosition;
-
     public DetectCollisionNoRb[] feetDetection;
     public DetectCollisionRb[] handDetection;
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 leftVelocity = Quaternion.Inverse(rb.rotation) * (leftHand.position - previousLeftPosition);
-        float leftVelocityMagnitude = leftVelocity.magnitude / Time.deltaTime;
-        previousLeftPosition = leftHand.position;
-        if (leftVelocityMagnitude < 2)
-        {
-            leftVelocityMagnitude = 0;
-        }
-
-        Vector3 rightVelocity = Quaternion.Inverse(rb.rotation) * (rightHand.position - previousRightPosition);
-        float rightVelocityMagnitude = rightVelocity.magnitude / Time.deltaTime;
-        if (rightVelocityMagnitude < 2)
-        {
-            rightVelocityMagnitude = 0;
-        }
-        previousRightPosition = rightHand.position;
-
-        //Calculate running speed based on hand movement
-        speed = Mathf.Lerp(0, maxSpeed, (leftVelocityMagnitude + rightVelocityMagnitude) / 5);
-        if(speed < minSpeed)
-        {
-            speed = minSpeed;
-        }
-
         inputMoveAxis = moveInputSource.action.ReadValue<Vector2>();
         inputTurnAxis = turnInputSource.action.ReadValue<Vector2>().x;
 
@@ -119,7 +91,15 @@ public class ContinuousMovementPhysics : MonoBehaviour
             Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
             direction = yaw * new Vector3(inputMoveAxis.x, 0, inputMoveAxis.y);
 
-            Vector3 targetMovePosition = rb.position + direction * Time.fixedDeltaTime * speed;
+            Vector3 targetMovePosition;
+            if(runInputSource.action.ReadValue<float>() > 0f)
+            {
+                targetMovePosition = rb.position + direction * Time.fixedDeltaTime * runningSpeed;
+            }
+            else
+            {
+                targetMovePosition = rb.position + direction * Time.fixedDeltaTime * speed;
+            }
 
             Vector3 axis = Vector3.up;
             float angle = turnSpeed * Time.fixedDeltaTime * inputTurnAxis;
