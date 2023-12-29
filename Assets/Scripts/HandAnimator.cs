@@ -4,24 +4,56 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+[System.Serializable]
+public class IndexFingerBones
+{
+    public Transform index1;
+    public Transform index2;
+    public Transform index3;
+}
 public class HandAnimator : MonoBehaviour
 {
     public InputActionProperty trigger;
     public InputActionProperty triggerTouch;
     public InputActionProperty grip;
     public InputActionProperty thumb;
+
     public Animator handAnimator;
     public Animator thumbAnimator;
+
     [Header("Collider Animation:")]
     public Animator handAnimatorPhysics;
     public Animator thumbAnimatorPhysics;
+
+    private float triggeredValue;
     private bool thumbTouched = false;
     private bool triggerTouched;
 
+    private GrabPhysics grabPhysics;
+    public IndexFingerBones indexFingerBones;
+    private Quaternion originalIndex1Rotation;
+    private Quaternion originalIndex2Rotation;
+    private Quaternion originalIndex3Rotation;
+    private void Start()
+    {
+        originalIndex1Rotation = indexFingerBones.index1.localRotation;
+        originalIndex2Rotation = indexFingerBones.index2.localRotation;
+        originalIndex3Rotation = indexFingerBones.index3.localRotation;
+        grabPhysics = GetComponent<GrabPhysics>();
+    }
     // Update is called once per frame
     void Update()
     {
+        if(grabPhysics.isGrabbing)
+        {
+            HandData h = grabPhysics.poseSetup.pose;
+
+            //giving freedom to the index finger to rotate during grabbing
+            indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
+            indexFingerBones.index2.localRotation = Quaternion.Slerp(originalIndex2Rotation, h.indexFingerBones.index2.localRotation, triggeredValue);
+            indexFingerBones.index3.localRotation = Quaternion.Slerp(originalIndex3Rotation, h.indexFingerBones.index3.localRotation, triggeredValue);
+        }
+
         //trigger
         float triggerValue = trigger.action.ReadValue<float>();
         float triggerTouchValue = triggerTouch.action.ReadValue<float>();
@@ -31,8 +63,7 @@ public class HandAnimator : MonoBehaviour
         }
         else if (triggerTouchValue > 0f && triggerTouched)
         {
-            handAnimator.SetFloat("Trigger", 0.3f);
-            handAnimatorPhysics.SetFloat("Trigger", 0.3f);
+            triggeredValue = 0.15f;
         }
         else if (triggerTouched) 
         {
@@ -40,14 +71,14 @@ public class HandAnimator : MonoBehaviour
         }
         if(!triggerTouched && triggerTouchValue == 0f)
         {
-            handAnimator.SetFloat("Trigger", 0);
-            handAnimatorPhysics.SetFloat("Trigger", 0);
+            triggeredValue = 0f;
         }
         if (triggerValue > 0f)
         {
-            handAnimator.SetFloat("Trigger", Mathf.Lerp(0.3f, 1f, triggerValue));
-            handAnimatorPhysics.SetFloat("Trigger", Mathf.Lerp(0.3f, 1f, triggerValue));
+            triggeredValue = Mathf.Lerp(0.15f, 1f, triggerValue);
         }
+        handAnimator.SetFloat("Trigger", triggeredValue);
+        handAnimatorPhysics.SetFloat("Trigger", triggeredValue);
 
         //grip
         float gripValue = grip.action.ReadValue<float>();
@@ -78,8 +109,7 @@ public class HandAnimator : MonoBehaviour
             float triggerTouchValue = triggerTouch.action.ReadValue<float>();
             if (triggerTouchValue > 0f)
             {
-                handAnimator.SetFloat("Trigger", Mathf.Lerp(0, 0.3f, timer / 0.05f));
-                handAnimatorPhysics.SetFloat("Trigger", Mathf.Lerp(0, 0.3f, timer / 0.05f));
+                triggeredValue = Mathf.Lerp(0, 0.15f, timer / 0.05f);
             }
             else
             {
@@ -99,9 +129,7 @@ public class HandAnimator : MonoBehaviour
             float triggerTouchValue = triggerTouch.action.ReadValue<float>();
             if (triggerTouchValue == 0f)
             {
-                handAnimator.SetFloat("Trigger", Mathf.Lerp(0.3f, 0, timer / 0.05f));
-                handAnimatorPhysics.SetFloat("Trigger", Mathf.Lerp(0.3f, 0, timer / 0.05f));
-
+                triggeredValue = Mathf.Lerp(0.15f, 0, timer / 0.05f);
             }
             else
             {

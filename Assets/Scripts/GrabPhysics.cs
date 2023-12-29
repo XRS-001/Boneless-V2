@@ -8,7 +8,7 @@ public class GrabPhysics : MonoBehaviour
     public enum handTypeEnum { Left, Right }
     public handTypeEnum handType;
     public Rigidbody rb;
-    private SetPose poseSetup;
+    public SetPose poseSetup { get; private set; }
 
     [Tooltip("The forearm collider to ignore on grab")]
     public Collider forearmCollider;

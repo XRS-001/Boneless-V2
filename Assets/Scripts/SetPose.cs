@@ -73,7 +73,10 @@ public class SetPose : MonoBehaviour
 
             for (int i = 0; i < newBonesRotation.Length; i++)
             {
-                h.fingerBones[i].localRotation = Quaternion.Lerp(startingBonesRotation[i], newBonesRotation[i], timer / poseTransitionDuration);
+                if (!h.fingerBones[i].name.Contains("Index"))
+                {
+                    h.fingerBones[i].localRotation = Quaternion.Lerp(startingBonesRotation[i], newBonesRotation[i], timer / poseTransitionDuration);
+                }
             }
 
             timer += Time.deltaTime;
