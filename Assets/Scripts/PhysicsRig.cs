@@ -67,7 +67,7 @@ public class PhysicsRig : MonoBehaviour
         if (weight > 1)
         {
             //calculate the damping of the position to simulate weight
-            float dampingFactor = Mathf.Clamp(1 / (weight * 2), float.NegativeInfinity, 1);
+            float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
             return Vector3.Lerp(currentPosition, targetPosition, dampingFactor);
         }
         else
