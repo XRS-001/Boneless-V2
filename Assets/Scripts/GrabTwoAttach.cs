@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Runtime.CompilerServices;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -26,6 +27,7 @@ public class GrabTwoAttach : BaseGrab
     public LeftAttach leftAttach;
     public RightAttach rightAttach;
     public bool twoHanded;
+
     public void SetAttachPoint(handTypeEnum handType)
     {
         if(handType == handTypeEnum.Left)

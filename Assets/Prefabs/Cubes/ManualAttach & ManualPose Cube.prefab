@@ -416,6 +416,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  indexFingerBones:
+    index1: {fileID: 7710210548064636615}
+    index2: {fileID: 7727091885240806017}
+    index3: {fileID: 5213773148981364619}
 --- !u!1 &1927437238242684554
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +921,7 @@ Transform:
   - {fileID: 5705883217256471357}
   - {fileID: 5382612139939178711}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2232777602051903343
 MeshFilter:
@@ -1691,3 +1695,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  indexFingerBones:
+    index1: {fileID: 6253330775728988049}
+    index2: {fileID: 7939401560043110318}
+    index3: {fileID: 1800113453332009305}

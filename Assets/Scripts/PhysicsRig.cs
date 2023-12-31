@@ -75,13 +75,21 @@ public class PhysicsRig : MonoBehaviour
             return targetPosition;
         }
     }
+    public Vector3 CalculateYOffset(float weight)
+    {
+        Vector3 offset = new Vector3(0, 0, 0);
+        offset.y -= weight / 3;
+        return offset;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
+        leftHandJoint.targetVelocity = CalculateYOffset(leftHandGrab.connectedMass);
         leftHandJoint.targetRotation = leftHandPhysicsTarget.localRotation;
 
         rightHandJoint.targetPosition = CalculateWeight(rightHandJoint.targetPosition, rightHandPhysicsTarget.localPosition, rightHandGrab.connectedMass);
+        rightHandJoint.targetVelocity = CalculateYOffset(rightHandGrab.connectedMass);
         rightHandJoint.targetRotation = rightHandPhysicsTarget.localRotation;
 
         joints.headJoint.targetPosition = joints.headTarget.localPosition;
