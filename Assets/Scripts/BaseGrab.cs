@@ -1,10 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseGrab : MonoBehaviour
 {
+    public bool displayAttachGizmos;
+    public readonly Color color = new Color(1, 0.75f, 0, 0.5f);
+
     public Vector3 attachPoint { get; protected set; }
     public Vector3 attachRotation { get; protected set; }
     public Collider[] colliders;

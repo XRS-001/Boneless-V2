@@ -27,7 +27,16 @@ public class GrabTwoAttach : BaseGrab
     public LeftAttach leftAttach;
     public RightAttach rightAttach;
     public bool twoHanded;
-
+    private void OnDrawGizmosSelected()
+    {
+        if (displayAttachGizmos)
+        {
+            //draw visual aids for the attach points
+            Gizmos.color = color;
+            Gizmos.DrawSphere(transform.TransformPoint(leftAttach.leftAttachPosition), 0.025f);
+            Gizmos.DrawSphere(transform.TransformPoint(rightAttach.rightAttachPosition), 0.025f);
+        }
+    }
     public void SetAttachPoint(handTypeEnum handType)
     {
         if(handType == handTypeEnum.Left)

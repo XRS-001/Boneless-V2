@@ -10664,10 +10664,12 @@ MonoBehaviour:
       type: 3}
   radius: 0.1
   grabZoneOffset: {x: 0, y: 0, z: -0.13}
+  grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
     m_Bits: 512
   isGrabbing: 0
+  isHovering: 0
   connectedMass: 0
 --- !u!114 &936266910
 MonoBehaviour:
@@ -12877,7 +12879,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1212200670}
   - component: {fileID: 1212200671}
-  - component: {fileID: 1212200679}
   - component: {fileID: 1212200672}
   - component: {fileID: 1212200673}
   - component: {fileID: 1212200674}
@@ -13190,10 +13191,12 @@ MonoBehaviour:
       type: 3}
   radius: 0.1
   grabZoneOffset: {x: 0, y: 0, z: -0.13}
+  grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
     m_Bits: 512
   isGrabbing: 0
+  isHovering: 0
   connectedMass: 0
 --- !u!114 &1212200678
 MonoBehaviour:
@@ -13209,18 +13212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseTransitionDuration: 0.2
   handData: {fileID: 6463750766064791287}
---- !u!75 &1212200679
-ConstantForce:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212200669}
-  m_Enabled: 1
-  m_Force: {x: 0, y: -500, z: 0}
-  m_RelativeForce: {x: 0, y: 0, z: 0}
-  m_Torque: {x: 0, y: 0, z: 0}
-  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!1 &1216056089
 GameObject:
   m_ObjectHideFlags: 0
@@ -25746,7 +25737,7 @@ PrefabInstance:
     - target: {fileID: 625557106850216747, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.77000004
+      value: -0.7713
       objectReference: {fileID: 0}
     - target: {fileID: 625557106850216747, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
@@ -25795,8 +25786,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
+      propertyPath: color.a
+      value: 0.4862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: color.g
+      value: 0.4088499
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: color.r
+      value: 0.5943396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
       propertyPath: dynamic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftOffset.x
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftOffset.y
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftOffset.z
+      value: 1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightOffset.x
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightOffset.y
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightOffset.z
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
@@ -25810,9 +25851,49 @@ PrefabInstance:
       objectReference: {fileID: 4300000, guid: ca20b3907ff1c794cb89c1ad2cce8282, type: 3}
     - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
+      propertyPath: displayAttachGizmos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
       propertyPath: rightHandAttachMesh
       value: 
       objectReference: {fileID: 4300000, guid: d0c255d07fd68f14b94e55d388e7e6bb, type: 3}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.color.a
+      value: 0.45882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.color.g
+      value: 0.56958544
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.color.r
+      value: 0.6886792
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.leftHandMesh
+      value: 
+      objectReference: {fileID: 4300000, guid: ca20b3907ff1c794cb89c1ad2cce8282, type: 3}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.rightHandMesh
+      value: 
+      objectReference: {fileID: 4300000, guid: d0c255d07fd68f14b94e55d388e7e6bb, type: 3}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: handAttachGizmo.displayHandGizmos
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2905607143777759512, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
       propertyPath: originalBones.Array.data[0]
@@ -28939,6 +29020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a193229b537e74f9fc7f7aa5984c34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayAttachGizmos: 1
   colliders:
   - {fileID: 2481129441173671631}
   isGrabbing: 0
@@ -28953,8 +29035,9 @@ MonoBehaviour:
     rightPose: {fileID: 6678287764768540131}
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
-  twoHanded: 0
+  twoHanded: 1
   dynamicSettings:
+    attachScale: 1.25
     leftHand: {fileID: 1212200670}
     leftGrab: {fileID: 0}
     rightHand: {fileID: 936266903}

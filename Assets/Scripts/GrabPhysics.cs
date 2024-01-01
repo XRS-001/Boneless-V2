@@ -19,6 +19,8 @@ public class GrabPhysics : MonoBehaviour
     public float radius = 0.1f;
     [Tooltip("The local offset for the grab zone of the hand")]
     public Vector3 grabZoneOffset;
+    [HideInInspector]
+    public Vector3 grabZonePosition;
     public LayerMask grabLayer;
 
     private ConfigurableJoint configJoint;
@@ -33,13 +35,44 @@ public class GrabPhysics : MonoBehaviour
     {
         poseSetup = GetComponent<SetPose>();
     }
+    public void Grab()
+    {
+        configJoint = gameObject.AddComponent<ConfigurableJoint>();
+        configJoint.autoConfigureConnectedAnchor = false;
+        grab.SetAttachPoint(handType);
+        transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
+
+        configJoint.xMotion = ConfigurableJointMotion.Locked;
+        configJoint.yMotion = ConfigurableJointMotion.Locked;
+        configJoint.zMotion = ConfigurableJointMotion.Locked;
+
+        configJoint.angularXMotion = ConfigurableJointMotion.Locked;
+        configJoint.angularYMotion = ConfigurableJointMotion.Locked;
+        configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+
+        configJoint.connectedBody = nearbyRigidbody;
+        configJoint.connectedMassScale *= nearbyRigidbody.mass;
+        configJoint.connectedAnchor = grab.attachPoint;
+
+        foreach (Collider collider in grab.colliders)
+        {
+            Physics.IgnoreCollision(forearmCollider, collider, true);
+        }
+        connectedMass = nearbyRigidbody.mass;
+        grab.SetPose(handType);
+        poseSetup.pose = grab.pose;
+        poseSetup.SetupPose();
+        grab.isGrabbing = true;
+        isGrabbing = true;
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
+        grabZonePosition = transform.position - (transform.rotation * grabZoneOffset);
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
         bool isGrabButtonPressedThisFrame = grabInputSource.action.WasPressedThisFrame();
 
-        nearbyColliders = Physics.OverlapSphere(transform.position - (transform.rotation * grabZoneOffset), radius, grabLayer, QueryTriggerInteraction.Ignore);
+        nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer, QueryTriggerInteraction.Ignore);
         if (nearbyColliders.Length > 0)
         {
             isHovering = true;
@@ -59,73 +92,19 @@ public class GrabPhysics : MonoBehaviour
 
                 if (!grab.isGrabbing)
                 {
-                    StartCoroutine(IgnoreCollision(closestCollider, nearbyColliders));
+                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                     grab.handGrabbing = this;
-
-                    configJoint = gameObject.AddComponent<ConfigurableJoint>();
-                    configJoint.autoConfigureConnectedAnchor = false;
-                    grab.SetAttachPoint(handType);
-                    transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
-
-                    configJoint.xMotion = ConfigurableJointMotion.Locked;
-                    configJoint.yMotion = ConfigurableJointMotion.Locked;
-                    configJoint.zMotion = ConfigurableJointMotion.Locked;
-
-                    configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                    configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                    configJoint.angularZMotion = ConfigurableJointMotion.Locked;
-
-                    configJoint.connectedBody = nearbyRigidbody;
-                    configJoint.connectedMassScale *= nearbyRigidbody.mass;
-                    configJoint.connectedAnchor = grab.attachPoint;
-
-                    foreach (Collider collider in grab.colliders)
-                    {
-                        Physics.IgnoreCollision(forearmCollider, collider, true);
-                    }
-                    connectedMass = nearbyRigidbody.mass;
-                    grab.SetPose(handType);
-                    poseSetup.pose = grab.pose;
-                    poseSetup.SetupPose();
-                    grab.isGrabbing = true;
-                    isGrabbing = true;
+                    Grab();
                 }
                 else if (grab.twoHanded)
                 {
                     grab.isTwoHandGrabbing = true;
-                    StartCoroutine(IgnoreCollision(closestCollider, nearbyColliders));
+                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                     grab.secondHandGrabbing = this;
                     colliderGroup.SetActive(false);
                     grab.handGrabbing.colliderGroup.SetActive(false);
                     Physics.IgnoreCollision(forearmCollider, grab.handGrabbing.forearmCollider, true);
-
-                    configJoint = gameObject.AddComponent<ConfigurableJoint>();
-                    configJoint.autoConfigureConnectedAnchor = false;
-                    grab.SetAttachPoint(handType);
-                    transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
-
-                    configJoint.xMotion = ConfigurableJointMotion.Locked;
-                    configJoint.yMotion = ConfigurableJointMotion.Locked;
-                    configJoint.zMotion = ConfigurableJointMotion.Locked;
-
-                    configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                    configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                    configJoint.angularZMotion = ConfigurableJointMotion.Locked;
-
-                    configJoint.connectedBody = nearbyRigidbody;
-                    configJoint.connectedMassScale *= nearbyRigidbody.mass;
-                    configJoint.connectedAnchor = grab.attachPoint;
-
-                    foreach (Collider collider in grab.colliders)
-                    {
-                        Physics.IgnoreCollision(forearmCollider, collider, true);
-                    }
-                    connectedMass = nearbyRigidbody.mass;
-                    grab.SetPose(handType);
-                    poseSetup.pose = grab.pose;
-                    poseSetup.SetupPose();
-                    grab.isGrabbing = true;
-                    isGrabbing = true;
+                    Grab();
                 }
             }
             else
@@ -156,10 +135,7 @@ public class GrabPhysics : MonoBehaviour
                     {
                         Destroy(configJoint);
                     }
-                    foreach (Collider collider in grab.colliders)
-                    {
-                        Physics.IgnoreCollision(forearmCollider, collider, false);
-                    }
+                    StartCoroutine(DelayCollisionExit(false));
                     grab.handGrabbing = null;
                     grab.isGrabbing = false;
                 }
@@ -173,13 +149,8 @@ public class GrabPhysics : MonoBehaviour
                     {
                         Destroy(configJoint);
                     }
-                    foreach (Collider collider in grab.colliders)
-                    {
-                        Physics.IgnoreCollision(forearmCollider, collider, false);
-                    }
+                    StartCoroutine(DelayCollisionExit(true));
                     Physics.IgnoreCollision(forearmCollider, grab.handGrabbing.forearmCollider, true);
-                    colliderGroup.SetActive(true);
-                    grab.handGrabbing.colliderGroup.SetActive(true);
                     grab.isTwoHandGrabbing = false;
                     if (grab.handGrabbing == this)
                     {
@@ -197,7 +168,23 @@ public class GrabPhysics : MonoBehaviour
             grab = null;
         }
     }
-    IEnumerator IgnoreCollision(Collider collider, Collider[] collidersToIgnore)
+    IEnumerator DelayCollisionExit(bool wasTwoHanded)
+    {
+        GrabTwoAttach oldGrab = grab;
+        GrabPhysics oldHandGrabbing = grab.handGrabbing;
+        yield return new WaitForSeconds(0.25f);
+
+        foreach (Collider collider in oldGrab.colliders)
+        {
+            Physics.IgnoreCollision(forearmCollider, collider, false);
+        }
+        if(wasTwoHanded)
+        {
+            colliderGroup.SetActive(true);
+            oldHandGrabbing.colliderGroup.SetActive(true);
+        }
+    }
+    IEnumerator IgnoreCollisionInteractables(Collider collider, Collider[] collidersToIgnore)
     {
         foreach(Collider colliderToIgnore in collidersToIgnore)
         {
@@ -236,6 +223,6 @@ public class GrabPhysics : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position - (transform.rotation * grabZoneOffset), radius);
+        Gizmos.DrawSphere(grabZonePosition, radius);
     }
 }

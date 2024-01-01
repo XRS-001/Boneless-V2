@@ -1,10 +1,13 @@
 using UnityEngine;
+using static GrabTwoAttach;
 
 public class GrabDynamic : GrabTwoAttach
 {
     [System.Serializable]
     public class DynamicSettings
     {
+        [Tooltip("The local radius in which the attach point can go")]
+        public float attachScale;
         [Tooltip("The transform used to calculate the leftAttach (must be the physical presence of the left hand)")]
         public Transform leftHand;
         [HideInInspector]
@@ -23,15 +26,22 @@ public class GrabDynamic : GrabTwoAttach
     // Update is called once per frame
     void Update()
     {
-        if (dynamicSettings.leftGrab.isHovering)
+        if (dynamicSettings.leftGrab.isHovering && !dynamicSettings.leftGrab.isGrabbing)
         {
-            leftAttach.leftAttachPosition = transform.InverseTransformPoint(colliders[0].ClosestPoint(dynamicSettings.leftHand.position));
-            rightAttach.rightAttachPosition = transform.InverseTransformPoint(colliders[0].ClosestPoint(dynamicSettings.rightHand.position));
-        }
-        if(dynamicSettings.rightGrab.isHovering)
-        {
+            //cast a ray that directs to the interactable and outputs the hitInfo
+            GetComponent<BoxCollider>().Raycast(new Ray(dynamicSettings.leftHand.position, transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
+            //set the leftAttachPosition to the hitPoint and add some offset
+            leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (hitInfo.normal / 30));
             leftAttach.leftAttachRotation = dynamicSettings.leftHand.rotation.eulerAngles;
+        }
+        if (dynamicSettings.rightGrab.isHovering && !dynamicSettings.rightGrab.isGrabbing)
+        {
+            //cast a ray that directs to the interactable and outputs the hitInfo
+            GetComponent<BoxCollider>().Raycast(new Ray(dynamicSettings.rightHand.position, transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+
+            //set the leftAttachPosition to the hitPoint and add some offset
+            rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point + (hitInfo.normal / 30));
             rightAttach.rightAttachRotation = dynamicSettings.rightHand.rotation.eulerAngles;
         }
     }
