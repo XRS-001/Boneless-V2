@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 using System.Collections;
-
+using static EnumDeclaration;
 public class GrabPhysics : MonoBehaviour
 {
-    public enum handTypeEnum { Left, Right }
     public handTypeEnum handType;
     public Rigidbody rb;
     public SetPose poseSetup { get; private set; }
@@ -78,53 +76,53 @@ public class GrabPhysics : MonoBehaviour
             isHovering = true;
             closestCollider = FindClosestInteractable(nearbyColliders);
             nearbyRigidbody = closestCollider.attachedRigidbody;
+
+            if (isGrabButtonPressedThisFrame && !isGrabbing)
+            {
+                if (nearbyRigidbody != null)
+                {
+                    grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
+
+                    if (!grab.isGrabbing)
+                    {
+                        StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                        grab.handGrabbing = this;
+                        Grab();
+                    }
+                    else if (grab.twoHanded)
+                    {
+                        grab.isTwoHandGrabbing = true;
+                        StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                        grab.secondHandGrabbing = this;
+                        colliderGroup.SetActive(false);
+                        grab.handGrabbing.colliderGroup.SetActive(false);
+                        Physics.IgnoreCollision(forearmCollider, grab.handGrabbing.forearmCollider, true);
+                        Grab();
+                    }
+                }
+                else
+                {
+                    configJoint = gameObject.AddComponent<ConfigurableJoint>();
+
+                    configJoint.xMotion = ConfigurableJointMotion.Locked;
+                    configJoint.yMotion = ConfigurableJointMotion.Locked;
+                    configJoint.zMotion = ConfigurableJointMotion.Locked;
+
+                    configJoint.angularXMotion = ConfigurableJointMotion.Locked;
+                    configJoint.angularYMotion = ConfigurableJointMotion.Locked;
+                    configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+
+                    configJoint.autoConfigureConnectedAnchor = false;
+                    configJoint.connectedAnchor = transform.position;
+                    isGrabbing = true;
+                }
+            }
         }
         else
         {
             isHovering = false;
         }
-
-        if (isGrabButtonPressedThisFrame && !isGrabbing)
-        {
-            if (nearbyRigidbody != null)
-            {
-                grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
-
-                if (!grab.isGrabbing)
-                {
-                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                    grab.handGrabbing = this;
-                    Grab();
-                }
-                else if (grab.twoHanded)
-                {
-                    grab.isTwoHandGrabbing = true;
-                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                    grab.secondHandGrabbing = this;
-                    colliderGroup.SetActive(false);
-                    grab.handGrabbing.colliderGroup.SetActive(false);
-                    Physics.IgnoreCollision(forearmCollider, grab.handGrabbing.forearmCollider, true);
-                    Grab();
-                }
-            }
-            else
-            {
-                configJoint = gameObject.AddComponent<ConfigurableJoint>();
-
-                configJoint.xMotion = ConfigurableJointMotion.Locked;
-                configJoint.yMotion = ConfigurableJointMotion.Locked;
-                configJoint.zMotion = ConfigurableJointMotion.Locked;
-
-                configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                configJoint.angularZMotion = ConfigurableJointMotion.Locked;
-
-                configJoint.autoConfigureConnectedAnchor = false;
-                configJoint.connectedAnchor = transform.position;
-                isGrabbing = true;
-            }
-        }
-        else if(!isGrabButtonPressed && isGrabbing)
+        if (!isGrabButtonPressed && isGrabbing)
         {
             isGrabbing = false;
             if (grab != null)

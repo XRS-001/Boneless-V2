@@ -1,15 +1,17 @@
+using RootMotion.Demos;
 using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public class VRIKData
+{
+    public VRIKCalibrator.CalibrationData ikData;
+}
 public class PhysicsRig : MonoBehaviour
 {
-    [Tooltip("The players real world height in meters")]
-    public float height;
     public VRIK playerModel;
-    public VRIK followIk;
 
     public Transform leftHandPhysicsTarget;
     public Transform rightHandPhysicsTarget;
@@ -55,12 +57,44 @@ public class PhysicsRig : MonoBehaviour
     public Joints joints;
     private void Start()
     {
-        //calculate IK scale based on real world height
-        playerModel.solver.scale /= 1.75f / height;
-        followIk.solver.scale /= 1.75f / height;
-
+        LoadData();
         leftHandGrab = leftHandJoint.GetComponent<GrabPhysics>();
         rightHandGrab = rightHandJoint.GetComponent<GrabPhysics>();
+    }
+    private VRIKData vrikData = new VRIKData();
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+    void SaveData()
+    {
+        VRIKCalibrator.CalibrationData calibrationData = GetComponent<VRIKCalibrationBasic>().data;
+
+        vrikData.ikData = calibrationData;
+
+        string json = JsonUtility.ToJson(vrikData);
+
+        PlayerPrefs.SetString("CalibrationData", json);
+        PlayerPrefs.Save();
+    }
+
+    void LoadData()
+    {
+        string json = PlayerPrefs.GetString("CalibrationData", "");
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            vrikData = JsonUtility.FromJson<VRIKData>(json);
+
+            VRIKCalibrator.CalibrationData loadedCalibrationData = vrikData.ikData;
+
+            GetComponent<VRIKCalibrationBasic>().data = loadedCalibrationData;
+            Debug.Log("<color=#00c04b> Loaded Calibration Data </color>");
+        }
+        else
+        {
+            Debug.Log("<color=#FF2400> No saved calibration data found. </color>");
+        }
     }
     public Vector3 CalculateWeight(Vector3 currentPosition, Vector3 targetPosition, float weight)
     {
@@ -75,21 +109,13 @@ public class PhysicsRig : MonoBehaviour
             return targetPosition;
         }
     }
-    public Vector3 CalculateYOffset(float weight)
-    {
-        Vector3 offset = new Vector3(0, 0, 0);
-        offset.y -= weight / 3;
-        return offset;
-    }
     // Update is called once per frame
     void FixedUpdate()
     {
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
-        leftHandJoint.targetVelocity = CalculateYOffset(leftHandGrab.connectedMass);
         leftHandJoint.targetRotation = leftHandPhysicsTarget.localRotation;
 
         rightHandJoint.targetPosition = CalculateWeight(rightHandJoint.targetPosition, rightHandPhysicsTarget.localPosition, rightHandGrab.connectedMass);
-        rightHandJoint.targetVelocity = CalculateYOffset(rightHandGrab.connectedMass);
         rightHandJoint.targetRotation = rightHandPhysicsTarget.localRotation;
 
         joints.headJoint.targetPosition = joints.headTarget.localPosition;

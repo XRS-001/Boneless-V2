@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using static GrabPhysics;
+using static EnumDeclaration;
 
 public class GrabTwoAttach : BaseGrab
 {
