@@ -9,6 +9,7 @@ public class BaseGrab : MonoBehaviour
     public Vector3 attachPoint { get; protected set; }
     public Vector3 attachRotation { get; protected set; }
     public Collider[] colliders;
+    protected Rigidbody rb;
     [HideInInspector]
     public bool isGrabbing;
     [HideInInspector]

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VRIKData
 {
@@ -11,8 +12,9 @@ public class VRIKData
 }
 public class PhysicsRig : MonoBehaviour
 {
+    public float height;
     public VRIK playerModel;
-
+    private VRIKCalibrationBasic calibrator;
     public Transform leftHandPhysicsTarget;
     public Transform rightHandPhysicsTarget;
 
@@ -55,17 +57,19 @@ public class PhysicsRig : MonoBehaviour
         public Transform leftLegTarget;
     }
     public Joints joints;
+    public void ChangeScene(string scene)
+    {
+        SaveData();
+        SceneManager.LoadScene(scene);
+    }
     private void Start()
     {
+        calibrator = GetComponent<VRIKCalibrationBasic>();
         LoadData();
         leftHandGrab = leftHandJoint.GetComponent<GrabPhysics>();
         rightHandGrab = rightHandJoint.GetComponent<GrabPhysics>();
     }
     private VRIKData vrikData = new VRIKData();
-    private void OnApplicationQuit()
-    {
-        SaveData();
-    }
     void SaveData()
     {
         VRIKCalibrator.CalibrationData calibrationData = GetComponent<VRIKCalibrationBasic>().data;
@@ -112,6 +116,8 @@ public class PhysicsRig : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //calculate the player height
+        height = 1.75f * calibrator.data.scale;
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
         leftHandJoint.targetRotation = leftHandPhysicsTarget.localRotation;
 

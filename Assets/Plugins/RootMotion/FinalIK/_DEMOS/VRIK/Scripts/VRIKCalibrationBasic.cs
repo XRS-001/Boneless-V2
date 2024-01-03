@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RootMotion.FinalIK;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 namespace RootMotion.Demos
 {
     public class VRIKCalibrationBasic : MonoBehaviour
@@ -29,7 +30,7 @@ namespace RootMotion.Demos
 
         private void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.C) || calibrateHeight.action.WasPressedThisFrame())
+            if (Input.GetKeyDown(KeyCode.C) || calibrateHeight.action.WasPressedThisFrame() && SceneManager.GetActiveScene().name == "Start Environment")
             {
                 data = VRIKCalibrator.Calibrate(ik, centerEyeAnchor, leftHandAnchor, rightHandAnchor, headAnchorPositionOffset, headAnchorRotationOffset, handAnchorPositionOffset, handAnchorRotationOffset, scaleMlp);
             }

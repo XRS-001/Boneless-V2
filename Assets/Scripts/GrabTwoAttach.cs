@@ -27,6 +27,18 @@ public class GrabTwoAttach : BaseGrab
     public LeftAttach leftAttach;
     public RightAttach rightAttach;
     public bool twoHanded;
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        Debug.Log(rb);
+    }
+    private void FixedUpdate()
+    {
+        if (isGrabbing)
+        {
+            rb.AddForce(Vector3.down * (500 * rb.mass));
+        }
+    }
     private void OnDrawGizmosSelected()
     {
         if (displayAttachGizmos)

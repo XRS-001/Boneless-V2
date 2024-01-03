@@ -20,6 +20,7 @@ public class GrabDynamic : GrabTwoAttach
     public DynamicSettings dynamicSettings;
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
         dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
     }
@@ -32,8 +33,9 @@ public class GrabDynamic : GrabTwoAttach
             GetComponent<BoxCollider>().Raycast(new Ray(dynamicSettings.leftHand.position, transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
             //set the leftAttachPosition to the hitPoint and add some offset
-            leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (hitInfo.normal / 30));
-            leftAttach.leftAttachRotation = dynamicSettings.leftHand.rotation.eulerAngles;
+            leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right) / 25);
+            //set the rotation to be the hands rotation extending the the normal
+            leftAttach.leftAttachRotation = Quaternion.Slerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), 0.5f).eulerAngles;
         }
         if (dynamicSettings.rightGrab.isHovering && !dynamicSettings.rightGrab.isGrabbing)
         {

@@ -35,9 +35,10 @@ public class GrabPhysics : MonoBehaviour
     }
     public void Grab()
     {
+        grab.SetAttachPoint(handType);
+        isGrabbing = true;
         configJoint = gameObject.AddComponent<ConfigurableJoint>();
         configJoint.autoConfigureConnectedAnchor = false;
-        grab.SetAttachPoint(handType);
         transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
 
         configJoint.xMotion = ConfigurableJointMotion.Locked;
@@ -61,7 +62,6 @@ public class GrabPhysics : MonoBehaviour
         poseSetup.pose = grab.pose;
         poseSetup.SetupPose();
         grab.isGrabbing = true;
-        isGrabbing = true;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -220,7 +220,7 @@ public class GrabPhysics : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = new Color(0, 0, 1, 0.5f);
         Gizmos.DrawSphere(grabZonePosition, radius);
     }
 }
