@@ -8,8 +8,6 @@ public class GrabPhysics : MonoBehaviour
     public Rigidbody rb;
     public SetPose poseSetup { get; private set; }
 
-    [Tooltip("The forearm collider to ignore on grab")]
-    public Collider forearmCollider;
     [Tooltip("The collider group of the hand")]
     public GameObject colliderGroup;
 
@@ -53,11 +51,6 @@ public class GrabPhysics : MonoBehaviour
         configJoint.connectedBody = nearbyRigidbody;
         configJoint.connectedMassScale *= nearbyRigidbody.mass;
         configJoint.connectedAnchor = grab.attachPoint;
-
-        foreach (Collider collider in grab.colliders)
-        {
-            Physics.IgnoreCollision(forearmCollider, collider, true);
-        }
         connectedMass = nearbyRigidbody.mass;
         if(grab is GrabDynamic)
         {
@@ -90,6 +83,7 @@ public class GrabPhysics : MonoBehaviour
 
                     if (!grab.isGrabbing)
                     {
+                        colliderGroup.SetActive(false);
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.handGrabbing = this;
                         Grab();
@@ -101,7 +95,6 @@ public class GrabPhysics : MonoBehaviour
                         grab.secondHandGrabbing = this;
                         colliderGroup.SetActive(false);
                         grab.handGrabbing.colliderGroup.SetActive(false);
-                        Physics.IgnoreCollision(forearmCollider, grab.handGrabbing.forearmCollider, true);
                         Grab();
                     }
                 }
@@ -138,9 +131,9 @@ public class GrabPhysics : MonoBehaviour
                     {
                         Destroy(configJoint);
                     }
-                    StartCoroutine(DelayCollisionExit(false));
                     grab.handGrabbing = null;
                     grab.isGrabbing = false;
+                    colliderGroup.SetActive(true);
                 }
                 else
                 {
@@ -152,8 +145,7 @@ public class GrabPhysics : MonoBehaviour
                     {
                         Destroy(configJoint);
                     }
-                    StartCoroutine(DelayCollisionExit(true));
-                    Physics.IgnoreCollision(forearmCollider, grab.handGrabbing.forearmCollider, true);
+                    StartCoroutine(DelayCollisionExit());
                     grab.isTwoHandGrabbing = false;
                     if (grab.handGrabbing == this)
                     {
@@ -172,21 +164,13 @@ public class GrabPhysics : MonoBehaviour
             grab = null;
         }
     }
-    IEnumerator DelayCollisionExit(bool wasTwoHanded)
+    IEnumerator DelayCollisionExit()
     {
-        GrabTwoAttach oldGrab = grab;
         GrabPhysics oldHandGrabbing = grab.handGrabbing;
         yield return new WaitForSeconds(0.25f);
 
-        foreach (Collider collider in oldGrab.colliders)
-        {
-            Physics.IgnoreCollision(forearmCollider, collider, false);
-        }
-        if(wasTwoHanded)
-        {
-            colliderGroup.SetActive(true);
-            oldHandGrabbing.colliderGroup.SetActive(true);
-        }
+        colliderGroup.SetActive(true);
+        oldHandGrabbing.colliderGroup.SetActive(true);
     }
     IEnumerator IgnoreCollisionInteractables(Collider collider, Collider[] collidersToIgnore)
     {

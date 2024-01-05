@@ -27,7 +27,23 @@ public class HandData : MonoBehaviour
     {
         for (int i = 0; i < fingerBones.Length; i++)
         {
-            if (!fingerBones[i].name.Contains("3"))
+            if (!fingerBones[i].name.Contains("3") && !fingerBones[i].name.Contains("2"))
+            {
+                if (Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, 1 << 9))
+                {
+                    hasHit[i] = true;
+                }
+                if (Physics.CheckSphere(fingerBones[i + 2].position, 0.01f, 1 << 9))
+                {
+                    hasHit[i] = true;
+                }
+                //check if it isn't setting pose
+                else if (animator.enabled)
+                {
+                    hasHit[i] = false;
+                }
+            }
+            else if (fingerBones[i].name.Contains("2"))
             {
                 if (Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, 1 << 9))
                 {
