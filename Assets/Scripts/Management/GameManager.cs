@@ -12,9 +12,22 @@ public class GameManager : MonoBehaviour
     public Image blurImage;
     public float height;
     public VRIKCalibratedData calibrator;
+    [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
+    public GameObject sceneChangeButton;
     private VRIKData vrikData = new VRIKData();
     private void Update()
     {
+        if (sceneChangeButton)
+        {
+            if (height == 0)
+            {
+                sceneChangeButton.SetActive(false);
+            }
+            else
+            {
+                sceneChangeButton.SetActive(true);
+            }
+        }
         //calculate the player height
         if (calibrator.data.scale != 0)
         {

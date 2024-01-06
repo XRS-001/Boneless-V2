@@ -82,14 +82,27 @@ public class PhysicsRig : MonoBehaviour
             return targetPosition;
         }
     }
+    public Quaternion CalculateAngle(Quaternion currentAngle, Quaternion targetAngle, float weight)
+    {
+        if (weight > 1)
+        {
+            //calculate the damping of the position to simulate weight
+            float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
+            return Quaternion.Slerp(currentAngle, targetAngle, dampingFactor);
+        }
+        else
+        {
+            return targetAngle;
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
-        leftHandJoint.targetRotation = leftHandPhysicsTarget.localRotation;
+        leftHandJoint.targetRotation = CalculateAngle(leftHandJoint.targetRotation, leftHandPhysicsTarget.localRotation, leftHandGrab.connectedMass);
 
         rightHandJoint.targetPosition = CalculateWeight(rightHandJoint.targetPosition, rightHandPhysicsTarget.localPosition, rightHandGrab.connectedMass);
-        rightHandJoint.targetRotation = rightHandPhysicsTarget.localRotation;
+        rightHandJoint.targetRotation = CalculateAngle(rightHandJoint.targetRotation, rightHandPhysicsTarget.localRotation, rightHandGrab.connectedMass);
 
         joints.headJoint.targetPosition = joints.headTarget.localPosition;
         joints.headJoint.targetRotation = joints.headTarget.localRotation;

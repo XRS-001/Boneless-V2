@@ -13,12 +13,26 @@ public class GrabVisualAid : MonoBehaviour
         if(handType == handTypeEnum.Left)
         {
             transform.position = grab.transform.TransformPoint(grab.leftAttach.leftAttachPosition);
-            transform.rotation = grab.transform.rotation * Quaternion.Euler(grab.leftAttach.leftAttachRotation);
+            if(!(grab is GrabDynamic))
+            {
+                transform.rotation = grab.transform.rotation * Quaternion.Euler(grab.leftAttach.leftAttachRotation);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(grab.leftAttach.leftAttachRotation);
+            }
         }
         else
         {
             transform.position = grab.transform.TransformPoint(grab.rightAttach.rightAttachPosition);
-            transform.rotation = grab.transform.rotation * Quaternion.Euler(grab.rightAttach.rightAttachRotation);
+            if(!(grab is GrabDynamic))
+            {
+                transform.rotation = grab.transform.rotation * Quaternion.Euler(grab.rightAttach.rightAttachRotation);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(grab.rightAttach.rightAttachRotation);
+            }
         }
     }
 }

@@ -44,14 +44,17 @@ public class HandAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(grabPhysics.isGrabbing && !(grabPhysics.grab is GrabDynamic))
+        if (grabPhysics.grab)
         {
-            HandData h = grabPhysics.poseSetup.pose;
+            if (!(grabPhysics.grab is GrabDynamic))
+            {
+                HandData h = grabPhysics.poseSetup.pose;
 
-            //giving freedom to the index finger to rotate during grabbing
-            indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
-            indexFingerBones.index2.localRotation = Quaternion.Slerp(originalIndex2Rotation, h.indexFingerBones.index2.localRotation, triggeredValue);
-            indexFingerBones.index3.localRotation = Quaternion.Slerp(originalIndex3Rotation, h.indexFingerBones.index3.localRotation, triggeredValue);
+                //giving freedom to the index finger to rotate during grabbing
+                indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
+                indexFingerBones.index2.localRotation = Quaternion.Slerp(originalIndex2Rotation, h.indexFingerBones.index2.localRotation, triggeredValue);
+                indexFingerBones.index3.localRotation = Quaternion.Slerp(originalIndex3Rotation, h.indexFingerBones.index3.localRotation, triggeredValue);
+            }
         }
 
         //trigger

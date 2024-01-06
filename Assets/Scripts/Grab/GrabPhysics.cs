@@ -38,7 +38,14 @@ public class GrabPhysics : MonoBehaviour
         isGrabbing = true;
         configJoint = gameObject.AddComponent<ConfigurableJoint>();
         configJoint.autoConfigureConnectedAnchor = false;
-        transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
+        if(!(grab is GrabDynamic))
+        {
+            transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(grab.attachRotation);
+        }
 
         configJoint.xMotion = ConfigurableJointMotion.Locked;
         configJoint.yMotion = ConfigurableJointMotion.Locked;
@@ -73,7 +80,10 @@ public class GrabPhysics : MonoBehaviour
         {
             isHovering = true;
             closestCollider = FindClosestInteractable(nearbyColliders);
-            nearbyRigidbody = closestCollider.attachedRigidbody;
+            if(closestCollider.attachedRigidbody)
+            {
+                nearbyRigidbody = closestCollider.attachedRigidbody;
+            }
 
             if (isGrabButtonPressedThisFrame && !isGrabbing)
             {
@@ -94,12 +104,35 @@ public class GrabPhysics : MonoBehaviour
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.secondHandGrabbing = this;
                         colliderGroup.SetActive(false);
-                        grab.handGrabbing.colliderGroup.SetActive(false);
                         Grab();
                     }
                 }
                 else
                 {
+                    grab = closestCollider.GetComponent<GrabDynamic>();
+                    if(!grab)
+                    {
+                        grab = closestCollider.GetComponentInParent<GrabDynamic>();
+                    }
+                    if (!grab.isGrabbing)
+                    {
+                        grab.handGrabbing = this;
+                    }
+                    else
+                    {
+                        grab.secondHandGrabbing = this;
+                    }
+                    colliderGroup.SetActive(false);
+
+                    grab.SetAttachPoint(handType);
+                    isGrabbing = true;
+                    transform.rotation = Quaternion.Euler(grab.attachRotation);
+                    poseSetup.setDynamicPose = true;
+                    grab.SetPose(handType);
+                    poseSetup.pose = grab.pose;
+                    poseSetup.SetupPose();
+                    grab.isGrabbing = true;
+                    transform.position = grab.transform.TransformPoint(grab.attachPoint);
                     configJoint = gameObject.AddComponent<ConfigurableJoint>();
 
                     configJoint.xMotion = ConfigurableJointMotion.Locked;
@@ -118,6 +151,8 @@ public class GrabPhysics : MonoBehaviour
         }
         else
         {
+            closestCollider = null;
+            nearbyRigidbody = null;
             isHovering = false;
         }
         if (!isGrabButtonPressed && isGrabbing)
@@ -154,7 +189,7 @@ public class GrabPhysics : MonoBehaviour
                     grab.secondHandGrabbing = null;
                 }
                 connectedMass = 0;
-                poseSetup.setDynamicPose = false;
+                poseSetup.exitingDynamicPose = true;
                 poseSetup.UnSetPose();
             }
             else
@@ -187,18 +222,14 @@ public class GrabPhysics : MonoBehaviour
     }
     public Collider FindClosestInteractable(Collider[] collidersGrabbed)
     {
-        if (!collidersGrabbed[0].attachedRigidbody)
-        {
-            return null;
-        }
         Collider closestCollider = collidersGrabbed[0];
-        Vector3 closestPosition = collidersGrabbed[0].attachedRigidbody.position;
+        Vector3 closestPosition = collidersGrabbed[0].transform.position;
         float closestDistance = Vector3.Distance(transform.position, closestPosition);
 
         // Loop through all positions and find the closest one
         for (int i = 1; i < collidersGrabbed.Length; i++)
         {
-            float distance = Vector3.Distance(transform.position, collidersGrabbed[i].attachedRigidbody.position);
+            float distance = Vector3.Distance(transform.position, collidersGrabbed[i].transform.position);
 
             if (distance < closestDistance)
             {

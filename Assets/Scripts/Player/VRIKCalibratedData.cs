@@ -46,11 +46,7 @@ public class VRIKCalibratedData : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        if (data.scale == 0f)
-        {
-            Debug.LogError("No Calibration Data to calibrate to, please calibrate with 'C' first.");
-        }
-        else
+        if(data.scale > 0f)
         {
             VRIKCalibrator.Calibrate(ik, data, centerEyeAnchor, null, leftHandAnchor, rightHandAnchor);
         }

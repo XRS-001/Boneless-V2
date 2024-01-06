@@ -1,13 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 using static GrabTwoAttach;
+using static EnumDeclaration;
+using UnityEditor.PackageManager;
+using static UnityEngine.ParticleSystem;
 
 public class GrabDynamic : GrabTwoAttach
 {
     [System.Serializable]
     public class DynamicSettings
     {
-        [Tooltip("The local radius in which the attach point can go")]
-        public float attachScale;
         [Tooltip("The transform used to calculate the leftAttach (must be the physical presence of the left hand)")]
         public Transform leftHand;
         [HideInInspector]
@@ -18,6 +20,8 @@ public class GrabDynamic : GrabTwoAttach
         public GrabPhysics rightGrab;
         [Tooltip("The offset from the surface of the interactable")]
         public float offset;
+        [Tooltip("The weight the hand is made to look at the normal (1 being 100%)")]
+        public float angleWeight;
     }
     public DynamicSettings dynamicSettings;
     private void Start()
@@ -31,24 +35,77 @@ public class GrabDynamic : GrabTwoAttach
     {
         if (dynamicSettings.leftGrab.isHovering && !dynamicSettings.leftGrab.isGrabbing)
         {
-            //cast a ray that directs to the interactable and outputs the hitInfo
-            GetComponent<BoxCollider>().Raycast(new Ray(dynamicSettings.leftHand.position, transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+            if (colliders.Length > 1)
+            {
+                ClosestCollider(handTypeEnum.Left).Raycast(new Ray(dynamicSettings.leftHand.position, ClosestCollider(handTypeEnum.Left).transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-            //set the leftAttachPosition to the hitPoint and add some offset
-            leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
-            //set the rotation to be the hands rotation extending the the normal
-            leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), 0.35f).eulerAngles;
+                leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
+                leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+            }
+            else
+            {
+                //cast a ray that directs to the interactable and outputs the hitInfo
+                GetComponent<Collider>().Raycast(new Ray(dynamicSettings.leftHand.position, transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+
+                //set the leftAttachPosition to the hitPoint and add some offset
+                leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
+                //set the rotation to be the hands rotation extending the the normal
+                leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+            }
         }
         if (dynamicSettings.rightGrab.isHovering && !dynamicSettings.rightGrab.isGrabbing)
         {
-            //cast a ray that directs to the interactable and outputs the hitInfo
-            GetComponent<BoxCollider>().Raycast(new Ray(dynamicSettings.rightHand.position, transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+            if (colliders.Length > 1)
+            {
+                ClosestCollider(handTypeEnum.Right).Raycast(new Ray(dynamicSettings.rightHand.position, ClosestCollider(handTypeEnum.Right).transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-            //set the rightAttachPosition to the hitPoint and add some offset
-            rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point + (dynamicSettings.rightHand.right / 20 * dynamicSettings.offset));
-            //set the rotation to be the hands rotation extending the the normal
-            rightAttach.rightAttachRotation = Quaternion.Slerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.rightHand.up) * Quaternion.Euler(0, -90, 0), 0.35f).eulerAngles;
+                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point + (dynamicSettings.rightHand.right / 20 * dynamicSettings.offset));
+                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.rightHand.up) * Quaternion.Euler(0, -90, 0), dynamicSettings.angleWeight).eulerAngles;
+            }
+            else
+            {
+                //cast a ray that directs to the interactable and outputs the hitInfo
+                GetComponent<Collider>().Raycast(new Ray(dynamicSettings.rightHand.position, transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+
+                //set the leftAttachPosition to the hitPoint and add some offset
+                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point + (dynamicSettings.rightHand.right / 20 * dynamicSettings.offset));
+                //set the rotation to be the hands rotation extending the the normal
+                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.rightHand.up) * Quaternion.Euler(0, -90, 0), dynamicSettings.angleWeight).eulerAngles;
+            }
         }
     }
-    
+    public Collider ClosestCollider(handTypeEnum handType)
+    {
+        Collider closestCollider = colliders[0];
+        Vector3 closestPosition = colliders[0].transform.position;
+        float closestDistance;
+        if (handType == handTypeEnum.Left)
+        {
+            closestDistance = Vector3.Distance(dynamicSettings.leftHand.position, closestPosition);
+        }
+        else
+        {
+            closestDistance = Vector3.Distance(dynamicSettings.rightHand.position, closestPosition);
+        }
+        // Loop through all positions and find the closest one
+        for (int i = 1; i < colliders.Length; i++)
+        {
+            float distance;
+            if (handType == handTypeEnum.Left)
+            {
+                distance = Vector3.Distance(dynamicSettings.leftHand.position, colliders[i].transform.position);
+            }
+            else
+            {
+                distance = Vector3.Distance(dynamicSettings.rightHand.position, colliders[i].transform.position);
+            }
+
+            if (distance < closestDistance)
+            {
+                closestCollider = colliders[i];
+                closestDistance = distance;
+            }
+        }
+        return closestCollider;
+    }
 }

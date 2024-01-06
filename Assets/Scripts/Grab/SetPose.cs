@@ -10,6 +10,7 @@ public class SetPose : MonoBehaviour
     public HandData pose;
     [NonSerialized]
     public bool setDynamicPose;
+    public bool exitingDynamicPose;
     public HandData handData;
 
     private Quaternion startingHandRotation;
@@ -74,7 +75,14 @@ public class SetPose : MonoBehaviour
                 }
                 else
                 {
-                    if (!h.fingerBones[i].name.Contains("Index"))
+                    if (!exitingDynamicPose)
+                    {
+                        if (!h.fingerBones[i].name.Contains("Index"))
+                        {
+                            h.fingerBones[i].localRotation = Quaternion.Lerp(startingBonesRotation[i], newBonesRotation[i], timer / poseTransitionDuration);
+                        }
+                    }
+                    else
                     {
                         h.fingerBones[i].localRotation = Quaternion.Lerp(startingBonesRotation[i], newBonesRotation[i], timer / poseTransitionDuration);
                     }
@@ -83,6 +91,16 @@ public class SetPose : MonoBehaviour
 
             timer += Time.deltaTime;
             yield return null;
+        }
+        if (exitingDynamicPose)
+            exitingDynamicPose = false;
+        if (setDynamicPose)
+        {
+            setDynamicPose = false;
+            for (int i = 0; i < newBonesRotation.Length; i++)
+            {
+                newBonesRotation[i] = h.fingerBones[i].localRotation;
+            }
         }
         if (enableAnimators && !grabPhysics.isGrabbing)
         {

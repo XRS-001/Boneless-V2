@@ -36,7 +36,10 @@ public class GrabTwoAttach : BaseGrab
     {
         if (isGrabbing)
         {
-            rb.AddForce(Vector3.down * (500 * rb.mass));
+            if(rb != null)
+            {
+                rb.AddForce(Vector3.down * (200 * rb.mass));
+            }
         }
     }
     public void SetAttachPoint(handTypeEnum handType)
