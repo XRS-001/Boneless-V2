@@ -22,10 +22,10 @@ public class PhysicsRig : MonoBehaviour
     private GrabPhysics leftHandGrab;
     public ConfigurableJoint rightHandJoint;
     private GrabPhysics rightHandGrab;
-
     [System.Serializable]
     public class Joints
     {
+        public Transform camera;
         public ConfigurableJoint headJoint;
         public Transform headTarget;
 
@@ -98,6 +98,13 @@ public class PhysicsRig : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 newPosition = joints.camera.position;
+        newPosition.x = joints.headTarget.transform.position.x;
+        newPosition.y = joints.headJoint.transform.position.y;
+        newPosition.z = joints.headTarget.transform.position.z;
+        joints.camera.position = newPosition;
+        joints.camera.rotation = joints.headTarget.transform.rotation;
+
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
         leftHandJoint.targetRotation = CalculateAngle(leftHandJoint.targetRotation, leftHandPhysicsTarget.localRotation, leftHandGrab.connectedMass);
 

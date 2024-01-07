@@ -6142,6 +6142,7 @@ MonoBehaviour:
   leftHandJoint: {fileID: 1371064488}
   rightHandJoint: {fileID: 1151367433}
   joints:
+    camera: {fileID: 0}
     headJoint: {fileID: 1057338139}
     headTarget: {fileID: 148573536}
     chestJoint: {fileID: 844712104}
@@ -8812,6 +8813,9 @@ MonoBehaviour:
     index1: {fileID: 1705881302}
     index2: {fileID: 1161657516}
     index3: {fileID: 757101338}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &650971687
 Animator:
   serializedVersion: 5
@@ -16419,6 +16423,9 @@ MonoBehaviour:
     index1: {fileID: 1850470299}
     index2: {fileID: 1048503203}
     index3: {fileID: 1225531925}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &1342760191
 Animator:
   serializedVersion: 5
@@ -20896,6 +20903,9 @@ MonoBehaviour:
     index1: {fileID: 1650369265}
     index2: {fileID: 1146627959}
     index3: {fileID: 1062545181}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &1724546564
 Animator:
   serializedVersion: 5
@@ -23877,6 +23887,9 @@ MonoBehaviour:
     index1: {fileID: 1962353715}
     index2: {fileID: 1488345376}
     index3: {fileID: 188731337}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &1989948220
 Animator:
   serializedVersion: 5

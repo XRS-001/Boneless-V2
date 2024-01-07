@@ -16,6 +16,7 @@ public class HandData : MonoBehaviour
     public List<bool> hasHit;
     public Transform[] originalBones;
     public IndexFingerBones indexFingerBones;
+    public LayerMask interactableLayers;
     private void Start()
     {
         for (int i = 0; i < fingerBones.Length; i++)
@@ -27,44 +28,102 @@ public class HandData : MonoBehaviour
     {
         for (int i = 0; i < fingerBones.Length; i++)
         {
-            if (!fingerBones[i].name.Contains("3") && !fingerBones[i].name.Contains("2"))
+            if (fingerBones[i].name.Contains("Thumb"))
             {
-                if (Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, 1 << 9))
+                if (!fingerBones[i].name.Contains("3") && !fingerBones[i].name.Contains("2"))
                 {
-                    hasHit[i] = true;
+                    if (!Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    else
+                    {
+                        hasHit[i] = false;
+                    }
+                    if (!Physics.CheckSphere(fingerBones[i + 2].position, 0.01f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    else
+                    {
+                        hasHit[i] = false;
+                    }
+                    //check if it isn't setting pose
+                    if (animator.enabled)
+                    {
+                        hasHit[i] = false;
+                    }
                 }
-                if (Physics.CheckSphere(fingerBones[i + 2].position, 0.01f, 1 << 9))
+                else if (fingerBones[i].name.Contains("2"))
                 {
-                    hasHit[i] = true;
+                    if (!Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    else
+                    {
+                        hasHit[i] = false;
+                    }
+                    //check if it isn't setting pose
+                    if (animator.enabled)
+                    {
+                        hasHit[i] = false;
+                    }
                 }
-                //check if it isn't setting pose
-                else if (animator.enabled)
+                else
                 {
-                    hasHit[i] = false;
-                }
-            }
-            else if (fingerBones[i].name.Contains("2"))
-            {
-                if (Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, 1 << 9))
-                {
-                    hasHit[i] = true;
-                }
-                //check if it isn't setting pose
-                else if (animator.enabled)
-                {
-                    hasHit[i] = false;
+                    if (Physics.CheckSphere(fingerBones[i].position, 0.005f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    //check if it isn't setting pose
+                    if (animator.enabled)
+                    {
+                        hasHit[i] = false;
+                    }
                 }
             }
             else
             {
-                if (Physics.CheckSphere(fingerBones[i].position, 0.01f, 1 << 9))
+                if (!fingerBones[i].name.Contains("3") && !fingerBones[i].name.Contains("2"))
                 {
-                    hasHit[i] = true;
+                    if (Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    if (Physics.CheckSphere(fingerBones[i + 2].position, 0.01f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    //check if it isn't setting pose
+                    else if (animator.enabled)
+                    {
+                        hasHit[i] = false;
+                    }
                 }
-                //check if it isn't setting pose
-                else if (animator.enabled)
+                else if (fingerBones[i].name.Contains("2"))
                 {
-                    hasHit[i] = false;
+                    if (Physics.CheckSphere(fingerBones[i + 1].position, 0.01f, interactableLayers))
+                    {
+                        hasHit[i] = true;
+                    }
+                    //check if it isn't setting pose
+                    else if (animator.enabled)
+                    {
+                        hasHit[i] = false;
+                    }
+                }
+                else
+                {
+                    if (Physics.CheckSphere(fingerBones[i].position, 0.01f, 1 << 9))
+                    {
+                        hasHit[i] = true;
+                    }
+                    //check if it isn't setting pose
+                    else if (animator.enabled)
+                    {
+                        hasHit[i] = false;
+                    }
                 }
             }
         }

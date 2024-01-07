@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GrabTwoAttach;
 using static EnumDeclaration;
-using UnityEditor.PackageManager;
-using static UnityEngine.ParticleSystem;
 
 public class GrabDynamic : GrabTwoAttach
 {
@@ -26,7 +24,6 @@ public class GrabDynamic : GrabTwoAttach
     public DynamicSettings dynamicSettings;
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
         dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
     }

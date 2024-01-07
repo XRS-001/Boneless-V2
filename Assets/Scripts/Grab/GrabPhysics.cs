@@ -38,7 +38,9 @@ public class GrabPhysics : MonoBehaviour
         isGrabbing = true;
         configJoint = gameObject.AddComponent<ConfigurableJoint>();
         configJoint.autoConfigureConnectedAnchor = false;
-        if(!(grab is GrabDynamic))
+        configJoint.connectedAnchor = grab.attachPoint;
+
+        if (!(grab is GrabDynamic))
         {
             transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
         }
@@ -46,6 +48,7 @@ public class GrabPhysics : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(grab.attachRotation);
         }
+
 
         configJoint.xMotion = ConfigurableJointMotion.Locked;
         configJoint.yMotion = ConfigurableJointMotion.Locked;
@@ -57,7 +60,6 @@ public class GrabPhysics : MonoBehaviour
 
         configJoint.connectedBody = nearbyRigidbody;
         configJoint.connectedMassScale *= nearbyRigidbody.mass;
-        configJoint.connectedAnchor = grab.attachPoint;
         connectedMass = nearbyRigidbody.mass;
         if(grab is GrabDynamic)
         {
@@ -89,22 +91,35 @@ public class GrabPhysics : MonoBehaviour
             {
                 if (nearbyRigidbody != null)
                 {
-                    grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
-
-                    if (!grab.isGrabbing)
+                    if (!nearbyRigidbody.GetComponent<GrabTwoAttach>().twoHanded)
                     {
-                        colliderGroup.SetActive(false);
-                        StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                        grab.handGrabbing = this;
-                        Grab();
+                        if (!nearbyRigidbody.GetComponent<GrabTwoAttach>().isGrabbing)
+                        {
+                            grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
+                        }
                     }
-                    else if (grab.twoHanded)
+                    else
                     {
-                        grab.isTwoHandGrabbing = true;
-                        StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                        grab.secondHandGrabbing = this;
-                        colliderGroup.SetActive(false);
-                        Grab();
+                        grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
+                    }
+
+                    if (grab)
+                    {
+                        if (!grab.isGrabbing)
+                        {
+                            colliderGroup.SetActive(false);
+                            StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                            grab.handGrabbing = this;
+                            Grab();
+                        }
+                        else if (grab.twoHanded)
+                        {
+                            grab.isTwoHandGrabbing = true;
+                            StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                            grab.secondHandGrabbing = this;
+                            colliderGroup.SetActive(false);
+                            Grab();
+                        }
                     }
                 }
                 else

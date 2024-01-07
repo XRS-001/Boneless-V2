@@ -22,8 +22,8 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private bool isClimbing;
     private bool isJumping;
 
-    public DetectCollisionNoRb[] feetDetection;
-    public DetectCollisionRb[] handDetection;
+    public DetectCollisionFeet[] feetDetection;
+    public DetectCollisionHand[] handDetection;
 
     // Update is called once per frame
     void Update()
@@ -77,7 +77,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
         {
             isJumping = true;
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
-            rb.velocity = Vector3.up * jumpVelocity + (Vector3.up * 3) + directionSource.forward;
+            rb.velocity = Vector3.up * jumpVelocity + (Vector3.up * 3.5f) + directionSource.forward;
             isJumping = false;
         }
     }
@@ -106,16 +106,14 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
             Quaternion q = Quaternion.AngleAxis(angle, axis);
             rb.MoveRotation(rb.rotation * q);
-
             Vector3 newPosition = q * (targetMovePosition - directionSource.position) + directionSource.position;
-
             rb.MovePosition(newPosition);
         }
     }
     public bool CheckIfGrounded()
     {
         bool isGrounded = false;
-        foreach (DetectCollisionNoRb detectCollision  in feetDetection) 
+        foreach (DetectCollisionFeet detectCollision  in feetDetection) 
         {
             if(detectCollision.isColliding)
             {
@@ -127,7 +125,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public bool CheckIfClimbing()
     {
         bool isClimbing = false;
-        foreach (DetectCollisionRb detectCollision in handDetection)
+        foreach (DetectCollisionHand detectCollision in handDetection)
         {
             if (detectCollision.isColliding)
             {
