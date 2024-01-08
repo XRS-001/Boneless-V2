@@ -766,11 +766,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &23327047
@@ -1087,11 +1086,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &34055079
@@ -3286,6 +3284,7 @@ MonoBehaviour:
   handType: 0
   rb: {fileID: 176898645}
   colliderGroup: {fileID: 1500882834}
+  forearm: {fileID: 1561344257}
   grabInputSource:
     m_UseReference: 1
     m_Action:
@@ -3307,7 +3306,7 @@ MonoBehaviour:
     m_Bits: 2560
   grab: {fileID: 0}
   isGrabbing: 0
-  isHovering: 0
+  isClimbing: 0
   connectedMass: 0
 --- !u!95 &176898641
 Animator:
@@ -3775,11 +3774,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &185335203
@@ -5164,11 +5162,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &276000439
@@ -6053,6 +6050,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718c702565e378f40a992b855ea66352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodyRb: {fileID: 1833081399}
+  climbingDrive:
+    spring: 750000
+    damper: 8000
   playerModel: {fileID: 372722943}
   leftHandPhysicsTarget: {fileID: 69982213}
   rightHandPhysicsTarget: {fileID: 601527040}
@@ -9695,11 +9696,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &386636613
@@ -9764,11 +9764,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &392188285
@@ -10326,11 +10325,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &411371466
@@ -11027,11 +11025,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!136 &463522077
@@ -11997,11 +11994,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &508087802
@@ -13582,11 +13578,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &585417945
@@ -14868,11 +14863,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &683796852
@@ -15179,6 +15173,7 @@ GameObject:
   - component: {fileID: 706847761}
   - component: {fileID: 706847760}
   - component: {fileID: 706847759}
+  - component: {fileID: 706847762}
   m_Layer: 9
   m_Name: TacticalKnife
   m_TagString: Untagged
@@ -15258,6 +15253,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &706847762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706847757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b196959e2e13964e80f0899b85bad09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  isGrabbing: 0
+  isTwoHandGrabbing: 0
+  handGrabbing: {fileID: 0}
+  secondHandGrabbing: {fileID: 0}
+  leftAttach:
+    leftPose: {fileID: 1513400669}
+    leftAttachPosition: {x: 0.025, y: -0.025, z: -0.035}
+    leftAttachRotation: {x: 0, y: 55, z: 90}
+  rightAttach:
+    rightPose: {fileID: 1230505481}
+    rightAttachPosition: {x: 0.035, y: 0.025, z: -0.035}
+    rightAttachRotation: {x: 0, y: 55, z: 90}
+  twoHanded: 0
+  isHovering: 0
 --- !u!1 &706856359
 GameObject:
   m_ObjectHideFlags: 0
@@ -15445,11 +15467,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &712295008
@@ -15945,11 +15966,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &744552135
@@ -16720,11 +16740,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.85
     angleWeight: 0.5
 --- !u!1 &801313120
@@ -17651,11 +17670,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &855710369
@@ -19738,11 +19756,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &1048598966
@@ -20536,11 +20553,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.85
     angleWeight: 0.5
 --- !u!1 &1095574603
@@ -22640,11 +22656,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &1217609653
@@ -23346,11 +23361,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &1272695167
@@ -23415,11 +23429,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &1277860624
@@ -23484,11 +23497,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &1277860627
@@ -25092,11 +25104,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &1354208541
@@ -26089,11 +26100,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &1416807487
@@ -26322,6 +26332,7 @@ MonoBehaviour:
   handType: 1
   rb: {fileID: 1426969265}
   colliderGroup: {fileID: 2068589054}
+  forearm: {fileID: 1873339271}
   grabInputSource:
     m_UseReference: 1
     m_Action:
@@ -26343,7 +26354,7 @@ MonoBehaviour:
     m_Bits: 2560
   grab: {fileID: 0}
   isGrabbing: 0
-  isHovering: 0
+  isClimbing: 0
   connectedMass: 0
 --- !u!95 &1426969261
 Animator:
@@ -28610,11 +28621,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &1544952340
@@ -29876,11 +29886,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1001 &1586765874
@@ -30253,11 +30262,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &1607528072
@@ -30930,11 +30938,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &1656561409
@@ -31438,11 +31445,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &1685657356
@@ -32210,11 +32216,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &1728327178
@@ -32312,11 +32317,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &1729789884
@@ -33116,11 +33120,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!135 &1772244563
@@ -35914,11 +35917,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &1931257604
@@ -37429,11 +37431,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!1 &2012395769
@@ -37849,11 +37850,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &2031438171
@@ -38773,11 +38773,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.25
     angleWeight: 0.5
 --- !u!1 &2079041157
@@ -39456,11 +39455,10 @@ MonoBehaviour:
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
   twoHanded: 1
+  isHovering: 0
   dynamicSettings:
     leftHand: {fileID: 176898638}
-    leftGrab: {fileID: 0}
     rightHand: {fileID: 1426969258}
-    rightGrab: {fileID: 0}
     offset: 0.6
     angleWeight: 0.75
 --- !u!65 &2139326110

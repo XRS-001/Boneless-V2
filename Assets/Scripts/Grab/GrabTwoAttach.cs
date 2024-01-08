@@ -24,6 +24,8 @@ public class GrabTwoAttach : BaseGrab
     public LeftAttach leftAttach;
     public RightAttach rightAttach;
     public bool twoHanded;
+    [HideInInspector]
+    public bool isHovering;
     public void SetAttachPoint(handTypeEnum handType)
     {
         if (handType == handTypeEnum.Left)

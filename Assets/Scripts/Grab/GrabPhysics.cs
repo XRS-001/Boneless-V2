@@ -10,6 +10,7 @@ public class GrabPhysics : MonoBehaviour
 
     [Tooltip("The collider group of the hand")]
     public GameObject colliderGroup;
+    public Collider forearm;
 
     public InputActionProperty grabInputSource;
     public float radius = 0.1f;
@@ -23,7 +24,9 @@ public class GrabPhysics : MonoBehaviour
     [HideInInspector]
     public GrabTwoAttach grab;
     public bool isGrabbing = false;
-    public bool isHovering = false;
+    [HideInInspector]
+    public bool isClimbing = false;
+    private bool canGrab = true;
     public float connectedMass;
     Collider[] nearbyColliders;
     Collider closestCollider;
@@ -49,7 +52,6 @@ public class GrabPhysics : MonoBehaviour
             transform.rotation = Quaternion.Euler(grab.attachRotation);
         }
 
-
         configJoint.xMotion = ConfigurableJointMotion.Locked;
         configJoint.yMotion = ConfigurableJointMotion.Locked;
         configJoint.zMotion = ConfigurableJointMotion.Locked;
@@ -59,7 +61,6 @@ public class GrabPhysics : MonoBehaviour
         configJoint.angularZMotion = ConfigurableJointMotion.Locked;
 
         configJoint.connectedBody = nearbyRigidbody;
-        configJoint.connectedMassScale *= nearbyRigidbody.mass;
         connectedMass = nearbyRigidbody.mass;
         if(grab is GrabDynamic)
         {
@@ -69,6 +70,10 @@ public class GrabPhysics : MonoBehaviour
         poseSetup.pose = grab.pose;
         poseSetup.SetupPose();
         grab.isGrabbing = true;
+        foreach(Collider collider in grab.colliders)
+        {
+            Physics.IgnoreCollision(collider, forearm);
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -80,29 +85,43 @@ public class GrabPhysics : MonoBehaviour
         nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer, QueryTriggerInteraction.Ignore);
         if (nearbyColliders.Length > 0)
         {
-            isHovering = true;
             closestCollider = FindClosestInteractable(nearbyColliders);
             if(closestCollider.attachedRigidbody)
             {
                 nearbyRigidbody = closestCollider.attachedRigidbody;
             }
-
-            if (isGrabButtonPressedThisFrame && !isGrabbing)
+            else
             {
-                if (nearbyRigidbody != null)
+                nearbyRigidbody = null;
+            }
+            if (nearbyRigidbody)
+            {
+                if (!nearbyRigidbody.GetComponent<GrabTwoAttach>().twoHanded)
                 {
-                    if (!nearbyRigidbody.GetComponent<GrabTwoAttach>().twoHanded)
-                    {
-                        if (!nearbyRigidbody.GetComponent<GrabTwoAttach>().isGrabbing)
-                        {
-                            grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
-                        }
-                    }
-                    else
+                    if (!nearbyRigidbody.GetComponent<GrabTwoAttach>().isGrabbing)
                     {
                         grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
                     }
-
+                }
+                else
+                {
+                    grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
+                }
+                grab.isHovering = true;
+            }
+            else if (closestCollider)
+            {
+                grab = closestCollider.GetComponent<GrabDynamic>();
+                if (grab == null)
+                {
+                    grab = closestCollider.transform.parent.GetComponent<GrabDynamic>();
+                }
+                grab.isHovering = true;
+            }
+            if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab)
+            {
+                if(nearbyRigidbody)
+                {
                     if (grab)
                     {
                         if (!grab.isGrabbing)
@@ -124,11 +143,7 @@ public class GrabPhysics : MonoBehaviour
                 }
                 else
                 {
-                    grab = closestCollider.GetComponent<GrabDynamic>();
-                    if(!grab)
-                    {
-                        grab = closestCollider.GetComponentInParent<GrabDynamic>();
-                    }
+                    isClimbing = true;
                     if (!grab.isGrabbing)
                     {
                         grab.handGrabbing = this;
@@ -137,6 +152,7 @@ public class GrabPhysics : MonoBehaviour
                     {
                         grab.secondHandGrabbing = this;
                     }
+                    grab.isHovering = true;
                     colliderGroup.SetActive(false);
 
                     grab.SetAttachPoint(handType);
@@ -147,7 +163,6 @@ public class GrabPhysics : MonoBehaviour
                     poseSetup.pose = grab.pose;
                     poseSetup.SetupPose();
                     grab.isGrabbing = true;
-                    transform.position = grab.transform.TransformPoint(grab.attachPoint);
                     configJoint = gameObject.AddComponent<ConfigurableJoint>();
 
                     configJoint.xMotion = ConfigurableJointMotion.Locked;
@@ -159,19 +174,24 @@ public class GrabPhysics : MonoBehaviour
                     configJoint.angularZMotion = ConfigurableJointMotion.Locked;
 
                     configJoint.autoConfigureConnectedAnchor = false;
-                    configJoint.connectedAnchor = transform.position;
+                    configJoint.connectedAnchor = grab.transform.TransformPoint(grab.attachPoint);
                     isGrabbing = true;
                 }
             }
         }
         else
         {
+            if (grab)
+            {
+                grab.isHovering = false;
+            }
+            grab = null;
             closestCollider = null;
             nearbyRigidbody = null;
-            isHovering = false;
         }
         if (!isGrabButtonPressed && isGrabbing)
         {
+            isClimbing = false;
             isGrabbing = false;
             if (grab != null)
             {
@@ -184,6 +204,11 @@ public class GrabPhysics : MonoBehaviour
                     grab.handGrabbing = null;
                     grab.isGrabbing = false;
                     colliderGroup.SetActive(true);
+                    grab.transform.parent = null;
+                    foreach (Collider collider in grab.colliders)
+                    {
+                        Physics.IgnoreCollision(collider, forearm, false);
+                    }
                 }
                 else
                 {
@@ -202,6 +227,10 @@ public class GrabPhysics : MonoBehaviour
                         grab.secondHandGrabbing.colliderGroup.SetActive(true);
                     }
                     grab.secondHandGrabbing = null;
+                    foreach (Collider collider in grab.colliders)
+                    {
+                        Physics.IgnoreCollision(collider, forearm, false);
+                    }
                 }
                 connectedMass = 0;
                 poseSetup.exitingDynamicPose = true;
@@ -211,8 +240,18 @@ public class GrabPhysics : MonoBehaviour
             {
                 Destroy(configJoint);
             }
+            if(grab is GrabDynamic)
+            {
+                StartCoroutine(WaitTillGrab());
+            }
             grab = null;
         }
+    }
+    IEnumerator WaitTillGrab()
+    {
+        canGrab = false;
+        yield return new WaitForSeconds(poseSetup.poseTransitionDuration);
+        canGrab = true;
     }
     IEnumerator DelayCollisionExit()
     {

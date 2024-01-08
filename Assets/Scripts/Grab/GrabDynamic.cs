@@ -10,27 +10,18 @@ public class GrabDynamic : GrabTwoAttach
     {
         [Tooltip("The transform used to calculate the leftAttach (must be the physical presence of the left hand)")]
         public Transform leftHand;
-        [HideInInspector]
-        public GrabPhysics leftGrab;
         [Tooltip("The transform used to calculate the rightAttach (must be the physical presence of the right hand)")]
         public Transform rightHand;
-        [HideInInspector]
-        public GrabPhysics rightGrab;
         [Tooltip("The offset from the surface of the interactable")]
         public float offset;
         [Tooltip("The weight the hand is made to look at the normal (1 being 100%)")]
         public float angleWeight;
     }
     public DynamicSettings dynamicSettings;
-    private void Start()
-    {
-        dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
-        dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
-    }
     // Update is called once per frame
     void Update()
     {
-        if (dynamicSettings.leftGrab.isHovering && !dynamicSettings.leftGrab.isGrabbing)
+        if (isHovering)
         {
             if (colliders.Length > 1)
             {
@@ -50,7 +41,7 @@ public class GrabDynamic : GrabTwoAttach
                 leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
             }
         }
-        if (dynamicSettings.rightGrab.isHovering && !dynamicSettings.rightGrab.isGrabbing)
+        if (isHovering)
         {
             if (colliders.Length > 1)
             {
