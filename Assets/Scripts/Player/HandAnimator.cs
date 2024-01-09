@@ -51,9 +51,12 @@ public class HandAnimator : MonoBehaviour
                 HandData h = grabPhysics.poseSetup.pose;
 
                 //giving freedom to the index finger to rotate during grabbing
-                indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
-                indexFingerBones.index2.localRotation = Quaternion.Slerp(originalIndex2Rotation, h.indexFingerBones.index2.localRotation, triggeredValue);
-                indexFingerBones.index3.localRotation = Quaternion.Slerp(originalIndex3Rotation, h.indexFingerBones.index3.localRotation, triggeredValue);
+                if (h)
+                {
+                    indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
+                    indexFingerBones.index2.localRotation = Quaternion.Slerp(originalIndex2Rotation, h.indexFingerBones.index2.localRotation, triggeredValue);
+                    indexFingerBones.index3.localRotation = Quaternion.Slerp(originalIndex3Rotation, h.indexFingerBones.index3.localRotation, triggeredValue);
+                }
             }
         }
 

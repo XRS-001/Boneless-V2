@@ -74,6 +74,7 @@ public class GrabPhysics : MonoBehaviour
         {
             Physics.IgnoreCollision(collider, forearm);
         }
+        nearbyRigidbody.mass = 1;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -107,7 +108,10 @@ public class GrabPhysics : MonoBehaviour
                 {
                     grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
                 }
-                grab.isHovering = true;
+                if (grab)
+                {
+                    grab.isHovering = true;
+                }
             }
             else if (closestCollider)
             {
@@ -116,7 +120,10 @@ public class GrabPhysics : MonoBehaviour
                 {
                     grab = closestCollider.transform.parent.GetComponent<GrabDynamic>();
                 }
-                grab.isHovering = true;
+                if (grab)
+                {
+                    grab.isHovering = true;
+                }
             }
             if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab)
             {
@@ -185,7 +192,6 @@ public class GrabPhysics : MonoBehaviour
             {
                 grab.isHovering = false;
             }
-            grab = null;
             closestCollider = null;
             nearbyRigidbody = null;
         }
@@ -232,6 +238,7 @@ public class GrabPhysics : MonoBehaviour
                         Physics.IgnoreCollision(collider, forearm, false);
                     }
                 }
+                nearbyRigidbody.mass = connectedMass;
                 connectedMass = 0;
                 poseSetup.exitingDynamicPose = true;
                 poseSetup.UnSetPose();

@@ -757,6 +757,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1077,6 +1078,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -3765,6 +3767,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -5153,6 +5156,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -9687,6 +9691,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -9755,6 +9760,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -10316,6 +10322,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -11016,6 +11023,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -11985,6 +11993,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -13569,6 +13578,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -14854,6 +14864,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -15173,7 +15184,7 @@ GameObject:
   - component: {fileID: 706847761}
   - component: {fileID: 706847760}
   - component: {fileID: 706847759}
-  - component: {fileID: 706847762}
+  - component: {fileID: 706847763}
   m_Layer: 9
   m_Name: TacticalKnife
   m_TagString: Untagged
@@ -15197,9 +15208,9 @@ MonoBehaviour:
   - {fileID: 313365089}
   - {fileID: 243447658}
   - {fileID: 570459437}
-  piercePoint: {x: 0, y: 0, z: 0.31}
+  piercePoint: {x: 0, y: 0, z: 0.225}
   damper: 500
-  limit: 0.28
+  limit: 0.25
   velocityThreshold: 3
   pierceableLayer:
     serializedVersion: 2
@@ -15253,7 +15264,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &706847762
+--- !u!114 &706847763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15262,14 +15273,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 706847757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b196959e2e13964e80f0899b85bad09, type: 3}
+  m_Script: {fileID: 11500000, guid: 551a08f78433e604dbca69b9c817a49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders: []
+  colliders:
+  - {fileID: 313365089}
+  - {fileID: 243447658}
+  - {fileID: 570459437}
   isGrabbing: 0
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1513400669}
     leftAttachPosition: {x: 0.025, y: -0.025, z: -0.035}
@@ -15280,6 +15295,18 @@ MonoBehaviour:
     rightAttachRotation: {x: 0, y: 55, z: 90}
   twoHanded: 0
   isHovering: 0
+  angleThreshold: 0
+  upAxis: 0
+  altLeftAttach:
+    leftPose: {fileID: 1513400669}
+    leftAttachPosition: {x: 0.04, y: 0.025, z: -0.1}
+    leftAttachRotation: {x: 180, y: -70, z: 90}
+  altRightAttach:
+    rightPose: {fileID: 1513400669}
+    rightAttachPosition: {x: 0.04, y: -0.025, z: -0.1}
+    rightAttachRotation: {x: 180, y: -70, z: 90}
+  leftHand: {fileID: 176898638}
+  rightHand: {fileID: 1426969258}
 --- !u!1 &706856359
 GameObject:
   m_ObjectHideFlags: 0
@@ -15458,6 +15485,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -15957,6 +15985,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -16731,6 +16760,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -17661,6 +17691,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -19747,6 +19778,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -20544,6 +20576,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -22647,6 +22680,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -23352,6 +23386,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -23420,6 +23455,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -23488,6 +23524,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -25095,6 +25132,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -26091,6 +26129,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -28612,6 +28651,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -29877,6 +29917,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -30253,6 +30294,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -30929,6 +30971,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -31436,6 +31479,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -32207,6 +32251,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -32308,6 +32353,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -33111,6 +33157,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -35908,6 +35955,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -36281,9 +36329,9 @@ MonoBehaviour:
     props:
       group: 0
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.5
+      muscleWeight: 0.5
+      muscleDamper: 0.5
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -36512,9 +36560,9 @@ MonoBehaviour:
     props:
       group: 1
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.25
+      muscleWeight: 0.25
+      muscleDamper: 0.25
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -36545,9 +36593,9 @@ MonoBehaviour:
     props:
       group: 2
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.5
+      muscleWeight: 0.5
+      muscleDamper: 0.5
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -36578,9 +36626,9 @@ MonoBehaviour:
     props:
       group: 3
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.5
+      muscleWeight: 0.5
+      muscleDamper: 0.5
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -36611,9 +36659,9 @@ MonoBehaviour:
     props:
       group: 3
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.5
+      muscleWeight: 0.5
+      muscleDamper: 0.5
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -36644,9 +36692,9 @@ MonoBehaviour:
     props:
       group: 3
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.5
+      muscleWeight: 0.5
+      muscleDamper: 0.5
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -36677,9 +36725,9 @@ MonoBehaviour:
     props:
       group: 3
       mappingWeight: 1
-      pinWeight: 1
-      muscleWeight: 1
-      muscleDamper: 1
+      pinWeight: 0.5
+      muscleWeight: 0.5
+      muscleDamper: 0.5
       internalCollisionIgnores:
         ignoreAll: 0
         muscles: []
@@ -37422,6 +37470,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -37841,6 +37890,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -38764,6 +38814,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 270198489}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -39446,6 +39497,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 18251461}
     leftAttachPosition: {x: 0, y: 0, z: 0}

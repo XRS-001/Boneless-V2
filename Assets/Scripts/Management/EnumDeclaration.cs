@@ -6,4 +6,5 @@ public class EnumDeclaration : MonoBehaviour
 {
     //A dedicated script for declaring enums to prevent hot reload issues
     public enum handTypeEnum { Left, Right }
+    public enum upDirection { forward, up, right }
 }
