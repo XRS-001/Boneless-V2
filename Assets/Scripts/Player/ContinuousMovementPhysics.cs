@@ -9,6 +9,10 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public float turnSpeed = 60;
     private float jumpVelocity;
     public float jumpHeight = 1.5f;
+    public float vaultHeight = 1.5f;
+    public AudioClip jumpNoise;
+    public float jumpVolume;
+    private AudioSource audioSource;
     public InputActionProperty moveInputSource;
     public InputActionProperty runInputSource;
     public InputActionProperty turnInputSource;
@@ -21,10 +25,15 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private bool isGrounded;
     private bool isClimbing;
     private bool isJumping;
+    [HideInInspector]
+    public bool isRunning;
 
     public DetectCollisionFeet[] feetDetection;
     public DetectCollisionHand[] handDetection;
-
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -41,6 +50,10 @@ public class ContinuousMovementPhysics : MonoBehaviour
         if(jumpValue == 0 && isJumping)
         {
             StartCoroutine(JumpRoutine());
+            jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
+            rb.velocity = Vector3.up * jumpVelocity + direction;
+            audioSource.PlayOneShot(jumpNoise, jumpVolume);
+            isJumping = false;
         }
     }
     IEnumerator JumpRoutine()
@@ -54,10 +67,6 @@ public class ContinuousMovementPhysics : MonoBehaviour
             yield return null;
         }
         directionSource.parent.transform.localPosition = new Vector3(0, 0, 0);
-
-        jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
-        rb.velocity = Vector3.up * jumpVelocity + direction;
-        isJumping = false;
     }
     IEnumerator JumpRoutineCrouch()
     {
@@ -77,7 +86,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
         {
             isJumping = true;
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
-            rb.velocity = Vector3.up * jumpVelocity + (Vector3.up * 3.5f) + directionSource.forward;
+            rb.velocity = Vector3.up * jumpVelocity + (Vector3.up * vaultHeight) + directionSource.forward;
             isJumping = false;
         }
     }
@@ -94,10 +103,12 @@ public class ContinuousMovementPhysics : MonoBehaviour
             Vector3 targetMovePosition;
             if(runInputSource.action.ReadValue<float>() > 0f)
             {
+                isRunning = true;
                 targetMovePosition = rb.position + direction * Time.fixedDeltaTime * runningSpeed;
             }
             else
             {
+                isRunning = false;
                 targetMovePosition = rb.position + direction * Time.fixedDeltaTime * speed;
             }
 

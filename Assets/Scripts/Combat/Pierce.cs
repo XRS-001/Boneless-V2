@@ -5,6 +5,7 @@ using UnityEngine.Purchasing;
 
 public class Pierce : MonoBehaviour
 {
+    private AudioSource audioSource;
     public Collider[] colliders;
     public Vector3 piercePoint;
     [Tooltip("The damper of the piercing")]
@@ -14,6 +15,9 @@ public class Pierce : MonoBehaviour
     [Tooltip("The velocity needed to pierce")]
     public float velocityThreshold;
     private float velocity;
+    public AudioClip stabSound;
+    public float stabPitch;
+    public float stabVolume;
     public LayerMask pierceableLayer;
     private bool stabbed = false;
     private Collider stabbedCollider;
@@ -22,6 +26,15 @@ public class Pierce : MonoBehaviour
     private GameObject hitPoint;
     private void Start()
     {
+        if (!GetComponent<CollisionImpact>())
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 1;
+        }
+        else
+        {
+            audioSource = GetComponent<CollisionImpact>().audioSource;
+        }
         rb = GetComponent<Rigidbody>();
     }
 
@@ -34,6 +47,7 @@ public class Pierce : MonoBehaviour
             Collider[] checkColliders = Physics.OverlapSphere(transform.TransformPoint(piercePoint), 0.035f, pierceableLayer);
             if (checkColliders[0].transform.root.name != gameObject.name)
             {
+                StartCoroutine(WaitToSFX());
                 stabbed = true;
                 stabbedCollider = checkColliders[0];
 
@@ -79,6 +93,16 @@ public class Pierce : MonoBehaviour
                     Physics.IgnoreCollision(collider, ragdollCollider, false);
                 }
             }
+        }
+    }
+    IEnumerator WaitToSFX()
+    {
+        yield return new WaitForSeconds(0.01f);
+        if(stabbed)
+        {
+            Debug.Log("Pierced");
+            audioSource.pitch = stabPitch;
+            audioSource.PlayOneShot(stabSound, stabVolume);
         }
     }
     private void OnDrawGizmosSelected()

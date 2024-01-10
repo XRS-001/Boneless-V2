@@ -16,7 +16,9 @@ public class RayInteract : MonoBehaviour
     public int vertexCount = 6;
 
     private Image image;
+    private GameObject element;
     private bool hasChangedOpacity;
+    private bool hasTouched;
     private void Start()
     {
         point1.transform.parent = null;
@@ -42,6 +44,10 @@ public class RayInteract : MonoBehaviour
         Physics.Raycast(point3.position, point3.forward, out RaycastHit hitInfo, float.PositiveInfinity);
         if (hitInfo.collider)
         {
+            if (hitInfo.collider.gameObject != element)
+            {
+                ChangeOpacity();
+            }
             if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("UI"))
             {
                 reticle.gameObject.SetActive(true);
@@ -56,23 +62,23 @@ public class RayInteract : MonoBehaviour
             {
                 reticle.gameObject.SetActive(false);
                 lineRenderer.enabled = false;
-                if (image != null && hasChangedOpacity)
-                {
-                    Color color = image.color;
-                    color.a *= 2;
-                    image.color = color;
-                    hasChangedOpacity = false;
-                }
+                ChangeOpacity();
             }
         }
         else
         {
             reticle.gameObject.SetActive(false);
             lineRenderer.enabled = false;
+            ChangeOpacity();
+        }
+        if (UIClickInput.action.ReadValue<float>() < 0.25f)
+        {
+            hasTouched = false;
         }
     }
     void HandleUIInteraction(GameObject uiElement)
     {
+        element = uiElement;
         PointerEventData eventData = new PointerEventData(EventSystem.current);
 
         eventData.position = new Vector2(Screen.width / 2, Screen.height / 2);
@@ -81,14 +87,31 @@ public class RayInteract : MonoBehaviour
         image = uiElement.GetComponent<Image>();
         if(image != null && !hasChangedOpacity)
         {
-            Color color = image.color;
-            color.a /= 2;
-            image.color = color;
-            hasChangedOpacity = true;
+            if (image.GetComponent<Button>())
+            {
+                Color color = image.color;
+                color.a /= 2;
+                image.color = color;
+                hasChangedOpacity = true;
+            }
         }
-        if (UIClickInput.action.ReadValue<float>() > 0.25f)
+        if (UIClickInput.action.ReadValue<float>() > 0.25f && !hasTouched)
         {
             ExecuteEvents.ExecuteHierarchy(uiElement, eventData, ExecuteEvents.pointerClickHandler);
+            hasTouched = true;
+        }
+    }
+    void ChangeOpacity()
+    {
+        if (image != null && hasChangedOpacity)
+        {
+            if (image.GetComponent<Button>())
+            {
+                Color color = image.color;
+                color.a *= 2;
+                image.color = color;
+                hasChangedOpacity = false;
+            }
         }
     }
 }

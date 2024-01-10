@@ -6,6 +6,10 @@ public class GrabPhysics : MonoBehaviour
 {
     public handTypeEnum handType;
     public Rigidbody rb;
+    private AudioSource audioSource;
+    public AudioClip grabSound;
+    public float grabPitch;
+    public float grabVolume;
     public SetPose poseSetup { get; private set; }
 
     [Tooltip("The collider group of the hand")]
@@ -33,6 +37,7 @@ public class GrabPhysics : MonoBehaviour
     Rigidbody nearbyRigidbody;
     private void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
         poseSetup = GetComponent<SetPose>();
     }
     public void Grab()
@@ -75,6 +80,8 @@ public class GrabPhysics : MonoBehaviour
             Physics.IgnoreCollision(collider, forearm);
         }
         nearbyRigidbody.mass = 1;
+        audioSource.pitch = grabPitch;
+        audioSource.PlayOneShot(grabSound, grabVolume);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -183,6 +190,8 @@ public class GrabPhysics : MonoBehaviour
                     configJoint.autoConfigureConnectedAnchor = false;
                     configJoint.connectedAnchor = grab.transform.TransformPoint(grab.attachPoint);
                     isGrabbing = true;
+                    audioSource.pitch = grabPitch;
+                    audioSource.PlayOneShot(grabSound, grabVolume);
                 }
             }
         }
@@ -238,7 +247,10 @@ public class GrabPhysics : MonoBehaviour
                         Physics.IgnoreCollision(collider, forearm, false);
                     }
                 }
-                nearbyRigidbody.mass = connectedMass;
+                if(nearbyRigidbody)
+                {
+                    nearbyRigidbody.mass = connectedMass;
+                }
                 connectedMass = 0;
                 poseSetup.exitingDynamicPose = true;
                 poseSetup.UnSetPose();
