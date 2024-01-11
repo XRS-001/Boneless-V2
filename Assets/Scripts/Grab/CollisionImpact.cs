@@ -27,16 +27,18 @@ public class CollisionImpact : MonoBehaviour
     {
         if(canCollide)
         {
-            if (!collision.gameObject.GetComponent<Surface>())
+            if (!collision.transform.root.GetComponent<Surface>())
             {
+                //verify the pitch is at 1
                 audioSource.pitch = 1;
+                //make the sound louder the harder the collision was ( / 10 to make it smaller)
                 audioSource.PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f));
                 StartCoroutine(WaitToCollide());
             }
             else
             {
                 audioSource.pitch = 1;
-                audioSource.PlayOneShot(collision.gameObject.GetComponent<Surface>().surfaceImpactClip, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f));
+                audioSource.PlayOneShot(collision.transform.root.GetComponent<Surface>().surfaceImpactClip, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f));
                 StartCoroutine(WaitToCollide());
             }
         }

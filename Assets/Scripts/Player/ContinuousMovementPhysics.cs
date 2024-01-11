@@ -10,9 +10,8 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private float jumpVelocity;
     public float jumpHeight = 1.5f;
     public float vaultHeight = 1.5f;
-    public AudioClip jumpNoise;
-    public float jumpVolume;
-    private AudioSource audioSource;
+    public AudioClip jumpAudio;
+    public AudioSource audioSource;
     public InputActionProperty moveInputSource;
     public InputActionProperty runInputSource;
     public InputActionProperty turnInputSource;
@@ -30,10 +29,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
     public DetectCollisionFeet[] feetDetection;
     public DetectCollisionHand[] handDetection;
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+
     // Update is called once per frame
     void Update()
     {
@@ -52,7 +48,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
             StartCoroutine(JumpRoutine());
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
             rb.velocity = Vector3.up * jumpVelocity + direction;
-            audioSource.PlayOneShot(jumpNoise, jumpVolume);
+            audioSource.PlayOneShot(jumpAudio, 0.5f);
             isJumping = false;
         }
     }

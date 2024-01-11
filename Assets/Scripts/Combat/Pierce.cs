@@ -26,6 +26,12 @@ public class Pierce : MonoBehaviour
     private GameObject hitPoint;
     private void Start()
     {
+        StartCoroutine(WaitToCheckAudio());
+        rb = GetComponent<Rigidbody>();
+    }
+    IEnumerator WaitToCheckAudio()
+    {
+        yield return new WaitForSeconds(0.1f);
         if (!GetComponent<CollisionImpact>())
         {
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -35,9 +41,7 @@ public class Pierce : MonoBehaviour
         {
             audioSource = GetComponent<CollisionImpact>().audioSource;
         }
-        rb = GetComponent<Rigidbody>();
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -97,10 +101,10 @@ public class Pierce : MonoBehaviour
     }
     IEnumerator WaitToSFX()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.025f);
         if(stabbed)
         {
-            Debug.Log("Pierced");
+            //set the pitch to a custom stab pitch
             audioSource.pitch = stabPitch;
             audioSource.PlayOneShot(stabSound, stabVolume);
         }

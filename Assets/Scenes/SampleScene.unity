@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 18251460}
   - component: {fileID: 18251462}
   - component: {fileID: 18251461}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: LeftPose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,6 +609,7 @@ MonoBehaviour:
     index1: {fileID: 1843724576}
     index2: {fileID: 1432452891}
     index3: {fileID: 1948216914}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -648,7 +649,7 @@ GameObject:
   - component: {fileID: 20364472}
   m_Layer: 9
   m_Name: GrabbableSphere
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1040,7 +1041,7 @@ GameObject:
   - component: {fileID: 34055078}
   m_Layer: 9
   m_Name: GrabbableSphere (2)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2413,7 +2414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 109744232}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2745,7 +2746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 116049487}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3289,6 +3290,9 @@ MonoBehaviour:
   grabSound: {fileID: 8300000, guid: 938a68e3ce63aa042a9c59ac1745bc30, type: 3}
   grabPitch: 1.25
   grabVolume: 0.25
+  hoverIcon: {fileID: 5297698841672881459, guid: 2a71ea549d00a0a46bd67e16c8aef8fb,
+    type: 3}
+  cameraTransform: {fileID: 1543219586}
   colliderGroup: {fileID: 1500882834}
   forearm: {fileID: 1561344257}
   grabInputSource:
@@ -3309,7 +3313,7 @@ MonoBehaviour:
   grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 10752
   grab: {fileID: 0}
   isGrabbing: 0
   isClimbing: 0
@@ -3577,7 +3581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 10d9cb6888f407a4ca90a70b41076bbf, type: 3}
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
 --- !u!1 &183666820
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,7 +4598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 236211774}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5041,6 +5045,7 @@ MonoBehaviour:
     index1: {fileID: 3031955}
     index2: {fileID: 1975103853}
     index3: {fileID: 82232721}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5138,7 +5143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 10d9cb6888f407a4ca90a70b41076bbf, type: 3}
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
 --- !u!1 &276000436
 GameObject:
   m_ObjectHideFlags: 0
@@ -5154,7 +5159,7 @@ GameObject:
   - component: {fileID: 276000438}
   m_Layer: 9
   m_Name: GrabbableCube (9)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -5419,7 +5424,7 @@ GameObject:
   - component: {fileID: 302505473}
   - component: {fileID: 302505472}
   - component: {fileID: 302505471}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5604,7 +5609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311850169}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5981,7 +5986,6 @@ GameObject:
   - component: {fileID: 329785810}
   - component: {fileID: 329785809}
   - component: {fileID: 329785813}
-  - component: {fileID: 329785814}
   m_Layer: 0
   m_Name: VRRig
   m_TagString: Untagged
@@ -6077,8 +6081,8 @@ MonoBehaviour:
   turnSpeed: 0
   jumpHeight: 1.5
   vaultHeight: 1.5
-  jumpNoise: {fileID: 8300000, guid: d28597111f679474ebe1f60470403b24, type: 3}
-  jumpVolume: 0.25
+  jumpAudio: {fileID: 8300000, guid: d28597111f679474ebe1f60470403b24, type: 3}
+  audioSource: {fileID: 1833081402}
   moveInputSource:
     m_UseReference: 1
     m_Action:
@@ -6211,103 +6215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23148ad959ffcb2408760d1344ff5960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &329785814
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 329785808}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 7cb3ff2cbc6bd40458c1e37f6c27aa00,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9803f8c8fa7e7cc439ea900a14add189, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  footstepAudio: {fileID: 8300000, guid: f0ecab4bcb27e7541929f647f7ca5870, type: 3}
 --- !u!1 &335336034
 GameObject:
   m_ObjectHideFlags: 0
@@ -6745,7 +6653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360380380}
   - component: {fileID: 360380381}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6913,6 +6821,7 @@ MonoBehaviour:
     index1: {fileID: 498013733}
     index2: {fileID: 240802311}
     index3: {fileID: 1550466535}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6983,7 +6892,7 @@ GameObject:
   - component: {fileID: 368029145}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -9144,7 +9053,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372722941}
-  - component: {fileID: 372722942}
   - component: {fileID: 372722943}
   m_Layer: 3
   m_Name: PlayerModel
@@ -9170,27 +9078,6 @@ Transform:
   m_Father: {fileID: 1833081398}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &372722942
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372722940}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4785679cb3fe6a34ab52cb5fd553178a, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &372722943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10567,7 +10454,7 @@ GameObject:
   - component: {fileID: 411371465}
   m_Layer: 9
   m_Name: GrabbableSphere (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -11544,7 +11431,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487245807}
-  m_Layer: 0
+  - component: {fileID: 487245808}
+  m_Layer: 9
   m_Name: ClimbingWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11593,6 +11481,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &487245808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487245806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e13948cb01b7d949b21e568bd2e9716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceImpactClip: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
 --- !u!1 &489529935
 GameObject:
   m_ObjectHideFlags: 0
@@ -11725,7 +11626,7 @@ GameObject:
   - component: {fileID: 494908603}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -11830,7 +11731,7 @@ GameObject:
   - component: {fileID: 497283404}
   - component: {fileID: 497283403}
   - component: {fileID: 497283402}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12810,7 +12711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 527839330}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13020,7 +12921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 549022275}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13051,7 +12952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550519590}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13823,7 +13724,7 @@ GameObject:
   - component: {fileID: 585417944}
   m_Layer: 9
   m_Name: GrabbableCube (6)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -14040,7 +13941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 592656624}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14591,7 +14492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 644562302}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14705,6 +14606,7 @@ MonoBehaviour:
     index1: {fileID: 1287483895}
     index2: {fileID: 1997950404}
     index3: {fileID: 413295789}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -15109,7 +15011,7 @@ GameObject:
   - component: {fileID: 683796851}
   m_Layer: 9
   m_Name: GrabbableCube (8)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -15606,7 +15508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 10d9cb6888f407a4ca90a70b41076bbf, type: 3}
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
 --- !u!1 &706856359
 GameObject:
   m_ObjectHideFlags: 0
@@ -15616,7 +15518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 706856360}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15649,6 +15551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709670440}
+  - component: {fileID: 709670441}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -15679,6 +15582,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &709670441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709670439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e13948cb01b7d949b21e568bd2e9716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceImpactClip: {fileID: 8300000, guid: e9a9f5fcddc3c7948b77daa7080cf799, type: 3}
 --- !u!1 &710507051
 GameObject:
   m_ObjectHideFlags: 0
@@ -15747,7 +15663,7 @@ GameObject:
   - component: {fileID: 712295007}
   m_Layer: 9
   m_Name: GrabbableCube (10)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -16381,7 +16297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746581426}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16468,7 +16384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754400460}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17398,7 +17314,7 @@ GameObject:
   - component: {fileID: 817578629}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -18344,7 +18260,7 @@ GameObject:
   - component: {fileID: 869710406}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -18614,7 +18530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 886617073}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20446,7 +20362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1059432429}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20656,7 +20572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1075982149}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21207,7 +21123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1111445618}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21998,6 +21914,7 @@ MonoBehaviour:
     index1: {fileID: 1918209802}
     index2: {fileID: 202958043}
     index3: {fileID: 365362781}
+  handGrab: {fileID: 1426969260}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2560
@@ -22299,7 +22216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191450783}
   - component: {fileID: 1191450784}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22660,7 +22577,7 @@ GameObject:
   - component: {fileID: 1210831763}
   - component: {fileID: 1210831765}
   - component: {fileID: 1210831764}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: RightPose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22740,6 +22657,7 @@ MonoBehaviour:
     index1: {fileID: 1075982149}
     index2: {fileID: 527839330}
     index3: {fileID: 1333675895}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -23337,7 +23255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1227597933}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23431,6 +23349,7 @@ MonoBehaviour:
     index1: {fileID: 1598930553}
     index2: {fileID: 517396471}
     index3: {fileID: 1755952785}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -23517,7 +23436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1247680299}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandMiddle4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23907,7 +23826,7 @@ GameObject:
   - component: {fileID: 1277860626}
   m_Layer: 9
   m_Name: GrabbableSphere (3)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -24191,7 +24110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1285560084}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24678,7 +24597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1293591739}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25428,7 +25347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333675895}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25705,6 +25624,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1400071965}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayUISound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1344413476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25752,7 +25683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348675397}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandThumb4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25883,7 +25814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1354208542}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26020,7 +25951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1363122730}
   m_Layer: 3
-  m_Name: Geo
+  m_Name: Swat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26033,8 +25964,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363122729}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26143,7 +26074,7 @@ GameObject:
   - component: {fileID: 1378418611}
   m_Layer: 9
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -26344,6 +26275,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1282003595}
         m_TargetAssemblyTypeName: VolumeUI, Assembly-CSharp
         m_MethodName: IncreaseValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1400071965}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayUISound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26659,6 +26602,7 @@ MonoBehaviour:
   height: 0
   calibrator: {fileID: 329785809}
   sceneChangeButton: {fileID: 0}
+  uiClickSound: {fileID: 8300000, guid: 85a9530aaf0749f4eb573b4c81cb0191, type: 3}
 --- !u!82 &1400071966
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26764,7 +26708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400872222}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26947,7 +26891,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1412527965}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27070,7 +27014,7 @@ GameObject:
   - component: {fileID: 1416807486}
   m_Layer: 9
   m_Name: GrabbableCube (12)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -27353,6 +27297,9 @@ MonoBehaviour:
   grabSound: {fileID: 8300000, guid: 938a68e3ce63aa042a9c59ac1745bc30, type: 3}
   grabPitch: 1.25
   grabVolume: 0.25
+  hoverIcon: {fileID: 5297698841672881459, guid: 2a71ea549d00a0a46bd67e16c8aef8fb,
+    type: 3}
+  cameraTransform: {fileID: 1543219586}
   colliderGroup: {fileID: 2068589054}
   forearm: {fileID: 1873339271}
   grabInputSource:
@@ -27373,7 +27320,7 @@ MonoBehaviour:
   grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 10752
   grab: {fileID: 0}
   isGrabbing: 0
   isClimbing: 0
@@ -27649,7 +27596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 10d9cb6888f407a4ca90a70b41076bbf, type: 3}
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
 --- !u!1 &1431371627
 GameObject:
   m_ObjectHideFlags: 0
@@ -27742,7 +27689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1432452891}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28939,6 +28886,7 @@ MonoBehaviour:
     index1: {fileID: 1460238175}
     index2: {fileID: 1538191390}
     index3: {fileID: 1817351118}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -29336,6 +29284,7 @@ MonoBehaviour:
     index1: {fileID: 99715372}
     index2: {fileID: 1184663722}
     index3: {fileID: 1772214403}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -29562,6 +29511,7 @@ Transform:
   - {fileID: 1312736725}
   - {fileID: 898885481}
   - {fileID: 697293073}
+  - {fileID: 1756880556}
   m_Father: {fileID: 492065713}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29581,7 +29531,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 1756880558}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -29647,7 +29598,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 4095
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -29674,7 +29625,7 @@ GameObject:
   - component: {fileID: 1543611558}
   m_Layer: 9
   m_Name: GrabbableCube (5)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -29878,7 +29829,7 @@ GameObject:
   - component: {fileID: 1547637598}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -30191,7 +30142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554802387}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30550,7 +30501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1564564887}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32007,7 +31958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1641404274}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32163,7 +32114,7 @@ GameObject:
   - component: {fileID: 1656561408}
   m_Layer: 9
   m_Name: GrabbableSphere (5)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -33545,7 +33496,7 @@ GameObject:
   - component: {fileID: 1729789883}
   m_Layer: 9
   m_Name: GrabbableSphere (7)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -33816,7 +33767,7 @@ MonoBehaviour:
   isColliding: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 2817
 --- !u!65 &1748569468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34069,6 +34020,133 @@ Transform:
   m_Father: {fileID: 517396471}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 59.594, y: -20.858, z: -12.034}
+--- !u!1 &1756880555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1756880556}
+  - component: {fileID: 1756880558}
+  - component: {fileID: 1756880557}
+  m_Layer: 0
+  m_Name: IconRenders
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1756880556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756880555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1543219586}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1756880557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756880555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 0
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 1
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
+--- !u!20 &1756880558
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756880555}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.05
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1759373161
 GameObject:
   m_ObjectHideFlags: 0
@@ -34349,7 +34427,7 @@ GameObject:
   - component: {fileID: 1772244562}
   m_Layer: 9
   m_Name: GrabbableSphere (4)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -34947,7 +35025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1807296953}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35482,6 +35560,7 @@ GameObject:
   - component: {fileID: 1833081401}
   - component: {fileID: 1833081400}
   - component: {fileID: 1833081399}
+  - component: {fileID: 1833081402}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -35568,6 +35647,102 @@ MonoBehaviour:
   m_CameraFloorOffsetObject: {fileID: 492065712}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 0
+--- !u!82 &1833081402
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833081397}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d28597111f679474ebe1f60470403b24, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1834549538
 GameObject:
   m_ObjectHideFlags: 0
@@ -35805,7 +35980,7 @@ MonoBehaviour:
   isColliding: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 2817
 --- !u!65 &1837161417
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35872,7 +36047,7 @@ GameObject:
   - component: {fileID: 1842489492}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -35974,7 +36149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1843724576}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36006,7 +36181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852628408}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandIndex4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36839,7 +37014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1920578647}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37054,7 +37229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1929732772}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37147,7 +37322,7 @@ GameObject:
   - component: {fileID: 1931257603}
   m_Layer: 9
   m_Name: GrabbableCube (7)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -37376,7 +37551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 10d9cb6888f407a4ca90a70b41076bbf, type: 3}
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
 --- !u!1 &1948216913
 GameObject:
   m_ObjectHideFlags: 0
@@ -37386,7 +37561,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1948216914}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38881,6 +39056,7 @@ MonoBehaviour:
     index1: {fileID: 556734472}
     index2: {fileID: 1728327179}
     index3: {fileID: 1220731164}
+  handGrab: {fileID: 176898640}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2560
@@ -40490,7 +40666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2111541401}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40522,7 +40698,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2121954381}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:RightHandRing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40708,7 +40884,7 @@ GameObject:
   - component: {fileID: 2139326109}
   m_Layer: 9
   m_Name: GrabbableCube (11)
-  m_TagString: Untagged
+  m_TagString: Climbing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -40883,7 +41059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142655722}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: mixamorig:LeftHandPinky4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

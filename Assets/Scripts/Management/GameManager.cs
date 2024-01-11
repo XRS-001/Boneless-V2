@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
     public GameObject sceneChangeButton;
     private VRIKData vrikData = new VRIKData();
+    private AudioSource audioSource;
+    public AudioClip uiClickSound;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         if (sceneChangeButton)
@@ -63,6 +69,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("<color=#FF2400> No saved calibration data found. </color>");
         }
+    }
+    public void PlayUISound()
+    {
+        //make the volume independent
+        audioSource.PlayOneShot(uiClickSound, 1 / audioSource.volume);
     }
     private void OnEnable()
     {

@@ -7,14 +7,16 @@ public class FootstepsAudio : MonoBehaviour
 {
     private AudioSource audioSource;
     private bool isMoving;
+    private bool hasPlayed = false;
     private Vector2 inputMoveAxis;
     private InputActionProperty moveInputSource;
     private ContinuousMovementPhysics movement;
+    public AudioClip footstepAudio;
     private void Start()
     {
         movement = GetComponent<ContinuousMovementPhysics>();
         moveInputSource = movement.moveInputSource;
-        audioSource = GetComponent<AudioSource>();
+        audioSource = movement.audioSource;
     }
     // Update is called once per frame
     void Update()
@@ -26,19 +28,25 @@ public class FootstepsAudio : MonoBehaviour
         // Play footstep sound when moving, stop it when not moving.
         if (isMoving)
         {
-            if (!audioSource.isPlaying)
+            if (!hasPlayed)
             {
-                if (movement.isRunning)
-                {
-                    audioSource.pitch = 0.75f * movement.runningSpeed;
-                }
-                else
-                {
-                    audioSource.pitch = 0.85f * movement.speed;
-                }
-
-                audioSource.Play();
+                StartCoroutine(PlayAudio());
+                hasPlayed = true;
             }
         }
+    }
+    IEnumerator PlayAudio()
+    {
+        if (movement.isRunning)
+        {
+            yield return new WaitForSeconds(0.5f / movement.runningSpeed);
+            audioSource.PlayOneShot(footstepAudio);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f / movement.speed);
+            audioSource.PlayOneShot(footstepAudio);
+        }
+        hasPlayed = false;
     }
 }

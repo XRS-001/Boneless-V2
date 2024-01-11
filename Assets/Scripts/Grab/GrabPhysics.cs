@@ -11,6 +11,10 @@ public class GrabPhysics : MonoBehaviour
     public float grabPitch;
     public float grabVolume;
     public SetPose poseSetup { get; private set; }
+    [Tooltip("A small icon to show on the interactable when hovering")]
+    public GameObject hoverIcon;
+    private GameObject spawnedIcon;
+    public Transform cameraTransform;
 
     [Tooltip("The collider group of the hand")]
     public GameObject colliderGroup;
@@ -86,6 +90,15 @@ public class GrabPhysics : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (spawnedIcon && grab)
+        {
+            spawnedIcon.transform.position = grab.transform.position;
+            spawnedIcon.transform.LookAt(cameraTransform.position);
+            if (grab.isGrabbing)
+            {
+                Destroy(spawnedIcon);
+            }
+        }
         grabZonePosition = transform.position - (transform.rotation * grabZoneOffset);
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
         bool isGrabButtonPressedThisFrame = grabInputSource.action.WasPressedThisFrame();
@@ -117,6 +130,11 @@ public class GrabPhysics : MonoBehaviour
                 }
                 if (grab)
                 {
+                    //verify the grab is not an enemy ragdoll before creating the hover icon
+                    if(!spawnedIcon && grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+                    {
+                        spawnedIcon = Instantiate(hoverIcon);
+                    }
                     grab.isHovering = true;
                 }
             }
@@ -199,6 +217,7 @@ public class GrabPhysics : MonoBehaviour
         {
             if (grab)
             {
+                Destroy(spawnedIcon);
                 grab.isHovering = false;
             }
             closestCollider = null;
@@ -219,7 +238,6 @@ public class GrabPhysics : MonoBehaviour
                     grab.handGrabbing = null;
                     grab.isGrabbing = false;
                     colliderGroup.SetActive(true);
-                    grab.transform.parent = null;
                     foreach (Collider collider in grab.colliders)
                     {
                         Physics.IgnoreCollision(collider, forearm, false);
