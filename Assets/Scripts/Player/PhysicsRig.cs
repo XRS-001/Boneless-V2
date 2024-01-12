@@ -7,12 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-[System.Serializable]
-public class HandClimbingDrive
-{
-    public float spring;
-    public float damper;
-}
 public class VRIKData
 {
     public VRIKCalibrator.CalibrationData ikData;
@@ -20,9 +14,6 @@ public class VRIKData
 public class PhysicsRig : MonoBehaviour
 {
     public Rigidbody bodyRb;
-    public HandClimbingDrive climbingDrive;
-    public JointDrive startDrive;
-    public JointDrive startYDrive;
     public VRIK playerModel;
     public Transform leftHandPhysicsTarget;
     public Transform rightHandPhysicsTarget;
@@ -68,11 +59,6 @@ public class PhysicsRig : MonoBehaviour
     public Joints joints;
     private void Start()
     {
-        //set the startDrive to the left X drive, assumes all X and Z drives are equal
-        startDrive = leftHandJoint.xDrive;
-
-        //set the startDrive to the leftY drive, assumes all Y drives are equal
-        startYDrive = leftHandJoint.yDrive;
         StartCoroutine(DelayStart());
         leftHandGrab = leftHandJoint.GetComponent<GrabPhysics>();
         rightHandGrab = rightHandJoint.GetComponent<GrabPhysics>();
@@ -112,49 +98,6 @@ public class PhysicsRig : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(leftHandGrab.isClimbing || rightHandGrab.isClimbing)
-        {
-            float dampingFactor = 0.00001f;
-            bodyRb.velocity *= dampingFactor;
-            if(leftHandGrab.isClimbing)
-            {
-                JointDrive newDrive = leftHandJoint.xDrive;
-                newDrive.positionDamper = climbingDrive.damper;
-                newDrive.positionSpring = climbingDrive.spring;
-                leftHandJoint.xDrive = newDrive;
-                leftHandJoint.yDrive = newDrive;
-                leftHandJoint.zDrive = newDrive;
-                leftHandJoint.slerpDrive = newDrive;
-            }
-            if (rightHandGrab.isClimbing)
-            {
-                JointDrive newDrive = rightHandJoint.xDrive;
-                newDrive.positionDamper = climbingDrive.damper;
-                newDrive.positionSpring = climbingDrive.spring;
-                rightHandJoint.xDrive = newDrive;
-                rightHandJoint.yDrive = newDrive;
-                rightHandJoint.zDrive = newDrive;
-                rightHandJoint.slerpDrive = newDrive;
-            }
-        }
-        else
-        {
-            if (!leftHandGrab.isClimbing)
-            {
-                leftHandJoint.xDrive = startDrive;
-                leftHandJoint.yDrive = startYDrive;
-                leftHandJoint.zDrive = startDrive;
-                leftHandJoint.slerpDrive = startDrive;
-            }
-            if (!rightHandGrab.isClimbing)
-            {
-                rightHandJoint.xDrive = startDrive;
-                rightHandJoint.yDrive = startYDrive;
-                rightHandJoint.zDrive = startDrive;
-                rightHandJoint.slerpDrive = startDrive;
-            }
-        }
-
         Vector3 newPosition = joints.camera.position;
         newPosition.x = joints.headTarget.transform.position.x;
         newPosition.y = joints.headJoint.transform.position.y;

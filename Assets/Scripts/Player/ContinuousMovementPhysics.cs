@@ -1,3 +1,4 @@
+using RootMotion.FinalIK;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,12 +12,14 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public float jumpHeight = 1.5f;
     public float vaultHeight = 1.5f;
     public AudioClip jumpAudio;
+    public AudioClip stepAudio;
     public AudioSource audioSource;
     public InputActionProperty moveInputSource;
     public InputActionProperty runInputSource;
     public InputActionProperty turnInputSource;
     public InputActionProperty jumpInputSource;
     public Rigidbody rb;
+    public VRIK ik;
     public Transform directionSource;
     private Vector3 direction;
     private Vector2 inputMoveAxis;
@@ -29,7 +32,18 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
     public DetectCollisionFeet[] feetDetection;
     public DetectCollisionHand[] handDetection;
-
+    private void Start()
+    {
+        ik.solver.locomotion.onLeftFootstep.AddListener(OnStep);
+        ik.solver.locomotion.onRightFootstep.AddListener(OnStep);
+    }
+    public void OnStep()
+    {
+        if (isGrounded)
+        {
+            audioSource.PlayOneShot(stepAudio, 0.5f);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -48,7 +62,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
             StartCoroutine(JumpRoutine());
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
             rb.velocity = Vector3.up * jumpVelocity + direction;
-            audioSource.PlayOneShot(jumpAudio, 0.5f);
+            audioSource.PlayOneShot(jumpAudio, 1f);
             isJumping = false;
         }
     }

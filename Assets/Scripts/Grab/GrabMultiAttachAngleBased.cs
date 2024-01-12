@@ -1,7 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static EnumDeclaration;
 public class GrabMultiAttachAngleBased : GrabTwoAttach
@@ -22,6 +18,8 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
         primaryLeftAttach.leftAttachPosition = leftAttach.leftAttachPosition; primaryLeftAttach.leftAttachRotation = leftAttach.leftAttachRotation;
         primaryRightAttach = new RightAttach();
         primaryRightAttach.rightAttachPosition = rightAttach.rightAttachPosition; primaryRightAttach.rightAttachRotation = rightAttach.rightAttachRotation;
+        //set the rb because of overriding of the baseGrab start function
+        rb = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()

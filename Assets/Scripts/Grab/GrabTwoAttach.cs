@@ -26,6 +26,24 @@ public class GrabTwoAttach : BaseGrab
     public bool twoHanded;
     [HideInInspector]
     public bool isHovering;
+    private void FixedUpdate()
+    {
+        if(isGrabbing)
+        {
+            if(handGrabbing.connectedMass > 1)
+            {
+                if (!secondHandGrabbing)
+                {
+                    rb.AddForce(Vector3.down * (rb.mass * 250));
+                }
+                else
+                {
+                    //halve the force of gravity if two hands are grabbing
+                    rb.AddForce(Vector3.down * (rb.mass * 125));
+                }
+            }
+        }
+    }
     public void SetAttachPoint(handTypeEnum handType)
     {
         if (handType == handTypeEnum.Left)

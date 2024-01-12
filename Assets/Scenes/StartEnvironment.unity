@@ -6064,6 +6064,10 @@ MonoBehaviour:
   runningSpeed: 2.5
   turnSpeed: 0
   jumpHeight: 0.5
+  vaultHeight: 1.5
+  jumpAudio: {fileID: 0}
+  stepAudio: {fileID: 0}
+  audioSource: {fileID: 0}
   moveInputSource:
     m_UseReference: 1
     m_Action:
@@ -6117,6 +6121,7 @@ MonoBehaviour:
     m_Reference: {fileID: -3613939836888762203, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   rb: {fileID: 4454752}
+  ik: {fileID: 0}
   directionSource: {fileID: 69769646}
   isRunning: 0
   feetDetection:
@@ -8818,6 +8823,7 @@ MonoBehaviour:
     index1: {fileID: 1705881302}
     index2: {fileID: 1161657516}
     index3: {fileID: 757101338}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -14353,10 +14359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c310b8797bdb4b84da4416aaf60c22e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handType: 1
-  rb: {fileID: 1151367434}
-  colliderGroup: {fileID: 1167387165}
-  forearm: {fileID: 0}
   grabInputSource:
     m_UseReference: 1
     m_Action:
@@ -14370,15 +14372,28 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  handType: 1
+  rb: {fileID: 1151367434}
+  colliderGroup: {fileID: 1167387165}
+  forearm: {fileID: 0}
   radius: 0.1
   grabZoneOffset: {x: 0.12, y: 0, z: 0.02}
   grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
     m_Bits: 512
+  grabSound: {fileID: 0}
+  grabVolume: 0
+  hoverIcon: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  distanceGrab: 0
+  distanceGrabDetection: {fileID: 0}
+  distanceGrabLayer:
+    serializedVersion: 2
+    m_Bits: 0
   grab: {fileID: 0}
-  isGrabbing: 0
   isClimbing: 0
+  isGrabbing: 0
   connectedMass: 0
 --- !u!95 &1151367430
 Animator:
@@ -16429,6 +16444,7 @@ MonoBehaviour:
     index1: {fileID: 1850470299}
     index2: {fileID: 1048503203}
     index3: {fileID: 1225531925}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -16709,10 +16725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c310b8797bdb4b84da4416aaf60c22e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handType: 0
-  rb: {fileID: 1371064489}
-  colliderGroup: {fileID: 1054933744}
-  forearm: {fileID: 0}
   grabInputSource:
     m_UseReference: 1
     m_Action:
@@ -16726,15 +16738,28 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  handType: 0
+  rb: {fileID: 1371064489}
+  colliderGroup: {fileID: 1054933744}
+  forearm: {fileID: 0}
   radius: 0.1
   grabZoneOffset: {x: -0.12, y: 0, z: 0.02}
   grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
     m_Bits: 512
+  grabSound: {fileID: 0}
+  grabVolume: 0
+  hoverIcon: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  distanceGrab: 0
+  distanceGrabDetection: {fileID: 0}
+  distanceGrabLayer:
+    serializedVersion: 2
+    m_Bits: 0
   grab: {fileID: 0}
-  isGrabbing: 0
   isClimbing: 0
+  isGrabbing: 0
   connectedMass: 0
 --- !u!95 &1371064485
 Animator:
@@ -18881,7 +18906,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20910,6 +20935,7 @@ MonoBehaviour:
     index1: {fileID: 1650369265}
     index2: {fileID: 1146627959}
     index3: {fileID: 1062545181}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -23894,6 +23920,7 @@ MonoBehaviour:
     index1: {fileID: 1962353715}
     index2: {fileID: 1488345376}
     index3: {fileID: 188731337}
+  handGrab: {fileID: 0}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -25870,6 +25897,7 @@ MonoBehaviour:
   height: 0
   calibrator: {fileID: 452711431}
   sceneChangeButton: {fileID: 357027825}
+  uiClickSound: {fileID: 0}
 --- !u!82 &2145428188
 AudioSource:
   m_ObjectHideFlags: 0

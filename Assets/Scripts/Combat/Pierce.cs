@@ -16,7 +16,6 @@ public class Pierce : MonoBehaviour
     public float velocityThreshold;
     private float velocity;
     public AudioClip stabSound;
-    public float stabPitch;
     public float stabVolume;
     public LayerMask pierceableLayer;
     private bool stabbed = false;
@@ -104,8 +103,6 @@ public class Pierce : MonoBehaviour
         yield return new WaitForSeconds(0.025f);
         if(stabbed)
         {
-            //set the pitch to a custom stab pitch
-            audioSource.pitch = stabPitch;
             audioSource.PlayOneShot(stabSound, stabVolume);
         }
     }
