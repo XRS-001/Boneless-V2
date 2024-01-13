@@ -11,9 +11,13 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
     private LeftAttach primaryLeftAttach;
     private RightAttach primaryRightAttach;
     public Transform leftHand;
+    private GrabPhysics leftGrab;
     public Transform rightHand;
+    private GrabPhysics rightGrab;
     private void Start()
     {
+        leftGrab = leftHand.GetComponent<GrabPhysics>();
+        rightGrab = rightHand.GetComponent<GrabPhysics>();
         primaryLeftAttach = new LeftAttach();
         primaryLeftAttach.leftAttachPosition = leftAttach.leftAttachPosition; primaryLeftAttach.leftAttachRotation = leftAttach.leftAttachRotation;
         primaryRightAttach = new RightAttach();
@@ -24,7 +28,7 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
     // Update is called once per frame
     void Update()
     {
-        if (isHovering)
+        if (leftGrab.nearbyRigidbody == rb || rightGrab.nearbyRigidbody == rb)
         {
             float dotLeft = 0;
             if (upAxis == upDirection.up)

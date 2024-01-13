@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.Rendering.Universal;
 
 public class Pierce : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class Pierce : MonoBehaviour
     private float velocity;
     public AudioClip stabSound;
     public float stabVolume;
+    public GameObject bloodDecal;
     public LayerMask pierceableLayer;
     private bool stabbed = false;
     private Collider stabbedCollider;
@@ -55,8 +58,14 @@ public class Pierce : MonoBehaviour
                 stabbedCollider = checkColliders[0];
 
                 hitPoint = new GameObject("HitPoint");
-                hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.1f));
+                hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.15f));
                 hitPoint.transform.parent = stabbedCollider.transform;
+
+                GameObject spawnedDecal = Instantiate(bloodDecal);
+                spawnedDecal.transform.position = transform.TransformPoint(piercePoint);
+                spawnedDecal.transform.rotation = transform.rotation;
+                spawnedDecal.transform.parent = stabbedCollider.transform;
+                StartCoroutine(DelayOpacity(spawnedDecal.GetComponent<DecalProjector>()));
 
                 foreach (Collider ragdollCollider in stabbedCollider.transform.root.GetComponentsInChildren<Collider>())
                 {
@@ -98,9 +107,23 @@ public class Pierce : MonoBehaviour
             }
         }
     }
+    IEnumerator DelayOpacity(DecalProjector decal)
+    {
+        float timer = 0f;
+        while (timer < 60)
+        {
+            decal.fadeFactor = Mathf.Lerp(1, 0, timer / 60);
+            timer += Time.deltaTime;
+            if (timer >= 60)
+            {
+                Destroy(decal.gameObject);
+            }
+            yield return null;
+        }
+    }
     IEnumerator WaitToSFX()
     {
-        yield return new WaitForSeconds(0.025f);
+        yield return new WaitForSeconds(0.25f);
         if(stabbed)
         {
             audioSource.PlayOneShot(stabSound, stabVolume);
