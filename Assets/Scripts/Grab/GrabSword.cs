@@ -80,7 +80,7 @@ public class GrabSword : GrabTwoAttach
         }
         else
         {
-            rightAttach.rightAttachPosition = dynamicSettings.handlePosition;
+            rightAttach.rightAttachPosition = new Vector3(-dynamicSettings.handlePosition.x, dynamicSettings.handlePosition.y, dynamicSettings.handlePosition.z);
         }
     }
     private void OnDrawGizmosSelected()

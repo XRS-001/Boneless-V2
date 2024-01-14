@@ -3,6 +3,7 @@ using UnityEngine;
 using static GrabTwoAttach;
 using static EnumDeclaration;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class GrabDynamic : GrabTwoAttach
 {
@@ -21,6 +22,9 @@ public class GrabDynamic : GrabTwoAttach
         public float offset;
         [Tooltip("The weight the hand is made to look at the normal (1 being 100%)")]
         public float angleWeight;
+        //verify that the object is valid to be grabbed
+        [HideInInspector]
+        public bool isGrabbable = true;
     }
     public DynamicSettings dynamicSettings;
     private void Start()
@@ -39,18 +43,33 @@ public class GrabDynamic : GrabTwoAttach
             {
                 ClosestCollider(handTypeEnum.Left).Raycast(new Ray(dynamicSettings.leftHand.position, ClosestCollider(handTypeEnum.Left).transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-                leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
-                leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+                if (hitInfo.collider)
+                {
+                    dynamicSettings.isGrabbable = true;
+                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
+                    leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+                }
+                else
+                {
+                    dynamicSettings.isGrabbable = false;
+                }
             }
             else
             {
                 //cast a ray that directs to the interactable and outputs the hitInfo
                 GetComponent<Collider>().Raycast(new Ray(dynamicSettings.leftHand.position, transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
-
-                //set the leftAttachPosition to the hitPoint and add some offset
-                leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
-                //set the rotation to be the hands rotation extending the the normal
-                leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+                if (hitInfo.collider)
+                {
+                    dynamicSettings.isGrabbable = true;
+                    //set the leftAttachPosition to the hitPoint and add some offset
+                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
+                    //set the rotation to be the hands rotation extending the the normal
+                    leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+                }
+                else
+                {
+                    dynamicSettings.isGrabbable = false;
+                }
             }
         }
         if (Vector3.Distance(transform.position, dynamicSettings.rightHand.position) < dynamicSettings.rightGrab.calculationDistance)

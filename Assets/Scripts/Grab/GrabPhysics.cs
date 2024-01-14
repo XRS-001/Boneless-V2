@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using static EnumDeclaration;
 using System.Linq;
-using System;
 using System.Collections.Generic;
 
 public class GrabPhysics : MonoBehaviour
@@ -11,10 +10,14 @@ public class GrabPhysics : MonoBehaviour
     [Header("Hand Info")]
     public InputActionProperty grabInputSource;
     public handTypeEnum handType;
+    public Transform controller;
     public Rigidbody rb;
     [Tooltip("The collider group of the hand")]
     public GameObject colliderGroup;
     public Collider forearm;
+    [Tooltip("The hand presence")]
+    public FollowTarget followTarget;
+    private PhysicsRig rig;
 
     private AudioSource audioSource;
     [Header("Grabbing")]
@@ -54,8 +57,11 @@ public class GrabPhysics : MonoBehaviour
     Collider closestCollider;
     [HideInInspector]
     public Rigidbody nearbyRigidbody;
+    private GameObject twoHandedInteraction;
+    private bool reGrabbing;
     private void Start()
     {
+        rig = transform.root.GetComponent<PhysicsRig>();
         //look for a capsule collider on the distanceGrabTransform
         distanceGrabZone = distanceGrabDetection.GetComponent<CapsuleCollider>();
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -63,44 +69,80 @@ public class GrabPhysics : MonoBehaviour
     }
     public void Grab()
     {
-        grab.SetAttachPoint(handType);
-        isGrabbing = true;
-        fixedJoint = gameObject.AddComponent<FixedJoint>();
-        fixedJoint.autoConfigureConnectedAnchor = false;
-        fixedJoint.connectedAnchor = grab.attachPoint;
-
-        if (!(grab is GrabDynamic))
+        if (grab is not GrabSword || !grab.isTwoHandGrabbing)
         {
-            transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
+            //check if it's regrabbing from a two handed ungrab
+            if(!reGrabbing)
+            {
+                if (grab is GrabDynamic)
+                {
+                    poseSetup.setDynamicPose = true;
+                }
+                grab.SetPose(handType);
+                poseSetup.pose = grab.pose;
+                poseSetup.SetupPose();
+                grab.SetAttachPoint(handType);
+            }
+            else
+            {
+                reGrabbing = false;
+            }
+            grab.handGrabbing = this;
+            isGrabbing = true;
+            fixedJoint = gameObject.AddComponent<FixedJoint>();
+            fixedJoint.autoConfigureConnectedAnchor = false;
+            fixedJoint.connectedAnchor = grab.attachPoint;
+
+            if (grab is not GrabDynamic)
+            {
+                transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(grab.attachRotation);
+            }
+
+            fixedJoint.connectedBody = nearbyRigidbody;
+            if (!grab.secondHandGrabbing)
+            {
+                connectedMass = nearbyRigidbody.mass;
+            }
+            else
+            {
+                connectedMass = grab.handGrabbing.connectedMass;
+            }
+            grab.isGrabbing = true;
+            foreach (Collider collider in grab.colliders)
+            {
+                Physics.IgnoreCollision(collider, forearm);
+            }
+            nearbyRigidbody.mass = 1;
+            audioSource.PlayOneShot(grabSound, grabVolume);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(grab.attachRotation);
+            twoHandedInteraction = new GameObject("TwoHandedInteraction");
+            twoHandedInteraction.transform.parent = GameObject.Find("TrackedObjects").transform;
+            if (handType == handTypeEnum.Left)
+            {
+                rig.rightHandPhysicsTarget = twoHandedInteraction.transform;
+            }
+            else
+            {
+                rig.leftHandPhysicsTarget = twoHandedInteraction.transform;
+            }
+            grab.SetAttachPoint(handType);
+            isGrabbing = true;
+            grab.SetPose(handType);
+            poseSetup.pose = grab.pose;
+            poseSetup.SetupPose();
+            audioSource.PlayOneShot(grabSound, grabVolume);
+            foreach (Collider collider in grab.colliders)
+            {
+                Physics.IgnoreCollision(collider, forearm);
+            }
         }
 
-        fixedJoint.connectedBody = nearbyRigidbody;
-        if(!grab.secondHandGrabbing)
-        {
-            connectedMass = nearbyRigidbody.mass;
-        }
-        else
-        {
-            connectedMass = grab.handGrabbing.connectedMass;
-        }
-        if(grab is GrabDynamic)
-        {
-            poseSetup.setDynamicPose = true;
-        }
-        grab.SetPose(handType);
-        poseSetup.pose = grab.pose;
-        poseSetup.SetupPose();
-        grab.isGrabbing = true;
-        foreach(Collider collider in grab.colliders)
-        {
-            Physics.IgnoreCollision(collider, forearm);
-        }
-        nearbyRigidbody.mass = 1;
-        audioSource.PlayOneShot(grabSound, grabVolume);
     }
     public void GrabClimbable()
     {
@@ -127,11 +169,50 @@ public class GrabPhysics : MonoBehaviour
         isGrabbing = true;
         audioSource.PlayOneShot(grabSound, grabVolume);
     }
+    public void SwordUnGrab()
+    {
+        if (grab.secondHandGrabbing == this)
+        {
+            if (handType == handTypeEnum.Right)
+            {
+                rig.leftHandPhysicsTarget = grab.handGrabbing.controller;
+            }
+            else
+            {
+                rig.rightHandPhysicsTarget = grab.handGrabbing.controller;
+            }
+        }
+        else
+        {
+            if (handType == handTypeEnum.Right)
+            {
+                rig.rightHandPhysicsTarget = grab.handGrabbing.controller;
+            }
+            else
+            {
+                rig.leftHandPhysicsTarget = grab.handGrabbing.controller;
+            }
+            grab.isGrabbing = false;
+            reGrabbing = true;
+            GrabPhysics secondHand = grab.secondHandGrabbing;
+            grab.secondHandGrabbing.UnGrab();
+            grab.handGrabbing = secondHand;
+            grab.handGrabbing.grab = grab;
+            grab.handGrabbing.Grab();
+        }
+        followTarget.overrideTarget = false;
+        Destroy(twoHandedInteraction);
+    }
     public void UnGrab()
     {
         isGrabbing = false;
         if (grab != null)
         {
+            if (!reGrabbing)
+            {
+                poseSetup.exitingDynamicPose = true;
+                poseSetup.UnSetPose();
+            }
             if (!grab.isTwoHandGrabbing)
             {
                 if (fixedJoint)
@@ -148,13 +229,10 @@ public class GrabPhysics : MonoBehaviour
             }
             else
             {
-                if (grab.handGrabbing == this)
+                if(grab is GrabSword)
                 {
-                    grab.handGrabbing = grab.secondHandGrabbing;
-                }
-                if (fixedJoint)
-                {
-                    Destroy(fixedJoint);
+                    //custom logic for swords
+                    SwordUnGrab();
                 }
                 grab.handGrabbing.colliderGroup.SetActive(true);
                 colliderGroup.SetActive(true);
@@ -164,6 +242,15 @@ public class GrabPhysics : MonoBehaviour
                 {
                     Physics.IgnoreCollision(collider, forearm, false);
                 }
+                if (grab.handGrabbing == this)
+                {
+                    grab.handGrabbing = grab.secondHandGrabbing;
+                }
+                if (fixedJoint)
+                {
+                    Destroy(fixedJoint);
+                }
+
             }
             if (nearbyRigidbody)
             {
@@ -173,8 +260,6 @@ public class GrabPhysics : MonoBehaviour
                 }
             }
             connectedMass = 0;
-            poseSetup.exitingDynamicPose = true;
-            poseSetup.UnSetPose();
         }
         if (grab is GrabDynamic)
         {
@@ -219,7 +304,33 @@ public class GrabPhysics : MonoBehaviour
                 //do not allow for distance grabbing dynamic interactables
                 nearbyColliders.Clear();
             }
+            Pierce pierce = closestCollider.transform.root.GetComponent<Pierce>();
+            if (pierce)
+            {
+                if(pierce.stabbed)
+                {
+                    //do not let grab if stabbing
+                    nearbyColliders.Clear();
+                }
+            }
         }
+    }
+    void TwoHandedGrabbing()
+    {
+        followTarget.overrideTarget = true;
+        followTarget.Overriding(grab.transform.TransformPoint(grab.attachPoint), grab.rb.rotation * Quaternion.Euler(grab.attachRotation));
+
+        twoHandedInteraction.transform.position = grab.handGrabbing.controller.transform.position;
+
+        Vector3 forwardDirection = (controller.position - twoHandedInteraction.transform.position).normalized;
+
+        Vector3 upDirection = grab.handGrabbing.controller.transform.up;
+
+        Vector3 rightDirection = Vector3.Cross(forwardDirection, upDirection).normalized;
+
+        upDirection = Vector3.Cross(rightDirection, forwardDirection).normalized;
+
+        twoHandedInteraction.transform.rotation = Quaternion.LookRotation(forwardDirection, upDirection);
     }
     void FixedUpdate()
     {
@@ -228,11 +339,14 @@ public class GrabPhysics : MonoBehaviour
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
         bool isGrabButtonPressedThisFrame = grabInputSource.action.WasPressedThisFrame();
 
-        nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer, QueryTriggerInteraction.Ignore).ToList();
-        //if distance grab is enabled, check if an object is in the distance grab zone as defined by a capsule collider under the hand
-        if (!(nearbyColliders.Count > 0) && distanceGrab)
+        if (!isGrabbing)
         {
-            CheckDistanceGrab();
+            nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer, QueryTriggerInteraction.Ignore).ToList();
+            //if distance grab is enabled, check if an object is in the distance grab zone as defined by a capsule collider under the hand
+            if (!(nearbyColliders.Count > 0) && distanceGrab)
+            {
+                CheckDistanceGrab();
+            }
         }
         if (nearbyColliders.Count > 0)
         {
@@ -243,20 +357,46 @@ public class GrabPhysics : MonoBehaviour
                 {
                     if (grab)
                     {
-                        if (!grab.isGrabbing)
+                        //if the interactable is a dynamic grab, verify it's valid for grabbing
+                        if (grab is GrabDynamic)
                         {
-                            StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                            grab.handGrabbing = this;
-                            Grab();
+                            GrabDynamic grabDynamic = grab as GrabDynamic;
+                            if (grabDynamic.dynamicSettings.isGrabbable)
+                            {
+                                if (!grab.isGrabbing)
+                                {
+                                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                                    grab.handGrabbing = this;
+                                    Grab();
+                                }
+                                else if (grab.twoHanded)
+                                {
+                                    grab.isTwoHandGrabbing = true;
+                                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                                    grab.secondHandGrabbing = this;
+                                    grab.handGrabbing.colliderGroup.SetActive(false);
+                                    colliderGroup.SetActive(false);
+                                    Grab();
+                                }
+                            }
                         }
-                        else if (grab.twoHanded)
+                        else
                         {
-                            grab.isTwoHandGrabbing = true;
-                            StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                            grab.secondHandGrabbing = this;
-                            grab.handGrabbing.colliderGroup.SetActive(false);
-                            colliderGroup.SetActive(false);
-                            Grab();
+                            if (!grab.isGrabbing)
+                            {
+                                StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                                grab.handGrabbing = this;
+                                Grab();
+                            }
+                            else if (grab.twoHanded)
+                            {
+                                grab.isTwoHandGrabbing = true;
+                                StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                                grab.secondHandGrabbing = this;
+                                grab.handGrabbing.colliderGroup.SetActive(false);
+                                colliderGroup.SetActive(false);
+                                Grab();
+                            }
                         }
                     }
                 }
@@ -270,6 +410,13 @@ public class GrabPhysics : MonoBehaviour
         {
             closestCollider = null;
             nearbyRigidbody = null;
+        }
+        if (grab)
+        {
+            if (grab.isTwoHandGrabbing && grab is GrabSword && grab.secondHandGrabbing == this)
+            {
+                TwoHandedGrabbing();
+            }
         }
         if (!isGrabButtonPressed && isGrabbing)
         {
