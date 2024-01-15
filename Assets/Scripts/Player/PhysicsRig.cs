@@ -28,6 +28,7 @@ public class PhysicsRig : MonoBehaviour
         public Transform camera;
         public ConfigurableJoint headJoint;
         public Transform headTarget;
+        public Transform headDriver;
 
         public ConfigurableJoint chestJoint;
         public Transform chestTarget;
@@ -103,7 +104,7 @@ public class PhysicsRig : MonoBehaviour
         newPosition.y = joints.headJoint.transform.position.y;
         newPosition.z = joints.headTarget.transform.position.z;
         joints.camera.position = newPosition;
-        joints.camera.rotation = joints.headTarget.transform.rotation;
+        joints.camera.rotation = joints.headDriver.transform.rotation;
 
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
         leftHandJoint.targetRotation = CalculateAngle(leftHandJoint.targetRotation, leftHandPhysicsTarget.localRotation, leftHandGrab.connectedMass);

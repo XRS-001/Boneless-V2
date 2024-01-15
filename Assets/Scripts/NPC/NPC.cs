@@ -43,17 +43,11 @@ public class NPC : MonoBehaviour
         }
         if (isOverlapping)
         {
-            if(puppetMaster.mode != PuppetMaster.Mode.Active)
-            {
-                Activate();
-            }
+            Activate();
         }
         else
         {
-            if (puppetMaster.mode == PuppetMaster.Mode.Active && !isBleeding)
-            {
-                Disable();
-            }
+            Disable();
         }
     }
     private void Activate()

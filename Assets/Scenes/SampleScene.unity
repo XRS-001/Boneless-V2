@@ -3923,8 +3923,8 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 4500
-    positionDamper: 150
+    positionSpring: 1125
+    positionDamper: 37.5
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ProjectionMode: 0
@@ -5834,6 +5834,7 @@ MonoBehaviour:
     camera: {fileID: 1543219586}
     headJoint: {fileID: 1465330688}
     headTarget: {fileID: 855710370}
+    headDriver: {fileID: 354109375}
     chestJoint: {fileID: 1290990472}
     chestTarget: {fileID: 1006856826}
     rightArmJoint: {fileID: 1206564951}
@@ -14977,6 +14978,8 @@ MonoBehaviour:
     rightHand: {fileID: 1426969258}
     handlePosition: {x: -0.035, y: -0.04, z: -0.48}
     handleLength: 0.085
+  lowerHand: {fileID: 0}
+  guardPosition: {x: 0, y: 0, z: -0.35}
 --- !u!114 &989768908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20448,8 +20451,8 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 4500
-    positionDamper: 150
+    positionSpring: 1125
+    positionDamper: 37.5
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ProjectionMode: 0
