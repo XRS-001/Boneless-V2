@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 20364472}
   m_Layer: 9
   m_Name: GrabbableSphere
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1187,7 +1187,7 @@ GameObject:
   - component: {fileID: 34055078}
   m_Layer: 9
   m_Name: GrabbableSphere (2)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2661,7 +2661,7 @@ GameObject:
   - component: {fileID: 112185800}
   m_Layer: 0
   m_Name: LeftHand Controller
-  m_TagString: Untagged
+  m_TagString: LeftController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3690,9 +3690,14 @@ MonoBehaviour:
   handType: 0
   controller: {fileID: 112185799}
   rb: {fileID: 176898645}
-  colliderGroup: {fileID: 1500882834}
+  colliders:
+  - {fileID: 113609394}
+  - {fileID: 1561353986}
+  - {fileID: 1890934936}
+  - {fileID: 750676537}
+  - {fileID: 986458191}
+  - {fileID: 42332602}
   forearm: {fileID: 1561344257}
-  followTarget: {fileID: 522251878}
   radius: 0.1
   calculationDistance: 1
   grabZoneOffset: {x: -0.12, y: 0, z: 0.02}
@@ -3896,7 +3901,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 2250
+    positionSpring: 3375
     positionDamper: 150
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -3923,8 +3928,8 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1125
-    positionDamper: 37.5
+    positionSpring: 3375
+    positionDamper: 175
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ProjectionMode: 0
@@ -5006,7 +5011,7 @@ GameObject:
   - component: {fileID: 276000438}
   m_Layer: 9
   m_Name: GrabbableCube (9)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -5688,8 +5693,8 @@ MonoBehaviour:
   centerEyeAnchor: {fileID: 1543219586}
   headAnchorPositionOffset: {x: 0, y: -0.142, z: -0.079}
   headAnchorRotationOffset: {x: 0, y: 0, z: 0}
-  leftHandAnchor: {fileID: 522251877}
-  rightHandAnchor: {fileID: 1530883242}
+  leftHandAnchor: {fileID: 176898638}
+  rightHandAnchor: {fileID: 1426969258}
   handAnchorPositionOffset: {x: 0, y: 0.03, z: 0.135}
   handAnchorRotationOffset: {x: -20, y: 0, z: 0}
   scaleMlp: 1
@@ -6376,7 +6381,7 @@ GameObject:
   - component: {fileID: 368029145}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -7530,7 +7535,7 @@ GameObject:
   - component: {fileID: 411371465}
   m_Layer: 9
   m_Name: GrabbableSphere (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -8236,7 +8241,7 @@ GameObject:
   - component: {fileID: 494908603}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -8768,52 +8773,6 @@ Transform:
   m_Father: {fileID: 1192238050}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &522251876
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 522251877}
-  - component: {fileID: 522251878}
-  m_Layer: 6
-  m_Name: LeftHandTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &522251877
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522251876}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1833081398}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &522251878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522251876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b048488ca20e544bd98b72de709f31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 176898638}
-  overrideTarget: 0
 --- !u!1 &527458977
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,7 +9967,7 @@ GameObject:
   - component: {fileID: 585417944}
   m_Layer: 9
   m_Name: GrabbableCube (6)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -10982,7 +10941,7 @@ GameObject:
   - component: {fileID: 683796851}
   m_Layer: 9
   m_Name: GrabbableCube (8)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -11336,6 +11295,7 @@ MonoBehaviour:
   - {fileID: 313365089}
   - {fileID: 243447658}
   - {fileID: 570459437}
+  stabDirection: 0
   piercePoint: {x: 0, y: 0, z: 0.225}
   pierceableLayer:
     serializedVersion: 2
@@ -11609,7 +11569,7 @@ GameObject:
   - component: {fileID: 712295007}
   m_Layer: 9
   m_Name: GrabbableCube (10)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -13045,7 +13005,7 @@ GameObject:
   - component: {fileID: 817578629}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -13813,7 +13773,7 @@ GameObject:
   - component: {fileID: 869710406}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -14978,7 +14938,7 @@ MonoBehaviour:
     rightHand: {fileID: 1426969258}
     handlePosition: {x: -0.035, y: -0.04, z: -0.48}
     handleLength: 0.085
-  lowerHand: {fileID: 0}
+  higherHand: {fileID: 0}
   guardPosition: {x: 0, y: 0, z: -0.35}
 --- !u!114 &989768908
 MonoBehaviour:
@@ -14996,6 +14956,7 @@ MonoBehaviour:
   - {fileID: 1292078571}
   - {fileID: 66396182}
   - {fileID: 837358485}
+  stabDirection: 0
   piercePoint: {x: 0, y: 0.05, z: 0.55}
   pierceableLayer:
     serializedVersion: 2
@@ -15875,35 +15836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049edbdb27f71cd4eae6e5094143c376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkRadius: 0.35
-  checkHeight: 2
-  dynamicLayers:
-    serializedVersion: 2
-    m_Bits: 7935
-  joints:
-  - joint: {fileID: 1042397191}
-    target: {fileID: 1179967277}
-  - joint: {fileID: 1298124817}
-    target: {fileID: 1179967277}
-  - joint: {fileID: 385710663}
-    target: {fileID: 1824508439}
-  - joint: {fileID: 1677132233}
-    target: {fileID: 313410632}
-  - joint: {fileID: 1483529290}
-    target: {fileID: 532944188}
-  - joint: {fileID: 571680379}
-    target: {fileID: 1720428794}
-  - joint: {fileID: 1995673856}
-    target: {fileID: 1519452441}
-  - joint: {fileID: 745286204}
-    target: {fileID: 457113334}
-  - joint: {fileID: 1573974692}
-    target: {fileID: 1791311892}
-  - joint: {fileID: 119924063}
-    target: {fileID: 1378652591}
-  - joint: {fileID: 1628877912}
-    target: {fileID: 852656843}
-  isBleeding: 0
 --- !u!1 &1091393401
 GameObject:
   m_ObjectHideFlags: 0
@@ -17901,7 +17833,7 @@ GameObject:
   - component: {fileID: 1277860626}
   m_Layer: 9
   m_Name: GrabbableSphere (3)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -19240,7 +19172,7 @@ GameObject:
   - component: {fileID: 1378418611}
   m_Layer: 9
   m_Name: Capsule
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -19998,7 +19930,7 @@ GameObject:
   - component: {fileID: 1416807486}
   m_Layer: 9
   m_Name: GrabbableCube (12)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -20210,9 +20142,14 @@ MonoBehaviour:
   handType: 1
   controller: {fileID: 1631724692}
   rb: {fileID: 1426969265}
-  colliderGroup: {fileID: 2068589054}
+  colliders:
+  - {fileID: 372627613}
+  - {fileID: 273277038}
+  - {fileID: 1625146741}
+  - {fileID: 1220651820}
+  - {fileID: 1518047273}
+  - {fileID: 30291280}
   forearm: {fileID: 1873339271}
-  followTarget: {fileID: 1530883243}
   radius: 0.1
   calculationDistance: 1
   grabZoneOffset: {x: 0.12, y: 0, z: 0.02}
@@ -20424,7 +20361,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 2250
+    positionSpring: 3375
     positionDamper: 150
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -20451,8 +20388,8 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1125
-    positionDamper: 37.5
+    positionSpring: 3375
+    positionDamper: 175
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ProjectionMode: 0
@@ -22074,52 +22011,6 @@ Transform:
   m_Father: {fileID: 1177740322}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1530883241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1530883242}
-  - component: {fileID: 1530883243}
-  m_Layer: 7
-  m_Name: RightHandTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1530883242
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530883241}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1833081398}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1530883243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530883241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b048488ca20e544bd98b72de709f31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1426969258}
-  overrideTarget: 0
 --- !u!1 &1531227830
 GameObject:
   m_ObjectHideFlags: 0
@@ -22442,7 +22333,7 @@ GameObject:
   - component: {fileID: 1543611558}
   m_Layer: 9
   m_Name: GrabbableCube (5)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -22679,7 +22570,7 @@ GameObject:
   - component: {fileID: 1547637598}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -24726,7 +24617,7 @@ GameObject:
   - component: {fileID: 1631724693}
   m_Layer: 0
   m_Name: RightHand Controller
-  m_TagString: Untagged
+  m_TagString: RightController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25284,7 +25175,7 @@ GameObject:
   - component: {fileID: 1656561408}
   m_Layer: 9
   m_Name: GrabbableSphere (5)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -26459,7 +26350,7 @@ GameObject:
   - component: {fileID: 1729789883}
   m_Layer: 9
   m_Name: GrabbableSphere (7)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -27326,7 +27217,7 @@ GameObject:
   - component: {fileID: 1772244562}
   m_Layer: 9
   m_Name: GrabbableSphere (4)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -28328,8 +28219,6 @@ Transform:
   - {fileID: 372722941}
   - {fileID: 176898638}
   - {fileID: 1426969258}
-  - {fileID: 522251877}
-  - {fileID: 1530883242}
   m_Father: {fileID: 329785812}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28401,7 +28290,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d28597111f679474ebe1f60470403b24, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -28739,7 +28628,7 @@ GameObject:
   - component: {fileID: 1842489492}
   m_Layer: 9
   m_Name: Capsule (1)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -29929,7 +29818,7 @@ GameObject:
   - component: {fileID: 1931257603}
   m_Layer: 9
   m_Name: GrabbableCube (7)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -33043,7 +32932,7 @@ GameObject:
   - component: {fileID: 2139326109}
   m_Layer: 9
   m_Name: GrabbableCube (11)
-  m_TagString: Climbing
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

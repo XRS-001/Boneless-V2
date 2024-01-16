@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Rendering.UI;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit;
-
+using static EnumDeclaration;
 public class Pierce : MonoBehaviour
 {
     private AudioSource audioSource;
     [Header("Stab Data")]
     public Collider[] colliders;
+    [Tooltip("The axis of the blade")]
+    public upDirection stabDirection;
+    private Vector3 stabAxis;
     public Vector3 piercePoint;
     public LayerMask pierceableLayer;
     [Tooltip("The damper of the piercing")]
@@ -32,7 +36,24 @@ public class Pierce : MonoBehaviour
     private ConfigurableJoint configurableJoint;
     private Rigidbody rb;
     private GameObject hitPoint;
-    private List<GameObject> spawnedDecals = new List<GameObject>();
+    private GameObject spawnedDecal;
+    private void Update()
+    {
+        switch (stabDirection)
+        {
+            case upDirection.forward:
+                stabAxis = transform.forward;
+                break;
+
+            case upDirection.up:
+                stabAxis = transform.up;
+                break;
+
+            case upDirection.right:
+                stabAxis = transform.right;
+                break;
+        }
+    }
     private void Start()
     {
         StartCoroutine(WaitToCheckAudio());
@@ -60,51 +81,71 @@ public class Pierce : MonoBehaviour
             Collider[] checkColliders = Physics.OverlapSphere(transform.TransformPoint(piercePoint), 0.035f, pierceableLayer);
             if (checkColliders[0].transform.root.name != gameObject.name)
             {
-                foreach(DecalProjector decal in objectDecals)
-                {
-                    decal.fadeFactor += 0.25f;
-                }
-
-                StartCoroutine(WaitToSFX());
-                stabbed = true;
                 stabbedCollider = checkColliders[0];
-                NPC stabbedNPC = stabbedCollider.transform.root.GetComponent<NPC>();
-                stabbedNPC.isBleeding = true;
 
-                hitPoint = new GameObject("HitPoint");
-                hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.15f));
-                hitPoint.transform.parent = stabbedCollider.transform;
+                stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-                spawnedDecals.Add(Instantiate(bloodDecal));
-                spawnedDecals[spawnedDecals.Count - 1].transform.position = transform.TransformPoint(piercePoint);
-                spawnedDecals[spawnedDecals.Count - 1].transform.rotation = transform.rotation;
-                spawnedDecals[spawnedDecals.Count - 1].transform.parent = stabbedCollider.transform;
-                StartCoroutine(DelayOpacity(spawnedDecals[spawnedDecals.Count - 1].GetComponent<DecalProjector>(), stabbedNPC));
-
-                foreach (Collider ragdollCollider in stabbedCollider.transform.root.GetComponentsInChildren<Collider>())
+                if (Vector3.Dot(stabAxis, hitInfo.normal) < -0.7f)
                 {
-                    foreach (Collider collider in colliders)
+                    stabbed = true;
+
+                    foreach (DecalProjector decal in objectDecals)
                     {
-                        Physics.IgnoreCollision(collider, ragdollCollider, true);
+                        decal.fadeFactor += 0.25f;
                     }
+
+                    StartCoroutine(WaitToSFX());
+
+                    hitPoint = new GameObject("HitPoint");
+                    hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.15f));
+                    hitPoint.transform.parent = stabbedCollider.transform;
+
+                    spawnedDecal = Instantiate(bloodDecal);
+                    spawnedDecal.transform.position = hitInfo.point;
+                    spawnedDecal.transform.rotation = Quaternion.LookRotation(hitInfo.normal);
+                    spawnedDecal.transform.parent = stabbedCollider.transform;
+                    StartCoroutine(DelayOpacity(spawnedDecal.GetComponent<DecalProjector>()));
+
+                    foreach (Collider ragdollCollider in stabbedCollider.transform.root.GetComponentsInChildren<Collider>())
+                    {
+                        foreach (Collider collider in colliders)
+                        {
+                            Physics.IgnoreCollision(collider, ragdollCollider, true);
+                        }
+                    }
+                    configurableJoint = gameObject.AddComponent<ConfigurableJoint>();
+                    configurableJoint.connectedBody = stabbedCollider.GetComponent<Rigidbody>();
+                    SoftJointLimit jointLimit = configurableJoint.linearLimit;
+                    jointLimit.limit = limit;
+                    configurableJoint.linearLimit = jointLimit;
+
+                    JointDrive zDrive = configurableJoint.zDrive;
+                    zDrive.positionDamper = damper;
+                    configurableJoint.zDrive = zDrive;
+                    switch (stabDirection)
+                    {
+                        case upDirection.forward:
+                            configurableJoint.xMotion = ConfigurableJointMotion.Locked;
+                            configurableJoint.yMotion = ConfigurableJointMotion.Locked;
+                            configurableJoint.zMotion = ConfigurableJointMotion.Limited;
+                            break;
+
+                        case upDirection.up:
+                            configurableJoint.xMotion = ConfigurableJointMotion.Locked;
+                            configurableJoint.yMotion = ConfigurableJointMotion.Limited;
+                            configurableJoint.zMotion = ConfigurableJointMotion.Locked;
+                            break;
+
+                        case upDirection.right:
+                            configurableJoint.xMotion = ConfigurableJointMotion.Limited;
+                            configurableJoint.yMotion = ConfigurableJointMotion.Locked;
+                            configurableJoint.zMotion = ConfigurableJointMotion.Locked;
+                            break;
+                    }
+                    configurableJoint.angularXMotion = ConfigurableJointMotion.Locked;
+                    configurableJoint.angularYMotion = ConfigurableJointMotion.Locked;
+                    configurableJoint.angularZMotion = ConfigurableJointMotion.Locked;
                 }
-                configurableJoint = gameObject.AddComponent<ConfigurableJoint>();
-                configurableJoint.connectedBody = stabbedCollider.GetComponent<Rigidbody>();
-                SoftJointLimit jointLimit = configurableJoint.linearLimit;
-                jointLimit.limit = limit;
-                configurableJoint.linearLimit = jointLimit;
-
-                JointDrive zDrive = configurableJoint.zDrive;
-                zDrive.positionDamper = damper;
-                configurableJoint.zDrive = zDrive;
-
-                configurableJoint.xMotion = ConfigurableJointMotion.Locked;
-                configurableJoint.yMotion = ConfigurableJointMotion.Locked;
-                configurableJoint.zMotion = ConfigurableJointMotion.Limited;
-
-                configurableJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                configurableJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                configurableJoint.angularZMotion = ConfigurableJointMotion.Locked;
             }
         }
         if (stabbed && Vector3.Distance(hitPoint.transform.position, transform.TransformPoint(piercePoint)) < 0.1f)
@@ -121,7 +162,7 @@ public class Pierce : MonoBehaviour
             }
         }
     }
-    IEnumerator DelayOpacity(DecalProjector decal, NPC npc)
+    IEnumerator DelayOpacity(DecalProjector decal)
     {
         float timer = 0f;
         while (timer < 15)
@@ -130,12 +171,7 @@ public class Pierce : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= 15)
             {
-                spawnedDecals.Remove(decal.gameObject);
-                Destroy(decal.gameObject);
-                if(spawnedDecals.Count == 0)
-                {
-                    npc.isBleeding = false;
-                }
+                Destroy(decal);
             }
             yield return null;
         }
