@@ -7,6 +7,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+[System.Serializable]
+public class JointDriveNew
+{
+    public float postionSpring;
+    public float positionDamper;
+}
 public class VRIKData
 {
     public VRIKCalibrator.CalibrationData ikData;
@@ -17,16 +23,25 @@ public class PhysicsRig : MonoBehaviour
     public VRIK playerModel;
     public Transform leftHandPhysicsTarget;
     public Transform rightHandPhysicsTarget;
-
+    [Header("Left Hand")]
     public ConfigurableJoint leftHandJoint;
     private GrabPhysics leftHandGrab;
+    public JointDriveNew jointDriveCollidingLeft;
+    public JointDrive jointLeftStart;
+    public DetectCollisionJoint detectCollisionHandLeft;
+    [Header("Right Hand")]
     public ConfigurableJoint rightHandJoint;
+    public JointDriveNew jointDriveCollidingRight;
+    public JointDrive jointRightStart;
+    public DetectCollisionJoint detectCollisionHandRight;
     private GrabPhysics rightHandGrab;
     [System.Serializable]
     public class Joints
     {
         public Transform camera;
         public ConfigurableJoint headJoint;
+        [HideInInspector]
+        public DetectCollisionJoint detectCollisionHead;
         public Transform headTarget;
         public Transform headDriver;
 
@@ -60,9 +75,13 @@ public class PhysicsRig : MonoBehaviour
     public Joints joints;
     private void Start()
     {
+        joints.detectCollisionHead = joints.headJoint.GetComponent<DetectCollisionJoint>();
         StartCoroutine(DelayStart());
         leftHandGrab = leftHandJoint.GetComponent<GrabPhysics>();
         rightHandGrab = rightHandJoint.GetComponent<GrabPhysics>();
+
+        jointLeftStart = leftHandJoint.xDrive;
+        jointRightStart = rightHandJoint.xDrive;
     }
     IEnumerator DelayStart()
     {
@@ -99,11 +118,103 @@ public class PhysicsRig : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 newPosition = joints.camera.position;
-        newPosition.x = joints.headTarget.transform.position.x;
-        newPosition.y = joints.headJoint.transform.position.y;
-        newPosition.z = joints.headTarget.transform.position.z;
-        joints.camera.position = newPosition;
+        if(detectCollisionHandLeft.isColliding)
+        {
+            JointDrive newDrive = leftHandJoint.xDrive;
+            newDrive.positionDamper = jointDriveCollidingLeft.positionDamper;
+            newDrive.positionSpring = jointDriveCollidingLeft.postionSpring;
+
+            leftHandJoint.xDrive = newDrive;
+            leftHandJoint.yDrive = newDrive;
+            leftHandJoint.zDrive = newDrive;
+            leftHandJoint.slerpDrive = newDrive;
+        }
+        else
+        {
+            if (leftHandGrab.detectCollision)
+            {
+                if (leftHandGrab.detectCollision.isColliding)
+                {
+                    JointDrive newDrive = leftHandJoint.xDrive;
+                    newDrive.positionDamper = jointDriveCollidingLeft.positionDamper;
+                    newDrive.positionSpring = jointDriveCollidingLeft.postionSpring;
+
+                    leftHandJoint.xDrive = newDrive;
+                    leftHandJoint.yDrive = newDrive;
+                    leftHandJoint.zDrive = newDrive;
+                    leftHandJoint.slerpDrive = newDrive;
+                }
+                else
+                {
+                    leftHandJoint.xDrive = jointLeftStart;
+                    leftHandJoint.yDrive = jointLeftStart;
+                    leftHandJoint.zDrive = jointLeftStart;
+                    leftHandJoint.slerpDrive = jointLeftStart;
+                }
+            }
+            else
+            {
+                leftHandJoint.xDrive = jointLeftStart;
+                leftHandJoint.yDrive = jointLeftStart;
+                leftHandJoint.zDrive = jointLeftStart;
+                leftHandJoint.slerpDrive = jointLeftStart;
+            }
+        }
+
+        if (detectCollisionHandRight.isColliding)
+        {
+            JointDrive newDrive = rightHandJoint.xDrive;
+            newDrive.positionDamper = jointDriveCollidingRight.positionDamper;
+            newDrive.positionSpring = jointDriveCollidingRight.postionSpring;
+
+            rightHandJoint.xDrive = newDrive;
+            rightHandJoint.yDrive = newDrive;
+            rightHandJoint.zDrive = newDrive;
+            rightHandJoint.slerpDrive = newDrive;
+        }
+        else
+        {
+            if (rightHandGrab.detectCollision)
+            {
+                if (rightHandGrab.detectCollision.isColliding)
+                {
+                    JointDrive newDrive = rightHandJoint.xDrive;
+                    newDrive.positionDamper = jointDriveCollidingRight.positionDamper;
+                    newDrive.positionSpring = jointDriveCollidingRight.postionSpring;
+
+                    rightHandJoint.xDrive = newDrive;
+                    rightHandJoint.yDrive = newDrive;
+                    rightHandJoint.zDrive = newDrive;
+                    rightHandJoint.slerpDrive = newDrive;
+                }
+                else
+                {
+                    rightHandJoint.xDrive = jointRightStart;
+                    rightHandJoint.yDrive = jointRightStart;
+                    rightHandJoint.zDrive = jointRightStart;
+                    rightHandJoint.slerpDrive = jointRightStart;
+                }
+            }
+            else
+            {
+                rightHandJoint.xDrive = jointRightStart;
+                rightHandJoint.yDrive = jointRightStart;
+                rightHandJoint.zDrive = jointRightStart;
+                rightHandJoint.slerpDrive = jointRightStart;
+            }
+        }
+        if (joints.detectCollisionHead.isColliding)
+        {
+            Vector3 newPosition = joints.camera.position;
+            newPosition.x = joints.headTarget.transform.position.x;
+            newPosition.y = joints.headJoint.transform.position.y;
+            newPosition.z = joints.headTarget.transform.position.z;
+            joints.camera.position = newPosition;
+        }
+        else
+        {
+            joints.camera.position = joints.headDriver.position;
+        }
         joints.camera.rotation = joints.headDriver.transform.rotation;
 
         leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);

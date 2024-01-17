@@ -5,6 +5,7 @@ using static EnumDeclaration;
 using System.Linq;
 using System.Collections.Generic;
 using RootMotion.Demos;
+using Unity.VisualScripting;
 
 public class GrabPhysics : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class GrabPhysics : MonoBehaviour
     private ConfigurableJoint configJoint;
     [HideInInspector]
     public GrabTwoAttach grab;
+    [HideInInspector]
+    public DetectCollisionJoint detectCollision;
     [HideInInspector]
     private bool canGrab = true;
 
@@ -129,10 +132,12 @@ public class GrabPhysics : MonoBehaviour
         configJoint.connectedBody = nearbyRigidbody;
         if (!grab.secondHandGrabbing)
         {
+            detectCollision = grab.AddComponent<DetectCollisionJoint>();
             connectedMass = nearbyRigidbody.mass;
         }
         else
         {
+            detectCollision = grab.handGrabbing.detectCollision;
             connectedMass = grab.handGrabbing.connectedMass;
         }
         grab.isGrabbing = true;
@@ -163,6 +168,15 @@ public class GrabPhysics : MonoBehaviour
         poseSetup.SetupPose();
         grab.isGrabbing = true;
         configJoint = gameObject.AddComponent<ConfigurableJoint>();
+
+        configJoint.xMotion = ConfigurableJointMotion.Locked;
+        configJoint.yMotion = ConfigurableJointMotion.Locked;
+        configJoint.zMotion = ConfigurableJointMotion.Locked;
+
+        configJoint.angularXMotion = ConfigurableJointMotion.Locked;
+        configJoint.angularYMotion = ConfigurableJointMotion.Locked;
+        configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedAnchor = grab.transform.TransformPoint(grab.attachPoint);
         isGrabbing = true;
@@ -190,11 +204,14 @@ public class GrabPhysics : MonoBehaviour
             if(grab.handGrabbing.handType == handTypeEnum.Left)
             {
                 rig.leftHandPhysicsTarget = grab.handGrabbing.controller;
+                if (grab.secondHandGrabbing)
                 rig.rightHandPhysicsTarget = grab.secondHandGrabbing.controller;
             }
             else
             {
+                if (grab.secondHandGrabbing)
                 rig.leftHandPhysicsTarget = grab.secondHandGrabbing.controller;
+
                 rig.rightHandPhysicsTarget = grab.handGrabbing.controller;
             }
             Destroy(twoHandedInteraction);
@@ -224,16 +241,13 @@ public class GrabPhysics : MonoBehaviour
             poseSetup.UnSetPose();
             if (!grab.isTwoHandGrabbing)
             {
+                Destroy(detectCollision);
                 if (configJoint)
                 {
                     Destroy(configJoint);
                 }
                 grab.handGrabbing = null;
                 grab.isGrabbing = false;
-                foreach (Collider collider in grab.colliders)
-                {
-                    Physics.IgnoreCollision(collider, forearm, false);
-                }
                 colliders[0].transform.parent.gameObject.SetActive(true);
             }
             else
@@ -250,11 +264,6 @@ public class GrabPhysics : MonoBehaviour
                 colliders[0].transform.parent.gameObject.SetActive(true);
                 grab.isTwoHandGrabbing = false;
                 grab.secondHandGrabbing = null;
-                foreach (Collider collider in grab.colliders)
-                {
-                    Physics.IgnoreCollision(collider, forearm, false);
-                }
-
             }
             if (nearbyRigidbody)
             {
@@ -322,13 +331,13 @@ public class GrabPhysics : MonoBehaviour
     }
     void TwoHandedGrabbing()
     {
-        if(initialRotationOffset == Quaternion.identity)
+        GrabSword grabSword = grab as GrabSword;
+        if (initialRotationOffset == Quaternion.identity)
         {
-            initialRotationOffset = Quaternion.Inverse(Quaternion.FromToRotation(grab.secondHandGrabbing.controller.up, grab.handGrabbing.controller.position - grab.secondHandGrabbing.controller.position) * grab.handGrabbing.controller.rotation);
+            initialRotationOffset = Quaternion.Inverse(Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position * 15, grab.handGrabbing.controller.position * 15)) * grabSword.higherHand.rotation * Quaternion.AngleAxis(15, grabSword.higherHand.right);
         }
 
-        GrabSword grabSword = grab as GrabSword;
-        twoHandedInteraction.transform.rotation = grabSword.higherHand.transform.rotation * Quaternion.Slerp(Quaternion.identity, Quaternion.FromToRotation(grab.secondHandGrabbing.controller.up, grab.handGrabbing.controller.position - grab.secondHandGrabbing.controller.position) * initialRotationOffset, 0.5f);
+        twoHandedInteraction.transform.rotation = grabSword.higherHand.rotation * Quaternion.Slerp(Quaternion.identity, Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position * 15, grab.handGrabbing.controller.position * 15) * initialRotationOffset, 1);
         twoHandedInteraction.transform.position = (grab.handGrabbing.controller.position + grab.secondHandGrabbing.controller.position) / 2;
     }
     void FixedUpdate()
@@ -459,6 +468,10 @@ public class GrabPhysics : MonoBehaviour
             {
                 Physics.IgnoreCollision(collider, handCollider, false);
             }
+        }
+        foreach (Collider collider in grab.colliders)
+        {
+            Physics.IgnoreCollision(collider, forearm, false);
         }
     }
     IEnumerator WaitTillGrab()

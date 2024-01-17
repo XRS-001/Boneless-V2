@@ -27,11 +27,10 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private bool isGrounded;
     private bool isClimbing;
     private bool isJumping;
-    [HideInInspector]
-    public bool isRunning;
+    private bool isRunning;
 
     public DetectCollisionFeet[] feetDetection;
-    public DetectCollisionHand[] handDetection;
+    public DetectCollisionJoint[] handDetection;
     private void Start()
     {
         ik.solver.locomotion.onLeftFootstep.AddListener(OnStep);
@@ -41,7 +40,14 @@ public class ContinuousMovementPhysics : MonoBehaviour
     {
         if (isGrounded)
         {
-            audioSource.PlayOneShot(stepAudio, 0.5f);
+            if(isRunning)
+            {
+                audioSource.PlayOneShot(stepAudio, 0.35f);
+            }
+            else
+            {
+                audioSource.PlayOneShot(stepAudio, 0.6f);
+            }
         }
     }
     // Update is called once per frame
@@ -97,7 +103,6 @@ public class ContinuousMovementPhysics : MonoBehaviour
             isJumping = true;
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
             rb.velocity = Vector3.up * jumpVelocity + (Vector3.up * vaultHeight) + directionSource.forward;
-            isJumping = false;
         }
     }
     private void FixedUpdate()
@@ -146,7 +151,7 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public bool CheckIfClimbing()
     {
         bool isClimbing = false;
-        foreach (DetectCollisionHand detectCollision in handDetection)
+        foreach (DetectCollisionJoint detectCollision in handDetection)
         {
             if (detectCollision.isColliding)
             {

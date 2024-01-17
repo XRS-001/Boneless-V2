@@ -3716,6 +3716,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   grab: {fileID: 0}
+  detectCollision: {fileID: 0}
   isGrabbing: 0
   connectedMass: 0
   nearbyRigidbody: {fileID: 0}
@@ -3841,6 +3842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isColliding: 0
+  hand: 1
 --- !u!153 &176898644
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -3901,8 +3903,8 @@ ConfigurableJoint:
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 3375
-    positionDamper: 150
+    positionSpring: 4500
+    positionDamper: 175
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
@@ -5810,7 +5812,6 @@ MonoBehaviour:
   rb: {fileID: 1833081399}
   ik: {fileID: 372722943}
   directionSource: {fileID: 354109375}
-  isRunning: 0
   feetDetection:
   - {fileID: 1748569467}
   - {fileID: 1837161416}
@@ -5834,10 +5835,19 @@ MonoBehaviour:
   leftHandPhysicsTarget: {fileID: 112185799}
   rightHandPhysicsTarget: {fileID: 1631724692}
   leftHandJoint: {fileID: 176898644}
+  jointDriveCollidingLeft:
+    postionSpring: 2250
+    positionDamper: 175
+  detectCollisionHandLeft: {fileID: 176898643}
   rightHandJoint: {fileID: 1426969264}
+  jointDriveCollidingRight:
+    postionSpring: 2250
+    positionDamper: 175
+  detectCollisionHandRight: {fileID: 1426969263}
   joints:
     camera: {fileID: 1543219586}
     headJoint: {fileID: 1465330688}
+    detectCollisionHead: {fileID: 0}
     headTarget: {fileID: 855710370}
     headDriver: {fileID: 354109375}
     chestJoint: {fileID: 1290990472}
@@ -6810,7 +6820,7 @@ MonoBehaviour:
       maxVelocity: 0.4
       velocityFactor: 0.4
       maxLegStretch: 1
-      rootSpeed: 20
+      rootSpeed: 1000
       stepSpeed: 3
       stepHeight:
         serializedVersion: 2
@@ -20168,6 +20178,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   grab: {fileID: 0}
+  detectCollision: {fileID: 0}
   isGrabbing: 0
   connectedMass: 0
   nearbyRigidbody: {fileID: 0}
@@ -20301,6 +20312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isColliding: 0
+  hand: 1
 --- !u!153 &1426969264
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -20361,7 +20373,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 3375
+    positionSpring: 4500
     positionDamper: 150
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -20736,6 +20748,7 @@ GameObject:
   - component: {fileID: 1465330689}
   - component: {fileID: 1465330688}
   - component: {fileID: 1465330687}
+  - component: {fileID: 1465330690}
   m_Layer: 3
   m_Name: HeadJoint
   m_TagString: Untagged
@@ -20908,6 +20921,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &1465330690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465330685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab607c1e3cdddec4096db5f2cb792256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isColliding: 0
+  hand: 0
 --- !u!1 &1473250377
 GameObject:
   m_ObjectHideFlags: 0
