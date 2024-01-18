@@ -26,7 +26,6 @@ public class ContinuousMovementPhysics : MonoBehaviour
     private float inputTurnAxis;
     private bool isGrounded;
     private bool isClimbing;
-    private bool isJumping;
     private bool isRunning;
 
     public DetectCollisionFeet[] feetDetection;
@@ -57,52 +56,18 @@ public class ContinuousMovementPhysics : MonoBehaviour
         inputTurnAxis = turnInputSource.action.ReadValue<Vector2>().x;
 
         bool JumpInput = jumpInputSource.action.WasPressedThisFrame();
-        float jumpValue = jumpInputSource.action.ReadValue<float>();
 
-        if(JumpInput && !isJumping)
+        if(JumpInput && isGrounded)
         {
-            StartCoroutine(JumpRoutineCrouch());
-        }
-        if(jumpValue == 0 && isJumping)
-        {
-            StartCoroutine(JumpRoutine());
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
             rb.velocity = Vector3.up * jumpVelocity + direction;
             audioSource.PlayOneShot(jumpAudio, 1f);
-            isJumping = false;
         }
-    }
-    IEnumerator JumpRoutine()
-    {
-        float timer = 0;
-        Vector3 newPosition = directionSource.parent.transform.localPosition;
-        while (timer < 0.1f)
+        if(JumpInput && isClimbing)
         {
-            directionSource.parent.transform.localPosition = Vector3.Lerp(newPosition, new Vector3(0,0,0), timer / 0.1f);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        directionSource.parent.transform.localPosition = new Vector3(0, 0, 0);
-    }
-    IEnumerator JumpRoutineCrouch()
-    {
-        if(!isClimbing && isGrounded)
-        {
-            isJumping = true;
-            //bouncing the parent of the tracked objects to simulate jumping
-            float timer = 0;
-            while (timer < 0.2f)
-            {
-                directionSource.parent.transform.localPosition = Vector3.Lerp(new Vector3(0, 0, 0), (new Vector3(0, 0, 0) - Vector3.up / 5f) * directionSource.localPosition.y, timer / 0.1f);
-                timer += Time.deltaTime;
-                yield return null;
-            }
-        }
-        else if (isClimbing)
-        {
-            isJumping = true;
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
-            rb.velocity = Vector3.up * jumpVelocity + (Vector3.up * vaultHeight) + directionSource.forward;
+            rb.velocity = Vector3.up * jumpVelocity + direction + rb.transform.forward;
+            audioSource.PlayOneShot(jumpAudio, 1f);
         }
     }
     private void FixedUpdate()

@@ -16,7 +16,6 @@ public class GrabPhysics : MonoBehaviour
     public Rigidbody rb;
     [Tooltip("The colliders of the hand")]
     public Collider[] colliders;
-    public Collider forearm;
     private PhysicsRig rig;
 
     private AudioSource audioSource;
@@ -141,10 +140,6 @@ public class GrabPhysics : MonoBehaviour
             connectedMass = grab.handGrabbing.connectedMass;
         }
         grab.isGrabbing = true;
-        foreach (Collider collider in grab.colliders)
-        {
-            Physics.IgnoreCollision(collider, forearm);
-        }
         nearbyRigidbody.mass = 1;
         audioSource.PlayOneShot(grabSound, grabVolume);
     }
@@ -309,7 +304,7 @@ public class GrabPhysics : MonoBehaviour
         Vector3 point0 = distanceGrabDetection.position - distanceGrabDetection.forward * distanceGrabZone.height;
         Vector3 point1 = distanceGrabDetection.position + distanceGrabDetection.forward * distanceGrabZone.height;
 
-        nearbyColliders = Physics.OverlapCapsule(point0, point1, 0.2f, grabLayer).ToList();
+        nearbyColliders = Physics.OverlapCapsule(point0, point1, 0.2f, distanceGrabLayer).ToList();
         if (nearbyColliders.Count > 0)
         {
             closestCollider = FindClosestInteractable(nearbyColliders);
@@ -468,10 +463,6 @@ public class GrabPhysics : MonoBehaviour
             {
                 Physics.IgnoreCollision(collider, handCollider, false);
             }
-        }
-        foreach (Collider collider in grab.colliders)
-        {
-            Physics.IgnoreCollision(collider, forearm, false);
         }
     }
     IEnumerator WaitTillGrab()

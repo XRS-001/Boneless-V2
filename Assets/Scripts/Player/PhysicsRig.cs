@@ -115,10 +115,22 @@ public class PhysicsRig : MonoBehaviour
             return targetAngle;
         }
     }
-    // Update is called once per frame
-    void FixedUpdate()
+    public void ChangeDrive()
     {
-        if(detectCollisionHandLeft.isColliding)
+        bool isPiercing = false;
+        Pierce pierceLeft = null;
+        if (leftHandGrab.isGrabbing)
+        {
+            pierceLeft = leftHandGrab.grab.GetComponent<Pierce>();
+        }
+        if (pierceLeft)
+        {
+            if (pierceLeft.stabbed)
+            {
+                isPiercing = true;
+            }
+        }
+        if (detectCollisionHandLeft.isColliding || isPiercing)
         {
             JointDrive newDrive = leftHandJoint.xDrive;
             newDrive.positionDamper = jointDriveCollidingLeft.positionDamper;
@@ -160,8 +172,19 @@ public class PhysicsRig : MonoBehaviour
                 leftHandJoint.slerpDrive = jointLeftStart;
             }
         }
-
-        if (detectCollisionHandRight.isColliding)
+        Pierce pierceRight = null;
+        if (rightHandGrab.isGrabbing)
+        {
+            pierceRight = rightHandGrab.grab.GetComponent<Pierce>();
+        }
+        if (pierceRight)
+        {
+            if (pierceRight.stabbed)
+            {
+                isPiercing = true;
+            }
+        }
+        if (detectCollisionHandRight.isColliding || isPiercing)
         {
             JointDrive newDrive = rightHandJoint.xDrive;
             newDrive.positionDamper = jointDriveCollidingRight.positionDamper;
@@ -203,6 +226,11 @@ public class PhysicsRig : MonoBehaviour
                 rightHandJoint.slerpDrive = jointRightStart;
             }
         }
+    }
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        ChangeDrive();
         if (joints.detectCollisionHead.isColliding)
         {
             Vector3 newPosition = joints.camera.position;

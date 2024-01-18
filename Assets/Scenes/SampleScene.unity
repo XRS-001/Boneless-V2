@@ -1456,19 +1456,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1489,7 +1489,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1855,19 +1855,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -1888,7 +1888,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -3697,7 +3697,6 @@ MonoBehaviour:
   - {fileID: 750676537}
   - {fileID: 986458191}
   - {fileID: 42332602}
-  forearm: {fileID: 1561344257}
   radius: 0.1
   calculationDistance: 1
   grabZoneOffset: {x: -0.12, y: 0, z: 0.02}
@@ -3930,7 +3929,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 3375
+    positionSpring: 4500
     positionDamper: 175
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -5836,13 +5835,13 @@ MonoBehaviour:
   rightHandPhysicsTarget: {fileID: 1631724692}
   leftHandJoint: {fileID: 176898644}
   jointDriveCollidingLeft:
-    postionSpring: 2250
-    positionDamper: 175
+    postionSpring: 1500
+    positionDamper: 350
   detectCollisionHandLeft: {fileID: 176898643}
   rightHandJoint: {fileID: 1426969264}
   jointDriveCollidingRight:
-    postionSpring: 2250
-    positionDamper: 175
+    postionSpring: 1500
+    positionDamper: 350
   detectCollisionHandRight: {fileID: 1426969263}
   joints:
     camera: {fileID: 1543219586}
@@ -6692,19 +6691,19 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 0.05
-          inSlope: 0.6666667
-          outSlope: 0.6666667
-          tangentMode: 34
+          time: 1.287897
+          value: 0.2132353
+          inSlope: 1.7547597
+          outSlope: 1.7547597
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 1
         - serializedVersion: 3
-          time: 1.3
-          value: 0.3
-          inSlope: 0.8333335
-          outSlope: 0.8333335
+          time: 1.3045928
+          value: 0.39976197
+          inSlope: 11.172033
+          outSlope: 11.172033
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -6743,17 +6742,17 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 0.05
-          inSlope: 0.6666667
-          outSlope: 0.6666667
+          inSlope: 0.8241466
+          outSlope: 0.8241466
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1.3
-          value: 0.3
-          inSlope: 0.8333335
-          outSlope: 0.8333335
+          time: 1.3045928
+          value: 0.39976197
+          inSlope: 1.1482934
+          outSlope: 1.1482934
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -7448,7 +7447,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -9756,11 +9755,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573331427}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 4785679cb3fe6a34ab52cb5fd553178a, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 95d016dc3613b184695d064297429f40, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -11310,9 +11309,9 @@ MonoBehaviour:
   pierceableLayer:
     serializedVersion: 2
     m_Bits: 2048
-  damper: 500
+  damper: 250
   limit: 0.25
-  velocityThreshold: 3
+  velocityThreshold: 2
   stabSound: {fileID: 8300000, guid: 0a98676ad811010439a396b34afb201b, type: 3}
   stabVolume: 0.05
   objectDecals:
@@ -14971,9 +14970,9 @@ MonoBehaviour:
   pierceableLayer:
     serializedVersion: 2
     m_Bits: 2048
-  damper: 500
+  damper: 250
   limit: 0.85
-  velocityThreshold: 3
+  velocityThreshold: 2
   stabSound: {fileID: 8300000, guid: 0a98676ad811010439a396b34afb201b, type: 3}
   stabVolume: 0.05
   objectDecals:
@@ -16393,7 +16392,7 @@ MonoBehaviour:
   handGrab: {fileID: 1426969260}
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 10752
+    m_Bits: 2560
 --- !u!95 &1160604536
 Animator:
   serializedVersion: 5
@@ -18236,19 +18235,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -18269,7 +18268,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -20159,7 +20158,6 @@ MonoBehaviour:
   - {fileID: 1220651820}
   - {fileID: 1518047273}
   - {fileID: 30291280}
-  forearm: {fileID: 1873339271}
   radius: 0.1
   calculationDistance: 1
   grabZoneOffset: {x: 0.12, y: 0, z: 0.02}
@@ -20846,19 +20844,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 1e+9
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 1e+9
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 1e+9
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -20879,7 +20877,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1e+9
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -23362,19 +23360,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -23395,7 +23393,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -30940,19 +30938,19 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -30973,7 +30971,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_SlerpDrive:
     serializedVersion: 4
-    positionSpring: 1000000
+    positionSpring: 100000
     positionDamper: 5000
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -31237,7 +31235,7 @@ MonoBehaviour:
   handGrab: {fileID: 176898640}
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 10752
+    m_Bits: 2560
 --- !u!95 &2026590865
 Animator:
   serializedVersion: 5
@@ -32182,11 +32180,11 @@ MonoBehaviour:
   solverIterationCount: 1
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.75
-  muscleWeight: 0.75
+  pinWeight: 0.65
+  muscleWeight: 0.65
   muscleSpring: 100
-  muscleDamper: 100
-  pinPow: 4
+  muscleDamper: 150
+  pinPow: 6
   pinDistanceFalloff: 5
   angularPinning: 1
   updateJointAnchors: 0
@@ -32209,22 +32207,22 @@ MonoBehaviour:
         groups: 
       animatedTargetChildren: []
     parentIndexes: 
-    childIndexes: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-    childFlags: 000101010101010101010101010101
-    kinshipDegrees: 000000000100000002000000030000000100000002000000030000000100000002000000030000000400000002000000020000000300000004000000
+    childIndexes: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+    childFlags: 0001010101010101010101
+    kinshipDegrees: 0000000001000000020000000100000002000000010000000200000003000000020000000200000003000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.0028824806, y: -0.0009704828, z: 0.0017881393}
+    positionOffset: {x: 0.005311966, y: 0.001961708, z: 0.004553199}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.015020071, y: -0.0004032863, z: -0.001036352}
-    mappedAngularVelocity: {x: 0.0040354817, y: 0.08758991, z: 0.025526706}
+    mappedVelocity: {x: 0.044368315, y: -0.002269942, z: -0.0010305259}
+    mappedAngularVelocity: {x: -0.01552395, y: 0.017425042, z: -0.08925582}
     isPropMuscle: 0
     index: 0
     ignoreTargetVelocity: 0
-    targetMappedPosition: {x: -2.5306156, y: 0.9379045, z: 1.1021745}
-    targetMappedRotation: {x: 0.020287491, y: 0.9988785, z: 0.01538417, w: -0.039918683}
+    targetMappedPosition: {x: -2.5227938, y: 0.93430996, z: 1.1035175}
+    targetMappedRotation: {x: 0.041175522, y: 0.9982103, z: -0.0035410014, w: -0.043223467}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: LeftThigh
@@ -32242,22 +32240,22 @@ MonoBehaviour:
         groups: 
       animatedTargetChildren: []
     parentIndexes: 00000000
-    childIndexes: 0200000003000000
-    childFlags: 000001010000000000000000000000
-    kinshipDegrees: 010000000000000001000000020000000200000003000000040000000200000003000000040000000500000003000000030000000400000005000000
+    childIndexes: 02000000
+    childFlags: 0000010000000000000000
+    kinshipDegrees: 0100000000000000010000000200000003000000020000000300000004000000030000000300000004000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.0013170242, y: 0.00029486418, z: -0.0005828142}
+    positionOffset: {x: -0.0043480396, y: 0.0076404214, z: -0.0010488033}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.016412815, y: 0.001687003, z: -0.008665967}
-    mappedAngularVelocity: {x: -0.014165421, y: -0.08065659, z: -0.019318033}
+    mappedVelocity: {x: 0.039026294, y: -0.009200925, z: -0.0015123663}
+    mappedAngularVelocity: {x: 0.0004616743, y: 0.08571069, z: -0.08324783}
     isPropMuscle: 0
     index: 1
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.99257284, y: -0.016128836, z: -0.11980091, w: -0.013665179}
+    targetMappedRotation: {x: 0.9911842, y: 0.003955172, z: -0.13092108, w: -0.019952387}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: LeftCalf
@@ -32275,22 +32273,22 @@ MonoBehaviour:
         groups: 
       animatedTargetChildren: []
     parentIndexes: 0100000000000000
-    childIndexes: 03000000
-    childFlags: 000000010000000000000000000000
-    kinshipDegrees: 020000000100000000000000010000000300000004000000050000000300000004000000050000000600000004000000040000000500000006000000
+    childIndexes: 
+    childFlags: 0000000000000000000000
+    kinshipDegrees: 0200000001000000000000000300000004000000030000000400000005000000040000000400000005000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.0002965927, y: -0.0034347475, z: 0.0019218922}
+    positionOffset: {x: -0.0018174648, y: 0.0036068857, z: 0.0019336939}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.009571016, y: 0.0014408107, z: -0.0038101177}
-    mappedAngularVelocity: {x: -0.010045353, y: -0.021251224, z: -0.026483402}
+    mappedVelocity: {x: 0.0044340463, y: -0.009353415, z: -0.0018382353}
+    mappedAngularVelocity: {x: -0.008820317, y: -0.037474014, z: -0.07836261}
     isPropMuscle: 0
     index: 2
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.9865978, y: 0.003253817, z: -0.13807133, w: 0.086893395}
+    targetMappedRotation: {x: 0.9905655, y: -0.039903466, z: -0.09359994, w: 0.09179906}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: RightThigh
@@ -32308,22 +32306,22 @@ MonoBehaviour:
         groups: 
       animatedTargetChildren: []
     parentIndexes: 00000000
-    childIndexes: 0500000006000000
-    childFlags: 000000000001010000000000000000
-    kinshipDegrees: 010000000200000003000000040000000000000001000000020000000200000003000000040000000500000003000000030000000400000005000000
+    childIndexes: 04000000
+    childFlags: 0000000001000000000000
+    kinshipDegrees: 0100000002000000030000000000000001000000020000000300000004000000030000000300000004000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: 0.0021464825, y: -0.0021564364, z: -0.0000783205}
+    positionOffset: {x: 0.004447937, y: -0.0027993321, z: -0.001009345}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.01728504, y: -0.0027081145, z: 0.006522922}
-    mappedAngularVelocity: {x: 0, y: 0, z: 0}
+    mappedVelocity: {x: 0.03995655, y: 0.005606618, z: 0.0014288102}
+    mappedAngularVelocity: {x: -0.0021179258, y: -0.053944252, z: -0.082793206}
     isPropMuscle: 0
     index: 3
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.9987888, y: -0.04532709, z: -0.008155865, w: -0.01732182}
+    targetMappedRotation: {x: 0.99875796, y: -0.03501832, z: -0.02599128, w: -0.024103582}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: RightCalf
@@ -32340,23 +32338,23 @@ MonoBehaviour:
         muscles: []
         groups: 
       animatedTargetChildren: []
-    parentIndexes: 0400000000000000
-    childIndexes: 06000000
-    childFlags: 000000000000010000000000000000
-    kinshipDegrees: 020000000300000004000000050000000100000000000000010000000300000004000000050000000600000004000000040000000500000006000000
+    parentIndexes: 0300000000000000
+    childIndexes: 
+    childFlags: 0000000000000000000000
+    kinshipDegrees: 0200000003000000040000000100000000000000030000000400000005000000040000000400000005000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.004676819, y: -0.0052387714, z: -0.0009505749}
+    positionOffset: {x: 0.00012111664, y: -0.0047481656, z: 0.0021086931}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.017186562, y: -0.0022643823, z: 0.0041266507}
-    mappedAngularVelocity: {x: -0.001030277, y: -0.08479324, z: -0.102526076}
+    mappedVelocity: {x: 0.008216355, y: 0.008202429, z: 0.000774287}
+    mappedAngularVelocity: {x: -0.02250026, y: -0.31685406, z: -0.062455513}
     isPropMuscle: 0
     index: 4
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.9957645, y: -0.00093577383, z: -0.03893357, w: 0.08328588}
+    targetMappedRotation: {x: 0.99590313, y: -0.038086817, z: -0.029485004, w: 0.07653178}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: Back
@@ -32374,22 +32372,22 @@ MonoBehaviour:
         groups: 
       animatedTargetChildren: []
     parentIndexes: 00000000
-    childIndexes: 08000000090000000a0000000b0000000c0000000d0000000e000000
-    childFlags: 000000000000000001010101010101
-    kinshipDegrees: 010000000200000003000000040000000200000003000000040000000000000001000000020000000300000001000000010000000200000003000000
+    childIndexes: 060000000700000008000000090000000a000000
+    childFlags: 0000000000000101010101
+    kinshipDegrees: 0100000002000000030000000200000003000000000000000100000002000000010000000100000002000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.005100727, y: -0.00027358532, z: -0.0036457777}
+    positionOffset: {x: -0.007880688, y: 0.0030009747, z: -0.0008574724}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.0124690505, y: -0.0002133666, z: -0.001509979}
-    mappedAngularVelocity: {x: -0.020787, y: 0.012408427, z: -0.101510584}
+    mappedVelocity: {x: 0.06535762, y: -0.003787879, z: -0.0049938727}
+    mappedAngularVelocity: {x: -0.058449358, y: -0.0035289517, z: -0.16087888}
     isPropMuscle: 0
     index: 5
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.00896567, y: 0.99767023, z: 0.03887557, w: -0.05533991}
+    targetMappedRotation: {x: 0.01371832, y: 0.9967147, z: 0.04443442, w: -0.066312164}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: LeftArm
@@ -32406,23 +32404,23 @@ MonoBehaviour:
         muscles: []
         groups: 
       animatedTargetChildren: []
-    parentIndexes: 0700000000000000
-    childIndexes: 090000000a000000
-    childFlags: 000000000000000000010100000000
-    kinshipDegrees: 020000000300000004000000050000000300000004000000050000000100000000000000010000000200000002000000020000000300000004000000
+    parentIndexes: 0500000000000000
+    childIndexes: 07000000
+    childFlags: 0000000000000001000000
+    kinshipDegrees: 0200000003000000040000000300000004000000010000000000000001000000020000000200000003000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.0014367104, y: 0.00031614304, z: -0.0012249947}
+    positionOffset: {x: -0.01625681, y: -0.02213955, z: 0.014436603}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.03591124, y: -0.020600427, z: -0.008743341}
-    mappedAngularVelocity: {x: 0.002939188, y: 0.018188594, z: -0.060949627}
+    mappedVelocity: {x: 0.10603275, y: -0.03812667, z: -0.01902295}
+    mappedAngularVelocity: {x: -0.059985362, y: -0.041753586, z: -0.15840955}
     isPropMuscle: 0
     index: 6
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.6011596, y: 0.03726909, z: -0.7969425, w: 0.045836706}
+    targetMappedRotation: {x: 0.6171065, y: 0.030170547, z: -0.78305334, w: 0.071391314}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: LeftForearm
@@ -32439,23 +32437,23 @@ MonoBehaviour:
         muscles: []
         groups: 
       animatedTargetChildren: []
-    parentIndexes: 080000000700000000000000
-    childIndexes: 0a000000
-    childFlags: 000000000000000000000100000000
-    kinshipDegrees: 030000000400000005000000060000000400000005000000060000000200000001000000000000000100000003000000030000000400000005000000
+    parentIndexes: 060000000500000000000000
+    childIndexes: 
+    childFlags: 0000000000000000000000
+    kinshipDegrees: 0300000004000000050000000400000005000000020000000100000000000000030000000300000004000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: 0.0009920597, y: 0.0008729696, z: -0.0006804466}
+    positionOffset: {x: -0.017363071, y: -0.02232349, z: 0.0068928003}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.021585196, y: -0.022365978, z: -0.009990715}
-    mappedAngularVelocity: {x: 0.014781637, y: 0.039711624, z: 0.051931843}
+    mappedVelocity: {x: 0.06929033, y: -0.043098263, z: -0.0038714348}
+    mappedAngularVelocity: {x: -0.06183437, y: -0.024384752, z: -0.15191841}
     isPropMuscle: 0
     index: 7
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.7367982, y: 0.04360993, z: -0.67299455, w: 0.04800819}
+    targetMappedRotation: {x: 0.6655825, y: 0.025169712, z: -0.74328953, w: 0.06234853}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: Head
@@ -32472,23 +32470,23 @@ MonoBehaviour:
         muscles: []
         groups: 
       animatedTargetChildren: []
-    parentIndexes: 0700000000000000
+    parentIndexes: 0500000000000000
     childIndexes: 
-    childFlags: 000000000000000000000000000000
-    kinshipDegrees: 020000000300000004000000050000000300000004000000050000000100000002000000030000000400000000000000020000000300000004000000
+    childFlags: 0000000000000000000000
+    kinshipDegrees: 0200000003000000040000000300000004000000010000000200000003000000000000000200000003000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: 0.0019402504, y: 0.0013257265, z: 0.000667572}
+    positionOffset: {x: -0.0075716972, y: 0.0036529303, z: -0.0028290749}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.050377965, y: -0.0012309612, z: -0.011704681}
-    mappedAngularVelocity: {x: -0.09433979, y: -0.22841883, z: -0.13053001}
+    mappedVelocity: {x: 0.12516154, y: -0.005007799, z: -0.026698975}
+    mappedAngularVelocity: {x: -0.10072422, y: -0.6352683, z: -0.10550648}
     isPropMuscle: 0
     index: 8
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: -0.0069192387, y: 0.99732894, z: -0.010971307, w: -0.07188144}
+    targetMappedRotation: {x: -0.024937663, y: 0.9982955, z: -0.0017745572, w: 0.052735854}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: RightArm
@@ -32505,23 +32503,23 @@ MonoBehaviour:
         muscles: []
         groups: 
       animatedTargetChildren: []
-    parentIndexes: 0700000000000000
-    childIndexes: 0d0000000e000000
-    childFlags: 000000000000000000000000000101
-    kinshipDegrees: 020000000300000004000000050000000300000004000000050000000100000002000000030000000400000002000000000000000100000002000000
+    parentIndexes: 0500000000000000
+    childIndexes: 0a000000
+    childFlags: 0000000000000000000001
+    kinshipDegrees: 0200000003000000040000000300000004000000010000000200000003000000020000000000000001000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.002370596, y: -0.0010223389, z: 0.00011730194}
+    positionOffset: {x: 0.009750366, y: -0.031129122, z: 0.013901949}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.03493116, y: 0.022759885, z: -0.0011090373}
-    mappedAngularVelocity: {x: 0.038049854, y: 0.0070177973, z: -0.05662244}
+    mappedVelocity: {x: 0.107041, y: 0.031133022, z: -0.020894608}
+    mappedAngularVelocity: {x: 0.015542186, y: -0.16982935, z: -0.11629452}
     isPropMuscle: 0
     index: 9
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.777543, y: -0.0044651874, z: 0.6050246, w: 0.17132564}
+    targetMappedRotation: {x: 0.7355415, y: -0.014573006, z: 0.65646166, w: 0.166806}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   - name: RightForearm
@@ -32538,23 +32536,23 @@ MonoBehaviour:
         muscles: []
         groups: 
       animatedTargetChildren: []
-    parentIndexes: 0c0000000700000000000000
-    childIndexes: 0e000000
-    childFlags: 000000000000000000000000000001
-    kinshipDegrees: 030000000400000005000000060000000400000005000000060000000200000003000000040000000500000003000000010000000000000001000000
+    parentIndexes: 090000000500000000000000
+    childIndexes: 
+    childFlags: 0000000000000000000000
+    kinshipDegrees: 0300000004000000050000000400000005000000020000000300000004000000030000000100000000000000
     broadcaster: {fileID: 0}
     jointBreakBroadcaster: {fileID: 0}
-    positionOffset: {x: -0.00016403198, y: -0.0015119314, z: 0.0010764599}
+    positionOffset: {x: 0.013429165, y: -0.031428456, z: 0.019812942}
     additionalPin: {fileID: 0}
     additionalPinTarget: {fileID: 0}
     additionalPinWeight: 0
-    mappedVelocity: {x: 0.023113932, y: 0.02320772, z: -0.009050495}
-    mappedAngularVelocity: {x: -0.03474552, y: -0.050776944, z: -0.026239678}
+    mappedVelocity: {x: 0.072749555, y: 0.036672793, z: -0.03364249}
+    mappedAngularVelocity: {x: -0.12462581, y: -0.18574671, z: -0.07045341}
     isPropMuscle: 0
     index: 10
     ignoreTargetVelocity: 0
     targetMappedPosition: {x: 0, y: 0, z: 0}
-    targetMappedRotation: {x: 0.858905, y: -0.07831109, z: 0.5041455, w: 0.044577327}
+    targetMappedRotation: {x: 0.80070466, y: -0.07947884, z: 0.591341, w: 0.05358011}
     targetSampledPosition: {x: 0, y: 0, z: 0}
     targetSampledRotation: {x: 0, y: 0, z: 0, w: 1}
   propMuscles: []
