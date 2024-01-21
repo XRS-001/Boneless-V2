@@ -1,5 +1,6 @@
 using RootMotion.FinalIK;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,18 +21,27 @@ public class ContinuousMovementPhysics : MonoBehaviour
     public InputActionProperty jumpInputSource;
     public Rigidbody rb;
     public VRIK ik;
+    public PhysicsRig rig;
     public Transform directionSource;
     private Vector3 direction;
     private Vector2 inputMoveAxis;
     private float inputTurnAxis;
     private bool isGrounded;
     private bool isClimbing;
+    private bool isMoving;
     private bool isRunning;
+    private bool isJumping;
 
     public DetectCollisionFeet[] feetDetection;
     public DetectCollisionJoint[] handDetection;
+    private List<GrabPhysics> grabPhysics = new List<GrabPhysics>();
     private void Start()
     {
+        rig = GetComponent<PhysicsRig>();
+        foreach(DetectCollisionJoint hand in handDetection)
+        {
+            grabPhysics.Add(hand.GetComponent<GrabPhysics>());
+        }
         ik.solver.locomotion.onLeftFootstep.AddListener(OnStep);
         ik.solver.locomotion.onRightFootstep.AddListener(OnStep);
     }
@@ -59,24 +69,89 @@ public class ContinuousMovementPhysics : MonoBehaviour
 
         if(JumpInput && isGrounded)
         {
+            rb.isKinematic = false;
+            isJumping = true;
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
             rb.velocity = Vector3.up * jumpVelocity + direction;
             audioSource.PlayOneShot(jumpAudio, 1f);
+            StartCoroutine(DelayKinematic());
         }
-        if(JumpInput && isClimbing)
+        if (JumpInput && isClimbing)
         {
+            rb.isKinematic = false;
+            isJumping = true;
             jumpVelocity = Mathf.Sqrt(2 * -Physics.gravity.y * jumpHeight);
-            rb.velocity = Vector3.up * jumpVelocity + direction + rb.transform.forward;
+            rb.velocity = Vector3.up * jumpVelocity * 1.25f + direction + rb.transform.forward;
             audioSource.PlayOneShot(jumpAudio, 1f);
+            StartCoroutine(DelayJump());
+        }
+    }
+    IEnumerator DelayJump()
+    {
+        yield return new WaitForSeconds(0.1f);
+        isJumping = false;
+    }
+    IEnumerator DelayKinematic()
+    {
+        yield return new WaitForSeconds(1f);
+        bool isGrabClimbing = false;
+        foreach (GrabPhysics hand in grabPhysics)
+        {
+            if (hand.isClimbing)
+            {
+                isGrabClimbing = true;
+            }
+        }
+        if (isGrounded && !isGrabClimbing && !isJumping && !rig.isBodyColliding)
+        {
+            rb.isKinematic = true;
         }
     }
     private void FixedUpdate()
     {
         isGrounded = CheckIfGrounded();
         isClimbing = CheckIfClimbing();
-
+        bool isGrabClimbing = false;
+        bool isGrabbingRagdoll = false;
+        foreach (GrabPhysics hand in grabPhysics)
+        {
+            if (hand.isClimbing)
+            {
+                isGrabClimbing = true;
+            }
+            if (hand.isGrabbingRagdoll)
+            {
+                isGrabbingRagdoll = true;
+            }
+        }
+        if(isGrounded && !isGrabClimbing && !isJumping && !rig.isBodyColliding)
+        {
+            if(!rb.isKinematic)
+            {
+                StartCoroutine(DelayKinematic());
+            }
+        }
+        else
+        {
+            if(!rig.delayStart)
+            {
+                rb.isKinematic = false;
+            }
+        }
+        if (isGrabbingRagdoll)
+        {
+            rb.isKinematic = true;
+        }
         if (isGrounded)
         {
+            if(inputMoveAxis != Vector2.zero) 
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
             Quaternion yaw = Quaternion.Euler(0, directionSource.eulerAngles.y, 0);
             direction = yaw * new Vector3(inputMoveAxis.x, 0, inputMoveAxis.y);
 
@@ -99,6 +174,34 @@ public class ContinuousMovementPhysics : MonoBehaviour
             rb.MoveRotation(rb.rotation * q);
             Vector3 newPosition = q * (targetMovePosition - directionSource.position) + directionSource.position;
             rb.MovePosition(newPosition);
+        }
+    }
+    public void LimitPositionLeft()
+    {
+        if (isMoving)
+        {
+            Vector3 direction = rb.position - (handDetection[1].transform.position - new Vector3(directionSource.localPosition.x, 0, directionSource.localPosition.z));
+
+            if (direction.magnitude > 1.3f)
+            {
+                direction = direction.normalized * 1.3f;
+                Vector3 newVector = handDetection[1].transform.position - new Vector3(directionSource.localPosition.x, 0, directionSource.localPosition.z) + direction;
+                rb.position = new Vector3(newVector.x, rb.position.y, newVector.z);
+            }
+        }
+    }
+    public void LimitPositionRight()
+    {
+        if (isMoving)
+        {
+            Vector3 direction = rb.position - (handDetection[0].transform.position - new Vector3(directionSource.localPosition.x, 0, directionSource.localPosition.z));
+
+            if (direction.magnitude > 1.3f)
+            {
+                direction = direction.normalized * 1.3f;
+                Vector3 newVector = handDetection[0].transform.position - new Vector3(directionSource.localPosition.x, 0, directionSource.localPosition.z) + direction;
+                rb.position = new Vector3(newVector.x, rb.position.y, newVector.z);
+            }
         }
     }
     public bool CheckIfGrounded()

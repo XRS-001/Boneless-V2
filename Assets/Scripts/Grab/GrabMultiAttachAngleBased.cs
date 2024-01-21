@@ -16,6 +16,11 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
     private GrabPhysics rightGrab;
     private void Start()
     {
+        if (leftHand == null)
+            leftHand = GameObject.Find("LeftHandPhysics").transform;
+        if (rightHand == null)
+            rightHand = GameObject.Find("RightHandPhysics").transform;
+
         leftGrab = leftHand.GetComponent<GrabPhysics>();
         rightGrab = rightHand.GetComponent<GrabPhysics>();
         primaryLeftAttach = new LeftAttach();

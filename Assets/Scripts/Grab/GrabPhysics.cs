@@ -4,7 +4,6 @@ using System.Collections;
 using static EnumDeclaration;
 using System.Linq;
 using System.Collections.Generic;
-using RootMotion.Demos;
 using Unity.VisualScripting;
 
 public class GrabPhysics : MonoBehaviour
@@ -42,7 +41,7 @@ public class GrabPhysics : MonoBehaviour
     private CapsuleCollider distanceGrabZone;
     public LayerMask distanceGrabLayer;
 
-    private ConfigurableJoint configJoint;
+    private ConfigurableJoint joint;
     [HideInInspector]
     public GrabTwoAttach grab;
     [HideInInspector]
@@ -52,6 +51,10 @@ public class GrabPhysics : MonoBehaviour
 
     [Header("Grabbed Data")]
     public bool isGrabbing = false;
+    [HideInInspector]
+    public bool isClimbing = false;
+    [HideInInspector]
+    public bool isGrabbingRagdoll = false;
     public float connectedMass;
 
     List<Collider> nearbyColliders;
@@ -71,24 +74,32 @@ public class GrabPhysics : MonoBehaviour
     }
     public void Grab()
     {
-        if(grab is GrabSword && grab.secondHandGrabbing)
+        if (handType == handTypeEnum.Left)
+        {
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("Body"), true);
+        }
+        else
+        {
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Body"), true);
+        }
+        if (grab is GrabSword && grab.secondHandGrabbing)
         {
             GrabSword grabSword = grab as GrabSword;
             if (Vector3.Distance(transform.position, grab.transform.TransformPoint(grabSword.guardPosition)) < Vector3.Distance(grab.handGrabbing.transform.position, grab.transform.TransformPoint(grabSword.guardPosition)))
             {
                 grabSword.higherHand = controller;
 
-                configJoint.angularXMotion = ConfigurableJointMotion.Free;
-                configJoint.angularYMotion = ConfigurableJointMotion.Free;
-                configJoint.angularZMotion = ConfigurableJointMotion.Free;
+                joint.angularXMotion = ConfigurableJointMotion.Free;
+                joint.angularYMotion = ConfigurableJointMotion.Free;
+                joint.angularZMotion = ConfigurableJointMotion.Free;
             }
             else
             {
                 grabSword.higherHand = grab.handGrabbing.controller.transform;
 
-                grab.handGrabbing.configJoint.angularXMotion = ConfigurableJointMotion.Free;
-                grab.handGrabbing.configJoint.angularYMotion = ConfigurableJointMotion.Free;
-                grab.handGrabbing.configJoint.angularZMotion = ConfigurableJointMotion.Free;
+                grab.handGrabbing.joint.angularXMotion = ConfigurableJointMotion.Free;
+                grab.handGrabbing.joint.angularYMotion = ConfigurableJointMotion.Free;
+                grab.handGrabbing.joint.angularZMotion = ConfigurableJointMotion.Free;
             }
 
             twoHandedInteraction = new GameObject("TwoHandedInteraction");
@@ -100,24 +111,29 @@ public class GrabPhysics : MonoBehaviour
         {
             poseSetup.setDynamicPose = true;
         }
+        if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
+        {
+            //custom cases for ragdolls
+            isGrabbingRagdoll = true;
+        }
         grab.SetPose(handType);
         poseSetup.pose = grab.pose;
         poseSetup.SetupPose();
         grab.SetAttachPoint(handType);
         isGrabbing = true;
-        configJoint = gameObject.AddComponent<ConfigurableJoint>();
+        joint = gameObject.AddComponent<ConfigurableJoint>();
 
-        configJoint.xMotion = ConfigurableJointMotion.Locked;
-        configJoint.yMotion = ConfigurableJointMotion.Locked;
-        configJoint.zMotion = ConfigurableJointMotion.Locked;
+        joint.xMotion = ConfigurableJointMotion.Locked;
+        joint.yMotion = ConfigurableJointMotion.Locked;
+        joint.zMotion = ConfigurableJointMotion.Locked;
 
-        configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-        configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-        configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+        joint.angularXMotion = ConfigurableJointMotion.Locked;
+        joint.angularYMotion = ConfigurableJointMotion.Locked;
+        joint.angularZMotion = ConfigurableJointMotion.Locked;
 
 
-        configJoint.autoConfigureConnectedAnchor = false;
-        configJoint.connectedAnchor = grab.attachPoint;
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedAnchor = grab.attachPoint;
 
         if (grab is not GrabDynamic)
         {
@@ -128,10 +144,9 @@ public class GrabPhysics : MonoBehaviour
             transform.rotation = Quaternion.Euler(grab.attachRotation);
         }
 
-        configJoint.connectedBody = nearbyRigidbody;
+        joint.connectedBody = nearbyRigidbody;
         if (!grab.secondHandGrabbing)
         {
-            detectCollision = grab.AddComponent<DetectCollisionJoint>();
             connectedMass = nearbyRigidbody.mass;
         }
         else
@@ -162,36 +177,45 @@ public class GrabPhysics : MonoBehaviour
         poseSetup.pose = grab.pose;
         poseSetup.SetupPose();
         grab.isGrabbing = true;
-        configJoint = gameObject.AddComponent<ConfigurableJoint>();
+        joint = gameObject.AddComponent<ConfigurableJoint>();
 
-        configJoint.xMotion = ConfigurableJointMotion.Locked;
-        configJoint.yMotion = ConfigurableJointMotion.Locked;
-        configJoint.zMotion = ConfigurableJointMotion.Locked;
+        joint.xMotion = ConfigurableJointMotion.Locked;
+        joint.yMotion = ConfigurableJointMotion.Locked;
+        joint.zMotion = ConfigurableJointMotion.Locked;
 
-        configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-        configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-        configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+        joint.angularXMotion = ConfigurableJointMotion.Locked;
+        joint.angularYMotion = ConfigurableJointMotion.Locked;
+        joint.angularZMotion = ConfigurableJointMotion.Locked;
 
-        configJoint.autoConfigureConnectedAnchor = false;
-        configJoint.connectedAnchor = grab.transform.TransformPoint(grab.attachPoint);
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedAnchor = grab.transform.TransformPoint(grab.attachPoint);
+        isClimbing = true;
         isGrabbing = true;
         audioSource.PlayOneShot(grabSound, grabVolume);
     }
     public void UnGrab()
     {
-        if(grab is GrabSword && grab.isTwoHandGrabbing)
+        if (handType == handTypeEnum.Left)
         {
-            if(grab.handGrabbing.configJoint.angularXMotion == ConfigurableJointMotion.Free)
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("Body"), false);
+        }
+        else
+        {
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Body"), false);
+        }
+        if (grab is GrabSword && grab.isTwoHandGrabbing)
+        {
+            if(grab.handGrabbing.joint.angularXMotion == ConfigurableJointMotion.Free)
             {
-                grab.handGrabbing.configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                grab.handGrabbing.configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                grab.handGrabbing.configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+                grab.handGrabbing.joint.angularXMotion = ConfigurableJointMotion.Locked;
+                grab.handGrabbing.joint.angularYMotion = ConfigurableJointMotion.Locked;
+                grab.handGrabbing.joint.angularZMotion = ConfigurableJointMotion.Locked;
             }
-            if(grab.secondHandGrabbing.configJoint.angularXMotion == ConfigurableJointMotion.Free)
+            if(grab.secondHandGrabbing.joint.angularXMotion == ConfigurableJointMotion.Free)
             {
-                grab.handGrabbing.configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                grab.handGrabbing.configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                grab.handGrabbing.configJoint.angularZMotion = ConfigurableJointMotion.Locked;
+                grab.handGrabbing.joint.angularXMotion = ConfigurableJointMotion.Locked;
+                grab.handGrabbing.joint.angularYMotion = ConfigurableJointMotion.Locked;
+                grab.handGrabbing.joint.angularZMotion = ConfigurableJointMotion.Locked;
             }
         }
         if (twoHandedInteraction)
@@ -229,6 +253,8 @@ public class GrabPhysics : MonoBehaviour
                 Destroy(twoHandedInteraction);
             }
         }
+        isClimbing = false;
+        isGrabbingRagdoll = false;
         isGrabbing = false;
         if (grab != null)
         {
@@ -237,9 +263,9 @@ public class GrabPhysics : MonoBehaviour
             if (!grab.isTwoHandGrabbing)
             {
                 Destroy(detectCollision);
-                if (configJoint)
+                if (joint)
                 {
-                    Destroy(configJoint);
+                    Destroy(joint);
                 }
                 grab.handGrabbing = null;
                 grab.isGrabbing = false;
@@ -251,9 +277,9 @@ public class GrabPhysics : MonoBehaviour
                 {
                     grab.handGrabbing = grab.secondHandGrabbing;
                 }
-                if (configJoint)
+                if (joint)
                 {
-                    Destroy(configJoint);
+                    Destroy(joint);
                 }
                 grab.handGrabbing.colliders[0].transform.parent.gameObject.SetActive(true);
                 colliders[0].transform.parent.gameObject.SetActive(true);
@@ -304,7 +330,7 @@ public class GrabPhysics : MonoBehaviour
         Vector3 point0 = distanceGrabDetection.position - distanceGrabDetection.forward * distanceGrabZone.height;
         Vector3 point1 = distanceGrabDetection.position + distanceGrabDetection.forward * distanceGrabZone.height;
 
-        nearbyColliders = Physics.OverlapCapsule(point0, point1, 0.2f, distanceGrabLayer).ToList();
+        nearbyColliders = Physics.OverlapCapsule(point0, point1, 0.3f, distanceGrabLayer).ToList();
         if (nearbyColliders.Count > 0)
         {
             closestCollider = FindClosestInteractable(nearbyColliders);
@@ -313,7 +339,7 @@ public class GrabPhysics : MonoBehaviour
                 //do not allow for distance grabbing dynamic interactables
                 nearbyColliders.Clear();
             }
-            Pierce pierce = closestCollider.transform.root.GetComponent<Pierce>();
+            Blade pierce = closestCollider.transform.root.GetComponent<Blade>();
             if (pierce)
             {
                 if(pierce.stabbed)
@@ -324,15 +350,16 @@ public class GrabPhysics : MonoBehaviour
             }
         }
     }
-    void TwoHandedGrabbing()
+    void TwoHandedGrabbingSword()
     {
         GrabSword grabSword = grab as GrabSword;
         if (initialRotationOffset == Quaternion.identity)
         {
-            initialRotationOffset = Quaternion.Inverse(Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position * 15, grab.handGrabbing.controller.position * 15)) * grabSword.higherHand.rotation * Quaternion.AngleAxis(15, grabSword.higherHand.right);
+            Quaternion offset = grabSword.higherHand.rotation * Quaternion.AngleAxis(-30, grabSword.higherHand.up);
+            initialRotationOffset = Quaternion.Inverse(Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position, grab.handGrabbing.controller.position)) * offset;
         }
 
-        twoHandedInteraction.transform.rotation = grabSword.higherHand.rotation * Quaternion.Slerp(Quaternion.identity, Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position * 15, grab.handGrabbing.controller.position * 15) * initialRotationOffset, 1);
+        twoHandedInteraction.transform.rotation = grabSword.higherHand.rotation * Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position, grab.handGrabbing.controller.position) * initialRotationOffset;
         twoHandedInteraction.transform.position = (grab.handGrabbing.controller.position + grab.secondHandGrabbing.controller.position) / 2;
     }
     void FixedUpdate()
@@ -418,7 +445,7 @@ public class GrabPhysics : MonoBehaviour
         {
             if (grab.isTwoHandGrabbing && grab is GrabSword && grab.secondHandGrabbing == this)
             {
-                TwoHandedGrabbing();
+                TwoHandedGrabbingSword();
             }
         }
         if (!isGrabButtonPressed && isGrabbing)

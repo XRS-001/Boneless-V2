@@ -32,12 +32,12 @@ public class GrabTwoAttach : BaseGrab
             {
                 if (!secondHandGrabbing)
                 {
-                    rb.AddForce(Vector3.down * (rb.mass * 250));
+                    rb.AddForce(Vector3.down * (handGrabbing.connectedMass * 25));
                 }
                 else
                 {
                     //halve the force of gravity if two hands are grabbing
-                    rb.AddForce(Vector3.down * (rb.mass * 125));
+                    rb.AddForce(Vector3.down * (handGrabbing.connectedMass * 12.5f));
                 }
             }
         }

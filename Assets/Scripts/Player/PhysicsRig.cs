@@ -1,18 +1,7 @@
-using RootMotion.Demos;
 using RootMotion.FinalIK;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 [System.Serializable]
-public class JointDriveNew
-{
-    public float postionSpring;
-    public float positionDamper;
-}
 public class VRIKData
 {
     public VRIKCalibrator.CalibrationData ikData;
@@ -26,24 +15,27 @@ public class PhysicsRig : MonoBehaviour
     [Header("Left Hand")]
     public ConfigurableJoint leftHandJoint;
     private GrabPhysics leftHandGrab;
-    public JointDriveNew jointDriveCollidingLeft;
-    public JointDrive jointLeftStart;
     public DetectCollisionJoint detectCollisionHandLeft;
     [Header("Right Hand")]
     public ConfigurableJoint rightHandJoint;
-    public JointDriveNew jointDriveCollidingRight;
-    public JointDrive jointRightStart;
     public DetectCollisionJoint detectCollisionHandRight;
     private GrabPhysics rightHandGrab;
+    public DetectCollisionJoint[] bodyDetectCollisions;
+    [HideInInspector]
+    public bool isBodyColliding;
     [System.Serializable]
     public class Joints
     {
         public Transform camera;
+        [HideInInspector]
+        public Camera physicalCameraComponent;
         public ConfigurableJoint headJoint;
         [HideInInspector]
         public DetectCollisionJoint detectCollisionHead;
         public Transform headTarget;
         public Transform headDriver;
+        [HideInInspector]
+        public Camera cameraComponent;
 
         public ConfigurableJoint chestJoint;
         public Transform chestTarget;
@@ -73,183 +65,211 @@ public class PhysicsRig : MonoBehaviour
         public Transform leftLegTarget;
     }
     public Joints joints;
+    private ContinuousMovementPhysics movement;
+    [HideInInspector]
+    public bool delayStart;
     private void Start()
     {
+        movement = GetComponent<ContinuousMovementPhysics>();
+        joints.cameraComponent = joints.headDriver.GetComponent<Camera>();
+        joints.physicalCameraComponent = joints.camera.GetComponent<Camera>();
         joints.detectCollisionHead = joints.headJoint.GetComponent<DetectCollisionJoint>();
         StartCoroutine(DelayStart());
         leftHandGrab = leftHandJoint.GetComponent<GrabPhysics>();
         rightHandGrab = rightHandJoint.GetComponent<GrabPhysics>();
-
-        jointLeftStart = leftHandJoint.xDrive;
-        jointRightStart = rightHandJoint.xDrive;
     }
     IEnumerator DelayStart()
     {
-        GetComponentInChildren<Rigidbody>().isKinematic = true;
+        delayStart = true;
         yield return new WaitForSeconds(1f);
-        GetComponentInChildren<Rigidbody>().isKinematic = false;
+        delayStart = false;
     }
-    public Vector3 CalculateWeight(Vector3 currentPosition, Vector3 targetPosition, float weight)
+    public Vector3 CalculateWeight(Vector3 currentPosition, Vector3 targetPosition, float weight, BaseGrab grab)
     {
         if (weight > 1)
         {
-            //calculate the damping of the position to simulate weight
-            float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
-            return Vector3.Lerp(currentPosition, targetPosition, dampingFactor);
+            if(grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+            {
+                if (grab.isTwoHandGrabbing)
+                {
+                    //calculate the damping of the position to simulate weight
+                    float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
+                    return Vector3.Lerp(currentPosition, targetPosition, dampingFactor * 2);
+                }
+                else
+                {
+                    //calculate the damping of the position to simulate weight
+                    float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
+                    return Vector3.Lerp(currentPosition, targetPosition, dampingFactor);
+                }
+            }
+            else
+            {
+                if (grab.isTwoHandGrabbing)
+                {
+                    //calculate the damping of the position to simulate weight
+                    float dampingFactor = Mathf.Clamp(1 / (weight * 8), float.NegativeInfinity, 1);
+                    return Vector3.Lerp(currentPosition, targetPosition, dampingFactor * 2);
+                }
+                else
+                {
+                    //calculate the damping of the position to simulate weight
+                    float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
+                    return Vector3.Lerp(currentPosition, targetPosition, dampingFactor);
+                }
+            }
         }
         else
         {
             return targetPosition;
         }
     }
-    public Quaternion CalculateAngle(Quaternion currentAngle, Quaternion targetAngle, float weight)
+    public Quaternion CalculateAngle(Transform transform, Quaternion currentAngle, Quaternion targetAngle, float weight)
     {
         if (weight > 1)
         {
-            //calculate the damping of the position to simulate weight
-            float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
-            return Quaternion.Slerp(currentAngle, targetAngle, dampingFactor);
+            if(weight > 5)
+            {
+                //rotate the hands in the direction of looking downwards
+                float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
+                Vector3 eulerAngles = Quaternion.Slerp(currentAngle, Quaternion.Slerp(targetAngle, Quaternion.LookRotation(Vector3.down, transform.up) * Quaternion.Euler(110, 0, 90), 0.01f * weight), dampingFactor).eulerAngles;
+                eulerAngles.y = Quaternion.Slerp(currentAngle, targetAngle, dampingFactor).eulerAngles.y;
+                return Quaternion.Euler(eulerAngles);
+            }
+            else
+            {
+                //calculate the damping of the position to simulate weight
+                float dampingFactor = Mathf.Clamp(1 / (weight * 4), float.NegativeInfinity, 1);
+                return Quaternion.Slerp(currentAngle, targetAngle, dampingFactor);
+            }
         }
         else
         {
             return targetAngle;
         }
     }
-    public void ChangeDrive()
+    public void ChangeLimit()
     {
-        bool isPiercing = false;
-        Pierce pierceLeft = null;
+        bool isPiercingLeft = false;
+        Blade pierceLeft = null;
         if (leftHandGrab.isGrabbing)
         {
-            pierceLeft = leftHandGrab.grab.GetComponent<Pierce>();
+            pierceLeft = leftHandGrab.grab.GetComponent<Blade>();
         }
         if (pierceLeft)
         {
             if (pierceLeft.stabbed)
             {
-                isPiercing = true;
+                isPiercingLeft = true;
             }
         }
-        if (detectCollisionHandLeft.isColliding || isPiercing)
+        if (!isPiercingLeft)
         {
-            JointDrive newDrive = leftHandJoint.xDrive;
-            newDrive.positionDamper = jointDriveCollidingLeft.positionDamper;
-            newDrive.positionSpring = jointDriveCollidingLeft.postionSpring;
-
-            leftHandJoint.xDrive = newDrive;
-            leftHandJoint.yDrive = newDrive;
-            leftHandJoint.zDrive = newDrive;
-            leftHandJoint.slerpDrive = newDrive;
-        }
-        else
-        {
-            if (leftHandGrab.detectCollision)
+            if (detectCollisionHandLeft.isColliding)
             {
-                if (leftHandGrab.detectCollision.isColliding)
+                if (detectCollisionHandLeft.layerColliding != "Interactable" && detectCollisionHandLeft.layerColliding != "Ragdoll")
                 {
-                    JointDrive newDrive = leftHandJoint.xDrive;
-                    newDrive.positionDamper = jointDriveCollidingLeft.positionDamper;
-                    newDrive.positionSpring = jointDriveCollidingLeft.postionSpring;
-
-                    leftHandJoint.xDrive = newDrive;
-                    leftHandJoint.yDrive = newDrive;
-                    leftHandJoint.zDrive = newDrive;
-                    leftHandJoint.slerpDrive = newDrive;
-                }
-                else
-                {
-                    leftHandJoint.xDrive = jointLeftStart;
-                    leftHandJoint.yDrive = jointLeftStart;
-                    leftHandJoint.zDrive = jointLeftStart;
-                    leftHandJoint.slerpDrive = jointLeftStart;
+                    movement.LimitPositionLeft();
                 }
             }
             else
             {
-                leftHandJoint.xDrive = jointLeftStart;
-                leftHandJoint.yDrive = jointLeftStart;
-                leftHandJoint.zDrive = jointLeftStart;
-                leftHandJoint.slerpDrive = jointLeftStart;
+                if (leftHandGrab.detectCollision)
+                {
+                    if (leftHandGrab.detectCollision.isColliding)
+                    {
+                        if (!leftHandGrab.isClimbing)
+                        {
+                            if (leftHandGrab.detectCollision.layerColliding != "Interactable" && leftHandGrab.detectCollision.layerColliding != "Ragdoll")
+                            {
+                                movement.LimitPositionLeft();
+                            }
+                        }
+                    }
+                }
             }
         }
-        Pierce pierceRight = null;
+        bool isPiercingRight = false;
+        Blade pierceRight = null;
         if (rightHandGrab.isGrabbing)
         {
-            pierceRight = rightHandGrab.grab.GetComponent<Pierce>();
+            pierceRight = rightHandGrab.grab.GetComponent<Blade>();
         }
         if (pierceRight)
         {
             if (pierceRight.stabbed)
             {
-                isPiercing = true;
+                isPiercingRight = true;
             }
         }
-        if (detectCollisionHandRight.isColliding || isPiercing)
+        if (!isPiercingRight)
         {
-            JointDrive newDrive = rightHandJoint.xDrive;
-            newDrive.positionDamper = jointDriveCollidingRight.positionDamper;
-            newDrive.positionSpring = jointDriveCollidingRight.postionSpring;
-
-            rightHandJoint.xDrive = newDrive;
-            rightHandJoint.yDrive = newDrive;
-            rightHandJoint.zDrive = newDrive;
-            rightHandJoint.slerpDrive = newDrive;
-        }
-        else
-        {
-            if (rightHandGrab.detectCollision)
+            if (detectCollisionHandRight.isColliding)
             {
-                if (rightHandGrab.detectCollision.isColliding)
+                if (detectCollisionHandRight.layerColliding != "Interactable" && detectCollisionHandRight.layerColliding != "Ragdoll")
                 {
-                    JointDrive newDrive = rightHandJoint.xDrive;
-                    newDrive.positionDamper = jointDriveCollidingRight.positionDamper;
-                    newDrive.positionSpring = jointDriveCollidingRight.postionSpring;
-
-                    rightHandJoint.xDrive = newDrive;
-                    rightHandJoint.yDrive = newDrive;
-                    rightHandJoint.zDrive = newDrive;
-                    rightHandJoint.slerpDrive = newDrive;
-                }
-                else
-                {
-                    rightHandJoint.xDrive = jointRightStart;
-                    rightHandJoint.yDrive = jointRightStart;
-                    rightHandJoint.zDrive = jointRightStart;
-                    rightHandJoint.slerpDrive = jointRightStart;
+                    //movement.LimitPositionRight();
                 }
             }
             else
             {
-                rightHandJoint.xDrive = jointRightStart;
-                rightHandJoint.yDrive = jointRightStart;
-                rightHandJoint.zDrive = jointRightStart;
-                rightHandJoint.slerpDrive = jointRightStart;
+                if (rightHandGrab.detectCollision)
+                {
+                    if (rightHandGrab.detectCollision.isColliding)
+                    {
+                        if (!rightHandGrab.isClimbing)
+                        {
+                            if (rightHandGrab.detectCollision.layerColliding != "Interactable" && rightHandGrab.detectCollision.layerColliding != "Ragdoll")
+                            {
+                                //movement.LimitPositionRight();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public void IsBodyColliding(bool collisionEnter)
+    {
+        if(collisionEnter)
+        {
+            isBodyColliding = true;
+        }
+        else
+        {
+            isBodyColliding = false;
+            foreach (DetectCollisionJoint joint in bodyDetectCollisions)
+            {
+                if (joint.isColliding)
+                {
+                    isBodyColliding = true;
+                }
             }
         }
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        ChangeDrive();
+        ChangeLimit();
+        joints.camera.position = joints.headJoint.transform.position;
+        joints.camera.rotation = joints.headDriver.transform.rotation;
+
         if (joints.detectCollisionHead.isColliding)
         {
-            Vector3 newPosition = joints.camera.position;
-            newPosition.x = joints.headTarget.transform.position.x;
-            newPosition.y = joints.headJoint.transform.position.y;
-            newPosition.z = joints.headTarget.transform.position.z;
-            joints.camera.position = newPosition;
+            joints.cameraComponent.enabled = false;
+            joints.physicalCameraComponent.enabled = true;
         }
         else
         {
-            joints.camera.position = joints.headDriver.position;
+            joints.cameraComponent.enabled = true;
+            joints.physicalCameraComponent.enabled = false;
         }
-        joints.camera.rotation = joints.headDriver.transform.rotation;
 
-        leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass);
-        leftHandJoint.targetRotation = CalculateAngle(leftHandJoint.targetRotation, leftHandPhysicsTarget.localRotation, leftHandGrab.connectedMass);
+        leftHandJoint.targetPosition = CalculateWeight(leftHandJoint.targetPosition, leftHandPhysicsTarget.localPosition, leftHandGrab.connectedMass, leftHandGrab.grab);
+        leftHandJoint.targetRotation = CalculateAngle(leftHandPhysicsTarget, leftHandJoint.targetRotation, leftHandPhysicsTarget.localRotation, leftHandGrab.connectedMass);
 
-        rightHandJoint.targetPosition = CalculateWeight(rightHandJoint.targetPosition, rightHandPhysicsTarget.localPosition, rightHandGrab.connectedMass);
-        rightHandJoint.targetRotation = CalculateAngle(rightHandJoint.targetRotation, rightHandPhysicsTarget.localRotation, rightHandGrab.connectedMass);
+        rightHandJoint.targetPosition = CalculateWeight(rightHandJoint.targetPosition, rightHandPhysicsTarget.localPosition, rightHandGrab.connectedMass, rightHandGrab.grab);
+        rightHandJoint.targetRotation = CalculateAngle(rightHandPhysicsTarget, rightHandJoint.targetRotation, rightHandPhysicsTarget.localRotation, rightHandGrab.connectedMass);
 
         joints.headJoint.targetPosition = joints.headTarget.localPosition;
         joints.headJoint.targetRotation = joints.headTarget.localRotation;

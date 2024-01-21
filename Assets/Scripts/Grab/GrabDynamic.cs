@@ -29,6 +29,11 @@ public class GrabDynamic : GrabTwoAttach
     public DynamicSettings dynamicSettings;
     private void Start()
     {
+        if (dynamicSettings.leftHand == null)
+            dynamicSettings.leftHand = GameObject.Find("LeftHandPhysics").transform;
+        if (dynamicSettings.rightHand == null)
+            dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
+
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
         dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
         //set the rb because of overriding of the baseGrab start function

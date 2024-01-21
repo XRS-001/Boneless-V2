@@ -25,6 +25,11 @@ public class GrabSword : GrabTwoAttach
     public Vector3 guardPosition;
     private void Start()
     {
+        if (dynamicSettings.leftHand == null)
+            dynamicSettings.leftHand = GameObject.Find("LeftHandPhysics").transform;
+        if (dynamicSettings.rightHand == null)
+            dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
+
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
         dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
         rb = GetComponent<Rigidbody>();

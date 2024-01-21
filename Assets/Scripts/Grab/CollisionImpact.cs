@@ -25,7 +25,7 @@ public class CollisionImpact : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(canCollide)
+        if(canCollide && gameObject.activeInHierarchy)
         {
             if (!collision.transform.root.GetComponent<Surface>())
             {
