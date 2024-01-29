@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CollisionImpact : MonoBehaviour
 {
     public AudioClip impactSound;
+    public float volumeModifier = 1;
     public AudioSource audioSource { get; private set; }
     private bool canCollide = true;
     // Start is called before the first frame update
@@ -25,19 +24,15 @@ public class CollisionImpact : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(canCollide && gameObject.activeInHierarchy)
+        if (canCollide && gameObject.activeInHierarchy && collision.gameObject.layer != LayerMask.NameToLayer("Hands"))
         {
-            if (!collision.transform.root.GetComponent<Surface>())
-            {
-                //make the sound louder the harder the collision was ( / 10 to make it smaller)
-                audioSource.PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 20, 0, 0.05f));
-                StartCoroutine(WaitToCollide());
-            }
-            else
-            {
-                audioSource.PlayOneShot(collision.transform.root.GetComponent<Surface>().surfaceImpactClip, Mathf.Clamp(collision.relativeVelocity.magnitude / 20, 0, 0.05f));
-                StartCoroutine(WaitToCollide());
-            }
+            audioSource.PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f) * volumeModifier);
+            StartCoroutine(WaitToCollide());
+        }
+        else if (canCollide && gameObject.activeInHierarchy)
+        {
+            collision.transform.root.GetComponent<AudioSource>().PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f) * volumeModifier);
+            StartCoroutine(WaitToCollide());
         }
     }
     IEnumerator WaitToCollide()

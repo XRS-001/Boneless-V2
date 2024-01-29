@@ -10,6 +10,7 @@ public class SetPose : MonoBehaviour
     public HandData pose;
     [NonSerialized]
     public bool setDynamicPose;
+    [NonSerialized]
     public bool exitingDynamicPose;
     public HandData handData;
 

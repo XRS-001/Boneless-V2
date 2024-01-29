@@ -8,6 +8,7 @@ public class BaseGrab : MonoBehaviour
     public Collider[] colliders;
     [HideInInspector]
     public bool isGrabbing;
+    public bool isHovering;
     [HideInInspector]
     public bool isTwoHandGrabbing;
     public GrabPhysics handGrabbing;
@@ -16,7 +17,7 @@ public class BaseGrab : MonoBehaviour
     public HandData pose;
     [HideInInspector]
     public Rigidbody rb;
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }

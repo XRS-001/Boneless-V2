@@ -10,10 +10,6 @@ public class GrabSword : GrabTwoAttach
     public class DynamicSettings
     {
         public Transform leftHand;
-        [HideInInspector]
-        public GrabPhysics leftGrab;
-        [HideInInspector]
-        public GrabPhysics rightGrab;
         public Transform rightHand;
         public Vector3 handlePosition;
         public float handleLength;
@@ -30,14 +26,12 @@ public class GrabSword : GrabTwoAttach
         if (dynamicSettings.rightHand == null)
             dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
 
-        dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
-        dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
         rb = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (!dynamicSettings.leftGrab.isGrabbing && Vector3.Distance(transform.position, dynamicSettings.leftHand.position) < dynamicSettings.leftGrab.calculationDistance)
+        if (isHovering)
         {
             Vector3 positionLeft = transform.InverseTransformPoint(dynamicSettings.leftHand.position);
             switch (handleDirection)
@@ -64,7 +58,7 @@ public class GrabSword : GrabTwoAttach
         {
             leftAttach.leftAttachPosition = dynamicSettings.handlePosition;
         }
-        if (!dynamicSettings.rightGrab.isGrabbing && Vector3.Distance(transform.position, dynamicSettings.rightHand.position) < dynamicSettings.rightGrab.calculationDistance)
+        if (isHovering)
         {
             Vector3 positionRight = transform.InverseTransformPoint(dynamicSettings.rightHand.position);
             switch (handleDirection)
@@ -95,7 +89,18 @@ public class GrabSword : GrabTwoAttach
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.TransformPoint(dynamicSettings.handlePosition - (Vector3.forward * dynamicSettings.handleLength)), transform.TransformPoint(dynamicSettings.handlePosition + (Vector3.forward * dynamicSettings.handleLength)));
+        switch (handleDirection)
+        {
+            case upDirection.forward:
+                Gizmos.DrawLine(transform.TransformPoint(dynamicSettings.handlePosition - (Vector3.forward * dynamicSettings.handleLength)), transform.TransformPoint(dynamicSettings.handlePosition + (Vector3.forward * dynamicSettings.handleLength)));
+                break;
+            case upDirection.up:
+                Gizmos.DrawLine(transform.TransformPoint(dynamicSettings.handlePosition - (Vector3.up * dynamicSettings.handleLength)), transform.TransformPoint(dynamicSettings.handlePosition + (Vector3.up * dynamicSettings.handleLength)));
+                break;
+            case upDirection.right:
+                Gizmos.DrawLine(transform.TransformPoint(dynamicSettings.handlePosition - (Vector3.right * dynamicSettings.handleLength)), transform.TransformPoint(dynamicSettings.handlePosition + (Vector3.right * dynamicSettings.handleLength)));
+                break;
+        }
         Gizmos.DrawSphere(transform.TransformPoint(guardPosition), 0.05f);
     }
 }

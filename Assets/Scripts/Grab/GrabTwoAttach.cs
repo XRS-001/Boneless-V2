@@ -23,25 +23,6 @@ public class GrabTwoAttach : BaseGrab
     public LeftAttach leftAttach;
     public RightAttach rightAttach;
     public bool twoHanded;
-    [HideInInspector]
-    private void FixedUpdate()
-    {
-        if (handGrabbing)
-        {
-            if (handGrabbing.connectedMass > 1)
-            {
-                if (!secondHandGrabbing)
-                {
-                    rb.AddForce(Vector3.down * (handGrabbing.connectedMass * 25));
-                }
-                else
-                {
-                    //halve the force of gravity if two hands are grabbing
-                    rb.AddForce(Vector3.down * (handGrabbing.connectedMass * 12.5f));
-                }
-            }
-        }
-    }
     public void SetAttachPoint(handTypeEnum handType)
     {
         if (handType == handTypeEnum.Left)

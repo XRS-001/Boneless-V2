@@ -11,29 +11,18 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
     private LeftAttach primaryLeftAttach;
     private RightAttach primaryRightAttach;
     public Transform leftHand;
-    private GrabPhysics leftGrab;
     public Transform rightHand;
-    private GrabPhysics rightGrab;
     private void Start()
     {
-        if (leftHand == null)
-            leftHand = GameObject.Find("LeftHandPhysics").transform;
-        if (rightHand == null)
-            rightHand = GameObject.Find("RightHandPhysics").transform;
-
-        leftGrab = leftHand.GetComponent<GrabPhysics>();
-        rightGrab = rightHand.GetComponent<GrabPhysics>();
         primaryLeftAttach = new LeftAttach();
         primaryLeftAttach.leftAttachPosition = leftAttach.leftAttachPosition; primaryLeftAttach.leftAttachRotation = leftAttach.leftAttachRotation;
         primaryRightAttach = new RightAttach();
         primaryRightAttach.rightAttachPosition = rightAttach.rightAttachPosition; primaryRightAttach.rightAttachRotation = rightAttach.rightAttachRotation;
-        //set the rb because of overriding of the baseGrab start function
-        rb = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (leftGrab.nearbyRigidbody == rb || rightGrab.nearbyRigidbody == rb)
+        if (isHovering)
         {
             float dotLeft = 0;
             if (upAxis == upDirection.up)

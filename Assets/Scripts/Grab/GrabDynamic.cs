@@ -34,15 +34,12 @@ public class GrabDynamic : GrabTwoAttach
         if (dynamicSettings.rightHand == null)
             dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
 
-        dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>();
-        dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
-        //set the rb because of overriding of the baseGrab start function
-        rb = GetComponent<Rigidbody>();
+        dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>(); dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, dynamicSettings.leftHand.position) < dynamicSettings.leftGrab.calculationDistance)
+        if (isHovering)
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())
             {
@@ -77,7 +74,7 @@ public class GrabDynamic : GrabTwoAttach
                 }
             }
         }
-        if (Vector3.Distance(transform.position, dynamicSettings.rightHand.position) < dynamicSettings.rightGrab.calculationDistance)
+        if (isHovering)
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())
             {

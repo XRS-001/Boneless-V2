@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+public class VRIKData
+{
+    public VRIKCalibrator.CalibrationData ikData;
+}
 public class GameManager : MonoBehaviour
 {    
     [Tooltip("The opaque black backround that loses opacity on start")]
