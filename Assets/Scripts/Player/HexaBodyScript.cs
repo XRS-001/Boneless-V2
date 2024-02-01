@@ -48,7 +48,7 @@ public class HexaBodyScript : MonoBehaviour
     public float crouchSpeed;
     public float lowestCrouch;
     public float highestCrouch;
-    private float additionalHight;
+    private float additionalHeight;
 
     Vector3 CrouchTarget;
 
@@ -59,6 +59,10 @@ public class HexaBodyScript : MonoBehaviour
     private Vector3 monoballTorque;
 
     private Vector3 CameraControllerPos;
+
+    private Vector3 previousHeadPosition;
+    private Vector3 currentHeadVelocity;
+
 
     private Vector3 RightHandControllerPos;
     private Vector3 LeftHandControllerPos;
@@ -76,7 +80,8 @@ public class HexaBodyScript : MonoBehaviour
 
     void Start()
     {
-        additionalHight = (0.5f * Monoball.transform.lossyScale.y) + (0.5f * Fender.transform.lossyScale.y) + (Head.transform.position.y - Chest.transform.position.y);
+        additionalHeight = (0.5f * Monoball.transform.lossyScale.y) + (0.5f * Fender.transform.lossyScale.y) + (Head.transform.position.y - Chest.transform.position.y);
+        previousHeadPosition = transform.position;
     }
 
     void Update()
@@ -85,6 +90,11 @@ public class HexaBodyScript : MonoBehaviour
         XRRigToPlayer();
 
         GetContollerInputValues();
+
+        currentHeadVelocity = (CameraControllerPos - previousHeadPosition) / Time.deltaTime;
+        previousHeadPosition = CameraControllerPos;
+        currentHeadVelocity.y = 0;
+        Monoball.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Monoball.transform.position, Monoball.transform.position + currentHeadVelocity, 0.075f));
     }
 
     private void FixedUpdate() 
@@ -188,13 +198,8 @@ public class HexaBodyScript : MonoBehaviour
     }
     private void StopMonoball()
     {
-        Monoball.GetComponent<Rigidbody>().angularDrag = angularBreakDrag;
-
-        if (Monoball.GetComponent<Rigidbody>().velocity == Vector3.zero)
-        {
-            Monoball.GetComponent<Rigidbody>().freezeRotation = true;
-        }
-
+       Monoball.GetComponent<Rigidbody>().freezeRotation = true;
+       Monoball.GetComponent<Rigidbody>().angularDrag = angularBreakDrag;
     }
 
     //------Jumping------------------------------------------------------------------------------------------
@@ -223,16 +228,15 @@ public class HexaBodyScript : MonoBehaviour
     }
     private void JumpSitUp()
     {
-        CrouchTarget = new Vector3(0, highestCrouch - additionalHight, 0);
+        CrouchTarget = new Vector3(0, highestCrouch - additionalHeight, 0);
         Spine.targetPosition = CrouchTarget;
     }
 
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraControllerPos.y - additionalHight, lowestCrouch, highestCrouch - additionalHight);
+        CrouchTarget.y = Mathf.Clamp(CameraControllerPos.y - additionalHeight, lowestCrouch, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
-
     }
     private void MoveAndRotateHand()
     {

@@ -59,13 +59,13 @@ public class HandAnimator : MonoBehaviour
 
         if (triggerTouchValue > 0f && !triggerTouched) { StartCoroutine(TriggerTouch()); }
 
-        else if (triggerTouchValue > 0f && triggerTouched) { triggeredValue = 0.15f; }
+        else if (triggerTouchValue > 0f && triggerTouched) { triggeredValue = 0.5f; }
 
         else if (triggerTouched) { StartCoroutine(TriggerUnTouch()); }
 
         if (!triggerTouched && triggerTouchValue == 0f) { triggeredValue = 0f; }
 
-        if (triggerValue > 0f) { triggeredValue = Mathf.Lerp(0.15f, 1f, triggerValue); }
+        if (triggerValue > 0f) { triggeredValue = Mathf.Lerp(0.5f, 1f, triggerValue); }
 
         handAnimator.SetFloat("Trigger", triggeredValue);
         handAnimatorPhysics.SetFloat("Trigger", triggeredValue);
@@ -117,7 +117,7 @@ public class HandAnimator : MonoBehaviour
             float triggerTouchValue = triggerTouch.action.ReadValue<float>();
             if (triggerTouchValue > 0f)
             {
-                triggeredValue = Mathf.Lerp(0, 0.15f, timer / 0.05f);
+                triggeredValue = Mathf.Lerp(0, 0.5f, timer / 0.05f);
             }
             else
             {
