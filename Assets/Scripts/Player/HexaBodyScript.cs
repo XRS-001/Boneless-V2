@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 using Unity.XR.CoreUtils;
+using RootMotion.FinalIK;
 
 public class HexaBodyScript : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HexaBodyScript : MonoBehaviour
     public XROrigin XRRig;
     public GameObject XRCamera;
     public Transform head;
+    public VRIK physicsIK;
 
     [Header("Actionbased Controller")]
     public ActionBasedController CameraController;
@@ -29,8 +31,6 @@ public class HexaBodyScript : MonoBehaviour
     public GameObject Fender;
     public GameObject Monoball;
 
-    public ConfigurableJoint RightHandJoint;
-    public ConfigurableJoint LeftHandJoint;
     public ConfigurableJoint Spine;
 
     [Header("Hexabody Movespeed")]
@@ -42,8 +42,9 @@ public class HexaBodyScript : MonoBehaviour
     public float angularDragOnMove;
     public float angularBreakDrag;
 
-    [Header("Hexabody Croch & Jump")]
+    [Header("Hexabody Crouch & Jump")]
     bool jumping = false;
+    bool isMoving = false;
 
     public float crouchSpeed;
     public float lowestCrouch;
@@ -63,13 +64,6 @@ public class HexaBodyScript : MonoBehaviour
     private Vector3 previousHeadPosition;
     private Vector3 currentHeadVelocity;
 
-
-    private Vector3 RightHandControllerPos;
-    private Vector3 LeftHandControllerPos;
-
-    private Quaternion RightHandControllerRotation;
-    private Quaternion LeftHandControllerRotation;
-
     private Vector2 LeftTrackPadVector;
     private Vector2 RightTrackPadVector;
 
@@ -81,20 +75,14 @@ public class HexaBodyScript : MonoBehaviour
     void Start()
     {
         additionalHeight = (0.5f * Monoball.transform.lossyScale.y) + (0.5f * Fender.transform.lossyScale.y) + (Head.transform.position.y - Chest.transform.position.y);
-        previousHeadPosition = transform.position;
+        previousHeadPosition = CameraController.transform.position;
     }
-
     void Update()
     {
         CameraToPlayer();
         XRRigToPlayer();
-
         GetContollerInputValues();
-
-        currentHeadVelocity = (CameraControllerPos - previousHeadPosition) / Time.deltaTime;
-        previousHeadPosition = CameraControllerPos;
-        currentHeadVelocity.y = 0;
-        Monoball.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Monoball.transform.position, Monoball.transform.position + currentHeadVelocity, 0.075f));
+        SetHeadTarget();
     }
 
     private void FixedUpdate() 
@@ -108,25 +96,35 @@ public class HexaBodyScript : MonoBehaviour
         }
 
         RotatePlayer();
-        MoveAndRotateHand();
+        RoomScaleMove();
     }
-
+    void SetHeadTarget()
+    {
+        if (physicsIK.solver.spine.headTarget == null && GameObject.Find("Head Target"))
+        {
+            physicsIK.solver.spine.headTarget = GameObject.Find("Head Target").transform;
+        }
+    }
+    void RoomScaleMove()
+    {
+        currentHeadVelocity = (CameraControllerPos - previousHeadPosition) / Time.deltaTime;
+        previousHeadPosition = CameraControllerPos;
+        currentHeadVelocity.y = 0;
+        if (!isMoving)
+        {
+            Monoball.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Monoball.transform.position, Monoball.transform.position + currentHeadVelocity, 0.015f));
+        }
+        else
+        {
+            Chest.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Chest.transform.position, Chest.transform.position + currentHeadVelocity, 0.015f));
+        }
+    }
     private void GetContollerInputValues()
     {
-        //Right Controller
-        //Position & Rotation
-        RightHandControllerPos = RightHandController.positionAction.action.ReadValue<Vector3>();
-        RightHandControllerRotation = RightHandController.rotationAction.action.ReadValue<Quaternion>();
-
         //Trackpad
         LeftTrackPadVector = LeftTrackPad.action.ReadValue<Vector2>();
         leftTrackPadPressed = LeftTrackPadClicked.action.ReadValue<float>();
         leftTrackPadTouched = LeftTrackPadTouch.action.ReadValue<float>();
-
-        //Left Contoller
-        //Position & Rotation
-        LeftHandControllerPos = LeftHandController.positionAction.action.ReadValue<Vector3>();
-        LeftHandControllerRotation = LeftHandController.rotationAction.action.ReadValue<Quaternion>();
 
         //Trackpad
         RightTrackPadVector = RightTrackPad.action.ReadValue<Vector2>();
@@ -147,7 +145,9 @@ public class HexaBodyScript : MonoBehaviour
     }
     private void XRRigToPlayer()
     {
-        XRRig.transform.position = new Vector3(Fender.transform.position.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z);
+        Vector3 offset = CameraControllerPos;
+        offset.y = 0;
+        XRRig.transform.position = new Vector3(Fender.transform.position.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z) - offset;
         head.transform.position = Head.transform.position;
         head.transform.rotation = XRCamera.transform.rotation;
     }
@@ -192,12 +192,14 @@ public class HexaBodyScript : MonoBehaviour
     }
     private void MoveMonoball(float force)
     {
+        isMoving = true;
         Monoball.GetComponent<Rigidbody>().freezeRotation = false;
         Monoball.GetComponent<Rigidbody>().angularDrag = angularDragOnMove;
         Monoball.GetComponent<Rigidbody>().AddTorque(monoballTorque.normalized * force, ForceMode.Force);
     }
     private void StopMonoball()
     {
+       isMoving = false;
        Monoball.GetComponent<Rigidbody>().freezeRotation = true;
        Monoball.GetComponent<Rigidbody>().angularDrag = angularBreakDrag;
     }
@@ -237,13 +239,5 @@ public class HexaBodyScript : MonoBehaviour
     {
         CrouchTarget.y = Mathf.Clamp(CameraControllerPos.y - additionalHeight, lowestCrouch, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
-    }
-    private void MoveAndRotateHand()
-    {
-        RightHandJoint.targetPosition = RightHandControllerPos - CameraControllerPos;
-        LeftHandJoint.targetPosition = LeftHandControllerPos - CameraControllerPos;
-
-        RightHandJoint.targetRotation = RightHandControllerRotation;
-        LeftHandJoint.targetRotation = LeftHandControllerRotation;
     }
 }

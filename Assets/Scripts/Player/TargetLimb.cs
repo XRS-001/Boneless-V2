@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TargetLimb : MonoBehaviour
+{
+    public bool root;
+    public Transform target;
+    public Transform head;
+    private ConfigurableJoint joint;
+    private Quaternion initialRotation;
+    // Start is called before the first frame update
+    void Start()
+    {
+        joint = GetComponent<ConfigurableJoint>();
+        if (root)
+        {
+            initialRotation = head.rotation * target.transform.rotation;
+        }
+        else
+        {
+            initialRotation = target.transform.localRotation;
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if(root)
+        {
+            joint.targetRotation = Quaternion.Inverse(head.rotation * target.rotation) * initialRotation;
+        }
+        else
+        {
+            joint.targetRotation = Quaternion.Inverse(target.localRotation) * initialRotation;
+        }
+    }
+}

@@ -137,7 +137,7 @@ public class HandAnimator : MonoBehaviour
             float triggerTouchValue = triggerTouch.action.ReadValue<float>();
             if (triggerTouchValue == 0f)
             {
-                triggeredValue = Mathf.Lerp(0.15f, 0, timer / 0.05f);
+                triggeredValue = Mathf.Lerp(0.5f, 0, timer / 0.05f);
             }
             else
             {

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public AudioClip uiClickSound;
     private void Start()
     {
+        Application.targetFrameRate = 90;
         audioSource = GetComponent<AudioSource>();
     }
     private void Update()
