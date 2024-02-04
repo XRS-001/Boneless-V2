@@ -14,8 +14,17 @@ public class GrabPhysics : MonoBehaviour
     public handTypeEnum handType;
     public Transform controller;
     public Rigidbody rb;
-    [Tooltip("The colliders of the hand")]
-    public GameObject colliderGroup;
+    [System.Serializable]
+    public class ArmJoint
+    {
+        public Collider[] colliders;
+        public Rigidbody rb;
+        public ConfigurableJoint joint;
+        [HideInInspector]
+        public JointDrive startDrive;
+    }
+    public ArmJoint[] armJoints;
+    public HexaBody hexaBody;
 
     private AudioSource audioSource;
     [Header("Grabbing")]
@@ -41,7 +50,7 @@ public class GrabPhysics : MonoBehaviour
 
     [Header("Grabbed Data")]
     public bool isGrabbing = false;
-    public float connectedMass;
+    public float connectedMass { get; private set; }
 
     Collider[] nearbyColliders;
     Collider closestCollider;
@@ -52,8 +61,35 @@ public class GrabPhysics : MonoBehaviour
     private Quaternion initialRotationOffset = Quaternion.identity;
     private void Start()
     {
+        foreach(ArmJoint joint in armJoints)
+        {
+            joint.startDrive = joint.joint.angularXDrive;
+        }
         audioSource = GetComponent<AudioSource>();
         poseSetup = GetComponent<SetPose>();
+    }
+    void HandleDrive()
+    {
+        if(connectedMass > 1)
+        {
+            foreach(ArmJoint joint in armJoints)
+            {
+                JointDrive newDrive = joint.startDrive;
+                newDrive.positionDamper /= connectedMass;
+                newDrive.positionSpring /= connectedMass;
+
+                joint.joint.angularXDrive = newDrive;
+                joint.joint.angularYZDrive = newDrive;
+            }
+        }
+        else
+        {
+            foreach (ArmJoint joint in armJoints)
+            {
+                joint.joint.angularXDrive = joint.startDrive;
+                joint.joint.angularYZDrive = joint.startDrive;
+            }
+        }
     }
     void GrabTwoHandSword()
     {
@@ -141,11 +177,21 @@ public class GrabPhysics : MonoBehaviour
     }
     void GenericGrab()
     {
+        StartCoroutine(DelayGrab());
         if (grab is GrabSword && grab.secondHandGrabbing)
             GrabTwoHandSword();
 
+        foreach(Collider collider in grab.colliders)
+        {
+            foreach(ArmJoint armJoint in armJoints)
+            {
+                foreach(Collider armCollider in armJoint.colliders)
+                {
+                    Physics.IgnoreCollision(collider, armCollider, true);
+                }
+            }
+        }
         audioSource.Play();
-        colliderGroup.SetActive(false);
 
         if (grab is GrabDynamic)
         {
@@ -159,14 +205,17 @@ public class GrabPhysics : MonoBehaviour
         grab.SetAttachPoint(handType);
 
         isGrabbing = true;
+        if (!grab.isGrabbing)
+            connectedMass = nearbyRigidbody.mass;
+        else
+            connectedMass = grab.handGrabbing.connectedMass;
+
+        HandleDrive();
         grab.isGrabbing = true;
 
+        nearbyRigidbody.mass = 1;
         joint = gameObject.AddComponent<ConfigurableJoint>();
         ConfigurableJoint configJoint = joint as ConfigurableJoint;
-
-        configJoint.xMotion = ConfigurableJointMotion.Locked;
-        configJoint.yMotion = ConfigurableJointMotion.Locked;
-        configJoint.zMotion = ConfigurableJointMotion.Locked;
 
         if (grab is not GrabDynamic)
         {
@@ -177,6 +226,10 @@ public class GrabPhysics : MonoBehaviour
             transform.rotation = Quaternion.Euler(grab.attachRotation);
         }
 
+        configJoint.xMotion = ConfigurableJointMotion.Locked;
+        configJoint.yMotion = ConfigurableJointMotion.Locked;
+        configJoint.zMotion = ConfigurableJointMotion.Locked;
+
         configJoint.angularXMotion = ConfigurableJointMotion.Locked;
         configJoint.angularYMotion = ConfigurableJointMotion.Locked;
         configJoint.angularZMotion = ConfigurableJointMotion.Locked;
@@ -184,22 +237,43 @@ public class GrabPhysics : MonoBehaviour
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedAnchor = grab.attachPoint;
         configJoint.connectedBody = nearbyRigidbody;
-
-        if (!grab.secondHandGrabbing)
+    }
+    IEnumerator DelayGrab()
+    {
+        foreach(ArmJoint armJoint in armJoints)
         {
-            connectedMass = nearbyRigidbody.mass;
+            armJoint.rb.isKinematic = true;
         }
-        else
-        {
-            connectedMass = grab.handGrabbing.connectedMass;
-        }
+        hexaBody.Monoball.GetComponent<Rigidbody>().angularDrag = 50;
+        hexaBody.Chest.GetComponent<Rigidbody>().angularDrag = 50;
+        hexaBody.Fender.GetComponent<Rigidbody>().angularDrag = 50;
+        hexaBody.Head.GetComponent<Rigidbody>().angularDrag = 50;
 
-        nearbyRigidbody.mass = 1;
+        yield return new WaitForSeconds(0.0025f);
+
+        foreach (ArmJoint armJoint in armJoints)
+        {
+            armJoint.rb.isKinematic = false;
+        }
+        hexaBody.Monoball.GetComponent<Rigidbody>().angularDrag = 0;
+        hexaBody.Chest.GetComponent<Rigidbody>().angularDrag = 0;
+        hexaBody.Fender.GetComponent<Rigidbody>().angularDrag = 0;
+        hexaBody.Head.GetComponent<Rigidbody>().angularDrag = 0;
     }
     public void GrabClimbable()
     {
+        StartCoroutine(DelayGrab());
+        foreach (Collider collider in grab.colliders)
+        {
+            foreach (ArmJoint armJoint in armJoints)
+            {
+                foreach (Collider armCollider in armJoint.colliders)
+                {
+                    Physics.IgnoreCollision(collider, armCollider, true);
+                }
+            }
+        }
         audioSource.Play();
-        colliderGroup.SetActive(false);
 
         if (!grab.isGrabbing)
         {
@@ -238,6 +312,7 @@ public class GrabPhysics : MonoBehaviour
     }
     public void UnGrab()
     {
+        StartCoroutine(DelayExit(grab.colliders));
         if (grab is GrabSword && grab.isTwoHandGrabbing)
         {
             UnGrabTwoHandSword();
@@ -250,13 +325,16 @@ public class GrabPhysics : MonoBehaviour
             poseSetup.UnSetPose();
             if (!grab.isTwoHandGrabbing)
             {
+                if (nearbyRigidbody)
+                {
+                    nearbyRigidbody.mass = connectedMass;
+                }
                 if (joint)
                 {
                     Destroy(joint);
                 }
                 grab.handGrabbing = null;
                 grab.isGrabbing = false;
-                colliderGroup.SetActive(true);
             }
             else
             {
@@ -268,20 +346,12 @@ public class GrabPhysics : MonoBehaviour
                 {
                     Destroy(joint);
                 }
-                grab.handGrabbing.colliderGroup.SetActive(true);
-                colliderGroup.SetActive(true);
 
                 grab.isTwoHandGrabbing = false;
                 grab.secondHandGrabbing = null;
             }
-            if (nearbyRigidbody)
-            {
-                if(!grab.isGrabbing)
-                {
-                    nearbyRigidbody.mass = connectedMass;
-                }
-            }
             connectedMass = 0;
+            HandleDrive();
         }
         if (grab is GrabDynamic)
         {
@@ -388,12 +458,12 @@ public class GrabPhysics : MonoBehaviour
     {
         grabZonePosition = transform.position - (transform.rotation * grabZoneOffset);
         nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer, QueryTriggerInteraction.Ignore);
-        CheckForInteractable(nearbyColliders);
-
-        if (nearbyColliders.Length > 0)
+        if (!isGrabbing)
         {
-            CheckGrabInput();
+            CheckForInteractable(nearbyColliders);
         }
+
+        CheckGrabInput();
         if (grab)
         {
             if (grab.isTwoHandGrabbing && grab is GrabSword && grab.secondHandGrabbing == this)
@@ -462,6 +532,24 @@ public class GrabPhysics : MonoBehaviour
             spawnedIcon.transform.position = grab.transform.position;
 
         spawnedIcon.transform.LookAt(GameObject.Find("CameraDriven").transform, Vector3.up);
+    }
+    IEnumerator DelayExit(Collider[] colliders)
+    {
+        yield return new WaitForSeconds(1f);
+
+        if(!isGrabbing)
+        {
+            foreach (Collider collider in colliders)
+            {
+                foreach (ArmJoint armJoint in armJoints)
+                {
+                    foreach (Collider armCollider in armJoint.colliders)
+                    {
+                        Physics.IgnoreCollision(collider, armCollider, false);
+                    }
+                }
+            }
+        }
     }
     IEnumerator WaitTillGrab()
     {

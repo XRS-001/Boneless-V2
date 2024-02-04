@@ -5232,11 +5232,11 @@ MonoBehaviour:
       type: 3}
   ik: {fileID: 935543270}
   centerEyeAnchor: {fileID: 69769646}
-  headAnchorPositionOffset: {x: 0, y: 0.05, z: 0.025}
+  headAnchorPositionOffset: {x: 0, y: 0.075, z: 0.04}
   headAnchorRotationOffset: {x: 0, y: 0, z: 0}
   leftHandAnchor: {fileID: 9499051}
   rightHandAnchor: {fileID: 1994593117}
-  handAnchorPositionOffset: {x: 0, y: 0.03, z: 0.135}
+  handAnchorPositionOffset: {x: 0, y: 0.035, z: 0.175}
   handAnchorRotationOffset: {x: -20, y: 0, z: 0}
   scaleMlp: 1
   data:
@@ -15371,7 +15371,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

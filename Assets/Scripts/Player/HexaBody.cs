@@ -3,13 +3,16 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
 using Unity.XR.CoreUtils;
 using RootMotion.FinalIK;
+using Unity.VisualScripting;
 
-public class HexaBodyScript : MonoBehaviour
+public class HexaBody : MonoBehaviour
 {
     [Header("XR Toolkit Parts")]
     public XROrigin XRRig;
     public GameObject XRCamera;
     public Transform head;
+    public Transform chest;
+    public Transform trackedOffset;
     public VRIK physicsIK;
 
     [Header("Actionbased Controller")]
@@ -32,6 +35,8 @@ public class HexaBodyScript : MonoBehaviour
     public GameObject Monoball;
 
     public ConfigurableJoint Spine;
+    public DetectLocoSphereGrounded detectGrounded;
+    public TargetLimb[] limbs;
 
     [Header("Hexabody Movespeed")]
     public float moveForceCrouch;
@@ -75,7 +80,7 @@ public class HexaBodyScript : MonoBehaviour
     void Start()
     {
         additionalHeight = (0.5f * Monoball.transform.lossyScale.y) + (0.5f * Fender.transform.lossyScale.y) + (Head.transform.position.y - Chest.transform.position.y);
-        previousHeadPosition = CameraController.transform.position;
+        previousHeadPosition = CameraController.positionAction.action.ReadValue<Vector3>();
     }
     void Update()
     {
@@ -87,6 +92,7 @@ public class HexaBodyScript : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        TransformSpineCollider();
         MovePlayerViaController();
         Jump();
 
@@ -97,6 +103,39 @@ public class HexaBodyScript : MonoBehaviour
 
         RotatePlayer();
         RoomScaleMove();
+        Climbing();
+    }
+    void TransformSpineCollider()
+    {
+        Chest.GetComponent<CapsuleCollider>().center = new Vector3(Chest.transform.InverseTransformPoint(chest.position).x, Chest.GetComponent<CapsuleCollider>().center.y, Chest.transform.InverseTransformPoint(chest.position).z);
+        Chest.GetComponent<CapsuleCollider>().height = Vector3.Distance(new Vector3(0, Head.transform.position.y, 0), new Vector3(0, Fender.transform.position.y, 0)) * 2;
+    }
+    void Climbing()
+    {
+        bool isClimbing = false;
+        foreach (TargetLimb limb in limbs)
+        {
+            if (limb.isColliding)
+            {
+                isClimbing = true;
+            }
+        }
+        if (isClimbing)
+        {
+            float drag = 1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 10;
+
+            Head.GetComponent<Rigidbody>().drag = drag;
+            Monoball.GetComponent<Rigidbody>().drag = drag;
+            Spine.GetComponent<Rigidbody>().drag = drag;
+            Fender.GetComponent<Rigidbody>().drag = drag;
+        }
+        else
+        {
+            Head.GetComponent<Rigidbody>().drag = 0;
+            Monoball.GetComponent<Rigidbody>().drag = 0;
+            Spine.GetComponent<Rigidbody>().drag = 0;
+            Fender.GetComponent<Rigidbody>().drag = 0;
+        }
     }
     void SetHeadTarget()
     {
@@ -145,9 +184,7 @@ public class HexaBodyScript : MonoBehaviour
     }
     private void XRRigToPlayer()
     {
-        Vector3 offset = CameraControllerPos;
-        offset.y = 0;
-        XRRig.transform.position = new Vector3(Fender.transform.position.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z) - offset;
+        XRRig.transform.position = Vector3.Lerp(XRRig.transform.position, new Vector3(Fender.transform.position.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z) - new Vector3(CameraControllerPos.x, 0, CameraControllerPos.z), 0.25f);
         head.transform.position = Head.transform.position;
         head.transform.rotation = XRCamera.transform.rotation;
     }
@@ -209,16 +246,20 @@ public class HexaBodyScript : MonoBehaviour
     {
         if (rightTrackPadPressed == 1 && RightTrackPadVector.y < 0)
         {
+            if(!jumping)
+            {
+                trackedOffset.transform.localPosition = new Vector3(0, -(CrouchTarget.y - lowestCrouch), 0);
+            }
             jumping = true;
             JumpSitDown();
         }
 
         else if ((rightTrackPadPressed == 0) && jumping == true)
         {
+            trackedOffset.transform.localPosition = Vector3.zero;
             jumping = false;
             JumpSitUp();
         }
-
     }
     private void JumpSitDown()
     {

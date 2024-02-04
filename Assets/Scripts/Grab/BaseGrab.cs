@@ -15,10 +15,4 @@ public class BaseGrab : MonoBehaviour
     public GrabPhysics secondHandGrabbing;
     [NonSerialized]
     public HandData pose;
-    [HideInInspector]
-    public Rigidbody rb;
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
 }

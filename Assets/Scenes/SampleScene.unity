@@ -748,7 +748,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1169,7 +1168,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2788,7 +2786,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -4511,7 +4508,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -5686,11 +5682,11 @@ MonoBehaviour:
       type: 3}
   ik: {fileID: 265640556453528296}
   centerEyeAnchor: {fileID: 286862140}
-  headAnchorPositionOffset: {x: 0, y: 0.05, z: 0.025}
+  headAnchorPositionOffset: {x: 0, y: 0.075, z: 0.04}
   headAnchorRotationOffset: {x: 0, y: 0, z: 0}
   leftHandAnchor: {fileID: 112185799}
   rightHandAnchor: {fileID: 1631724692}
-  handAnchorPositionOffset: {x: 0, y: 0.03, z: 0.135}
+  handAnchorPositionOffset: {x: 0, y: 0.035, z: 0.175}
   handAnchorRotationOffset: {x: -20, y: 0, z: 0}
   scaleMlp: 1
   data:
@@ -5743,6 +5739,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1833081398}
+  - {fileID: 1315774803}
   - {fileID: 1036415093}
   - {fileID: 4676225410228242887}
   - {fileID: 286862140}
@@ -6659,7 +6656,7 @@ Camera:
     height: 1
   near clip plane: 0.05
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -7091,7 +7088,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -7288,7 +7284,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -7367,9 +7362,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.675, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1766310003}
-  - {fileID: 620716948}
+  m_Children: []
   m_Father: {fileID: 1036415093}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7790,7 +7783,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -9392,7 +9384,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: 0
   target: {fileID: 8170031473675651953}
-  head: {fileID: 395463274}
+  relative: {fileID: 1315774803}
+  isColliding: 0
 --- !u!153 &500414953
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -9405,7 +9398,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.35, y: 1.385, z: 0.17}
+  m_ConnectedAnchor: {x: 0, y: 1.46, z: -0.11}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -9468,13 +9461,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 2000
+    positionSpring: 1000
     positionDamper: 100
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 2000
+    positionSpring: 1000
     positionDamper: 100
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -9542,9 +9535,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Height: 1.83
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0.0000000066568426, y: 0.8483704, z: -0.000000013313953}
+  m_Center: {x: -0.11, y: 0.74, z: 0.14}
 --- !u!1 &507979449
 GameObject:
   m_ObjectHideFlags: 0
@@ -10513,7 +10506,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &571680381
@@ -10535,7 +10528,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -10898,7 +10890,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -11300,12 +11291,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620716947}
   m_LocalRotation: {x: 0.5, y: 0.50000006, z: -0.50000024, w: 0.49999967}
-  m_LocalPosition: {x: 0.9231624, y: 3.8588955, z: -0.27497888}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.18463248, y: 1.446779, z: -0.054995775}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1582647943}
-  m_Father: {fileID: 395463274}
+  m_Father: {fileID: 1315774803}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &620716949
@@ -11322,7 +11313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: 1
   target: {fileID: 5782187437536784057}
-  head: {fileID: 395463274}
+  relative: {fileID: 1315774803}
+  isColliding: 0
 --- !u!153 &620716950
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -11330,12 +11322,12 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620716947}
-  m_ConnectedBody: {fileID: 395463278}
+  m_ConnectedBody: {fileID: 1315774804}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.51, y: -0.42, z: 0.37}
+  m_ConnectedAnchor: {x: 0.14, y: 0.47, z: 0}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -11398,7 +11390,7 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 3000
+    positionSpring: 2000
     positionDamper: 100
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -12047,7 +12039,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -12306,7 +12297,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!4 &706847761
@@ -12352,26 +12343,25 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 979349758}
-    leftAttachPosition: {x: 0.025, y: -0.025, z: -0.01}
-    leftAttachRotation: {x: 0, y: 55, z: 90}
+    leftAttachPosition: {x: -0.1, y: -0.02, z: -0.05}
+    leftAttachRotation: {x: -90, y: 180, z: 90}
   rightAttach:
     rightPose: {fileID: 1455259838}
-    rightAttachPosition: {x: 0.035, y: 0.025, z: -0.01}
-    rightAttachRotation: {x: 0, y: 55, z: 90}
+    rightAttachPosition: {x: -0.1, y: -0.03, z: -0.04}
+    rightAttachRotation: {x: -90, y: -90, z: 0}
   twoHanded: 0
   angleThreshold: 0
-  upAxis: 0
+  upAxis: 2
   altLeftAttach:
     leftPose: {fileID: 979349758}
-    leftAttachPosition: {x: 0.04, y: 0.025, z: -0.075}
-    leftAttachRotation: {x: 180, y: -70, z: 90}
+    leftAttachPosition: {x: 0.1, y: -0.02, z: -0.05}
+    leftAttachRotation: {x: -90, y: 0, z: 90}
   altRightAttach:
     rightPose: {fileID: 1455259838}
-    rightAttachPosition: {x: 0.04, y: -0.025, z: -0.075}
-    rightAttachRotation: {x: 180, y: -70, z: 90}
+    rightAttachPosition: {x: 0.1, y: -0.03, z: -0.04}
+    rightAttachRotation: {x: -90, y: 90, z: 0}
   leftHand: {fileID: 2033460229}
   rightHand: {fileID: 792806553}
 --- !u!114 &706847764
@@ -12443,7 +12433,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709670440}
-  - component: {fileID: 709670441}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -12474,18 +12463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &709670441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709670439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e13948cb01b7d949b21e568bd2e9716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &710163502
 GameObject:
   m_ObjectHideFlags: 0
@@ -12626,7 +12603,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -13111,7 +13087,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -13480,7 +13455,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -14377,7 +14351,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: 0
   target: {fileID: 2560726744204375494}
-  head: {fileID: 395463274}
+  relative: {fileID: 1315774803}
+  isColliding: 0
 --- !u!153 &792806555
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -14390,7 +14365,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 1.8, z: 0}
+  m_ConnectedAnchor: {x: -0.18, y: 1.22, z: 0.19}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -14453,14 +14428,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 100
+    positionSpring: 750
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 100
+    positionSpring: 750
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -14640,14 +14615,31 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   handType: 1
   controller: {fileID: 1631724692}
   rb: {fileID: 792806556}
-  colliderGroup: {fileID: 2068589054}
+  armJoints:
+  - colliders:
+    - {fileID: 372627613}
+    - {fileID: 273277038}
+    - {fileID: 1625146741}
+    - {fileID: 1220651820}
+    - {fileID: 1518047273}
+    - {fileID: 30291280}
+    rb: {fileID: 792806556}
+    joint: {fileID: 792806555}
+  - colliders:
+    - {fileID: 1582647944}
+    rb: {fileID: 1582647947}
+    joint: {fileID: 1582647946}
+  - colliders: []
+    rb: {fileID: 620716951}
+    joint: {fileID: 620716950}
+  hexaBody: {fileID: 1036415094}
   radius: 0.1
-  grabZoneOffset: {x: 0.12, y: 0, z: 0.02}
+  grabZoneOffset: {x: -0.01, y: -0.06, z: -0.12}
   grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
@@ -14659,7 +14651,6 @@ MonoBehaviour:
     m_Bits: 512
   grab: {fileID: 0}
   isGrabbing: 0
-  connectedMass: 0
 --- !u!95 &792806560
 Animator:
   serializedVersion: 5
@@ -14774,9 +14765,9 @@ MonoBehaviour:
   handAnimatorPhysics: {fileID: 792806560}
   thumbAnimatorPhysics: {fileID: 372627614}
   indexFingerBones:
-    index1: {fileID: 692822824}
-    index2: {fileID: 1504265761}
-    index3: {fileID: 1277116464}
+    index1: {fileID: 776699219}
+    index2: {fileID: 930590642}
+    index3: {fileID: 997147551}
 --- !u!1 &800331554
 GameObject:
   m_ObjectHideFlags: 0
@@ -16813,7 +16804,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!4 &989768906
@@ -16857,7 +16848,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1247890974}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -16869,8 +16859,8 @@ MonoBehaviour:
   twoHanded: 1
   handleDirection: 0
   dynamicSettings:
-    leftHand: {fileID: 2033460229}
-    rightHand: {fileID: 792806553}
+    leftHand: {fileID: 112185799}
+    rightHand: {fileID: 1631724692}
     handlePosition: {x: -0.035, y: -0.04, z: -0.48}
     handleLength: 0.085
   higherHand: {fileID: 0}
@@ -17362,13 +17352,15 @@ MonoBehaviour:
   XRRig: {fileID: 1833081401}
   XRCamera: {fileID: 354109370}
   head: {fileID: 286862140}
+  chest: {fileID: 2077160417}
+  trackedOffset: {fileID: 492065713}
   physicsIK: {fileID: 284976140}
   CameraController: {fileID: 1492801358}
   RightHandController: {fileID: 1631724693}
   LeftHandController: {fileID: 112185800}
   LeftTrackPadClicked: {fileID: -6390568391384303791, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  LeftTrackPadTouch: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  LeftTrackPadTouch: {fileID: -4491635751020109278, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   RightTrackPadClicked: {fileID: -2839164490639102535, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
@@ -17381,12 +17373,20 @@ MonoBehaviour:
   Fender: {fileID: 342587803}
   Monoball: {fileID: 1172708311}
   Spine: {fileID: 342587805}
-  moveForceCrouch: 20
-  moveForceWalk: 45
-  moveForceSprint: 60
+  detectGrounded: {fileID: 1172708317}
+  limbs:
+  - {fileID: 1766310006}
+  - {fileID: 500414952}
+  - {fileID: 2033460230}
+  - {fileID: 620716949}
+  - {fileID: 1582647945}
+  - {fileID: 792806554}
+  moveForceCrouch: 15
+  moveForceWalk: 35
+  moveForceSprint: 50
   angularDragOnMove: 50
   angularBreakDrag: 200
-  crouchSpeed: 1.5
+  crouchSpeed: 2
   lowestCrouch: 0
   highestCrouch: 3
 --- !u!1 &1042397190
@@ -17473,7 +17473,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -18448,7 +18447,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &1172708313
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19370,7 +19369,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -19473,7 +19471,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -19672,7 +19669,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -20017,7 +20013,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -20256,6 +20251,67 @@ Transform:
   m_Father: {fileID: 426118141}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1315774802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315774803}
+  - component: {fileID: 1315774804}
+  m_Layer: 0
+  m_Name: Physics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315774803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315774802}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1766310003}
+  - {fileID: 620716948}
+  m_Father: {fileID: 329785812}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1315774804
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315774802}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &1318758930
 GameObject:
   m_ObjectHideFlags: 0
@@ -20629,7 +20685,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -21619,7 +21674,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -21800,7 +21854,7 @@ MonoBehaviour:
     index1: {fileID: 776699219}
     index2: {fileID: 930590642}
     index3: {fileID: 997147551}
-  handGrab: {fileID: 0}
+  handGrab: {fileID: 792806559}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2560
@@ -22474,7 +22528,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -23872,7 +23925,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -24367,7 +24419,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -24598,9 +24649,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Height: 1.83
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7, z: 0}
+  m_Center: {x: -0.11, y: 0.74, z: 0.14}
 --- !u!114 &1582647945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24615,7 +24666,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: 0
   target: {fileID: 6876941665040588003}
-  head: {fileID: 395463274}
+  relative: {fileID: 1315774803}
+  isColliding: 0
 --- !u!153 &1582647946
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -24628,7 +24680,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.35, y: 1.385, z: 0.17}
+  m_ConnectedAnchor: {x: 0, y: 1.46, z: -0.11}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -24691,13 +24743,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 2000
+    positionSpring: 1000
     positionDamper: 100
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 2000
+    positionSpring: 1000
     positionDamper: 100
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -25080,7 +25132,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -25600,7 +25651,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -26323,7 +26373,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -26878,7 +26927,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -27075,7 +27123,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -27504,7 +27551,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -28132,13 +28178,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766310002}
-  m_LocalRotation: {x: -0.5000004, y: 0.4999998, z: -0.4999998, w: -0.49999994}
-  m_LocalPosition: {x: -0.9231677, y: 3.8588963, z: -0.27497768}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.5000004, y: 0.49999982, z: -0.4999998, w: -0.49999997}
+  m_LocalPosition: {x: -0.18463354, y: 1.4467793, z: -0.054995537}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 500414951}
-  m_Father: {fileID: 395463274}
+  m_Father: {fileID: 1315774803}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!153 &1766310004
@@ -28148,12 +28194,12 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766310002}
-  m_ConnectedBody: {fileID: 395463278}
+  m_ConnectedBody: {fileID: 1315774804}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.9231677, y: -0.77, z: 0.37}
+  m_ConnectedAnchor: {x: -0.14, y: 0.47, z: 0}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -28216,7 +28262,7 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 3000
+    positionSpring: 2000
     positionDamper: 100
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -28284,7 +28330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: 1
   target: {fileID: 1370980527023896823}
-  head: {fileID: 395463274}
+  relative: {fileID: 1315774803}
+  isColliding: 0
 --- !u!1 &1766353735
 GameObject:
   m_ObjectHideFlags: 0
@@ -28466,7 +28513,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -29229,7 +29275,7 @@ MonoBehaviour:
     index1: {fileID: 220422696}
     index2: {fileID: 1922799510}
     index3: {fileID: 1171659479}
-  handGrab: {fileID: 0}
+  handGrab: {fileID: 2033460235}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2560
@@ -31186,7 +31232,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -31642,6 +31687,7 @@ GameObject:
   - component: {fileID: 1951543674}
   - component: {fileID: 1951543675}
   - component: {fileID: 1951543676}
+  - component: {fileID: 1951543677}
   m_Layer: 3
   m_Name: Chest
   m_TagString: Untagged
@@ -31711,9 +31757,24 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Height: 1.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!138 &1951543677
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951543673}
+  m_ConnectedBody: {fileID: 1315774804}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &1956320758
 GameObject:
   m_ObjectHideFlags: 0
@@ -32179,7 +32240,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 864157563}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -32376,7 +32436,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -32608,7 +32667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root: 0
   target: {fileID: 9147503624946302685}
-  head: {fileID: 395463274}
+  relative: {fileID: 1315774803}
+  isColliding: 0
 --- !u!153 &2033460231
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -32621,7 +32681,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 1.8, z: 0}
+  m_ConnectedAnchor: {x: -0.18, y: 1.22, z: 0.19}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -32684,14 +32744,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 100
+    positionSpring: 750
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 100
+    positionSpring: 750
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -32871,14 +32931,31 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   handType: 0
   controller: {fileID: 112185799}
   rb: {fileID: 2033460232}
-  colliderGroup: {fileID: 1500882834}
+  armJoints:
+  - colliders:
+    - {fileID: 113609394}
+    - {fileID: 1561353986}
+    - {fileID: 1890934936}
+    - {fileID: 750676537}
+    - {fileID: 986458191}
+    - {fileID: 42332602}
+    rb: {fileID: 2033460232}
+    joint: {fileID: 2033460231}
+  - colliders:
+    - {fileID: 500414955}
+    rb: {fileID: 500414954}
+    joint: {fileID: 500414953}
+  - colliders: []
+    rb: {fileID: 1766310005}
+    joint: {fileID: 1766310004}
+  hexaBody: {fileID: 1036415094}
   radius: 0.1
-  grabZoneOffset: {x: -0.12, y: 0, z: 0.02}
+  grabZoneOffset: {x: -0.01, y: -0.06, z: -0.12}
   grabZonePosition: {x: 0, y: 0, z: 0}
   grabLayer:
     serializedVersion: 2
@@ -32890,7 +32967,6 @@ MonoBehaviour:
     m_Bits: 512
   grab: {fileID: 0}
   isGrabbing: 0
-  connectedMass: 0
 --- !u!95 &2033460236
 Animator:
   serializedVersion: 5
@@ -35021,7 +35097,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1875535898}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -35991,7 +36066,7 @@ MonoBehaviour:
     index1: {fileID: 703849994465138950}
     index2: {fileID: 8110824620793787774}
     index3: {fileID: 8100287178628931596}
-  handGrab: {fileID: 0}
+  handGrab: {fileID: 792806559}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2560
@@ -36088,7 +36163,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -36103,7 +36177,7 @@ MonoBehaviour:
     leftGrab: {fileID: 0}
     rightHand: {fileID: 792806553}
     rightGrab: {fileID: 0}
-    offset: 0.75
+    offset: 1
     angleWeight: 0.5
     isGrabbable: 1
 --- !u!54 &490505053947440845
@@ -36130,7 +36204,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &490505053947440846
@@ -36216,7 +36290,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -36258,7 +36331,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &490505055498920944
@@ -37413,7 +37486,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &1566201112812196880
@@ -37440,7 +37513,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &1566201114853335646
@@ -37467,7 +37540,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &1566201114936908344
@@ -37494,7 +37567,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &1566201115079854214
@@ -37521,7 +37594,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!4 &1574390971435333859
@@ -37580,7 +37653,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 740458495}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -37653,7 +37725,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 740458495}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -37726,7 +37797,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 740458495}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -37799,7 +37869,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 740458495}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -37872,7 +37941,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 740458495}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -38112,7 +38180,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!23 &2038883218476278303
@@ -38225,7 +38293,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 740458495}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -38240,7 +38307,7 @@ MonoBehaviour:
     leftGrab: {fileID: 0}
     rightHand: {fileID: 792806553}
     rightGrab: {fileID: 0}
-    offset: 0.75
+    offset: 0.85
     angleWeight: 0.5
     isGrabbable: 1
 --- !u!114 &2038883218478616549
@@ -39375,6 +39442,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5731440478906900420, guid: 5ae7b0f4c183ff24083fa560c2108e87,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6792300720042591071, guid: 5ae7b0f4c183ff24083fa560c2108e87,
         type: 3}
       propertyPath: m_UpdateMode
@@ -39544,7 +39616,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442099801100020
@@ -39571,7 +39643,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442108994965098
@@ -39598,7 +39670,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442108995413158
@@ -39625,7 +39697,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109159004142
@@ -39652,7 +39724,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109201706392
@@ -39679,7 +39751,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109303184914
@@ -39706,7 +39778,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109422258376
@@ -39733,7 +39805,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109564431078
@@ -39760,7 +39832,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109652873074
@@ -39787,7 +39859,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109858453130
@@ -39814,7 +39886,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109949088080
@@ -39841,7 +39913,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442109999753678
@@ -39868,7 +39940,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442110851722198
@@ -39895,7 +39967,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442110989482464
@@ -39922,7 +39994,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111391089782
@@ -39949,7 +40021,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111408595320
@@ -39976,7 +40048,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111462700106
@@ -40003,7 +40075,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111477917786
@@ -40030,7 +40102,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111674397358
@@ -40057,7 +40129,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111782036624
@@ -40084,7 +40156,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111898431424
@@ -40111,7 +40183,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442111915913108
@@ -40138,7 +40210,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442112814744166
@@ -40165,7 +40237,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!54 &4469442112855459268
@@ -40192,7 +40264,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!64 &4492942031572090988
@@ -42085,7 +42157,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42178,7 +42249,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42271,7 +42341,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42364,7 +42433,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42457,7 +42525,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42550,7 +42617,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42643,7 +42709,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42736,7 +42801,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42829,7 +42893,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -42922,7 +42985,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43015,7 +43077,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43108,7 +43169,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43201,7 +43261,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43294,7 +43353,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43387,7 +43445,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43480,7 +43537,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43573,7 +43629,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43666,7 +43721,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43759,7 +43813,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43852,7 +43905,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -43945,7 +43997,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -44038,7 +44089,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -44131,7 +44181,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -44224,7 +44273,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -44317,7 +44365,6 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
-  rb: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1895378812}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -44502,6 +44549,71 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 721445438599454550, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftAttach.leftAttachPosition.x
+      value: -0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftAttach.leftAttachPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftAttach.leftAttachPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftAttach.leftAttachRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftAttach.leftAttachRotation.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: leftAttach.leftAttachRotation.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightAttach.rightAttachPosition.x
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightAttach.rightAttachPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightAttach.rightAttachPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightAttach.rightAttachRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightAttach.rightAttachRotation.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
+      propertyPath: rightAttach.rightAttachRotation.z
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 5844223947879883459, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
@@ -46336,7 +46448,7 @@ MonoBehaviour:
     index1: {fileID: 5174955273782139367}
     index2: {fileID: 9047214243354667492}
     index3: {fileID: 491018442627281262}
-  handGrab: {fileID: 0}
+  handGrab: {fileID: 2033460235}
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2560

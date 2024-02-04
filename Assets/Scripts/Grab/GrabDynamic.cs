@@ -29,11 +29,6 @@ public class GrabDynamic : GrabTwoAttach
     public DynamicSettings dynamicSettings;
     private void Start()
     {
-        if (dynamicSettings.leftHand == null)
-            dynamicSettings.leftHand = GameObject.Find("LeftHandPhysics").transform;
-        if (dynamicSettings.rightHand == null)
-            dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
-
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>(); dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
     }
     // Update is called once per frame
@@ -48,8 +43,8 @@ public class GrabDynamic : GrabTwoAttach
                 if (hitInfo.collider)
                 {
                     dynamicSettings.isGrabbable = true;
-                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
-                    leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point - dynamicSettings.leftHand.up / 17.5f + (-dynamicSettings.leftHand.forward / 30 * dynamicSettings.offset));
+                    leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.right) * Quaternion.Euler(0, 180, 90), dynamicSettings.angleWeight).eulerAngles;
                 }
                 else
                 {
@@ -63,10 +58,10 @@ public class GrabDynamic : GrabTwoAttach
                 if (hitInfo.collider)
                 {
                     dynamicSettings.isGrabbable = true;
-                    //set the leftAttachPosition to the hitPoint and add some offset
-                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point + (-dynamicSettings.leftHand.right / 20 * dynamicSettings.offset));
                     //set the rotation to be the hands rotation extending the the normal
-                    leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.up) * Quaternion.Euler(0, 90, 0), dynamicSettings.angleWeight).eulerAngles;
+                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point - dynamicSettings.leftHand.up / 17.5f + (-dynamicSettings.leftHand.forward / 30 * dynamicSettings.offset));
+                    //set the leftAttachPosition to the hitPoint and add some offset
+                    leftAttach.leftAttachRotation = Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.leftHand.right) * Quaternion.Euler(0, 180, 90), dynamicSettings.angleWeight).eulerAngles;
                 }
                 else
                 {
@@ -80,18 +75,16 @@ public class GrabDynamic : GrabTwoAttach
             {
                 ClosestCollider(handTypeEnum.Right).Raycast(new Ray(dynamicSettings.rightHand.position, ClosestCollider(handTypeEnum.Right).transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point + (dynamicSettings.rightHand.right / 20 * dynamicSettings.offset));
-                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.rightHand.up) * Quaternion.Euler(0, -90, 0), dynamicSettings.angleWeight).eulerAngles;
+                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point - dynamicSettings.rightHand.up / 17.5f + (-dynamicSettings.rightHand.forward / 30 * dynamicSettings.offset));
+                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight).eulerAngles;
             }
             else
             {
                 //cast a ray that directs to the interactable and outputs the hitInfo
                 GetComponent<Collider>().Raycast(new Ray(dynamicSettings.rightHand.position, transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-                //set the leftAttachPosition to the hitPoint and add some offset
-                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point + (dynamicSettings.rightHand.right / 20 * dynamicSettings.offset));
-                //set the rotation to be the hands rotation extending the the normal
-                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, dynamicSettings.rightHand.up) * Quaternion.Euler(0, -90, 0), dynamicSettings.angleWeight).eulerAngles;
+                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point - dynamicSettings.rightHand.up / 17.5f + (-dynamicSettings.rightHand.forward / 30 * dynamicSettings.offset));
+                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight).eulerAngles;
             }
         }
     }

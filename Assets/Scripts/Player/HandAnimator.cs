@@ -97,7 +97,6 @@ public class HandAnimator : MonoBehaviour
             if (!(grabPhysics.grab is GrabDynamic))
             {
                 HandData h = grabPhysics.poseSetup.pose;
-
                 if (h)
                 {
                     indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
@@ -117,7 +116,7 @@ public class HandAnimator : MonoBehaviour
             float triggerTouchValue = triggerTouch.action.ReadValue<float>();
             if (triggerTouchValue > 0f)
             {
-                triggeredValue = Mathf.Lerp(0, 0.5f, timer / 0.05f);
+                triggeredValue = Mathf.Lerp(0, 0.5f, timer / 0.1f);
             }
             else
             {
@@ -137,7 +136,7 @@ public class HandAnimator : MonoBehaviour
             float triggerTouchValue = triggerTouch.action.ReadValue<float>();
             if (triggerTouchValue == 0f)
             {
-                triggeredValue = Mathf.Lerp(0.5f, 0, timer / 0.05f);
+                triggeredValue = Mathf.Lerp(0.5f, 0, timer / 0.1f);
             }
             else
             {

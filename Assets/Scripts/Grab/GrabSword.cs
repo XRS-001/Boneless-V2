@@ -25,8 +25,6 @@ public class GrabSword : GrabTwoAttach
             dynamicSettings.leftHand = GameObject.Find("LeftHandPhysics").transform;
         if (dynamicSettings.rightHand == null)
             dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
-
-        rb = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()

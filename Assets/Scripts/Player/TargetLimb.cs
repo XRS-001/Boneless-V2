@@ -6,16 +6,17 @@ public class TargetLimb : MonoBehaviour
 {
     public bool root;
     public Transform target;
-    public Transform head;
+    public Transform relative;
     private ConfigurableJoint joint;
     private Quaternion initialRotation;
+    public bool isColliding;
     // Start is called before the first frame update
     void Start()
     {
         joint = GetComponent<ConfigurableJoint>();
         if (root)
         {
-            initialRotation = head.rotation * target.transform.rotation;
+            initialRotation = relative.rotation * target.transform.rotation;
         }
         else
         {
@@ -28,11 +29,19 @@ public class TargetLimb : MonoBehaviour
     {
         if(root)
         {
-            joint.targetRotation = Quaternion.Inverse(head.rotation * target.rotation) * initialRotation;
+            joint.targetRotation = Quaternion.Inverse(Quaternion.Inverse(relative.rotation) * target.rotation) * initialRotation;
         }
         else
         {
             joint.targetRotation = Quaternion.Inverse(target.localRotation) * initialRotation;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        isColliding = true;
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        isColliding = false;
     }
 }
