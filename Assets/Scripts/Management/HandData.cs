@@ -48,7 +48,7 @@ public class HandData : MonoBehaviour
             {
                 if (!fingerBones[i].name.Contains("3") && !fingerBones[i].name.Contains("2"))
                 {
-                    if (!Physics.CheckSphere(fingerBones[i + 1].position, 0.015f, interactableLayers))
+                    if (!Physics.CheckSphere(fingerBones[i + 1].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
@@ -56,7 +56,7 @@ public class HandData : MonoBehaviour
                     {
                         hasHit[i] = false;
                     }
-                    if (!Physics.CheckSphere(fingerBones[i + 2].position, 0.015f, interactableLayers))
+                    if (!Physics.CheckSphere(fingerBones[i + 2].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
@@ -72,7 +72,7 @@ public class HandData : MonoBehaviour
                 }
                 else if (fingerBones[i].name.Contains("2"))
                 {
-                    if (!Physics.CheckSphere(fingerBones[i + 1].position, 0.015f, interactableLayers))
+                    if (!Physics.CheckSphere(fingerBones[i + 1].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
@@ -88,7 +88,7 @@ public class HandData : MonoBehaviour
                 }
                 else
                 {
-                    if (Physics.CheckSphere(fingerBones[i].position, 0.015f, interactableLayers))
+                    if (Physics.CheckSphere(fingerBones[i].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
@@ -103,11 +103,11 @@ public class HandData : MonoBehaviour
             {
                 if (!fingerBones[i].name.Contains("3") && !fingerBones[i].name.Contains("2"))
                 {
-                    if (Physics.CheckSphere(fingerBones[i + 1].position, 0.015f, interactableLayers))
+                    if (Physics.CheckSphere(fingerBones[i + 1].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
-                    if (Physics.CheckSphere(fingerBones[i + 2].position, 0.015f, interactableLayers))
+                    if (Physics.CheckSphere(fingerBones[i + 2].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
@@ -119,7 +119,7 @@ public class HandData : MonoBehaviour
                 }
                 else if (fingerBones[i].name.Contains("2"))
                 {
-                    if (Physics.CheckSphere(fingerBones[i + 1].position, 0.015f, interactableLayers))
+                    if (Physics.CheckSphere(fingerBones[i + 1].position, 0.005f, interactableLayers))
                     {
                         hasHit[i] = true;
                     }
@@ -131,7 +131,7 @@ public class HandData : MonoBehaviour
                 }
                 else
                 {
-                    if (Physics.CheckSphere(fingerBones[i].position, 0.015f, 1 << 9))
+                    if (Physics.CheckSphere(fingerBones[i].position, 0.005f, 1 << 9))
                     {
                         hasHit[i] = true;
                     }

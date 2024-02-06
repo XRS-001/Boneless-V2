@@ -10,6 +10,7 @@ public class TargetLimb : MonoBehaviour
     private ConfigurableJoint joint;
     private Quaternion initialRotation;
     public bool isColliding;
+    public Collider colliderColliding = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class TargetLimb : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         isColliding = true;
+        colliderColliding = collision.collider;
     }
     private void OnCollisionExit(Collision collision)
     {

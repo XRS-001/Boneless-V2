@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 using Unity.XR.CoreUtils;
 using RootMotion.FinalIK;
 using Unity.VisualScripting;
+using UnityEngine.Timeline;
+using System.Collections;
+using RootMotion;
+using static RootMotion.Demos.FBBIKSettings;
 
 public class HexaBody : MonoBehaviour
 {
@@ -16,14 +20,14 @@ public class HexaBody : MonoBehaviour
     public VRIK physicsIK;
 
     [Header("Actionbased Controller")]
-    public ActionBasedController CameraController;
+    public Transform CameraController;
     public ActionBasedController RightHandController;
     public ActionBasedController LeftHandController;
 
     public InputActionReference LeftTrackPadClicked;
     public InputActionReference LeftTrackPadTouch;
 
-    public InputActionReference RightTrackPadClicked;
+    public InputActionReference RightTrackPadTouched;
 
     public InputActionReference RightTrackPad;
     public InputActionReference LeftTrackPad;
@@ -49,7 +53,7 @@ public class HexaBody : MonoBehaviour
 
     [Header("Hexabody Crouch & Jump")]
     bool jumping = false;
-    bool isMoving = false;
+    bool vaulting = false;
 
     public float crouchSpeed;
     public float lowestCrouch;
@@ -64,8 +68,6 @@ public class HexaBody : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 monoballTorque;
 
-    private Vector3 CameraControllerPos;
-
     private Vector3 previousHeadPosition;
     private Vector3 currentHeadVelocity;
 
@@ -73,14 +75,14 @@ public class HexaBody : MonoBehaviour
     private Vector2 RightTrackPadVector;
 
     private float leftTrackPadPressed;
-    private float rightTrackPadPressed;
+    private float rightTrackPadTouched;
 
     private float leftTrackPadTouched;
 
     void Start()
     {
         additionalHeight = (0.5f * Monoball.transform.lossyScale.y) + (0.5f * Fender.transform.lossyScale.y) + (Head.transform.position.y - Chest.transform.position.y);
-        previousHeadPosition = CameraController.positionAction.action.ReadValue<Vector3>();
+        previousHeadPosition = CameraController.localPosition;
     }
     void Update()
     {
@@ -104,11 +106,11 @@ public class HexaBody : MonoBehaviour
         RotatePlayer();
         RoomScaleMove();
         Climbing();
-    }
+    } 
     void TransformSpineCollider()
     {
         Chest.GetComponent<CapsuleCollider>().center = new Vector3(Chest.transform.InverseTransformPoint(chest.position).x, Chest.GetComponent<CapsuleCollider>().center.y, Chest.transform.InverseTransformPoint(chest.position).z);
-        Chest.GetComponent<CapsuleCollider>().height = Vector3.Distance(new Vector3(0, Head.transform.position.y, 0), new Vector3(0, Fender.transform.position.y, 0)) * 2;
+        Chest.GetComponent<CapsuleCollider>().height = Vector3.Distance(new Vector3(0, Head.transform.position.y, 0), new Vector3(0, Fender.transform.position.y, 0)) * 3f;
     }
     void Climbing()
     {
@@ -122,12 +124,46 @@ public class HexaBody : MonoBehaviour
         }
         if (isClimbing)
         {
-            float drag = 1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 10;
+            if (!detectGrounded.isGrounded)
+            {
+                foreach(TargetLimb limb in limbs)
+                {
+                    if (limb.isColliding)
+                    {
+                        Physics.Raycast(Head.transform.position, Vector3.down, out RaycastHit hit);
+                        if (hit.collider)
+                        {
+                            if(hit.collider == limb.colliderColliding)
+                            {
+                                StartCoroutine(Vault());
+                            }
+                        }
+                    }
+                }
+            }
+            if (!vaulting)
+            {
+                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 20, 150, float.PositiveInfinity);
 
-            Head.GetComponent<Rigidbody>().drag = drag;
-            Monoball.GetComponent<Rigidbody>().drag = drag;
-            Spine.GetComponent<Rigidbody>().drag = drag;
-            Fender.GetComponent<Rigidbody>().drag = drag;
+                Head.GetComponent<Rigidbody>().drag = drag;
+                Monoball.GetComponent<Rigidbody>().drag = drag;
+                Spine.GetComponent<Rigidbody>().drag = drag;
+                Fender.GetComponent<Rigidbody>().drag = drag;
+            }
+            else
+            {
+                Head.GetComponent<Rigidbody>().drag = 0;
+                Monoball.GetComponent<Rigidbody>().drag = 0;
+                Spine.GetComponent<Rigidbody>().drag = 0;
+                Fender.GetComponent<Rigidbody>().drag = 0;
+            }
+        }
+        else if (detectGrounded.isGrounded)
+        {
+            Head.GetComponent<Rigidbody>().drag = 5;
+            Monoball.GetComponent<Rigidbody>().drag = 5;
+            Spine.GetComponent<Rigidbody>().drag = 5;
+            Fender.GetComponent<Rigidbody>().drag = 5;
         }
         else
         {
@@ -136,6 +172,27 @@ public class HexaBody : MonoBehaviour
             Spine.GetComponent<Rigidbody>().drag = 0;
             Fender.GetComponent<Rigidbody>().drag = 0;
         }
+    }
+    IEnumerator Vault()
+    {
+        Monoball.GetComponent<Collider>().enabled = false;
+        Fender.GetComponent<Collider>().enabled = false;
+        Chest.GetComponent<Collider>().enabled = false;
+
+        yield return new WaitForSeconds(0.1f);
+        vaulting = true;
+        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
+        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
+        Fender.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
+        Head.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(0.4f);
+
+        Monoball.GetComponent<Collider>().enabled = true;
+        Fender.GetComponent<Collider>().enabled = true;
+        Chest.GetComponent<Collider>().enabled = true;
+
+        vaulting = false;
     }
     void SetHeadTarget()
     {
@@ -146,17 +203,14 @@ public class HexaBody : MonoBehaviour
     }
     void RoomScaleMove()
     {
-        currentHeadVelocity = (CameraControllerPos - previousHeadPosition) / Time.deltaTime;
-        previousHeadPosition = CameraControllerPos;
-        currentHeadVelocity.y = 0;
-        if (!isMoving)
-        {
-            Monoball.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Monoball.transform.position, Monoball.transform.position + currentHeadVelocity, 0.015f));
-        }
-        else
-        {
-            Chest.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Chest.transform.position, Chest.transform.position + currentHeadVelocity, 0.015f));
-        }
+        currentHeadVelocity = (CameraController.localPosition - previousHeadPosition) / Time.deltaTime;
+        previousHeadPosition = CameraController.localPosition;
+        Vector3 roomscaleMove = new Vector3(currentHeadVelocity.x, 0, currentHeadVelocity.z) * Time.deltaTime;
+
+        Monoball.GetComponent<Rigidbody>().MovePosition(Monoball.transform.position + roomscaleMove);
+        Fender.GetComponent<Rigidbody>().MovePosition(Fender.transform.position + roomscaleMove);
+        Chest.GetComponent<Rigidbody>().MovePosition(Chest.transform.position + roomscaleMove);
+        Head.GetComponent<Rigidbody>().MovePosition(Head.transform.position + roomscaleMove);
     }
     private void GetContollerInputValues()
     {
@@ -167,10 +221,7 @@ public class HexaBody : MonoBehaviour
 
         //Trackpad
         RightTrackPadVector = RightTrackPad.action.ReadValue<Vector2>();
-        rightTrackPadPressed = RightTrackPadClicked.action.ReadValue<float>();
-
-        //Camera Inputs
-        CameraControllerPos = CameraController.positionAction.action.ReadValue<Vector3>();
+        rightTrackPadTouched = RightTrackPadTouched.action.ReadValue<float>();
 
         headYaw = Quaternion.Euler(0, XRRig.Camera.transform.eulerAngles.y, 0);
         moveDirection = headYaw * new Vector3(LeftTrackPadVector.x, 0, LeftTrackPadVector.y);
@@ -184,7 +235,7 @@ public class HexaBody : MonoBehaviour
     }
     private void XRRigToPlayer()
     {
-        XRRig.transform.position = Vector3.Lerp(XRRig.transform.position, new Vector3(Fender.transform.position.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z) - new Vector3(CameraControllerPos.x, 0, CameraControllerPos.z), 0.25f);
+        XRRig.transform.position = new Vector3(Fender.transform.position.x - CameraController.localPosition.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z - CameraController.localPosition.z);
         head.transform.position = Head.transform.position;
         head.transform.rotation = XRCamera.transform.rotation;
     }
@@ -229,14 +280,12 @@ public class HexaBody : MonoBehaviour
     }
     private void MoveMonoball(float force)
     {
-        isMoving = true;
         Monoball.GetComponent<Rigidbody>().freezeRotation = false;
         Monoball.GetComponent<Rigidbody>().angularDrag = angularDragOnMove;
         Monoball.GetComponent<Rigidbody>().AddTorque(monoballTorque.normalized * force, ForceMode.Force);
     }
     private void StopMonoball()
     {
-       isMoving = false;
        Monoball.GetComponent<Rigidbody>().freezeRotation = true;
        Monoball.GetComponent<Rigidbody>().angularDrag = angularBreakDrag;
     }
@@ -244,19 +293,14 @@ public class HexaBody : MonoBehaviour
     //------Jumping------------------------------------------------------------------------------------------
     private void Jump()
     {
-        if (rightTrackPadPressed == 1 && RightTrackPadVector.y < 0)
+        if (rightTrackPadTouched == 1 && RightTrackPadVector.y < 0)
         {
-            if(!jumping)
-            {
-                trackedOffset.transform.localPosition = new Vector3(0, -(CrouchTarget.y - lowestCrouch), 0);
-            }
             jumping = true;
             JumpSitDown();
         }
 
-        else if ((rightTrackPadPressed == 0) && jumping == true)
+        else if ((rightTrackPadTouched == 0) && jumping == true)
         {
-            trackedOffset.transform.localPosition = Vector3.zero;
             jumping = false;
             JumpSitUp();
         }
@@ -267,18 +311,30 @@ public class HexaBody : MonoBehaviour
         {
             CrouchTarget.y -= crouchSpeed * Time.fixedDeltaTime;
             Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - Spine.transform.localPosition.y, 0), 0.05f);
         }
     }
     private void JumpSitUp()
     {
         CrouchTarget = new Vector3(0, highestCrouch - additionalHeight, 0);
         Spine.targetPosition = CrouchTarget;
+        StartCoroutine(SitUpRoutine());
+    }
+    IEnumerator SitUpRoutine()
+    {
+        float timer = 0;
+        while (timer < 0.5f)
+        {
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, Vector3.zero, timer / 0.4f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraControllerPos.y - additionalHeight, lowestCrouch, highestCrouch - additionalHeight);
+        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, lowestCrouch, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
     }
 }

@@ -24,14 +24,21 @@ public class CollisionImpact : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (canCollide && gameObject.activeInHierarchy && collision.gameObject.layer != LayerMask.NameToLayer("Hands"))
+        if (canCollide && gameObject.activeInHierarchy && collision.gameObject.layer != LayerMask.NameToLayer("LeftHand") && collision.gameObject.layer != LayerMask.NameToLayer("RightHand"))
         {
             audioSource.PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f) * volumeModifier);
             StartCoroutine(WaitToCollide());
         }
         else if (canCollide && gameObject.activeInHierarchy)
         {
-            collision.transform.root.GetComponent<AudioSource>().PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f) * volumeModifier);
+            if (collision.transform.parent.parent.GetComponent<AudioSource>())
+            {
+                collision.transform.parent.parent.GetComponent<AudioSource>().PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f) * volumeModifier);
+            }
+            else if (collision.transform.GetChild(0).GetComponent<AudioSource>())
+            {
+                collision.transform.GetChild(0).GetComponent<AudioSource>().PlayOneShot(impactSound, Mathf.Clamp(collision.relativeVelocity.magnitude / 10, 0, 0.1f) * volumeModifier);
+            }
             StartCoroutine(WaitToCollide());
         }
     }

@@ -75,7 +75,7 @@ public class GrabPhysics : MonoBehaviour
             foreach(ArmJoint joint in armJoints)
             {
                 JointDrive newDrive = joint.startDrive;
-                newDrive.positionDamper /= connectedMass;
+                newDrive.positionDamper /= connectedMass / 1.5f;
                 newDrive.positionSpring /= connectedMass;
 
                 joint.joint.angularXDrive = newDrive;
@@ -244,21 +244,21 @@ public class GrabPhysics : MonoBehaviour
         {
             armJoint.rb.isKinematic = true;
         }
-        hexaBody.Monoball.GetComponent<Rigidbody>().angularDrag = 50;
-        hexaBody.Chest.GetComponent<Rigidbody>().angularDrag = 50;
-        hexaBody.Fender.GetComponent<Rigidbody>().angularDrag = 50;
-        hexaBody.Head.GetComponent<Rigidbody>().angularDrag = 50;
+        hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
+        hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
+        hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
+        hexaBody.Head.GetComponent<Rigidbody>().isKinematic = true;
 
-        yield return new WaitForSeconds(0.0025f);
+        yield return new WaitForSeconds(0.01f);
 
         foreach (ArmJoint armJoint in armJoints)
         {
             armJoint.rb.isKinematic = false;
         }
-        hexaBody.Monoball.GetComponent<Rigidbody>().angularDrag = 0;
-        hexaBody.Chest.GetComponent<Rigidbody>().angularDrag = 0;
-        hexaBody.Fender.GetComponent<Rigidbody>().angularDrag = 0;
-        hexaBody.Head.GetComponent<Rigidbody>().angularDrag = 0;
+        hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
+        hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
+        hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = false;
+        hexaBody.Head.GetComponent<Rigidbody>().isKinematic = false;
     }
     public void GrabClimbable()
     {
