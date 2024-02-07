@@ -22,13 +22,13 @@ public class Breakable : MonoBehaviour
         BaseGrab grab = GetComponent<BaseGrab>();
         if (grab.isGrabbing)
         {
-            if (grab.handGrabbing)
-            {
-                grab.handGrabbing.UnGrab();
-            }
             if (grab.secondHandGrabbing)
             {
                 grab.secondHandGrabbing.UnGrab();
+            }
+            if (grab.handGrabbing)
+            {
+                grab.handGrabbing.UnGrab();
             }
         }
         grab.enabled = false;

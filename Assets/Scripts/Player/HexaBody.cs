@@ -175,18 +175,29 @@ public class HexaBody : MonoBehaviour
     }
     IEnumerator Vault()
     {
+        vaulting = true;
         Monoball.GetComponent<Collider>().enabled = false;
         Fender.GetComponent<Collider>().enabled = false;
         Chest.GetComponent<Collider>().enabled = false;
 
-        yield return new WaitForSeconds(0.1f);
-        vaulting = true;
-        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
-        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
-        Fender.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
-        Head.GetComponent<Rigidbody>().AddForce(Vector3.up / 4, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(0.25f);
 
-        yield return new WaitForSeconds(0.4f);
+        Chest.GetComponent<Rigidbody>().useGravity = false;
+        Monoball.GetComponent<Rigidbody>().useGravity = false;
+        Fender.GetComponent<Rigidbody>().useGravity = false;
+        Head.GetComponent<Rigidbody>().useGravity = false;
+
+        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
+        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
+        Fender.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
+        Head.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(0.7f);
+
+        Chest.GetComponent<Rigidbody>().useGravity = true;
+        Monoball.GetComponent<Rigidbody>().useGravity = true;
+        Fender.GetComponent<Rigidbody>().useGravity = true;
+        Head.GetComponent<Rigidbody>().useGravity = true;
 
         Monoball.GetComponent<Collider>().enabled = true;
         Fender.GetComponent<Collider>().enabled = true;

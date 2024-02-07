@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using static GrabPhysics;
 
 public class GrabPhysics : MonoBehaviour
 {
@@ -55,10 +56,6 @@ public class GrabPhysics : MonoBehaviour
     Collider[] nearbyColliders;
     Collider closestCollider;
     Rigidbody nearbyRigidbody;
-
-    //two handed interaction
-    private GameObject twoHandedInteraction;
-    private Quaternion initialRotationOffset = Quaternion.identity;
     private void Start()
     {
         foreach(ArmJoint joint in armJoints)
@@ -91,106 +88,36 @@ public class GrabPhysics : MonoBehaviour
             }
         }
     }
-    void GrabTwoHandSword()
-    {
-        GrabSword grabSword = grab as GrabSword;
-        if (Vector3.Distance(transform.position, grab.transform.TransformPoint(grabSword.guardPosition)) < Vector3.Distance(grab.handGrabbing.transform.position, grab.transform.TransformPoint(grabSword.guardPosition)))
-        {
-            grabSword.higherHand = controller;
-
-            ConfigurableJoint configJoint = joint as ConfigurableJoint;
-            configJoint.angularXMotion = ConfigurableJointMotion.Free;
-            configJoint.angularYMotion = ConfigurableJointMotion.Free;
-            configJoint.angularZMotion = ConfigurableJointMotion.Free;
-        }
-        else
-        {
-            grabSword.higherHand = grab.handGrabbing.controller.transform;
-
-            ConfigurableJoint configJoint = grab.handGrabbing.joint as ConfigurableJoint;
-            configJoint.angularXMotion = ConfigurableJointMotion.Free;
-            configJoint.angularYMotion = ConfigurableJointMotion.Free;
-            configJoint.angularZMotion = ConfigurableJointMotion.Free;
-        }
-
-        twoHandedInteraction = new GameObject("TwoHandedInteraction");
-        twoHandedInteraction.transform.parent = controller.parent.transform;
-    }
-    void UnGrabTwoHandSword()
-    {
-        ConfigurableJoint configJoint = grab.handGrabbing.joint as ConfigurableJoint;
-        if (configJoint.angularXMotion == ConfigurableJointMotion.Free)
-        {
-            configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-            configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-            configJoint.angularZMotion = ConfigurableJointMotion.Locked;
-        }
-        if (configJoint.angularXMotion == ConfigurableJointMotion.Free)
-        {
-            configJoint.angularXMotion = ConfigurableJointMotion.Locked;
-            configJoint.angularYMotion = ConfigurableJointMotion.Locked;
-            configJoint.angularZMotion = ConfigurableJointMotion.Locked;
-        }
-    }
-    void TwoHandedGrabbingSword()
-    {
-        GrabSword grabSword = grab as GrabSword;
-        if (initialRotationOffset == Quaternion.identity)
-        {
-            Quaternion offset = grabSword.higherHand.rotation * Quaternion.AngleAxis(-30, grabSword.higherHand.up);
-            initialRotationOffset = Quaternion.Inverse(Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position, grab.handGrabbing.controller.position)) * offset;
-        }
-
-        twoHandedInteraction.transform.rotation = grabSword.higherHand.rotation * Quaternion.FromToRotation(grab.secondHandGrabbing.controller.position, grab.handGrabbing.controller.position) * initialRotationOffset;
-        twoHandedInteraction.transform.position = (grab.handGrabbing.controller.position + grab.secondHandGrabbing.controller.position) / 2;
-    }
-    void CheckTwoHandedInteraction()
-    {
-        if (twoHandedInteraction)
-        {
-            if (grab.handGrabbing.handType == handTypeEnum.Left)
-            {
-            }
-            else
-            {
-                if (grab.secondHandGrabbing)
-                {
-
-                }
-            }
-            Destroy(twoHandedInteraction);
-        }
-        else
-        {
-            twoHandedInteraction = grab.secondHandGrabbing?.twoHandedInteraction;
-            if (twoHandedInteraction)
-            {
-                if (grab.handGrabbing.handType == handTypeEnum.Left)
-                {
-                }
-                else
-                {
-                }
-                Destroy(twoHandedInteraction);
-            }
-        }
-    }
     void GenericGrab()
     {
-        StartCoroutine(DelayGrab());
-        if (grab is GrabSword && grab.secondHandGrabbing)
-            GrabTwoHandSword();
-
-        foreach(Collider collider in grab.colliders)
+        if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
         {
-            foreach(ArmJoint armJoint in armJoints)
+            foreach (Collider collider in grab.transform.root.GetComponent<NPC>().colliders)
             {
-                foreach(Collider armCollider in armJoint.colliders)
+                foreach (ArmJoint armJoint in armJoints)
                 {
-                    Physics.IgnoreCollision(collider, armCollider, true);
+                    foreach (Collider armCollider in armJoint.colliders)
+                    {
+                        Physics.IgnoreCollision(collider, armCollider, true);
+                    }
                 }
             }
         }
+        else
+        {
+            foreach (Collider collider in grab.colliders)
+            {
+                foreach (ArmJoint armJoint in armJoints)
+                {
+                    foreach (Collider armCollider in armJoint.colliders)
+                    {
+                        Physics.IgnoreCollision(collider, armCollider, true);
+                    }
+                }
+            }
+        }
+        StartCoroutine(DelayGrab());
+
         audioSource.Play();
 
         if (grab is GrabDynamic)
@@ -240,21 +167,26 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayGrab()
     {
-        foreach(ArmJoint armJoint in armJoints)
+        if(grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
-            armJoint.rb.isKinematic = true;
+            foreach (ArmJoint armJoint in armJoints)
+            {
+                armJoint.rb.isKinematic = true;
+            }
         }
+
         hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
         hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
         hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
         hexaBody.Head.GetComponent<Rigidbody>().isKinematic = true;
 
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.1f);
 
         foreach (ArmJoint armJoint in armJoints)
         {
             armJoint.rb.isKinematic = false;
         }
+
         hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
         hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
         hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = false;
@@ -312,12 +244,7 @@ public class GrabPhysics : MonoBehaviour
     }
     public void UnGrab()
     {
-        StartCoroutine(DelayExit(grab.colliders));
-        if (grab is GrabSword && grab.isTwoHandGrabbing)
-        {
-            UnGrabTwoHandSword();
-        }
-        CheckTwoHandedInteraction();
+        StartCoroutine(DelayExit(grab));
         isGrabbing = false;
         if (grab != null)
         {
@@ -466,10 +393,6 @@ public class GrabPhysics : MonoBehaviour
         CheckGrabInput();
         if (grab)
         {
-            if (grab.isTwoHandGrabbing && grab is GrabSword && grab.secondHandGrabbing == this)
-            {
-                TwoHandedGrabbingSword();
-            }
             if (grab.isHovering && grab is not GrabDynamic)
             {
                 HoverIcon();
@@ -533,19 +456,64 @@ public class GrabPhysics : MonoBehaviour
 
         spawnedIcon.transform.LookAt(GameObject.Find("CameraDriven").transform, Vector3.up);
     }
-    IEnumerator DelayExit(Collider[] colliders)
+    IEnumerator DelayExit(GrabTwoAttach oldGrab)
     {
         yield return new WaitForSeconds(1f);
 
         if(!isGrabbing)
         {
-            foreach (Collider collider in colliders)
+            if (oldGrab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
             {
-                foreach (ArmJoint armJoint in armJoints)
+                foreach (Collider collider in oldGrab.colliders)
                 {
-                    foreach (Collider armCollider in armJoint.colliders)
+                    foreach (ArmJoint armJoint in armJoints)
                     {
-                        Physics.IgnoreCollision(collider, armCollider, false);
+                        foreach (Collider armCollider in armJoint.colliders)
+                        {
+                            Physics.IgnoreCollision(collider, armCollider, false);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Collider collider in oldGrab.transform.root.GetComponent<NPC>().colliders)
+                {
+                    foreach (ArmJoint armJoint in armJoints)
+                    {
+                        foreach (Collider armCollider in armJoint.colliders)
+                        {
+                            Physics.IgnoreCollision(collider, armCollider, false);
+                        }
+                    }
+                }
+            }
+        }
+        else if (oldGrab != grab)
+        {
+            if (oldGrab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+            {
+                foreach (Collider collider in oldGrab.colliders)
+                {
+                    foreach (ArmJoint armJoint in armJoints)
+                    {
+                        foreach (Collider armCollider in armJoint.colliders)
+                        {
+                            Physics.IgnoreCollision(collider, armCollider, false);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (Collider collider in oldGrab.transform.root.GetComponent<NPC>().colliders)
+                {
+                    foreach (ArmJoint armJoint in armJoints)
+                    {
+                        foreach (Collider armCollider in armJoint.colliders)
+                        {
+                            Physics.IgnoreCollision(collider, armCollider, false);
+                        }
                     }
                 }
             }
