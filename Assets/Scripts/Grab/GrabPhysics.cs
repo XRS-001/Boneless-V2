@@ -58,65 +58,63 @@ public class GrabPhysics : MonoBehaviour
     Rigidbody nearbyRigidbody;
     private void Start()
     {
-        foreach(ArmJoint joint in armJoints)
+        foreach (ArmJoint joint in armJoints)
         {
             joint.startDrive = joint.joint.angularXDrive;
         }
         audioSource = GetComponent<AudioSource>();
         poseSetup = GetComponent<SetPose>();
     }
-    void HandleDrive()
+    void HandleDrive(bool climbing)
     {
-        if(connectedMass > 1)
+        if(!climbing)
         {
-            foreach(ArmJoint joint in armJoints)
+            if (connectedMass > 1)
             {
-                JointDrive newDrive = joint.startDrive;
-                newDrive.positionDamper /= connectedMass / 1.5f;
-                newDrive.positionSpring /= connectedMass;
+                foreach (ArmJoint joint in armJoints)
+                {
+                    JointDrive newDrive = joint.startDrive;
+                    newDrive.positionDamper /= connectedMass / 4f;
+                    newDrive.positionSpring /= connectedMass * 1.5f;
 
-                joint.joint.angularXDrive = newDrive;
-                joint.joint.angularYZDrive = newDrive;
+                    joint.joint.angularXDrive = newDrive;
+                    joint.joint.angularYZDrive = newDrive;
+                }
+            }
+            else
+            {
+                foreach (ArmJoint joint in armJoints)
+                {
+                    joint.joint.angularXDrive = joint.startDrive;
+                    joint.joint.angularYZDrive = joint.startDrive;
+                }
             }
         }
         else
         {
             foreach (ArmJoint joint in armJoints)
             {
-                joint.joint.angularXDrive = joint.startDrive;
-                joint.joint.angularYZDrive = joint.startDrive;
+                JointDrive newDrive = joint.startDrive;
+                newDrive.positionDamper *= 4;
+
+                joint.joint.angularXDrive = newDrive;
+                joint.joint.angularYZDrive = newDrive;
             }
         }
     }
     void GenericGrab()
     {
-        if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
-        {
-            foreach (Collider collider in grab.transform.root.GetComponent<NPC>().colliders)
-            {
-                foreach (ArmJoint armJoint in armJoints)
-                {
-                    foreach (Collider armCollider in armJoint.colliders)
-                    {
-                        Physics.IgnoreCollision(collider, armCollider, true);
-                    }
-                }
-            }
-        }
-        else
-        {
-            foreach (Collider collider in grab.colliders)
-            {
-                foreach (ArmJoint armJoint in armJoints)
-                {
-                    foreach (Collider armCollider in armJoint.colliders)
-                    {
-                        Physics.IgnoreCollision(collider, armCollider, true);
-                    }
-                }
-            }
-        }
         StartCoroutine(DelayGrab());
+        foreach (Collider collider in grab.colliders)
+        {
+            foreach (ArmJoint armJoint in armJoints)
+            {
+                foreach (Collider armCollider in armJoint.colliders)
+                {
+                    Physics.IgnoreCollision(collider, armCollider, true);
+                }
+            }
+        }
 
         audioSource.Play();
 
@@ -137,7 +135,7 @@ public class GrabPhysics : MonoBehaviour
         else
             connectedMass = grab.handGrabbing.connectedMass;
 
-        HandleDrive();
+        HandleDrive(false);
         grab.isGrabbing = true;
 
         nearbyRigidbody.mass = 1;
@@ -167,34 +165,51 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayGrab()
     {
-        if(grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        if (grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
-            foreach (ArmJoint armJoint in armJoints)
+            foreach (ArmJoint joint in armJoints)
             {
-                armJoint.rb.isKinematic = true;
+                joint.rb.isKinematic = true;
+            }
+            yield return new WaitForSeconds(0.001f);
+
+            foreach (ArmJoint joint in armJoints)
+            {
+                joint.rb.isKinematic = false;
             }
         }
-
-        hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
-        hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
-        hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
-        hexaBody.Head.GetComponent<Rigidbody>().isKinematic = true;
-
-        yield return new WaitForSeconds(0.1f);
-
-        foreach (ArmJoint armJoint in armJoints)
+        if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
         {
-            armJoint.rb.isKinematic = false;
-        }
+            hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
+            hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
+            hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
+            hexaBody.Head.GetComponent<Rigidbody>().isKinematic = true;
 
-        hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
-        hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
-        hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = false;
-        hexaBody.Head.GetComponent<Rigidbody>().isKinematic = false;
+            foreach (ArmJoint joint in armJoints)
+            {
+                foreach(Collider collider in joint.colliders)
+                {
+                    collider.enabled = false;
+                }
+            }
+            yield return new WaitForSeconds(0.25f);
+
+            hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
+            hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
+            hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = false;
+            hexaBody.Head.GetComponent<Rigidbody>().isKinematic = false;
+
+            foreach (ArmJoint joint in armJoints)
+            {
+                foreach (Collider collider in joint.colliders)
+                {
+                    collider.enabled = true;
+                }
+            }
+        }
     }
     public void GrabClimbable()
     {
-        StartCoroutine(DelayGrab());
         foreach (Collider collider in grab.colliders)
         {
             foreach (ArmJoint armJoint in armJoints)
@@ -217,6 +232,7 @@ public class GrabPhysics : MonoBehaviour
         }
 
         grab.SetAttachPoint(handType);
+        HandleDrive(true);
 
         isGrabbing = true;
         grab.isGrabbing = true;
@@ -278,7 +294,7 @@ public class GrabPhysics : MonoBehaviour
                 grab.secondHandGrabbing = null;
             }
             connectedMass = 0;
-            HandleDrive();
+            HandleDrive(false);
         }
         if (grab is GrabDynamic)
         {
@@ -372,12 +388,18 @@ public class GrabPhysics : MonoBehaviour
             if (nearbyRigidbody)
             {
                 grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
-                grab.isHovering = true;
+                if (grab)
+                {
+                    grab.isHovering = true;
+                }
             }
             else
             {
                 grab = closestCollider.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.parent.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.root.GetComponent<GrabTwoAttach>();
-                grab.isHovering = true;
+                if (grab)
+                {
+                    grab.isHovering = true;
+                }
             }
         }
     }
@@ -401,6 +423,10 @@ public class GrabPhysics : MonoBehaviour
             {
                 Destroy(spawnedIcon);
             }
+            if (nearbyRigidbody && isGrabbing)
+            {
+                nearbyRigidbody.AddForce(Vector3.down * connectedMass);
+            }
         }
         else if (spawnedIcon)
         {
@@ -409,14 +435,14 @@ public class GrabPhysics : MonoBehaviour
     }
     void HoverIcon()
     {
-        if(!spawnedIcon)
+        if (!spawnedIcon)
         {
             spawnedIcon = Instantiate(hoverIcon);
         }
-        if(grab is GrabSword)
+        if (grab is GrabSword)
         {
             GrabSword grabSword = grab as GrabSword;
-            if(handType == handTypeEnum.Left)
+            if (handType == handTypeEnum.Left)
             {
                 Vector3 position = Vector3.zero;
                 switch (grabSword.handleDirection)
@@ -460,60 +486,28 @@ public class GrabPhysics : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        if(!isGrabbing)
+        if (!isGrabbing)
         {
-            if (oldGrab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+            foreach (Collider collider in oldGrab.colliders)
             {
-                foreach (Collider collider in oldGrab.colliders)
+                foreach (ArmJoint armJoint in armJoints)
                 {
-                    foreach (ArmJoint armJoint in armJoints)
+                    foreach (Collider armCollider in armJoint.colliders)
                     {
-                        foreach (Collider armCollider in armJoint.colliders)
-                        {
-                            Physics.IgnoreCollision(collider, armCollider, false);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (Collider collider in oldGrab.transform.root.GetComponent<NPC>().colliders)
-                {
-                    foreach (ArmJoint armJoint in armJoints)
-                    {
-                        foreach (Collider armCollider in armJoint.colliders)
-                        {
-                            Physics.IgnoreCollision(collider, armCollider, false);
-                        }
+                        Physics.IgnoreCollision(collider, armCollider, false);
                     }
                 }
             }
         }
         else if (oldGrab != grab)
         {
-            if (oldGrab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+            foreach (Collider collider in oldGrab.colliders)
             {
-                foreach (Collider collider in oldGrab.colliders)
+                foreach (ArmJoint armJoint in armJoints)
                 {
-                    foreach (ArmJoint armJoint in armJoints)
+                    foreach (Collider armCollider in armJoint.colliders)
                     {
-                        foreach (Collider armCollider in armJoint.colliders)
-                        {
-                            Physics.IgnoreCollision(collider, armCollider, false);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (Collider collider in oldGrab.transform.root.GetComponent<NPC>().colliders)
-                {
-                    foreach (ArmJoint armJoint in armJoints)
-                    {
-                        foreach (Collider armCollider in armJoint.colliders)
-                        {
-                            Physics.IgnoreCollision(collider, armCollider, false);
-                        }
+                        Physics.IgnoreCollision(collider, armCollider, false);
                     }
                 }
             }
@@ -528,7 +522,7 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator IgnoreCollisionInteractables(Collider collider, Collider[] collidersToIgnore)
     {
-        foreach(Collider colliderToIgnore in collidersToIgnore)
+        foreach (Collider colliderToIgnore in collidersToIgnore)
         {
             Physics.IgnoreCollision(collider, colliderToIgnore, true);
         }

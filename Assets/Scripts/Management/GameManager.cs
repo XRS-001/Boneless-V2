@@ -2,6 +2,7 @@ using RootMotion.Demos;
 using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,19 +15,40 @@ public class GameManager : MonoBehaviour
     [Tooltip("The opaque black backround that loses opacity on start")]
     public Image blurImage;
     public float height;
+    public Camera externalCamera;
+    private Quaternion startRotation;
+    private Vector3 startPosition;
+    public Transform player;
     public VRIKCalibratedData calibrator;
     [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
     public GameObject sceneChangeButton;
     private VRIKData vrikData = new VRIKData();
     private AudioSource audioSource;
     public AudioClip uiClickSound;
+    private bool altCameraFollow;
     private void Start()
     {
-        Application.targetFrameRate = 90;
+        startPosition = externalCamera.transform.position;
+        startRotation = externalCamera.transform.rotation;
+
+        Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
+        if (externalCamera)
+        {
+            if (altCameraFollow)
+            {
+                externalCamera.transform.LookAt(new Vector3(player.position.x, height - 0.5f, player.position.z));
+                externalCamera.transform.position = Vector3.Lerp(externalCamera.transform.position, new Vector3(player.position.x, height, player.position.z) + Vector3.forward * 2, 0.05f);
+            }
+            else
+            {
+                externalCamera.transform.position = Vector3.Lerp(externalCamera.transform.position, startPosition, 0.05f);
+                externalCamera.transform.rotation = Quaternion.Slerp(externalCamera.transform.rotation, startRotation, 0.05f);
+            }
+        }
         if (sceneChangeButton)
         {
             if (height == 0)
@@ -42,6 +64,31 @@ public class GameManager : MonoBehaviour
         if (calibrator.data.scale != 0)
         {
             height = 1.75f * calibrator.data.scale;
+        }
+    }
+    public void CameraFollow()
+    {
+        if (altCameraFollow)
+        {
+            altCameraFollow = false;
+        }
+        else
+        {
+            altCameraFollow = true;
+        }
+    }
+    public void ChangeCamera()
+    {
+        if (externalCamera)
+        {
+            if (externalCamera.enabled)
+            {
+                externalCamera.enabled = false;
+            }
+            else
+            {
+                externalCamera.enabled = true;
+            }
         }
     }
     void SaveData()

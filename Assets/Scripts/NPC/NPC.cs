@@ -3,5 +3,4 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    public Collider[] colliders;
 }

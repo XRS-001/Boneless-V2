@@ -17,12 +17,13 @@ public class HexaBody : MonoBehaviour
     public Transform head;
     public Transform chest;
     public Transform trackedOffset;
-    public VRIK physicsIK;
-
+    public GrabPhysics[] grabbing;
     [Header("Actionbased Controller")]
     public Transform CameraController;
     public ActionBasedController RightHandController;
+    public Transform trackedSolverRightTarget;
     public ActionBasedController LeftHandController;
+    public Transform trackedSolverLeftTarget;
 
     public InputActionReference LeftTrackPadClicked;
     public InputActionReference LeftTrackPadTouch;
@@ -89,11 +90,16 @@ public class HexaBody : MonoBehaviour
         CameraToPlayer();
         XRRigToPlayer();
         GetContollerInputValues();
-        SetHeadTarget();
     }
 
     private void FixedUpdate() 
     {
+        trackedSolverLeftTarget.transform.position = LeftHandController.transform.position;
+        trackedSolverLeftTarget.transform.rotation = LeftHandController.transform.rotation;
+
+        trackedSolverRightTarget.transform.position = RightHandController.transform.position;
+        trackedSolverRightTarget.transform.rotation = RightHandController.transform.rotation * Quaternion.Euler(0, 0, 180);
+
         TransformSpineCollider();
         MovePlayerViaController();
         Jump();
@@ -115,14 +121,26 @@ public class HexaBody : MonoBehaviour
     void Climbing()
     {
         bool isClimbing = false;
-        foreach (TargetLimb limb in limbs)
+        foreach (GrabPhysics grab in grabbing)
         {
-            if (limb.isColliding)
+            if (grab.isGrabbing)
             {
                 isClimbing = true;
             }
         }
-        if (isClimbing)
+        if (detectGrounded.isGrounded)
+        {
+            isClimbing = false;
+        }
+        bool onSurface = false;
+        foreach (TargetLimb limb in limbs)
+        {
+            if (limb.isColliding)
+            {
+                onSurface = true;
+            }
+        }
+        if (onSurface)
         {
             if (!detectGrounded.isGrounded)
             {
@@ -130,10 +148,10 @@ public class HexaBody : MonoBehaviour
                 {
                     if (limb.isColliding)
                     {
-                        Physics.Raycast(Head.transform.position, Vector3.down, out RaycastHit hit);
+                        Physics.Raycast(new Vector3(Chest.transform.position.x, Head.transform.position.y, Chest.transform.position.z + 0.005f), Vector3.down, out RaycastHit hit);
                         if (hit.collider)
                         {
-                            if(hit.collider == limb.colliderColliding)
+                            if (hit.collider == limb.colliderColliding)
                             {
                                 StartCoroutine(Vault());
                             }
@@ -141,7 +159,7 @@ public class HexaBody : MonoBehaviour
                     }
                 }
             }
-            if (!vaulting)
+            if (!vaulting && !isClimbing)
             {
                 float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 20, 150, float.PositiveInfinity);
 
@@ -149,6 +167,13 @@ public class HexaBody : MonoBehaviour
                 Monoball.GetComponent<Rigidbody>().drag = drag;
                 Spine.GetComponent<Rigidbody>().drag = drag;
                 Fender.GetComponent<Rigidbody>().drag = drag;
+            }
+            else if (isClimbing)
+            {
+                Head.GetComponent<Rigidbody>().drag = 25;
+                Monoball.GetComponent<Rigidbody>().drag = 25;
+                Spine.GetComponent<Rigidbody>().drag = 25;
+                Fender.GetComponent<Rigidbody>().drag = 25;
             }
             else
             {
@@ -164,6 +189,13 @@ public class HexaBody : MonoBehaviour
             Monoball.GetComponent<Rigidbody>().drag = 5;
             Spine.GetComponent<Rigidbody>().drag = 5;
             Fender.GetComponent<Rigidbody>().drag = 5;
+        }
+        else if (isClimbing)
+        {
+            Head.GetComponent<Rigidbody>().drag = 25;
+            Monoball.GetComponent<Rigidbody>().drag = 25;
+            Spine.GetComponent<Rigidbody>().drag = 25;
+            Fender.GetComponent<Rigidbody>().drag = 25;
         }
         else
         {
@@ -185,14 +217,13 @@ public class HexaBody : MonoBehaviour
         Chest.GetComponent<Rigidbody>().useGravity = false;
         Monoball.GetComponent<Rigidbody>().useGravity = false;
         Fender.GetComponent<Rigidbody>().useGravity = false;
-        Head.GetComponent<Rigidbody>().useGravity = false;
 
-        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
-        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
-        Fender.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
-        Head.GetComponent<Rigidbody>().AddForce(Vector3.up / 50, ForceMode.VelocityChange);
+        Chest.GetComponent<Rigidbody>().MovePosition(Chest.transform.position + Vector3.up / 20);
+        Monoball.GetComponent<Rigidbody>().MovePosition(Monoball.transform.position + Vector3.up / 20);
+        Fender.GetComponent<Rigidbody>().MovePosition(Fender.transform.position + Vector3.up / 20);
+        Head.GetComponent<Rigidbody>().MovePosition(Head.transform.position + Vector3.up / 20);
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.35f);
 
         Chest.GetComponent<Rigidbody>().useGravity = true;
         Monoball.GetComponent<Rigidbody>().useGravity = true;
@@ -204,13 +235,6 @@ public class HexaBody : MonoBehaviour
         Chest.GetComponent<Collider>().enabled = true;
 
         vaulting = false;
-    }
-    void SetHeadTarget()
-    {
-        if (physicsIK.solver.spine.headTarget == null && GameObject.Find("Head Target"))
-        {
-            physicsIK.solver.spine.headTarget = GameObject.Find("Head Target").transform;
-        }
     }
     void RoomScaleMove()
     {
@@ -322,7 +346,7 @@ public class HexaBody : MonoBehaviour
         {
             CrouchTarget.y -= crouchSpeed * Time.fixedDeltaTime;
             Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
-            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - Spine.transform.localPosition.y, 0), 0.05f);
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - Spine.transform.localPosition.y - 0.2f, 0), 0.05f);
         }
     }
     private void JumpSitUp()

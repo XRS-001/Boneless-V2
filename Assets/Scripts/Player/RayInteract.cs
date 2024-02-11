@@ -15,7 +15,7 @@ public class RayInteract : MonoBehaviour
     public LineRenderer lineRenderer;
     public int vertexCount = 6;
 
-    private Image image;
+    private Graphic image;
     private GameObject element;
     private bool hasChangedOpacity;
     private bool hasTouched;
@@ -84,7 +84,10 @@ public class RayInteract : MonoBehaviour
         eventData.position = new Vector2(Screen.width / 2, Screen.height / 2);
         EventSystem.current.RaycastAll(eventData, new List<RaycastResult>());
         ExecuteEvents.ExecuteHierarchy(uiElement, eventData, ExecuteEvents.pointerEnterHandler);
-        image = uiElement.GetComponent<Image>();
+        if (uiElement.GetComponent<Button>())
+        {
+            image = uiElement.GetComponent<Button>().targetGraphic;
+        }
         if(image != null && !hasChangedOpacity)
         {
             if (image.GetComponent<Button>())
