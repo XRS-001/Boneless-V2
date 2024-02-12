@@ -16,8 +16,10 @@ public class HexaBody : MonoBehaviour
     public GameObject XRCamera;
     public Transform head;
     public Transform chest;
+    public Transform hip;
     public Transform trackedOffset;
     public GrabPhysics[] grabbing;
+    public VRIK finalSolver;
     [Header("Actionbased Controller")]
     public Transform CameraController;
     public ActionBasedController RightHandController;
@@ -94,12 +96,7 @@ public class HexaBody : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        trackedSolverLeftTarget.transform.position = LeftHandController.transform.position;
-        trackedSolverLeftTarget.transform.rotation = LeftHandController.transform.rotation;
-
-        trackedSolverRightTarget.transform.position = RightHandController.transform.position;
-        trackedSolverRightTarget.transform.rotation = RightHandController.transform.rotation * Quaternion.Euler(0, 0, 180);
-
+        SetHandTargets();
         TransformSpineCollider();
         MovePlayerViaController();
         Jump();
@@ -113,6 +110,14 @@ public class HexaBody : MonoBehaviour
         RoomScaleMove();
         Climbing();
     } 
+    void SetHandTargets()
+    {
+        trackedSolverLeftTarget.transform.position = LeftHandController.transform.position;
+        trackedSolverLeftTarget.transform.rotation = LeftHandController.transform.rotation;
+
+        trackedSolverRightTarget.transform.position = RightHandController.transform.position;
+        trackedSolverRightTarget.transform.rotation = RightHandController.transform.rotation * Quaternion.Euler(0, 0, 180);
+    }
     void TransformSpineCollider()
     {
         Chest.GetComponent<CapsuleCollider>().center = new Vector3(Chest.transform.InverseTransformPoint(chest.position).x, Chest.GetComponent<CapsuleCollider>().center.y, Chest.transform.InverseTransformPoint(chest.position).z);
@@ -131,6 +136,11 @@ public class HexaBody : MonoBehaviour
         if (detectGrounded.isGrounded)
         {
             isClimbing = false;
+            finalSolver.solver.locomotion.weight = Mathf.Lerp(finalSolver.solver.locomotion.weight, 1, 0.1f);
+        }
+        else
+        {
+            finalSolver.solver.locomotion.weight = Mathf.Lerp(finalSolver.solver.locomotion.weight, 0.25f, 0.1f);
         }
         bool onSurface = false;
         foreach (TargetLimb limb in limbs)
@@ -148,20 +158,17 @@ public class HexaBody : MonoBehaviour
                 {
                     if (limb.isColliding)
                     {
-                        Physics.Raycast(new Vector3(Chest.transform.position.x, Head.transform.position.y, Chest.transform.position.z + 0.005f), Vector3.down, out RaycastHit hit);
-                        if (hit.collider)
+                        limb.colliderColliding.Raycast(new Ray(new Vector3(Chest.transform.position.x, Head.transform.position.y, Chest.transform.position.z) + Chest.transform.forward / 32, Vector3.down), out RaycastHit hit, float.PositiveInfinity);
+                        if (hit.collider && hit.point.y > hip.position.y)
                         {
-                            if (hit.collider == limb.colliderColliding)
-                            {
-                                StartCoroutine(Vault());
-                            }
+                            StartCoroutine(Vault());
                         }
                     }
                 }
             }
             if (!vaulting && !isClimbing)
             {
-                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 20, 150, float.PositiveInfinity);
+                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude, 0, float.PositiveInfinity);
 
                 Head.GetComponent<Rigidbody>().drag = drag;
                 Monoball.GetComponent<Rigidbody>().drag = drag;
@@ -217,11 +224,12 @@ public class HexaBody : MonoBehaviour
         Chest.GetComponent<Rigidbody>().useGravity = false;
         Monoball.GetComponent<Rigidbody>().useGravity = false;
         Fender.GetComponent<Rigidbody>().useGravity = false;
+        Head.GetComponent<Rigidbody>().useGravity = false;
 
-        Chest.GetComponent<Rigidbody>().MovePosition(Chest.transform.position + Vector3.up / 20);
-        Monoball.GetComponent<Rigidbody>().MovePosition(Monoball.transform.position + Vector3.up / 20);
-        Fender.GetComponent<Rigidbody>().MovePosition(Fender.transform.position + Vector3.up / 20);
-        Head.GetComponent<Rigidbody>().MovePosition(Head.transform.position + Vector3.up / 20);
+        Chest.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Chest.transform.position, Chest.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
+        Monoball.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Monoball.transform.position, Monoball.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
+        Fender.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Fender.transform.position, Fender.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
+        Head.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Head.transform.position, Head.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
 
         yield return new WaitForSeconds(0.35f);
 

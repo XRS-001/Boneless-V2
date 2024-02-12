@@ -40,7 +40,11 @@ public class GameManager : MonoBehaviour
         {
             if (altCameraFollow)
             {
+                Quaternion previousRotation = externalCamera.transform.rotation;
                 externalCamera.transform.LookAt(new Vector3(player.position.x, height - 0.5f, player.position.z));
+                Quaternion targetRotation = externalCamera.transform.rotation;
+
+                externalCamera.transform.rotation = Quaternion.Slerp(previousRotation, targetRotation, 0.05f);
                 externalCamera.transform.position = Vector3.Lerp(externalCamera.transform.position, new Vector3(player.position.x, height, player.position.z) + Vector3.forward * 2, 0.05f);
             }
             else
