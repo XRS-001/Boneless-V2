@@ -43,6 +43,7 @@ public class GrabPhysics : MonoBehaviour
     private GameObject spawnedIcon;
     public LayerMask distanceGrabLayer;
     public Transform gazeTarget;
+    private bool distanceHovering;
 
     private Joint joint;
     [HideInInspector]
@@ -96,7 +97,8 @@ public class GrabPhysics : MonoBehaviour
             foreach (ArmJoint joint in armJoints)
             {
                 JointDrive newDrive = joint.startDrive;
-                newDrive.positionDamper *= 4;
+                newDrive.positionSpring *= 3;
+                newDrive.positionDamper *= 3;
 
                 joint.joint.angularXDrive = newDrive;
                 joint.joint.angularYZDrive = newDrive;
@@ -166,6 +168,18 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayGrab()
     {
+        if(distanceHovering)
+        {
+            foreach(Collider collider in grab.colliders)
+            {
+                collider.enabled = false;
+            }
+            yield return new WaitForSeconds(0.01f);
+            foreach (Collider collider in grab.colliders)
+            {
+                collider.enabled = true;
+            }
+        }
         if (grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
             foreach (ArmJoint joint in armJoints)
@@ -358,15 +372,16 @@ public class GrabPhysics : MonoBehaviour
     {
         if (colliders.Count <= 0)
         {
-            colliders = Physics.OverlapCapsule(grabZonePosition, grabZonePosition + Vector3.Lerp(gazeTarget.forward, transform.forward + transform.up, 0.35f).normalized * 2, 0.1f, distanceGrabLayer).ToList();
+            colliders = Physics.OverlapCapsule(grabZonePosition, grabZonePosition + Vector3.Lerp(gazeTarget.forward, transform.forward + transform.up, 0.5f).normalized * 2, 0.125f, distanceGrabLayer).ToList();
 
-            for(int i = 0; i < colliders.Count; i++)
-            {
-                if (colliders[i].GetComponent<GrabDynamic>())
-                {
-                    colliders.Remove(colliders[i]);
-                }
-            }
+            if (colliders.Count > 0)
+                distanceHovering = true;
+            else
+                distanceHovering = false;
+        }
+        else
+        {
+            distanceHovering = false;
         }
         closestCollider = null;
         nearbyRigidbody = null;
@@ -408,6 +423,10 @@ public class GrabPhysics : MonoBehaviour
                 {
                     grab.isHovering = true;
                 }
+            }
+            if(grab is GrabDynamic && distanceHovering)
+            {
+                grab = null;
             }
         }
     }
@@ -599,6 +618,6 @@ public class GrabPhysics : MonoBehaviour
 
         Gizmos.color = new Color(1, 0, 0, 1f);
 
-        Gizmos.DrawRay(new Ray(grabZonePosition, Vector3.Lerp(gazeTarget.forward, transform.forward / 2 + transform.up, 0.65f)));
+        Gizmos.DrawRay(new Ray(grabZonePosition, Vector3.Lerp(gazeTarget.forward, transform.forward / 2 + transform.up, 0.5f)));
     }
 }

@@ -2,6 +2,7 @@ using RootMotion.Demos;
 using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Image blurImage;
     public float height;
     public Camera externalCamera;
+    public GameObject recordingIcon;
     private Quaternion startRotation;
     private Vector3 startPosition;
     public Transform player;
@@ -26,26 +28,38 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip uiClickSound;
     private bool altCameraFollow;
+    private float deltaTime;
+    public TextMeshProUGUI fpsText;
     private void Start()
     {
-        startPosition = externalCamera.transform.position;
-        startRotation = externalCamera.transform.rotation;
+        if(externalCamera)
+        {
+            startPosition = externalCamera.transform.position;
+            startRotation = externalCamera.transform.rotation;
+        }
 
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+
+        if (fpsText)
+        {
+            fpsText.text = string.Format("{0:0.} fps", fps);
+        }
         if (externalCamera)
         {
             if (altCameraFollow)
             {
                 Quaternion previousRotation = externalCamera.transform.rotation;
-                externalCamera.transform.LookAt(new Vector3(player.position.x, height - 0.5f, player.position.z));
+                externalCamera.transform.LookAt(new Vector3(player.position.x, player.position.y, player.position.z));
                 Quaternion targetRotation = externalCamera.transform.rotation;
 
                 externalCamera.transform.rotation = Quaternion.Slerp(previousRotation, targetRotation, 0.05f);
-                externalCamera.transform.position = Vector3.Lerp(externalCamera.transform.position, new Vector3(player.position.x, height, player.position.z) + Vector3.forward * 2, 0.05f);
+                externalCamera.transform.position = Vector3.Lerp(externalCamera.transform.position, new Vector3(player.position.x, Mathf.Clamp(player.position.y, height / 2, float.PositiveInfinity), player.position.z) + Vector3.forward * 2, 0.05f);
             }
             else
             {
@@ -87,10 +101,12 @@ public class GameManager : MonoBehaviour
         {
             if (externalCamera.enabled)
             {
+                recordingIcon.SetActive(false);
                 externalCamera.enabled = false;
             }
             else
             {
+                recordingIcon.SetActive(true);
                 externalCamera.enabled = true;
             }
         }

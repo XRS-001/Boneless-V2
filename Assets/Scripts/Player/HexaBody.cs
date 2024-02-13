@@ -14,7 +14,8 @@ public class HexaBody : MonoBehaviour
     [Header("XR Toolkit Parts")]
     public XROrigin XRRig;
     public GameObject XRCamera;
-    public Transform head;
+    public Transform headTarget;
+    public Transform headBone;
     public Transform chest;
     public Transform hip;
     public Transform trackedOffset;
@@ -59,7 +60,6 @@ public class HexaBody : MonoBehaviour
     bool vaulting = false;
 
     public float crouchSpeed;
-    public float lowestCrouch;
     public float highestCrouch;
     private float additionalHeight;
 
@@ -199,10 +199,10 @@ public class HexaBody : MonoBehaviour
         }
         else if (isClimbing)
         {
-            Head.GetComponent<Rigidbody>().drag = 25;
-            Monoball.GetComponent<Rigidbody>().drag = 25;
-            Spine.GetComponent<Rigidbody>().drag = 25;
-            Fender.GetComponent<Rigidbody>().drag = 25;
+            Head.GetComponent<Rigidbody>().drag = 10;
+            Monoball.GetComponent<Rigidbody>().drag = 10;
+            Spine.GetComponent<Rigidbody>().drag = 10;
+            Fender.GetComponent<Rigidbody>().drag = 10;
         }
         else
         {
@@ -219,19 +219,16 @@ public class HexaBody : MonoBehaviour
         Fender.GetComponent<Collider>().enabled = false;
         Chest.GetComponent<Collider>().enabled = false;
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.35f);
 
         Chest.GetComponent<Rigidbody>().useGravity = false;
         Monoball.GetComponent<Rigidbody>().useGravity = false;
         Fender.GetComponent<Rigidbody>().useGravity = false;
         Head.GetComponent<Rigidbody>().useGravity = false;
 
-        Chest.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Chest.transform.position, Chest.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
-        Monoball.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Monoball.transform.position, Monoball.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
-        Fender.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Fender.transform.position, Fender.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
-        Head.GetComponent<Rigidbody>().MovePosition(Vector3.Lerp(Head.transform.position, Head.transform.position + (Vector3.up / 7.5f + Chest.transform.forward / 70), 0.35f));
+        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up * 50);
 
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.75f);
 
         Chest.GetComponent<Rigidbody>().useGravity = true;
         Monoball.GetComponent<Rigidbody>().useGravity = true;
@@ -279,12 +276,12 @@ public class HexaBody : MonoBehaviour
     private void XRRigToPlayer()
     {
         XRRig.transform.position = new Vector3(Fender.transform.position.x - CameraController.localPosition.x, Fender.transform.position.y - (0.5f * Fender.transform.localScale.y + 0.5f * Monoball.transform.localScale.y), Fender.transform.position.z - CameraController.localPosition.z);
-        head.transform.position = Head.transform.position;
-        head.transform.rotation = XRCamera.transform.rotation;
+        headTarget.transform.position = Head.transform.position;
+        headTarget.transform.rotation = XRCamera.transform.rotation;
     }
     private void RotatePlayer()
     {
-        Chest.transform.rotation = headYaw;
+        Chest.transform.rotation = Quaternion.Euler(0, headBone.eulerAngles.y, 0);
     }
     //-----HexaBody Movement---------------------------------------------------------------------------------
     private void MovePlayerViaController()
@@ -350,11 +347,11 @@ public class HexaBody : MonoBehaviour
     }
     private void JumpSitDown()
     {
-        if (CrouchTarget.y >= lowestCrouch)
+        if (CrouchTarget.y >= 0)
         {
             CrouchTarget.y -= crouchSpeed * Time.fixedDeltaTime;
             Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
-            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - Spine.transform.localPosition.y - 0.2f, 0), 0.05f);
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - Spine.transform.localPosition.y - 0.415f, 0), 0.05f);
         }
     }
     private void JumpSitUp()
@@ -377,7 +374,7 @@ public class HexaBody : MonoBehaviour
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, lowestCrouch, highestCrouch - additionalHeight);
+        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, 0, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
     }
 }
