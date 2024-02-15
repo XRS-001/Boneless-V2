@@ -7,7 +7,6 @@ public class Breakable : MonoBehaviour
     public GameObject breakableParent;
     private List<Rigidbody> breakables;
     public float forceNeededToBreak;
-    public AudioSource audioSource;
     public AudioClip breakClip;
     private void OnCollisionEnter(Collision collision)
     {
@@ -15,9 +14,9 @@ public class Breakable : MonoBehaviour
             forceNeededToBreak -= collision.relativeVelocity.magnitude;
 
         if (forceNeededToBreak < 0)
-            Break(collision.relativeVelocity.magnitude * 2, collision.relativeVelocity);
+            Break(collision.relativeVelocity.magnitude * 2, collision.relativeVelocity, collision.GetContact(0).point);
     }
-    public void Break(float breakForce, Vector3 velocity)
+    public void Break(float breakForce, Vector3 velocity, Vector3 breakPoint)
     {
         BaseGrab grab = GetComponent<BaseGrab>();
         if (grab.isGrabbing)
@@ -34,7 +33,7 @@ public class Breakable : MonoBehaviour
         grab.enabled = false;
         breakableParent.SetActive(true);
 
-        audioSource.PlayOneShot(breakClip, Mathf.Clamp(velocity.magnitude / 10, 0.5f, 1.5f));
+        AudioSource.PlayClipAtPoint(breakClip, breakPoint, Mathf.Clamp(velocity.magnitude / 10, 0.5f, 1.5f));
         breakableParent.transform.parent = null;
         gameObject.SetActive(false);
 

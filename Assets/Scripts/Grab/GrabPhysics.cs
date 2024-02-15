@@ -27,7 +27,6 @@ public class GrabPhysics : MonoBehaviour
     public ArmJoint[] armJoints;
     public HexaBody hexaBody;
 
-    private AudioSource audioSource;
     [Header("Grabbing")]
     public float radius = 0.1f;
     [Tooltip("The local offset for the grab zone of the hand")]
@@ -36,6 +35,7 @@ public class GrabPhysics : MonoBehaviour
     public Vector3 grabZonePosition;
     public LayerMask grabLayer;
     public SetPose poseSetup { get; private set; }
+    public AudioClip grabSound;
 
     [Header("Distance Grabbing")]
     [Tooltip("A small icon to show on the interactable when hovering")]
@@ -64,7 +64,6 @@ public class GrabPhysics : MonoBehaviour
         {
             joint.startDrive = joint.joint.angularXDrive;
         }
-        audioSource = GetComponent<AudioSource>();
         poseSetup = GetComponent<SetPose>();
     }
     void HandleDrive(bool climbing)
@@ -97,8 +96,7 @@ public class GrabPhysics : MonoBehaviour
             foreach (ArmJoint joint in armJoints)
             {
                 JointDrive newDrive = joint.startDrive;
-                newDrive.positionSpring *= 3;
-                newDrive.positionDamper *= 3;
+                newDrive.positionDamper *= 2;
 
                 joint.joint.angularXDrive = newDrive;
                 joint.joint.angularYZDrive = newDrive;
@@ -119,7 +117,7 @@ public class GrabPhysics : MonoBehaviour
             }
         }
 
-        audioSource.Play();
+        AudioSource.PlayClipAtPoint(grabSound, closestCollider.ClosestPoint(transform.position));
 
         if (grab is GrabDynamic)
         {
@@ -174,7 +172,7 @@ public class GrabPhysics : MonoBehaviour
             {
                 collider.enabled = false;
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.025f);
             foreach (Collider collider in grab.colliders)
             {
                 collider.enabled = true;
@@ -210,7 +208,7 @@ public class GrabPhysics : MonoBehaviour
                     }
                 }
             }
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.1f);
 
             hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
             hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
@@ -230,7 +228,7 @@ public class GrabPhysics : MonoBehaviour
                 }
             }
         }
-        audioSource.Play();
+        AudioSource.PlayClipAtPoint(grabSound, closestCollider.ClosestPoint(transform.position));
 
         if (!grab.isGrabbing)
         {

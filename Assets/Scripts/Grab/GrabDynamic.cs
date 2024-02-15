@@ -95,35 +95,45 @@ public class GrabDynamic : GrabTwoAttach
             {
                 ClosestCollider(handTypeEnum.Right).Raycast(new Ray(dynamicSettings.rightHand.position, ClosestCollider(handTypeEnum.Right).transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point 
+                if (hitInfo.collider)
+                {
+                    dynamicSettings.isGrabbable = true;
+                    rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point
+                        - Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right)
+                        * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight)
+                        * -Vector3.down / 15f
 
-                    - Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) 
-                    * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight) 
-                    * -Vector3.down / 15f 
-
-                    + (Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) 
-                    * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight) 
-                    * -Vector3.forward / 15f * dynamicSettings.offset));
-
-                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight).eulerAngles;
+                        + (Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right)
+                        * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight)
+                        * -Vector3.forward / 15f * dynamicSettings.offset));
+                    rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight).eulerAngles;
+                }
+                else
+                {
+                    dynamicSettings.isGrabbable = false;
+                }
             }
             else
             {
                 //cast a ray that directs to the interactable and outputs the hitInfo
                 GetComponent<Collider>().Raycast(new Ray(dynamicSettings.rightHand.position, transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                if (hitInfo.collider)
+                {
+                    dynamicSettings.isGrabbable = true;
+                    rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point
+                        - Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right)
+                        * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight)
+                        * -Vector3.down / 15f
 
-                rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point 
-
-                    - Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) 
-                    * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight) 
-                    * -Vector3.down / 15f 
-
-                    + (Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) 
-                    * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight) 
-                    * -Vector3.forward / 15f 
-                    * dynamicSettings.offset));
-
-                rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight).eulerAngles;
+                        + (Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right)
+                        * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight)
+                        * -Vector3.forward / 15f * dynamicSettings.offset));
+                    rightAttach.rightAttachRotation = Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right) * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight).eulerAngles;
+                }
+                else
+                {
+                    dynamicSettings.isGrabbable = false;
+                }
             }
         }
     }

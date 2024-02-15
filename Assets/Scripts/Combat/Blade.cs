@@ -10,13 +10,11 @@ public class SlicePoint
 }
 public class Blade : MonoBehaviour
 {
-    private AudioSource audioSource;
     [Header("Stab Data")]
     public Collider[] colliders;
     public float pierceDamage;
     [Tooltip("The axis of the blade")]
     public upDirection stabDirection;
-    private Vector3 stabAxis;
     public Vector3 piercePoint;
     public LayerMask pierceableLayer;
     [Tooltip("The damper of the piercing")]
@@ -28,46 +26,14 @@ public class Blade : MonoBehaviour
     private float velocity;
     [Header("Effects")]
     public AudioClip stabSound;
-    public float stabVolume;
     public bool stabbed = false;
     private Collider stabbedCollider;
     private ConfigurableJoint stabbedJoint;
     private Rigidbody rb;
     private GameObject hitPoint;
-    private void Update()
-    {
-        switch (stabDirection)
-        {
-            case upDirection.forward:
-                stabAxis = transform.forward;
-                break;
-
-            case upDirection.up:
-                stabAxis = transform.up;
-                break;
-
-            case upDirection.right:
-                stabAxis = transform.right;
-                break;
-        }
-    }
     private void Start()
     {
-        StartCoroutine(WaitToCheckAudio());
         rb = GetComponent<Rigidbody>();
-    }
-    IEnumerator WaitToCheckAudio()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (!GetComponent<CollisionImpact>())
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.spatialBlend = 1;
-        }
-        else
-        {
-            audioSource = GetComponent<CollisionImpact>().audioSource;
-        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -100,7 +66,22 @@ public class Blade : MonoBehaviour
 
             stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
-            if (Vector3.Dot(stabAxis, hitInfo.normal) < -0.7f)
+            Vector3 velocityDirection = Vector3.zero;
+            switch (stabDirection)
+            {
+                case upDirection.forward:
+                    velocityDirection = transform.forward;
+                    break;
+
+                case upDirection.up:
+                    velocityDirection = transform.up;
+                    break;
+
+                case upDirection.right:
+                    velocityDirection = transform.right;
+                    break;
+            }
+            if (Vector3.Dot(rb.velocity, velocityDirection) > 1.25f)
             {
                 stabbed = true;
 
@@ -152,26 +133,12 @@ public class Blade : MonoBehaviour
             }
         }
     }
-    IEnumerator DelayOpacity(DecalProjector decal)
-    {
-        float timer = 0f;
-        while (timer < 15)
-        {
-            decal.fadeFactor = Mathf.Lerp(1, 0, timer / 15);
-            timer += Time.deltaTime;
-            if (timer >= 15)
-            {
-                Destroy(decal.gameObject);
-            }
-            yield return null;
-        }
-    }
     IEnumerator WaitToSFX()
     {
         yield return new WaitForSeconds(0.025f);
         if (stabbed)
         {
-            audioSource.PlayOneShot(stabSound, stabVolume);
+            AudioSource.PlayClipAtPoint(stabSound, hitPoint.transform.position, 0.15f);
         }
     }
     private void OnDrawGizmosSelected()
