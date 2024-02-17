@@ -416,7 +416,7 @@ public class GrabPhysics : MonoBehaviour
             }
             else
             {
-                grab = closestCollider.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.parent.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.root.GetComponent<GrabTwoAttach>();
+                grab = closestCollider.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.parent.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.root.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.parent.parent.GetComponent<GrabTwoAttach>();
                 if (grab)
                 {
                     grab.isHovering = true;
@@ -424,6 +424,7 @@ public class GrabPhysics : MonoBehaviour
             }
             if(grab is GrabDynamic && distanceHovering)
             {
+                grab.isHovering = false;
                 grab = null;
             }
         }

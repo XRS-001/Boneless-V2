@@ -38,7 +38,7 @@ public class GrabDynamic : GrabTwoAttach
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())
             {
-                ClosestCollider(handTypeEnum.Left).Raycast(new Ray(dynamicSettings.leftHand.position, ClosestCollider(handTypeEnum.Left).transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                ClosestCollider(handTypeEnum.Left).Raycast(new Ray(dynamicSettings.leftHand.position, ClosestCollider(handTypeEnum.Left).ClosestPoint(dynamicSettings.leftHand.position) - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
                 if (hitInfo.collider)
                 {
@@ -93,7 +93,7 @@ public class GrabDynamic : GrabTwoAttach
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())
             {
-                ClosestCollider(handTypeEnum.Right).Raycast(new Ray(dynamicSettings.rightHand.position, ClosestCollider(handTypeEnum.Right).transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                ClosestCollider(handTypeEnum.Right).Raycast(new Ray(dynamicSettings.rightHand.position, ClosestCollider(handTypeEnum.Right).ClosestPoint(dynamicSettings.rightHand.position) - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
                 if (hitInfo.collider)
                 {
@@ -140,7 +140,15 @@ public class GrabDynamic : GrabTwoAttach
     public Collider ClosestCollider(handTypeEnum handType)
     {
         Collider closestCollider = colliders[0];
-        Vector3 closestPosition = colliders[0].transform.position;
+        Vector3 closestPosition = Vector3.zero;
+        if (handType == handTypeEnum.Left)
+        {
+            closestPosition = colliders[0].ClosestPoint(dynamicSettings.leftHand.position);
+        }
+        else
+        {
+            closestPosition = colliders[0].ClosestPoint(dynamicSettings.rightHand.position);
+        }
         float closestDistance;
         if (handType == handTypeEnum.Left)
         {
@@ -156,11 +164,11 @@ public class GrabDynamic : GrabTwoAttach
             float distance;
             if (handType == handTypeEnum.Left)
             {
-                distance = Vector3.Distance(dynamicSettings.leftHand.position, colliders[i].transform.position);
+                distance = Vector3.Distance(dynamicSettings.leftHand.position, colliders[i].ClosestPoint(dynamicSettings.leftHand.position));
             }
             else
             {
-                distance = Vector3.Distance(dynamicSettings.rightHand.position, colliders[i].transform.position);
+                distance = Vector3.Distance(dynamicSettings.rightHand.position, colliders[i].ClosestPoint(dynamicSettings.rightHand.position));
             }
 
             if (distance < closestDistance)

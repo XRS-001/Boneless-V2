@@ -110,6 +110,13 @@ public class HexaBody : MonoBehaviour
         RoomScaleMove();
         Climbing();
     } 
+    public void Zipline()
+    {
+        if(!detectGrounded.collided)
+        {
+            Monoball.GetComponent<Rigidbody>().AddForce(Vector3.down * -Physics.gravity.y * 100);
+        }
+    }
     void SetHandTargets()
     {
         trackedSolverLeftTarget.transform.position = LeftHandController.transform.position;
@@ -158,7 +165,7 @@ public class HexaBody : MonoBehaviour
                 {
                     if (limb.isColliding)
                     {
-                        limb.colliderColliding.Raycast(new Ray(new Vector3(Chest.transform.position.x, Head.transform.position.y, Chest.transform.position.z) + Chest.transform.forward / 32, Vector3.down), out RaycastHit hit, float.PositiveInfinity);
+                        limb.colliderColliding.Raycast(new Ray(new Vector3(Chest.transform.position.x, Head.transform.position.y, Chest.transform.position.z) + Chest.transform.forward / 16, Vector3.down), out RaycastHit hit, float.PositiveInfinity);
                         if (hit.collider && hit.point.y > hip.position.y)
                         {
                             StartCoroutine(Vault(hit.point));

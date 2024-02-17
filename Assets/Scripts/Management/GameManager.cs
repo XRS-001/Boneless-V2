@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject sceneChangeButton;
     private VRIKData vrikData = new VRIKData();
     private AudioSource audioSource;
-    public AudioClip uiClickSound;
+    public AudioClip UIClickSound;
     private bool altCameraFollow;
     private float deltaTime;
     public TextMeshProUGUI fpsText;
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
     public void PlayUISound()
     {
         //make the volume independent
-        audioSource.PlayOneShot(uiClickSound, 1 / audioSource.volume);
+        audioSource.PlayOneShot(UIClickSound, 1 / audioSource.volume);
     }
     private void OnEnable()
     {
