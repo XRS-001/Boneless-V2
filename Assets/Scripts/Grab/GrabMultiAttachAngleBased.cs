@@ -27,15 +27,15 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
             float dotLeft = 0;
             if (upAxis == upDirection.up)
             {
-                dotLeft = Vector3.Dot(leftHand.up, transform.up);
+                dotLeft = Vector3.Dot(leftHand.right, transform.up);
             }
             else if (upAxis == upDirection.forward)
             {
-                dotLeft = Vector3.Dot(leftHand.up, transform.forward);
+                dotLeft = Vector3.Dot(leftHand.right, transform.forward);
             }
             else
             {
-                dotLeft = Vector3.Dot(leftHand.up, transform.right);
+                dotLeft = Vector3.Dot(leftHand.right, transform.right);
             }
             if(dotLeft < (angleThreshold / 360))
             {
@@ -50,15 +50,15 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
             float dotRight = 0;
             if (upAxis == upDirection.up)
             {
-                dotRight = Vector3.Dot(rightHand.up, transform.up);
+                dotRight = Vector3.Dot(rightHand.right, transform.up);
             }
             else if (upAxis == upDirection.forward)
             {
-                dotRight = Vector3.Dot(rightHand.up, transform.forward);
+                dotRight = Vector3.Dot(rightHand.right, transform.forward);
             }
             else
             {
-                dotRight = Vector3.Dot(rightHand.up, transform.right);
+                dotRight = Vector3.Dot(rightHand.right, transform.right);
             }
             if (dotRight < (angleThreshold / 360))
             {

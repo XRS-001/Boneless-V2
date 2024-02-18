@@ -96,6 +96,7 @@ public class GrabPhysics : MonoBehaviour
             foreach (ArmJoint joint in armJoints)
             {
                 JointDrive newDrive = joint.startDrive;
+
                 newDrive.positionDamper *= 2;
 
                 joint.joint.angularXDrive = newDrive;
@@ -510,7 +511,7 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayExit(GrabTwoAttach oldGrab)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         if (!isGrabbing)
         {

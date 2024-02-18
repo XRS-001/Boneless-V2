@@ -44,6 +44,7 @@ public class HexaBody : MonoBehaviour
 
     public ConfigurableJoint Spine;
     public CheckColliding detectGrounded;
+    public CheckColliding fenderCollision;
     public TargetLimb[] limbs;
 
     [Header("Hexabody Movespeed")]
@@ -110,11 +111,12 @@ public class HexaBody : MonoBehaviour
         RoomScaleMove();
         Climbing();
     } 
+    
     public void Zipline()
     {
         if(!detectGrounded.collided)
         {
-            Monoball.GetComponent<Rigidbody>().AddForce(Vector3.down * -Physics.gravity.y * 100);
+            Monoball.GetComponent<Rigidbody>().AddForce(Physics.gravity * 50);
         }
     }
     void SetHandTargets()
@@ -165,17 +167,19 @@ public class HexaBody : MonoBehaviour
                 {
                     if (limb.isColliding)
                     {
-                        limb.colliderColliding.Raycast(new Ray(new Vector3(Chest.transform.position.x, Head.transform.position.y, Chest.transform.position.z) + Chest.transform.forward / 16, Vector3.down), out RaycastHit hit, float.PositiveInfinity);
-                        if (hit.collider && hit.point.y > hip.position.y)
+                        if (fenderCollision.collided)
                         {
-                            StartCoroutine(Vault(hit.point));
+                            if(fenderCollision.colliderColliding == limb.colliderColliding && !vaulting && limb.transform.position.y > hip.transform.position.y)
+                            {
+                                StartCoroutine(Vault());
+                            }
                         }
                     }
                 }
             }
             if (!vaulting && !isClimbing)
             {
-                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 15, 0, float.PositiveInfinity);
+                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 15, 100, float.PositiveInfinity);
 
                 Head.GetComponent<Rigidbody>().drag = drag;
                 Monoball.GetComponent<Rigidbody>().drag = drag;
@@ -219,13 +223,9 @@ public class HexaBody : MonoBehaviour
             Fender.GetComponent<Rigidbody>().drag = 0;
         }
     }
-    IEnumerator Vault(Vector3 hitPoint)
+    IEnumerator Vault()
     {
         vaulting = true;
-        Monoball.GetComponent<Collider>().enabled = false;
-        Fender.GetComponent<Collider>().enabled = false;
-        Chest.GetComponent<Collider>().enabled = false;
-
         yield return new WaitForSeconds(0.35f);
 
         Chest.GetComponent<Rigidbody>().useGravity = false;
@@ -233,23 +233,26 @@ public class HexaBody : MonoBehaviour
         Fender.GetComponent<Rigidbody>().useGravity = false;
         Head.GetComponent<Rigidbody>().useGravity = false;
 
-        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up / 75, ForceMode.VelocityChange);
-        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up / 75, ForceMode.VelocityChange);
-        Head.GetComponent<Rigidbody>().AddForce(Vector3.up / 75, ForceMode.VelocityChange);
-        Spine.GetComponent<Rigidbody>().AddForce(Vector3.up / 75, ForceMode.VelocityChange);
+        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+        Head.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+        Spine.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
 
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
+
+        Monoball.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 1, ForceMode.VelocityChange);
+        Chest.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 1, ForceMode.VelocityChange);
+        Head.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 1f, ForceMode.VelocityChange);
+        Spine.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 1f, ForceMode.VelocityChange);
 
         Chest.GetComponent<Rigidbody>().useGravity = true;
         Monoball.GetComponent<Rigidbody>().useGravity = true;
         Fender.GetComponent<Rigidbody>().useGravity = true;
         Head.GetComponent<Rigidbody>().useGravity = true;
 
-        Monoball.GetComponent<Collider>().enabled = true;
-        Fender.GetComponent<Collider>().enabled = true;
-        Chest.GetComponent<Collider>().enabled = true;
-
+        yield return new WaitForSeconds(1f);
         vaulting = false;
+
     }
     void RoomScaleMove()
     {
@@ -273,7 +276,7 @@ public class HexaBody : MonoBehaviour
         RightTrackPadVector = RightTrackPad.action.ReadValue<Vector2>();
         rightTrackPadTouched = RightTrackPadTouched.action.ReadValue<float>();
 
-        headYaw = Quaternion.Euler(0, XRRig.Camera.transform.eulerAngles.y, 0);
+        headYaw = Quaternion.LookRotation(Quaternion.Euler(0, headBone.transform.eulerAngles.y, 0) * Vector3.forward);
         moveDirection = headYaw * new Vector3(LeftTrackPadVector.x, 0, LeftTrackPadVector.y);
         monoballTorque = new Vector3(moveDirection.z, 0, -moveDirection.x);
     }
@@ -291,7 +294,7 @@ public class HexaBody : MonoBehaviour
     }
     private void RotatePlayer()
     {
-        Chest.transform.rotation = Quaternion.Euler(0, headBone.eulerAngles.y, 0);
+        Chest.transform.rotation = headYaw;
     }
     //-----HexaBody Movement---------------------------------------------------------------------------------
     private void MovePlayerViaController()
@@ -361,30 +364,41 @@ public class HexaBody : MonoBehaviour
         {
             CrouchTarget.y -= crouchSpeed * Time.fixedDeltaTime;
             Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
-            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - 2, 0), 0.005f);
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - 2.5f, 0), 0.005f);
         }
     }
     private void JumpSitUp()
     {
         CrouchTarget = new Vector3(0, highestCrouch - additionalHeight, 0);
         Spine.targetPosition = CrouchTarget;
+
+
+
         StartCoroutine(SitUpRoutine());
     }
     IEnumerator SitUpRoutine()
     {
         float timer = 0;
-        while (timer < 0.5f)
+        while (timer < 0.25f)
         {
-            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, Vector3.zero, timer / 0.4f);
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, Vector3.zero, timer / 0.25f);
             timer += Time.deltaTime;
             yield return null;
+        }
+
+        if (Monoball.GetComponent<Rigidbody>().angularVelocity.magnitude > 0.5f)
+        {
+            Monoball.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 2f, ForceMode.VelocityChange);
+            Chest.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 2f, ForceMode.VelocityChange);
+            Fender.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 2f, ForceMode.VelocityChange);
+            Head.GetComponent<Rigidbody>().AddForce(chest.transform.forward / 2f, ForceMode.VelocityChange);
         }
     }
 
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, 0, highestCrouch - additionalHeight);
+        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.25f, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
     }
 }

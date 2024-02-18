@@ -38,12 +38,13 @@ public class GrabDynamic : GrabTwoAttach
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())
             {
-                ClosestCollider(handTypeEnum.Left).Raycast(new Ray(dynamicSettings.leftHand.position, ClosestCollider(handTypeEnum.Left).ClosestPoint(dynamicSettings.leftHand.position) - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                Collider closestCollider = ClosestCollider(handTypeEnum.Left);
+                closestCollider.Raycast(new Ray(dynamicSettings.leftHand.position, closestCollider.ClosestPoint(dynamicSettings.leftHand.position) - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
                 if (hitInfo.collider)
                 {
                     dynamicSettings.isGrabbable = true;
-                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(hitInfo.point 
+                    leftAttach.leftAttachPosition = transform.InverseTransformPoint(closestCollider.ClosestPoint(dynamicSettings.leftHand.position)
 
                         - Quaternion.Lerp(dynamicSettings.leftHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.leftHand.right) 
                         * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight) 
@@ -93,12 +94,13 @@ public class GrabDynamic : GrabTwoAttach
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())
             {
-                ClosestCollider(handTypeEnum.Right).Raycast(new Ray(dynamicSettings.rightHand.position, ClosestCollider(handTypeEnum.Right).ClosestPoint(dynamicSettings.rightHand.position) - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                Collider closestCollider = ClosestCollider(handTypeEnum.Right);
+                closestCollider.Raycast(new Ray(dynamicSettings.rightHand.position, closestCollider.ClosestPoint(dynamicSettings.rightHand.position) - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
                 if (hitInfo.collider)
                 {
                     dynamicSettings.isGrabbable = true;
-                    rightAttach.rightAttachPosition = transform.InverseTransformPoint(hitInfo.point
+                    rightAttach.rightAttachPosition = transform.InverseTransformPoint(closestCollider.ClosestPoint(dynamicSettings.rightHand.position)
                         - Quaternion.Lerp(dynamicSettings.rightHand.rotation, Quaternion.LookRotation(hitInfo.normal, -dynamicSettings.rightHand.right)
                         * Quaternion.Euler(180, 0, 90), dynamicSettings.angleWeight)
                         * -Vector3.down / 15f
@@ -159,7 +161,7 @@ public class GrabDynamic : GrabTwoAttach
             closestDistance = Vector3.Distance(dynamicSettings.rightHand.position, closestPosition);
         }
         // Loop through all positions and find the closest one
-        for (int i = 1; i < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
             float distance;
             if (handType == handTypeEnum.Left)
