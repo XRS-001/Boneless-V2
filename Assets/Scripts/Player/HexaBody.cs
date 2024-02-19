@@ -15,7 +15,6 @@ public class HexaBody : MonoBehaviour
     public XROrigin XRRig;
     public GameObject XRCamera;
     public Transform headTarget;
-    public Transform headBone;
     public Transform chest;
     public Transform hip;
     public Transform trackedOffset;
@@ -179,7 +178,7 @@ public class HexaBody : MonoBehaviour
             }
             if (!vaulting && !isClimbing)
             {
-                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 15, 100, float.PositiveInfinity);
+                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 15, 250, float.PositiveInfinity);
 
                 Head.GetComponent<Rigidbody>().drag = drag;
                 Monoball.GetComponent<Rigidbody>().drag = drag;
@@ -276,7 +275,7 @@ public class HexaBody : MonoBehaviour
         RightTrackPadVector = RightTrackPad.action.ReadValue<Vector2>();
         rightTrackPadTouched = RightTrackPadTouched.action.ReadValue<float>();
 
-        headYaw = Quaternion.LookRotation(Quaternion.Euler(0, headBone.transform.eulerAngles.y, 0) * Vector3.forward);
+        headYaw = Quaternion.Euler(0, XRCamera.transform.eulerAngles.y, 0);
         moveDirection = headYaw * new Vector3(LeftTrackPadVector.x, 0, LeftTrackPadVector.y);
         monoballTorque = new Vector3(moveDirection.z, 0, -moveDirection.x);
     }
@@ -294,7 +293,7 @@ public class HexaBody : MonoBehaviour
     }
     private void RotatePlayer()
     {
-        Chest.transform.rotation = headYaw;
+        Chest.transform.rotation = Quaternion.Euler(0, chest.eulerAngles.y, 0);
     }
     //-----HexaBody Movement---------------------------------------------------------------------------------
     private void MovePlayerViaController()
@@ -360,7 +359,7 @@ public class HexaBody : MonoBehaviour
     }
     private void JumpSitDown()
     {
-        if (CrouchTarget.y >= 0)
+        if (CrouchTarget.y >= 0.1f)
         {
             CrouchTarget.y -= crouchSpeed * Time.fixedDeltaTime;
             Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
@@ -371,8 +370,6 @@ public class HexaBody : MonoBehaviour
     {
         CrouchTarget = new Vector3(0, highestCrouch - additionalHeight, 0);
         Spine.targetPosition = CrouchTarget;
-
-
 
         StartCoroutine(SitUpRoutine());
     }

@@ -371,6 +371,11 @@ public class GrabPhysics : MonoBehaviour
     {
         if (colliders.Count <= 0)
         {
+            if (grab)
+            {
+                grab.isHovering = false;
+                grab = null;
+            }
             colliders = Physics.OverlapCapsule(grabZonePosition, grabZonePosition + Vector3.Lerp(gazeTarget.forward, transform.forward + transform.up, 0.5f).normalized * 2, 0.125f, distanceGrabLayer).ToList();
 
             if (colliders.Count > 0)
@@ -384,25 +389,6 @@ public class GrabPhysics : MonoBehaviour
         }
         closestCollider = null;
         nearbyRigidbody = null;
-        if (grab)
-        {
-            bool isHovering = false;
-            foreach (Collider nearbyCollider in colliders)
-            {
-                foreach (Collider collider in grab.colliders)
-                {
-                    if (collider == nearbyCollider)
-                    {
-                        isHovering = true;
-                    }
-                }
-            }
-            if (!isHovering)
-            {
-                grab.isHovering = false;
-                grab = null;
-            }
-        }
         if (colliders.Count > 0)
         {
             closestCollider = FindClosestInteractable(colliders.ToArray());
@@ -411,21 +397,28 @@ public class GrabPhysics : MonoBehaviour
             {
                 grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
                 if (grab)
-                {
-                    grab.isHovering = true;
-                }
+                    if (grab is GrabDynamic)
+                    {
+                        if (!distanceHovering)
+                            grab.isHovering = true;
+                    }
+                    else
+                        grab.isHovering = true;
             }
             else
             {
                 grab = closestCollider.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.parent.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.root.GetComponent<GrabTwoAttach>() ?? closestCollider.transform.parent.parent.GetComponent<GrabTwoAttach>();
                 if (grab)
-                {
-                    grab.isHovering = true;
-                }
+                    if(grab is GrabDynamic)
+                    {
+                        if (!distanceHovering)
+                            grab.isHovering = true;
+                    }
+                    else
+                        grab.isHovering = true;
             }
             if(grab is GrabDynamic && distanceHovering)
             {
-                grab.isHovering = false;
                 grab = null;
             }
         }
@@ -433,7 +426,7 @@ public class GrabPhysics : MonoBehaviour
     void FixedUpdate()
     {
         grabZonePosition = transform.position - (transform.rotation * grabZoneOffset);
-        nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer, QueryTriggerInteraction.Ignore);
+        nearbyColliders = Physics.OverlapSphere(grabZonePosition, radius, grabLayer);
         if (!isGrabbing)
         {
             CheckForInteractable(nearbyColliders.ToList());
@@ -511,7 +504,7 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayExit(GrabTwoAttach oldGrab)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (!isGrabbing)
         {
