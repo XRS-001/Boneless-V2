@@ -8,6 +8,7 @@ using UnityEngine.Timeline;
 using System.Collections;
 using RootMotion;
 using static RootMotion.Demos.FBBIKSettings;
+using RootMotion.Demos;
 
 public class HexaBody : MonoBehaviour
 {
@@ -58,6 +59,8 @@ public class HexaBody : MonoBehaviour
     [Header("Hexabody Crouch & Jump")]
     bool jumping = false;
     bool vaulting = false;
+    [HideInInspector]
+    public bool zipLining;
 
     public float crouchSpeed;
     public float highestCrouch;
@@ -113,9 +116,10 @@ public class HexaBody : MonoBehaviour
     
     public void Zipline()
     {
-        if(!detectGrounded.collided)
+        if (!detectGrounded.collided)
         {
             Monoball.GetComponent<Rigidbody>().AddForce(Physics.gravity * 50);
+            zipLining = true;
         }
     }
     void SetHandTargets()
@@ -136,12 +140,12 @@ public class HexaBody : MonoBehaviour
         bool isClimbing = false;
         foreach (GrabPhysics grab in grabbing)
         {
-            if (grab.isGrabbing)
+            if (grab.isClimbing)
             {
                 isClimbing = true;
             }
         }
-        if (detectGrounded.collided )
+        if (detectGrounded.collided)
         {
             isClimbing = false;
             finalSolver.solver.locomotion.weight = Mathf.Lerp(finalSolver.solver.locomotion.weight, 1, 0.1f);
@@ -155,8 +159,33 @@ public class HexaBody : MonoBehaviour
         {
             if (limb.isColliding)
             {
-                onSurface = true;
+                GrabTwoAttach grab = limb.colliderColliding.GetComponent<GrabTwoAttach>();
+                if (!grab && limb.colliderColliding.transform.parent)
+                {
+                    grab = limb.colliderColliding.transform.parent.GetComponent<GrabTwoAttach>();
+
+                    if (!grab && limb.colliderColliding.transform.parent.parent)
+                        grab = limb.colliderColliding.transform.parent.parent.GetComponent<GrabTwoAttach>();
+                }
+
+                if(!grab && limb.colliderColliding.transform.root)
+                    grab = limb.colliderColliding.transform.root.GetComponent<GrabTwoAttach>();
+
+                if (grab)
+                {
+                    if (!grab.isGrabbing)
+                        onSurface = true;
+                }
+                else
+                    onSurface = true;
             }
+        }
+        foreach (GrabPhysics grab in grabbing)
+        {
+            if (grab.grabColliding)
+                if (grab.grabColliding.collided)
+                    onSurface = true;
+
         }
         if (onSurface)
         {
@@ -176,9 +205,9 @@ public class HexaBody : MonoBehaviour
                     }
                 }
             }
-            if (!vaulting && !isClimbing)
+            if (!vaulting && !isClimbing && !zipLining)
             {
-                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude * 15, 250, float.PositiveInfinity);
+                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude, 10, float.PositiveInfinity);
 
                 Head.GetComponent<Rigidbody>().drag = drag;
                 Monoball.GetComponent<Rigidbody>().drag = drag;
@@ -232,10 +261,10 @@ public class HexaBody : MonoBehaviour
         Fender.GetComponent<Rigidbody>().useGravity = false;
         Head.GetComponent<Rigidbody>().useGravity = false;
 
-        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
-        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
-        Head.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
-        Spine.GetComponent<Rigidbody>().AddForce(Vector3.up * 3, ForceMode.VelocityChange);
+        Monoball.GetComponent<Rigidbody>().AddForce(Vector3.up * 2, ForceMode.VelocityChange);
+        Chest.GetComponent<Rigidbody>().AddForce(Vector3.up * 2, ForceMode.VelocityChange);
+        Head.GetComponent<Rigidbody>().AddForce(Vector3.up * 2, ForceMode.VelocityChange);
+        Spine.GetComponent<Rigidbody>().AddForce(Vector3.up * 2, ForceMode.VelocityChange);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -395,7 +424,7 @@ public class HexaBody : MonoBehaviour
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.25f, highestCrouch - additionalHeight);
+        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.075f, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
     }
 }

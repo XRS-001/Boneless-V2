@@ -65,7 +65,7 @@ public class GrabDynamic : GrabTwoAttach
             else
             {
                 //cast a ray that directs to the interactable and outputs the hitInfo
-                GetComponent<Collider>().Raycast(new Ray(dynamicSettings.leftHand.position, transform.position - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                GetComponent<Collider>().Raycast(new Ray(dynamicSettings.leftHand.position, GetComponent<Collider>().ClosestPoint(dynamicSettings.leftHand.position) - dynamicSettings.leftHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
                 if (hitInfo.collider)
                 {
                     dynamicSettings.isGrabbable = true;
@@ -118,7 +118,7 @@ public class GrabDynamic : GrabTwoAttach
             else
             {
                 //cast a ray that directs to the interactable and outputs the hitInfo
-                GetComponent<Collider>().Raycast(new Ray(dynamicSettings.rightHand.position, transform.position - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
+                GetComponent<Collider>().Raycast(new Ray(dynamicSettings.rightHand.position, GetComponent<Collider>().ClosestPoint(dynamicSettings.rightHand.position) - dynamicSettings.rightHand.position), out RaycastHit hitInfo, float.PositiveInfinity);
                 if (hitInfo.collider)
                 {
                     dynamicSettings.isGrabbable = true;

@@ -53,11 +53,16 @@ public class GrabPhysics : MonoBehaviour
 
     [Header("Grabbed Data")]
     public bool isGrabbing = false;
+    [HideInInspector]
+    public bool isClimbing = false;
     public float connectedMass { get; private set; }
 
     Collider[] nearbyColliders;
     Collider closestCollider;
     Rigidbody nearbyRigidbody;
+
+    [HideInInspector]
+    public CheckColliding grabColliding;
     private void Start()
     {
         foreach (ArmJoint joint in armJoints)
@@ -133,9 +138,15 @@ public class GrabPhysics : MonoBehaviour
 
         isGrabbing = true;
         if (!grab.isGrabbing)
+        {
             connectedMass = nearbyRigidbody.mass;
+            grabColliding = grab.AddComponent<CheckColliding>();
+        }
         else
+        {
             connectedMass = grab.handGrabbing.connectedMass;
+            grabColliding = grab.GetComponent<CheckColliding>();
+        }
 
         HandleDrive(false);
         grab.isGrabbing = true;
@@ -146,7 +157,7 @@ public class GrabPhysics : MonoBehaviour
 
         if (grab is not GrabDynamic)
         {
-            transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
+            transform.rotation = (nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation));
         }
         else
         {
@@ -219,6 +230,7 @@ public class GrabPhysics : MonoBehaviour
     }
     public void GrabClimbable()
     {
+        isClimbing = true;
         foreach (Collider collider in grab.colliders)
         {
             foreach (ArmJoint armJoint in armJoints)
@@ -271,6 +283,7 @@ public class GrabPhysics : MonoBehaviour
     {
         StartCoroutine(DelayExit(grab));
         isGrabbing = false;
+        isClimbing = false;
         if (grab != null)
         {
             poseSetup.exitingDynamicPose = true;
@@ -280,6 +293,7 @@ public class GrabPhysics : MonoBehaviour
                 if (nearbyRigidbody)
                 {
                     nearbyRigidbody.mass = connectedMass;
+                    Destroy(grabColliding);
                 }
                 if (joint)
                 {

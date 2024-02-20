@@ -32,5 +32,9 @@ public class ZipLine : MonoBehaviour
         {
             player.Zipline();
         }
+        else
+        {
+            player.zipLining = false;
+        }
     }
 }
