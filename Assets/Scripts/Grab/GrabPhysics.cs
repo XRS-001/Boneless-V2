@@ -205,6 +205,7 @@ public class GrabPhysics : MonoBehaviour
         }
         if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
         {
+            grab.transform.root.GetComponent<NPC>().isGrabbing = true;
             hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
             hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
             hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
@@ -290,6 +291,9 @@ public class GrabPhysics : MonoBehaviour
             poseSetup.UnSetPose();
             if (!grab.isTwoHandGrabbing)
             {
+                if(grab.transform.root.GetComponent<NPC>())
+                    grab.transform.root.GetComponent<NPC>().isGrabbing = false;
+
                 if (nearbyRigidbody)
                 {
                     nearbyRigidbody.mass = connectedMass;

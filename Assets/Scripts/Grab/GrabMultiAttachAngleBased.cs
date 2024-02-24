@@ -10,10 +10,15 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
     public RightAttach altRightAttach;
     private LeftAttach primaryLeftAttach;
     private RightAttach primaryRightAttach;
-    public Transform leftHand;
-    public Transform rightHand;
+    private Transform leftHand;
+    private Transform rightHand;
     private void Start()
     {
+        if (!rightHand && !leftHand)
+        {
+            rightHand = GameObject.Find("GameManager").GetComponent<GameManager>().defaultRightHandTarget;
+            leftHand = GameObject.Find("GameManager").GetComponent<GameManager>().defaultLeftHandTarget;
+        }
         primaryLeftAttach = new LeftAttach();
         primaryLeftAttach.leftAttachPosition = leftAttach.leftAttachPosition; primaryLeftAttach.leftAttachRotation = leftAttach.leftAttachRotation;
         primaryRightAttach = new RightAttach();

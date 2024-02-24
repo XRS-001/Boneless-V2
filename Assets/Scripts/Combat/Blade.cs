@@ -39,7 +39,7 @@ public class Blade : MonoBehaviour
     void FixedUpdate()
     {
         velocity = rb.velocity.magnitude;
-        if (Physics.CheckSphere(transform.TransformPoint(piercePoint), 0.035f, pierceableLayer) && !stabbed && velocity > velocityThreshold)
+        if (Physics.CheckSphere(transform.TransformPoint(piercePoint), 0.05f, pierceableLayer) && !stabbed && velocity > velocityThreshold)
         {
             TryStab();
         }
@@ -48,22 +48,25 @@ public class Blade : MonoBehaviour
             stabbed = false;
             Destroy(stabbedJoint);
             Destroy(hitPoint);
-            foreach (Collider ragdollCollider in stabbedCollider.transform.root.GetComponentsInChildren<Collider>())
+            NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
+            if (npc)
             {
-                foreach (Collider collider in colliders)
+                foreach (Collider ragdollCollider in npc.colliders)
                 {
-                    Physics.IgnoreCollision(collider, ragdollCollider, false);
+                    foreach (Collider collider in colliders)
+                    {
+                        Physics.IgnoreCollision(collider, ragdollCollider, false);
+                    }
                 }
             }
         }
     }
     void TryStab()
     {
-        Collider[] checkColliders = Physics.OverlapSphere(transform.TransformPoint(piercePoint), 0.035f, pierceableLayer);
+        Collider[] checkColliders = Physics.OverlapSphere(transform.TransformPoint(piercePoint), 0.05f, pierceableLayer);
         if (checkColliders[0].transform.root.name != gameObject.name)
         {
             stabbedCollider = checkColliders[0];
-
             stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
 
             Vector3 velocityDirection = Vector3.zero;
@@ -139,6 +142,12 @@ public class Blade : MonoBehaviour
         if (stabbed)
         {
             AudioSource.PlayClipAtPoint(stabSound, hitPoint.transform.position, 0.15f);
+
+            NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
+            if (npc)
+            {
+                npc.health -= pierceDamage;
+            }
         }
     }
     private void OnDrawGizmosSelected()

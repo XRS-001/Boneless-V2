@@ -10,11 +10,11 @@ public class GrabDynamic : GrabTwoAttach
     [System.Serializable]
     public class DynamicSettings
     {
-        [Tooltip("The transform used to calculate the leftAttach (must be the physical presence of the left hand)")]
+        [HideInInspector]
         public Transform leftHand;
         [HideInInspector]
         public GrabPhysics leftGrab;
-        [Tooltip("The transform used to calculate the rightAttach (must be the physical presence of the right hand)")]
+        [HideInInspector]
         public Transform rightHand;
         [HideInInspector]
         public GrabPhysics rightGrab;
@@ -29,6 +29,14 @@ public class GrabDynamic : GrabTwoAttach
     public DynamicSettings dynamicSettings;
     private void Start()
     {
+        if (!dynamicSettings.rightHand && !dynamicSettings.leftHand)
+        {
+            dynamicSettings.rightHand = GameObject.Find("GameManager").GetComponent<GameManager>().defaultRightHandTarget;
+            dynamicSettings.leftHand = GameObject.Find("GameManager").GetComponent<GameManager>().defaultLeftHandTarget;
+        }
+        leftAttach.leftPose = GameObject.Find("GameManager").GetComponent<GameManager>().leftDynamicPose;
+        rightAttach.rightPose = GameObject.Find("GameManager").GetComponent<GameManager>().rightDynamicPose;
+
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>(); dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
     }
     // Update is called once per frame

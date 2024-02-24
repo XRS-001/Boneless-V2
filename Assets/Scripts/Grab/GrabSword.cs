@@ -21,10 +21,11 @@ public class GrabSword : GrabTwoAttach
     public Vector3 guardPosition;
     private void Start()
     {
-        if (dynamicSettings.leftHand == null)
-            dynamicSettings.leftHand = GameObject.Find("LeftHandPhysics").transform;
-        if (dynamicSettings.rightHand == null)
-            dynamicSettings.rightHand = GameObject.Find("RightHandPhysics").transform;
+        if (!dynamicSettings.rightHand && !dynamicSettings.leftHand)
+        {
+            dynamicSettings.rightHand = GameObject.Find("GameManager").GetComponent<GameManager>().defaultRightHandTarget;
+            dynamicSettings.leftHand = GameObject.Find("GameManager").GetComponent<GameManager>().defaultLeftHandTarget;
+        }
     }
     // Update is called once per frame
     void Update()

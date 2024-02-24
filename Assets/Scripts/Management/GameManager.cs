@@ -12,24 +12,37 @@ public class VRIKData
     public VRIKCalibrator.CalibrationData ikData;
 }
 public class GameManager : MonoBehaviour
-{    
+{
+    [Header("Default Targets")]
+    public Transform defaultLeftHandTarget;
+    public Transform defaultRightHandTarget;
+    public HandData leftDynamicPose;
+    public HandData rightDynamicPose;
+
+    [Header("Calibration Data")]
+    private VRIKData vrikData = new VRIKData();
+    public VRIKCalibratedData calibrator;
+    public float height;
+
     [Tooltip("The opaque black backround that loses opacity on start")]
     public Image blurImage;
-    public float height;
+    [Header("Camera")]
     public Camera externalCamera;
     public GameObject recordingIcon;
     private Quaternion startRotation;
     private Vector3 startPosition;
     public Transform player;
-    public VRIKCalibratedData calibrator;
+
+    [Header("UI")]
     [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
     public GameObject sceneChangeButton;
-    private VRIKData vrikData = new VRIKData();
     private AudioSource audioSource;
     public AudioClip UIClickSound;
     private bool altCameraFollow;
     private float deltaTime;
     public TextMeshProUGUI fpsText;
+    public NPC dummy;
+    public TextMeshProUGUI dummyCanKillText;
     private void Start()
     {
         if(externalCamera)
@@ -37,7 +50,10 @@ public class GameManager : MonoBehaviour
             startPosition = externalCamera.transform.position;
             startRotation = externalCamera.transform.rotation;
         }
-
+        if(dummy && dummyCanKillText)
+        {
+            dummyCanKillText.text = dummy.canKill.ToString();
+        }
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
     }
@@ -82,6 +98,19 @@ public class GameManager : MonoBehaviour
         if (calibrator.data.scale != 0)
         {
             height = 1.75f * calibrator.data.scale;
+        }
+    }
+    public void ToggleDummyKill()
+    {
+        if (dummy.canKill)
+        {
+            dummyCanKillText.text = "False";
+            dummy.canKill = false;
+        }
+        else
+        {
+            dummyCanKillText.text = "True";
+            dummy.canKill = true;
         }
     }
     public void CameraFollow()
