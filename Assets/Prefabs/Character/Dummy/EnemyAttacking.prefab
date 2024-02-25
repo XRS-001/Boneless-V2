@@ -3033,10 +3033,10 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 30463
-  collisionThreshold: 25
+  collisionThreshold: 15
   collisionResistance:
     mode: 0
-    floatValue: 75
+    floatValue: 150
     curve:
       serializedVersion: 2
       m_Curve:
@@ -3070,6 +3070,16 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 8
     multiplier: 0.2
+    collisionThreshold: 0
+  - layers:
+      serializedVersion: 2
+      m_Bits: 512
+    multiplier: 0.5
+    collisionThreshold: 0
+  - layers:
+      serializedVersion: 2
+      m_Bits: 192
+    multiplier: 1
     collisionThreshold: 0
   maxCollisions: 30
   regainPinSpeed: 1
@@ -3163,9 +3173,9 @@ MonoBehaviour:
       knockOutDistance: 100
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
-  knockOutDistance: 0.1
+  knockOutDistance: 0.25
   unpinnedMuscleWeightMlp: 0.4
-  maxRigidbodyVelocity: 25
+  maxRigidbodyVelocity: 5
   pinWeightThreshold: 1
   unpinnedMuscleKnockout: 1
   dropProps: 0
@@ -3202,11 +3212,7 @@ MonoBehaviour:
         m_Calls: []
   onLoseBalance:
     switchToBehaviour: 
-    animations:
-    - animationState: Fall
-      crossfadeTime: 0.7
-      layer: 0
-      resetNormalizedTime: 0
+    animations: []
     unityEvent:
       m_PersistentCalls:
         m_Calls: []
@@ -3431,6 +3437,7 @@ MonoBehaviour:
   isGrabbing: 0
   attackDistance: 0.5
   enemyType: 0
+  despawnTime: 30
 --- !u!1 &4779383359798231932
 GameObject:
   m_ObjectHideFlags: 0
@@ -6362,18 +6369,18 @@ MonoBehaviour:
   mode: 0
   blendTime: 0.1
   fixTargetTransforms: 1
-  solverIterationCount: 50
+  solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.6
-  muscleWeight: 0.6
-  muscleSpring: 300
+  pinWeight: 0.7
+  muscleWeight: 0.7
+  muscleSpring: 150
   muscleDamper: 25
   pinPow: 8
   pinDistanceFalloff: 5
-  angularPinning: 1
+  angularPinning: 0
   updateJointAnchors: 1
-  supportTranslationAnimation: 1
+  supportTranslationAnimation: 0
   angularLimits: 0
   internalCollisions: 1
   muscles:

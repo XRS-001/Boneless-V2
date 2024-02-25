@@ -11,7 +11,14 @@ public class Breakable : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 5f)
-            forceNeededToBreak -= collision.relativeVelocity.magnitude;
+        {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable")
+                || collision.gameObject.layer == LayerMask.NameToLayer("Default")
+                || collision.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
+                forceNeededToBreak -= collision.relativeVelocity.magnitude * 2;
+            else
+                forceNeededToBreak -= collision.relativeVelocity.magnitude;
+        }
 
         if (forceNeededToBreak < 0)
             Break(collision.relativeVelocity.magnitude * 2, collision.relativeVelocity, collision.GetContact(0).point);

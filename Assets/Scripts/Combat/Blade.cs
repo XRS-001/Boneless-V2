@@ -13,6 +13,7 @@ public class Blade : MonoBehaviour
     [Header("Stab Data")]
     public Collider[] colliders;
     public float pierceDamage;
+    public GameObject decal;
     [Tooltip("The axis of the blade")]
     public upDirection stabDirection;
     public Vector3 piercePoint;
@@ -31,6 +32,7 @@ public class Blade : MonoBehaviour
     private ConfigurableJoint stabbedJoint;
     private Rigidbody rb;
     private GameObject hitPoint;
+    private bool canStab = true;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,35 +41,40 @@ public class Blade : MonoBehaviour
     void FixedUpdate()
     {
         velocity = rb.velocity.magnitude;
-        if (Physics.CheckSphere(transform.TransformPoint(piercePoint), 0.05f, pierceableLayer) && !stabbed && velocity > velocityThreshold)
+        if (Physics.CheckSphere(transform.TransformPoint(piercePoint), 0.001f, pierceableLayer) && !stabbed && velocity > velocityThreshold)
         {
             TryStab();
         }
-        if (stabbed && Vector3.Distance(hitPoint.transform.position, transform.TransformPoint(piercePoint)) < 0.1f)
-        {
-            stabbed = false;
-            Destroy(stabbedJoint);
-            Destroy(hitPoint);
-            NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
-            if (npc)
+        if (hitPoint)
+            if (stabbed && Vector3.Distance(hitPoint.transform.position, transform.TransformPoint(piercePoint)) < 0.2f && !canStab)
             {
-                foreach (Collider ragdollCollider in npc.colliders)
+                stabbed = false;
+                Destroy(stabbedJoint);
+                Destroy(hitPoint);
+                NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
+                if (npc)
                 {
-                    foreach (Collider collider in colliders)
+                    npc.piercedBy.Remove(this);
+                    foreach (Collider ragdollCollider in npc.colliders)
                     {
-                        Physics.IgnoreCollision(collider, ragdollCollider, false);
+                        foreach (Collider collider in colliders)
+                        {
+                            Physics.IgnoreCollision(collider, ragdollCollider, false);
+                        }
                     }
                 }
+                StartCoroutine(DelayCanStab());
+                stabbedCollider = null;
             }
-        }
     }
     void TryStab()
     {
-        Collider[] checkColliders = Physics.OverlapSphere(transform.TransformPoint(piercePoint), 0.05f, pierceableLayer);
-        if (checkColliders[0].transform.root.name != gameObject.name)
+        Collider[] checkColliders = Physics.OverlapSphere(transform.TransformPoint(piercePoint), 0.001f, pierceableLayer);
+        if (checkColliders[0].transform.root.name != gameObject.name && canStab)
         {
             stabbedCollider = checkColliders[0];
             stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
+            Instantiate(decal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), stabbedCollider.transform);
 
             Vector3 velocityDirection = Vector3.zero;
             switch (stabDirection)
@@ -91,7 +98,7 @@ public class Blade : MonoBehaviour
                 StartCoroutine(WaitToSFX());
 
                 hitPoint = new GameObject("HitPoint");
-                hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.125f));
+                hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.2f));
                 hitPoint.transform.parent = stabbedCollider.transform;
 
                 foreach (Collider ragdollCollider in stabbedCollider.transform.root.GetComponentsInChildren<Collider>())
@@ -102,7 +109,12 @@ public class Blade : MonoBehaviour
                     }
                 }
                 stabbedJoint = gameObject.AddComponent<ConfigurableJoint>();
-                stabbedJoint.connectedBody = stabbedCollider.GetComponent<Rigidbody>();
+
+                if (stabbedCollider.GetComponent<Rigidbody>())
+                    stabbedJoint.connectedBody = stabbedCollider.GetComponent<Rigidbody>();
+                else
+                    stabbedJoint.connectedBody = stabbedCollider.transform.parent.GetComponent<Rigidbody>();
+
                 SoftJointLimit jointLimit = stabbedJoint.linearLimit;
                 jointLimit.limit = limit;
                 stabbedJoint.linearLimit = jointLimit;
@@ -136,6 +148,11 @@ public class Blade : MonoBehaviour
             }
         }
     }
+    IEnumerator DelayCanStab()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canStab = true;
+    }
     IEnumerator WaitToSFX()
     {
         yield return new WaitForSeconds(0.025f);
@@ -146,9 +163,13 @@ public class Blade : MonoBehaviour
             NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
             if (npc)
             {
-                npc.health -= pierceDamage;
+                npc.piercedBy.Add(this);
+                npc.DealDamage(stabbedCollider.transform.tag, pierceDamage);
             }
         }
+        yield return new WaitForSeconds(0.5f);
+        if(stabbed)
+            canStab = false;
     }
     private void OnDrawGizmosSelected()
     {

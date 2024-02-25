@@ -23,11 +23,17 @@ public class TargetLimb : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        isColliding = true;
-        colliderColliding = collision.collider;
+        if(collision.gameObject.layer != LayerMask.NameToLayer("Interactable") && collision.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        {
+            isColliding = true;
+            colliderColliding = collision.collider;
+        }
     }
     private void OnCollisionExit(Collision collision)
     {
-        isColliding = false;
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Interactable") && collision.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        {
+            isColliding = false;
+        }
     }
 }

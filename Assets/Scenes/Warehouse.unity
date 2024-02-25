@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 38962444}
   - component: {fileID: 38962443}
   - component: {fileID: 38962442}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,6 @@ GameObject:
   - component: {fileID: 39860882}
   - component: {fileID: 39860881}
   - component: {fileID: 39860880}
-  - component: {fileID: 39860879}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -1329,20 +1328,6 @@ Transform:
   m_Father: {fileID: 1970494146}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &39860879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39860877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &39860880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,7 +2117,6 @@ GameObject:
   - component: {fileID: 95783861}
   - component: {fileID: 95783860}
   - component: {fileID: 95783859}
-  - component: {fileID: 95783858}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -2155,20 +2139,6 @@ Transform:
   m_Father: {fileID: 1973915615}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &95783858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95783856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &95783859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3177,7 +3147,6 @@ GameObject:
   - component: {fileID: 153093066}
   - component: {fileID: 153093065}
   - component: {fileID: 153093064}
-  - component: {fileID: 153093063}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -3200,20 +3169,6 @@ Transform:
   m_Father: {fileID: 1835078591}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &153093063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153093061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &153093064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3363,7 +3318,6 @@ GameObject:
   - component: {fileID: 161424898}
   - component: {fileID: 161424897}
   - component: {fileID: 161424896}
-  - component: {fileID: 161424895}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -3386,20 +3340,6 @@ Transform:
   m_Father: {fileID: 1973915615}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &161424895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161424893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &161424896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3582,7 +3522,6 @@ GameObject:
   - component: {fileID: 165072671}
   - component: {fileID: 165072670}
   - component: {fileID: 165072669}
-  - component: {fileID: 165072668}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -3605,20 +3544,6 @@ Transform:
   m_Father: {fileID: 1970494146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &165072668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165072666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &165072669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5369,7 +5294,6 @@ GameObject:
   - component: {fileID: 263513126}
   - component: {fileID: 263513125}
   - component: {fileID: 263513124}
-  - component: {fileID: 263513123}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -5392,20 +5316,6 @@ Transform:
   m_Father: {fileID: 2004240450}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &263513123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263513121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &263513124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6076,6 +5986,7 @@ MonoBehaviour:
     m_Bits: 512
   gazeTarget: {fileID: 354109375}
   grab: {fileID: 0}
+  canGrab: 1
   isGrabbing: 0
   isClimbing: 0
   grabColliding: {fileID: 0}
@@ -6238,7 +6149,7 @@ GameObject:
   - component: {fileID: 278815803}
   m_Layer: 6
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6276,7 +6187,7 @@ GameObject:
   - component: {fileID: 285801102}
   m_Layer: 11
   m_Name: Foot Collider
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6329,7 +6240,7 @@ GameObject:
   - component: {fileID: 286519182}
   m_Layer: 7
   m_Name: Index
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6668,7 +6579,7 @@ GameObject:
   - component: {fileID: 307401097}
   - component: {fileID: 307401096}
   - component: {fileID: 307401095}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8190,7 +8101,6 @@ GameObject:
   - component: {fileID: 351302991}
   - component: {fileID: 351302990}
   - component: {fileID: 351302989}
-  - component: {fileID: 351302988}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -8213,20 +8123,6 @@ Transform:
   m_Father: {fileID: 1153202599}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &351302988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351302986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &351302989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9345,7 +9241,6 @@ GameObject:
   - component: {fileID: 389608553}
   - component: {fileID: 389608552}
   - component: {fileID: 389608551}
-  - component: {fileID: 389608550}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -9368,20 +9263,6 @@ Transform:
   m_Father: {fileID: 1318212661}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &389608550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389608548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &389608551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10180,7 +10061,6 @@ GameObject:
   - component: {fileID: 413152642}
   - component: {fileID: 413152641}
   - component: {fileID: 413152640}
-  - component: {fileID: 413152639}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -10203,20 +10083,6 @@ Transform:
   m_Father: {fileID: 1153202599}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &413152639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413152637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &413152640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10395,7 +10261,7 @@ GameObject:
   - component: {fileID: 417825441}
   m_Layer: 7
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11508,7 +11374,6 @@ GameObject:
   - component: {fileID: 509155412}
   - component: {fileID: 509155411}
   - component: {fileID: 509155410}
-  - component: {fileID: 509155409}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -11531,20 +11396,6 @@ Transform:
   m_Father: {fileID: 1318212661}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &509155409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509155407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &509155410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11852,7 +11703,7 @@ GameObject:
   - component: {fileID: 527362521}
   m_Layer: 7
   m_Name: Pinky
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13323,7 +13174,6 @@ GameObject:
   - component: {fileID: 643036594}
   - component: {fileID: 643036593}
   - component: {fileID: 643036592}
-  - component: {fileID: 643036591}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -13346,20 +13196,6 @@ Transform:
   m_Father: {fileID: 2004240450}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &643036591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 643036589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &643036592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14230,7 +14066,6 @@ GameObject:
   - component: {fileID: 676610571}
   - component: {fileID: 676610570}
   - component: {fileID: 676610569}
-  - component: {fileID: 676610568}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -14253,20 +14088,6 @@ Transform:
   m_Father: {fileID: 1318212661}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &676610568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 676610566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &676610569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14416,7 +14237,6 @@ GameObject:
   - component: {fileID: 683581397}
   - component: {fileID: 683581396}
   - component: {fileID: 683581395}
-  - component: {fileID: 683581394}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -14439,20 +14259,6 @@ Transform:
   m_Father: {fileID: 1153202599}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &683581394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683581392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &683581395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14699,7 +14505,6 @@ GameObject:
   - component: {fileID: 694097264}
   - component: {fileID: 694097263}
   - component: {fileID: 694097262}
-  - component: {fileID: 694097261}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -14722,20 +14527,6 @@ Transform:
   m_Father: {fileID: 2004240450}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &694097261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694097259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &694097262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15066,14 +14857,15 @@ MonoBehaviour:
   - {fileID: 243447658}
   - {fileID: 570459437}
   pierceDamage: 25
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
   stabDirection: 0
-  piercePoint: {x: 0, y: 0, z: 0.27}
+  piercePoint: {x: 0, y: 0, z: 0.32}
   pierceableLayer:
     serializedVersion: 2
     m_Bits: 2048
-  damper: 50
+  damper: 100
   limit: 0.23
-  velocityThreshold: 1
+  velocityThreshold: 2
   stabSound: {fileID: 8300000, guid: 0a98676ad811010439a396b34afb201b, type: 3}
   stabbed: 0
 --- !u!54 &706847760
@@ -15392,7 +15184,7 @@ GameObject:
   - component: {fileID: 718179688}
   m_Layer: 11
   m_Name: Foot Collider
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15550,7 +15342,7 @@ GameObject:
   - component: {fileID: 724377748}
   - component: {fileID: 724377745}
   - component: {fileID: 724377746}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: SecondCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16160,7 +15952,6 @@ GameObject:
   - component: {fileID: 749080418}
   - component: {fileID: 749080417}
   - component: {fileID: 749080416}
-  - component: {fileID: 749080415}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -16183,20 +15974,6 @@ Transform:
   m_Father: {fileID: 1973915615}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &749080415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 749080413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &749080416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16401,7 +16178,6 @@ GameObject:
   - component: {fileID: 751912523}
   - component: {fileID: 751912522}
   - component: {fileID: 751912521}
-  - component: {fileID: 751912520}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -16424,20 +16200,6 @@ Transform:
   m_Father: {fileID: 2004240450}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &751912520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751912518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &751912521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17125,7 +16887,7 @@ GameObject:
   - component: {fileID: 813311217}
   m_Layer: 7
   m_Name: Ring
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19177,7 +18939,6 @@ GameObject:
   - component: {fileID: 982936803}
   - component: {fileID: 982936802}
   - component: {fileID: 982936801}
-  - component: {fileID: 982936800}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -19200,20 +18961,6 @@ Transform:
   m_Father: {fileID: 1835078591}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &982936800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982936798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &982936801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19667,9 +19414,7 @@ MonoBehaviour:
     leftHand: {fileID: 112185799}
     rightHand: {fileID: 1631724692}
     handlePosition: {x: -0.03, y: 0.1, z: -0.54}
-    handleLength: 0.125
-  higherHand: {fileID: 0}
-  guardPosition: {x: 0, y: 0, z: -0.35}
+    handleLength: 0.115
 --- !u!114 &989768908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19688,14 +19433,15 @@ MonoBehaviour:
   - {fileID: 837358485}
   - {fileID: 853561243}
   pierceDamage: 35
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
   stabDirection: 0
-  piercePoint: {x: 0, y: 0.02, z: 0.55}
+  piercePoint: {x: 0, y: 0.04, z: 0.55}
   pierceableLayer:
     serializedVersion: 2
     m_Bits: 2048
-  damper: 50
-  limit: 0.9
-  velocityThreshold: 1
+  damper: 100
+  limit: 0.8
+  velocityThreshold: 1.5
   stabSound: {fileID: 8300000, guid: 0a98676ad811010439a396b34afb201b, type: 3}
   stabbed: 0
 --- !u!114 &989768909
@@ -20138,7 +19884,6 @@ GameObject:
   - component: {fileID: 1011715664}
   - component: {fileID: 1011715663}
   - component: {fileID: 1011715662}
-  - component: {fileID: 1011715661}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -20161,20 +19906,6 @@ Transform:
   m_Father: {fileID: 1835078591}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1011715661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011715659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1011715662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20632,9 +20363,9 @@ MonoBehaviour:
   - {fileID: 98672272}
   - {fileID: 1849339580}
   - {fileID: 276302955}
-  moveForceCrouch: 30
-  moveForceWalk: 30
-  moveForceSprint: 75
+  moveForceCrouch: 40
+  moveForceWalk: 40
+  moveForceSprint: 90
   angularDragOnMove: 50
   angularBreakDrag: 200
   zipLining: 0
@@ -22410,7 +22141,7 @@ GameObject:
   - component: {fileID: 1172175372}
   - component: {fileID: 1172175373}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22480,8 +22211,10 @@ MonoBehaviour:
   animator: {fileID: 0}
   player: {fileID: 0}
   isGrabbing: 0
+  piercedBy: []
   attackDistance: 0
   enemyType: 2
+  despawnTime: 30
 --- !u!1 &1172708311
 GameObject:
   m_ObjectHideFlags: 0
@@ -23009,7 +22742,7 @@ GameObject:
   - component: {fileID: 1227121023}
   m_Layer: 7
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23416,7 +23149,6 @@ GameObject:
   - component: {fileID: 1263509110}
   - component: {fileID: 1263509109}
   - component: {fileID: 1263509108}
-  - component: {fileID: 1263509107}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -23439,20 +23171,6 @@ Transform:
   m_Father: {fileID: 1970494146}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1263509107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263509105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1263509108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24619,7 +24337,7 @@ GameObject:
   - component: {fileID: 1320674532}
   m_Layer: 6
   m_Name: Index
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24958,7 +24676,7 @@ GameObject:
   - component: {fileID: 1372074474}
   m_Layer: 6
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27293,7 +27011,6 @@ GameObject:
   - component: {fileID: 1505853438}
   - component: {fileID: 1505853437}
   - component: {fileID: 1505853436}
-  - component: {fileID: 1505853435}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -27316,20 +27033,6 @@ Transform:
   m_Father: {fileID: 1973915615}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1505853435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505853433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1505853436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28252,7 +27955,6 @@ GameObject:
   - component: {fileID: 1558607870}
   - component: {fileID: 1558607869}
   - component: {fileID: 1558607868}
-  - component: {fileID: 1558607867}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -28275,20 +27977,6 @@ Transform:
   m_Father: {fileID: 1973915615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1558607867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558607865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1558607868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29159,7 +28847,6 @@ GameObject:
   - component: {fileID: 1572089265}
   - component: {fileID: 1572089264}
   - component: {fileID: 1572089263}
-  - component: {fileID: 1572089262}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -29182,20 +28869,6 @@ Transform:
   m_Father: {fileID: 1970494146}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1572089262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572089260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1572089263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29343,7 +29016,7 @@ GameObject:
   - component: {fileID: 1583405497}
   m_Layer: 6
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29867,7 +29540,7 @@ GameObject:
   - component: {fileID: 1604963284}
   m_Layer: 6
   m_Name: Pinky
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30242,7 +29915,7 @@ GameObject:
   - component: {fileID: 1607553471}
   m_Layer: 6
   m_Name: Thumb
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30933,7 +30606,6 @@ GameObject:
   - component: {fileID: 1663543102}
   - component: {fileID: 1663543101}
   - component: {fileID: 1663543100}
-  - component: {fileID: 1663543099}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -30956,20 +30628,6 @@ Transform:
   m_Father: {fileID: 1835078591}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1663543099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663543097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1663543100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31352,7 +31010,6 @@ GameObject:
   - component: {fileID: 1683364575}
   - component: {fileID: 1683364574}
   - component: {fileID: 1683364573}
-  - component: {fileID: 1683364572}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -31375,20 +31032,6 @@ Transform:
   m_Father: {fileID: 1835078591}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1683364572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683364570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1683364573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31879,7 +31522,6 @@ GameObject:
   - component: {fileID: 1698545672}
   - component: {fileID: 1698545671}
   - component: {fileID: 1698545670}
-  - component: {fileID: 1698545669}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -31902,20 +31544,6 @@ Transform:
   m_Father: {fileID: 1970494146}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1698545669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698545667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1698545670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32112,7 +31740,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b0f134b1a218340bcefb423081327f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPC: {fileID: 4625439507994906789, guid: 5fdb0e4dea7366c40b85df9b231dc89d, type: 3}
+  NPCS:
+  - {fileID: 3781964092912549764, guid: 125f1d85ed664624b969d9c263a7c547, type: 3}
+  - {fileID: 49792074823331329, guid: 87b0980ea9f4f5a4e980ec36f8a697a8, type: 3}
+  - {fileID: 2633083933191605880, guid: d89b1b5a2278f814180e37b81f20ca45, type: 3}
+  - {fileID: 5098387635651606777, guid: 6985b81aef2c0a34db81490d69e74ddf, type: 3}
+  - {fileID: 3245971944264410865, guid: 62b24854e7785044aad0107a7ec80272, type: 3}
 --- !u!4 &1707342360
 Transform:
   m_ObjectHideFlags: 0
@@ -32174,7 +31807,6 @@ GameObject:
   - component: {fileID: 1710040636}
   - component: {fileID: 1710040635}
   - component: {fileID: 1710040634}
-  - component: {fileID: 1710040633}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -32197,20 +31829,6 @@ Transform:
   m_Father: {fileID: 1153202599}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1710040633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710040631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1710040634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32815,7 +32433,6 @@ GameObject:
   - component: {fileID: 1759678899}
   - component: {fileID: 1759678898}
   - component: {fileID: 1759678897}
-  - component: {fileID: 1759678896}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -32838,20 +32455,6 @@ Transform:
   m_Father: {fileID: 1318212661}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1759678896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759678894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1759678897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32996,7 +32599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760661788}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: AltCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34698,7 +34301,6 @@ GameObject:
   - component: {fileID: 1874755562}
   - component: {fileID: 1874755561}
   - component: {fileID: 1874755560}
-  - component: {fileID: 1874755559}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -34721,20 +34323,6 @@ Transform:
   m_Father: {fileID: 1153202599}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1874755559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874755557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1874755560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35226,7 +34814,6 @@ GameObject:
   - component: {fileID: 1904273849}
   - component: {fileID: 1904273848}
   - component: {fileID: 1904273847}
-  - component: {fileID: 1904273846}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -35249,20 +34836,6 @@ Transform:
   m_Father: {fileID: 1318212661}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1904273846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904273844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &1904273847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36475,7 +36048,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 3
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 02c15f33319082b4b9ee4337a3a43ce0, type: 2}
@@ -37360,7 +36933,6 @@ GameObject:
   - component: {fileID: 2025740004}
   - component: {fileID: 2025740003}
   - component: {fileID: 2025740002}
-  - component: {fileID: 2025740001}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -37383,20 +36955,6 @@ Transform:
   m_Father: {fileID: 2004240450}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2025740001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025739999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!114 &2025740002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38366,7 +37924,7 @@ GameObject:
   - component: {fileID: 2044431402}
   m_Layer: 7
   m_Name: Thumb
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38674,7 +38232,7 @@ GameObject:
   - component: {fileID: 2058790597}
   m_Layer: 6
   m_Name: Ring
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38885,7 +38443,7 @@ GameObject:
   - component: {fileID: 2077640196}
   m_Layer: 7
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39192,6 +38750,7 @@ MonoBehaviour:
     m_Bits: 512
   gazeTarget: {fileID: 354109375}
   grab: {fileID: 0}
+  canGrab: 1
   isGrabbing: 0
   isClimbing: 0
   grabColliding: {fileID: 0}
@@ -39466,7 +39025,7 @@ GameObject:
   - component: {fileID: 2093931733}
   - component: {fileID: 2093931732}
   - component: {fileID: 2093931731}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40076,7 +39635,7 @@ GameObject:
   - component: {fileID: 2106643003}
   - component: {fileID: 2106643002}
   - component: {fileID: 2106643001}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42827,7 +42386,7 @@ GameObject:
   - component: {fileID: 8371121436536612576}
   - component: {fileID: 2277297528217575953}
   - component: {fileID: 8371121436536612577}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: cameraBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43036,7 +42595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490505055498920941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.151, y: 0.8399, z: -1.201}
+  m_LocalPosition: {x: 0, y: 0.441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43171,7 +42730,6 @@ GameObject:
   - component: {fileID: 476436382698032295}
   - component: {fileID: 490505055498920943}
   - component: {fileID: 490505055498920942}
-  - component: {fileID: 490505055498920944}
   m_Layer: 9
   m_Name: Pickle Barrel Lid
   m_TagString: Untagged
@@ -43241,20 +42799,6 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &490505055498920944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490505055498920941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!4 &491018442627281262
 Transform:
   m_ObjectHideFlags: 0
@@ -46161,7 +45705,7 @@ GameObject:
   - component: {fileID: 2144486509964595056}
   m_Layer: 11
   m_Name: mixamorig1:LeftArm
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46552,7 +46096,7 @@ GameObject:
   - component: {fileID: 3792262694935295295}
   m_Layer: 11
   m_Name: mixamorig1:LeftFoot
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47040,7 +46584,6 @@ GameObject:
   - component: {fileID: 1566201114936908344}
   - component: {fileID: 1576475989628378350}
   - component: {fileID: 1576475989628378351}
-  - component: {fileID: 1576475989628378352}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.009
   m_TagString: Untagged
@@ -47062,7 +46605,6 @@ GameObject:
   - component: {fileID: 1566201112812196880}
   - component: {fileID: 1576475960837724470}
   - component: {fileID: 1576475960837724471}
-  - component: {fileID: 1576475960837724472}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.002
   m_TagString: Untagged
@@ -47100,7 +46642,6 @@ GameObject:
   - component: {fileID: 1566201114853335646}
   - component: {fileID: 1576475961033905978}
   - component: {fileID: 1576475961033905979}
-  - component: {fileID: 1576475961033905980}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell
   m_TagString: Untagged
@@ -47122,7 +46663,6 @@ GameObject:
   - component: {fileID: 1566201115079854214}
   - component: {fileID: 1576475988945155996}
   - component: {fileID: 1576475988945155997}
-  - component: {fileID: 1576475988945155998}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.003
   m_TagString: Untagged
@@ -47144,7 +46684,6 @@ GameObject:
   - component: {fileID: 1566201112432160214}
   - component: {fileID: 1576475989948118474}
   - component: {fileID: 1576475989948118475}
-  - component: {fileID: 1576475989948118476}
   m_Layer: 9
   m_Name: WoodenCrate_BrokenSmall.013_cell.005
   m_TagString: Untagged
@@ -47895,20 +47434,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &1576475960837724472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513234373675872640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!64 &1576475961033905978
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -47967,20 +47492,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &1576475961033905980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513234374254046180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!64 &1576475988945155996
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48039,20 +47550,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &1576475988945155998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513234374515482078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!64 &1576475989628378350
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48111,20 +47608,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &1576475989628378352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513234373040066882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!64 &1576475989948118474
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48183,20 +47666,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &1576475989948118476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513234375741935368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!4 &1591917371342697148
 Transform:
   m_ObjectHideFlags: 0
@@ -49282,7 +48751,7 @@ GameObject:
   - component: {fileID: 5236236782705121962}
   - component: {fileID: 7117217306257152510}
   - component: {fileID: 6138195062380825629}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: cameraLens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50119,7 +49588,7 @@ GameObject:
   - component: {fileID: 8541549063388546510}
   m_Layer: 11
   m_Name: mixamorig1:RightFoot
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52817,7 +52286,7 @@ GameObject:
   - component: {fileID: 2571235939902959487}
   m_Layer: 11
   m_Name: mixamorig1:LeftHand
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57782,7 +57251,7 @@ GameObject:
   - component: {fileID: 5873663176728159968}
   m_Layer: 11
   m_Name: mixamorig1:RightLeg
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59320,7 +58789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4438578427358641743}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59371,7 +58840,7 @@ GameObject:
   - component: {fileID: 8402032827286001819}
   m_Layer: 11
   m_Name: mixamorig1:RightUpLeg
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62915,7 +62384,6 @@ GameObject:
   - component: {fileID: 4469442109858453130}
   - component: {fileID: 4492942032601810576}
   - component: {fileID: 4533096437207485355}
-  - component: {fileID: 4533096437207485356}
   m_Layer: 9
   m_Name: PickleBarrel_cell.001
   m_TagString: Untagged
@@ -62937,7 +62405,6 @@ GameObject:
   - component: {fileID: 4469442109303184914}
   - component: {fileID: 4492942055937778500}
   - component: {fileID: 4533096436838962389}
-  - component: {fileID: 4533096436838962390}
   m_Layer: 9
   m_Name: PickleBarrel_cell.013
   m_TagString: Untagged
@@ -62959,7 +62426,6 @@ GameObject:
   - component: {fileID: 4469442112814744166}
   - component: {fileID: 4492942055123348346}
   - component: {fileID: 4533096440161060381}
-  - component: {fileID: 4533096440161060382}
   m_Layer: 9
   m_Name: PickleBarrel_cell.012
   m_TagString: Untagged
@@ -62981,7 +62447,6 @@ GameObject:
   - component: {fileID: 4469442108995413158}
   - component: {fileID: 4492942033118169504}
   - component: {fileID: 4533096436663178525}
-  - component: {fileID: 4533096436663178526}
   m_Layer: 9
   m_Name: PickleBarrel_cell.018
   m_TagString: Untagged
@@ -63003,7 +62468,6 @@ GameObject:
   - component: {fileID: 4469442099284148252}
   - component: {fileID: 4492942055724113306}
   - component: {fileID: 4533096436546493831}
-  - component: {fileID: 4533096436546493832}
   m_Layer: 9
   m_Name: PickleBarrel_cell
   m_TagString: Untagged
@@ -63025,7 +62489,6 @@ GameObject:
   - component: {fileID: 4469442111915913108}
   - component: {fileID: 4492942031575361244}
   - component: {fileID: 4533096436737067003}
-  - component: {fileID: 4533096436737067004}
   m_Layer: 9
   m_Name: PickleBarrel_cell.009
   m_TagString: Untagged
@@ -63047,7 +62510,6 @@ GameObject:
   - component: {fileID: 4469442109159004142}
   - component: {fileID: 4492942053980773252}
   - component: {fileID: 4533096437782498197}
-  - component: {fileID: 4533096437782498198}
   m_Layer: 9
   m_Name: PickleBarrel_cell.022
   m_TagString: Untagged
@@ -63069,7 +62531,6 @@ GameObject:
   - component: {fileID: 4469442110989482464}
   - component: {fileID: 4492942055161482358}
   - component: {fileID: 4533096440197590197}
-  - component: {fileID: 4533096440197590198}
   m_Layer: 9
   m_Name: PickleBarrel_cell.019
   m_TagString: Untagged
@@ -63091,7 +62552,6 @@ GameObject:
   - component: {fileID: 4469442111898431424}
   - component: {fileID: 4492942031813032026}
   - component: {fileID: 4533096437787840563}
-  - component: {fileID: 4533096437787840564}
   m_Layer: 9
   m_Name: PickleBarrel_cell.017
   m_TagString: Untagged
@@ -63113,7 +62573,6 @@ GameObject:
   - component: {fileID: 4469442108994965098}
   - component: {fileID: 4492942031758382762}
   - component: {fileID: 4533096461468688119}
-  - component: {fileID: 4533096461468688120}
   m_Layer: 9
   m_Name: PickleBarrel_cell.014
   m_TagString: Untagged
@@ -63135,7 +62594,6 @@ GameObject:
   - component: {fileID: 4469442109564431078}
   - component: {fileID: 4492942031904390914}
   - component: {fileID: 4533096437536643167}
-  - component: {fileID: 4533096437536643168}
   m_Layer: 9
   m_Name: PickleBarrel_cell.010
   m_TagString: Untagged
@@ -63157,7 +62615,6 @@ GameObject:
   - component: {fileID: 4469442109999753678}
   - component: {fileID: 4492942032838576198}
   - component: {fileID: 4533096439429114693}
-  - component: {fileID: 4533096439429114694}
   m_Layer: 9
   m_Name: PickleBarrel_cell.021
   m_TagString: Untagged
@@ -63179,7 +62636,6 @@ GameObject:
   - component: {fileID: 4469442099801100020}
   - component: {fileID: 4492942032926842166}
   - component: {fileID: 4533096461314188719}
-  - component: {fileID: 4533096461314188720}
   m_Layer: 9
   m_Name: PickleBarrel_cell.004
   m_TagString: Untagged
@@ -63201,7 +62657,6 @@ GameObject:
   - component: {fileID: 4469442109201706392}
   - component: {fileID: 4492942056434937360}
   - component: {fileID: 4533096439209913745}
-  - component: {fileID: 4533096439209913746}
   m_Layer: 9
   m_Name: PickleBarrel_cell.006
   m_TagString: Untagged
@@ -63223,7 +62678,6 @@ GameObject:
   - component: {fileID: 4469442111408595320}
   - component: {fileID: 4492942055924381994}
   - component: {fileID: 4533096436748305383}
-  - component: {fileID: 4533096436748305384}
   m_Layer: 9
   m_Name: PickleBarrel_cell.008
   m_TagString: Untagged
@@ -63245,7 +62699,6 @@ GameObject:
   - component: {fileID: 4469442109422258376}
   - component: {fileID: 4492942031572090988}
   - component: {fileID: 4533096438254708631}
-  - component: {fileID: 4533096438254708632}
   m_Layer: 9
   m_Name: PickleBarrel_cell.007
   m_TagString: Untagged
@@ -63267,7 +62720,6 @@ GameObject:
   - component: {fileID: 4469442111391089782}
   - component: {fileID: 4492942032056159846}
   - component: {fileID: 4533096436328929141}
-  - component: {fileID: 4533096436328929142}
   m_Layer: 9
   m_Name: PickleBarrel_cell.020
   m_TagString: Untagged
@@ -63289,7 +62741,6 @@ GameObject:
   - component: {fileID: 4469442111782036624}
   - component: {fileID: 4492942055141011178}
   - component: {fileID: 4533096439127798661}
-  - component: {fileID: 4533096439127798662}
   m_Layer: 9
   m_Name: PickleBarrel_cell.016
   m_TagString: Untagged
@@ -63311,7 +62762,6 @@ GameObject:
   - component: {fileID: 4469442110851722198}
   - component: {fileID: 4492942055699591906}
   - component: {fileID: 4533096437554211425}
-  - component: {fileID: 4533096437554211426}
   m_Layer: 9
   m_Name: PickleBarrel_cell.005
   m_TagString: Untagged
@@ -63333,7 +62783,6 @@ GameObject:
   - component: {fileID: 4469442111674397358}
   - component: {fileID: 4492942031658267218}
   - component: {fileID: 4533096440283858135}
-  - component: {fileID: 4533096440283858136}
   m_Layer: 9
   m_Name: PickleBarrel_cell.003
   m_TagString: Untagged
@@ -63355,7 +62804,6 @@ GameObject:
   - component: {fileID: 4469442109652873074}
   - component: {fileID: 4492942033150332440}
   - component: {fileID: 4533096436928086913}
-  - component: {fileID: 4533096436928086914}
   m_Layer: 9
   m_Name: PickleBarrel_cell.024
   m_TagString: Untagged
@@ -63393,7 +62841,6 @@ GameObject:
   - component: {fileID: 4469442112855459268}
   - component: {fileID: 4492942056194809852}
   - component: {fileID: 4533096438372530855}
-  - component: {fileID: 4533096438372530856}
   m_Layer: 9
   m_Name: PickleBarrel_cell.002
   m_TagString: Untagged
@@ -63415,7 +62862,6 @@ GameObject:
   - component: {fileID: 4469442111462700106}
   - component: {fileID: 4492942031823775890}
   - component: {fileID: 4533096436820650783}
-  - component: {fileID: 4533096436820650784}
   m_Layer: 9
   m_Name: PickleBarrel_cell.011
   m_TagString: Untagged
@@ -63437,7 +62883,6 @@ GameObject:
   - component: {fileID: 4469442111477917786}
   - component: {fileID: 4492942055620489442}
   - component: {fileID: 4533096436593505341}
-  - component: {fileID: 4533096436593505342}
   m_Layer: 9
   m_Name: PickleBarrel_cell.015
   m_TagString: Untagged
@@ -63459,7 +62904,6 @@ GameObject:
   - component: {fileID: 4469442109949088080}
   - component: {fileID: 4492942031630247502}
   - component: {fileID: 4533096439110670541}
-  - component: {fileID: 4533096439110670542}
   m_Layer: 9
   m_Name: PickleBarrel_cell.023
   m_TagString: Untagged
@@ -64038,20 +63482,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436328929142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189968283140588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436546493830
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64130,20 +63560,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436546493832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965560093520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436593505340
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64222,20 +63638,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436593505342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189969138000198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436663178524
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64314,20 +63716,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436663178526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965367993554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436737067002
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64406,20 +63794,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436737067004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965663947638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436748305382
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64498,20 +63872,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436748305384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189967366245860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436820650782
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64590,20 +63950,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436820650784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189969064636466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436838962388
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64682,20 +64028,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436838962390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965146030758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096436928086912
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64774,20 +64106,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096436928086914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189968837358924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096437207485354
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64866,20 +64184,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096437207485356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965064541024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096437536643166
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64958,20 +64262,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096437536643168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189966478067892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096437554211424
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65050,20 +64340,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096437554211426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189968300473836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096437782498196
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65142,20 +64418,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096437782498198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965907673576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096437787840562
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65234,20 +64496,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096437787840564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189966341904524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096438254708630
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65326,20 +64574,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096438254708632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189967786886724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096438372530854
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65418,20 +64652,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096438372530856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189968954816976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096439110670540
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65510,20 +64730,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096439110670542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189969289428620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096439127798660
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65602,20 +64808,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096439127798662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189968298137714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096439209913744
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65694,20 +64886,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096439209913746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189967156829022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096439429114692
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65786,20 +64964,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096439429114694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189966593829678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096440161060380
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65878,20 +65042,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096440161060382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189965150427614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096440197590196
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65970,20 +65120,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096440197590198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189966127929086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096440283858134
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66062,20 +65198,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096440283858136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189968511905492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096461314188718
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66154,20 +65276,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096461314188720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189967156621702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!23 &4533096461468688118
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66246,20 +65354,6 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
---- !u!114 &4533096461468688120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4520189966451181564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactSound: {fileID: 8300000, guid: 92134bf24355b944e8c1b472f53aa11d, type: 3}
-  volumeModifier: 1
 --- !u!64 &4550218306262008299
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -68868,7 +67962,7 @@ GameObject:
   - component: {fileID: 8118104789604953520}
   m_Layer: 11
   m_Name: mixamorig1:Spine1
-  m_TagString: Untagged
+  m_TagString: Torso
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69990,7 +69084,7 @@ GameObject:
   - component: {fileID: 5407406704833370451}
   m_Layer: 11
   m_Name: mixamorig1:Head
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70558,7 +69652,7 @@ GameObject:
   - component: {fileID: 7032399069667834102}
   m_Layer: 11
   m_Name: mixamorig1:LeftForeArm
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71278,7 +70372,7 @@ GameObject:
   - component: {fileID: 5776542098071214504}
   m_Layer: 11
   m_Name: mixamorig1:LeftLeg
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73285,7 +72379,7 @@ GameObject:
   - component: {fileID: 6024612947436254984}
   m_Layer: 11
   m_Name: mixamorig1:RightHand
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75274,7 +74368,7 @@ MonoBehaviour:
     leftGrab: {fileID: 0}
     rightHand: {fileID: 276302954}
     rightGrab: {fileID: 0}
-    offset: 0.6
+    offset: 0.5
     angleWeight: 0.25
     isGrabbable: 1
 --- !u!64 &6307998560546231446
@@ -76260,7 +75354,7 @@ GameObject:
   - component: {fileID: 6733439093753092743}
   m_Layer: 11
   m_Name: mixamorig1:RightArm
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77907,7 +77001,7 @@ GameObject:
   - component: {fileID: 7095122937987061762}
   m_Layer: 11
   m_Name: mixamorig1:Hips
-  m_TagString: Untagged
+  m_TagString: Torso
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80123,7 +79217,7 @@ GameObject:
   - component: {fileID: 8247673683768614717}
   m_Layer: 11
   m_Name: mixamorig1:LeftUpLeg
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85564,16 +84658,16 @@ MonoBehaviour:
   mode: 0
   blendTime: 0.1
   fixTargetTransforms: 1
-  solverIterationCount: 50
+  solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
   pinWeight: 0.6
   muscleWeight: 0.6
-  muscleSpring: 250
+  muscleSpring: 150
   muscleDamper: 25
   pinPow: 8
   pinDistanceFalloff: 5
-  angularPinning: 1
+  angularPinning: 0
   updateJointAnchors: 1
   supportTranslationAnimation: 0
   angularLimits: 1
@@ -87327,7 +86421,7 @@ GameObject:
   - component: {fileID: 9021297149247539213}
   m_Layer: 11
   m_Name: mixamorig1:RightForeArm
-  m_TagString: Untagged
+  m_TagString: Limb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

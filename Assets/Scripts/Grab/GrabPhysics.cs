@@ -49,7 +49,7 @@ public class GrabPhysics : MonoBehaviour
     [HideInInspector]
     public GrabTwoAttach grab;
     [HideInInspector]
-    private bool canGrab = true;
+    public bool canGrab = true;
 
     [Header("Grabbed Data")]
     public bool isGrabbing = false;
@@ -111,6 +111,7 @@ public class GrabPhysics : MonoBehaviour
     }
     void GenericGrab()
     {
+        canGrab = false;
         StartCoroutine(DelayGrab());
         foreach (Collider collider in grab.colliders)
         {
@@ -586,7 +587,6 @@ public class GrabPhysics : MonoBehaviour
     IEnumerator WaitTillGrab()
     {
         //delay until you can regrab dynamic attaches
-        canGrab = false;
         yield return new WaitForSeconds(poseSetup.poseTransitionDuration);
         canGrab = true;
     }

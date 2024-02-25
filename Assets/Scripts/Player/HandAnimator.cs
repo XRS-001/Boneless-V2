@@ -77,17 +77,20 @@ public class HandAnimator : MonoBehaviour
 
         //thumb
         float thumbTouch = thumb.action.ReadValue<float>();
-        if (thumbTouch > 0f)
+        if (grabPhysics.canGrab)
         {
-            thumbTouched = true;
-            thumbAnimator.Play("Thumb", 0);
-            thumbAnimatorPhysics.Play("Thumb", 0);
-        }
-        else if (thumbTouched)
-        {
-            thumbTouched = false;
-            thumbAnimator.Play("ThumbReverse", 0);
-            thumbAnimatorPhysics.Play("ThumbReverse", 0);
+            if (thumbTouch > 0f)
+            {
+                thumbTouched = true;
+                thumbAnimator.Play("Thumb", 0);
+                thumbAnimatorPhysics.Play("Thumb", 0);
+            }
+            else if (thumbTouched)
+            {
+                thumbTouched = false;
+                thumbAnimator.Play("ThumbReverse", 0);
+                thumbAnimatorPhysics.Play("ThumbReverse", 0);
+            }
         }
     }
     void FreeIndexFinger()

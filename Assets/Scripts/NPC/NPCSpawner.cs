@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    public GameObject NPC;
+    public GameObject[] NPCS;
     public void InstantiateNPC()
     {
-        Instantiate(NPC, transform.position, transform.rotation);
+        Instantiate(NPCS[Random.Range(0, NPCS.Length)], transform.position, transform.rotation);
     }
 }

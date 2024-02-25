@@ -15,10 +15,6 @@ public class GrabSword : GrabTwoAttach
         public float handleLength;
     }
     public DynamicSettings dynamicSettings;
-    [HideInInspector]
-    public Transform higherHand;
-    [Tooltip("The position of the guard, or top of handle")]
-    public Vector3 guardPosition;
     private void Start()
     {
         if (!dynamicSettings.rightHand && !dynamicSettings.leftHand)
@@ -100,6 +96,5 @@ public class GrabSword : GrabTwoAttach
                 Gizmos.DrawLine(transform.TransformPoint(dynamicSettings.handlePosition - (Vector3.right * dynamicSettings.handleLength)), transform.TransformPoint(dynamicSettings.handlePosition + (Vector3.right * dynamicSettings.handleLength)));
                 break;
         }
-        Gizmos.DrawSphere(transform.TransformPoint(guardPosition), 0.05f);
     }
 }
