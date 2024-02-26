@@ -77,15 +77,26 @@ public class GrabPhysics : MonoBehaviour
         {
             if (connectedMass > 1)
             {
-                foreach (ArmJoint joint in armJoints)
-                {
-                    JointDrive newDrive = joint.startDrive;
-                    newDrive.positionDamper /= connectedMass / 4;
-                    newDrive.positionSpring /= connectedMass / 2;
+                if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
+                    foreach (ArmJoint joint in armJoints)
+                    {
+                        JointDrive newDrive = joint.startDrive;
+                        newDrive.positionDamper /= connectedMass / 8;
+                        newDrive.positionSpring /= connectedMass / 4;
 
-                    joint.joint.angularXDrive = newDrive;
-                    joint.joint.angularYZDrive = newDrive;
-                }
+                        joint.joint.angularXDrive = newDrive;
+                        joint.joint.angularYZDrive = newDrive;
+                    }
+                else
+                    foreach (ArmJoint joint in armJoints)
+                    {
+                        JointDrive newDrive = joint.startDrive;
+                        newDrive.positionDamper /= connectedMass / 4;
+                        newDrive.positionSpring /= connectedMass / 2;
+
+                        joint.joint.angularXDrive = newDrive;
+                        joint.joint.angularYZDrive = newDrive;
+                    }
             }
             else
             {
@@ -111,7 +122,6 @@ public class GrabPhysics : MonoBehaviour
     }
     void GenericGrab()
     {
-        canGrab = false;
         StartCoroutine(DelayGrab());
         foreach (Collider collider in grab.colliders)
         {
@@ -176,6 +186,7 @@ public class GrabPhysics : MonoBehaviour
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedAnchor = grab.attachPoint;
         configJoint.connectedBody = nearbyRigidbody;
+        canGrab = false;
     }
     IEnumerator DelayGrab()
     {
@@ -325,9 +336,9 @@ public class GrabPhysics : MonoBehaviour
             HandleDrive(false);
         }
         if (grab is GrabDynamic)
-        {
             StartCoroutine(WaitTillGrab());
-        }
+        else
+            canGrab = true;
         grab = null;
     }
     void CheckGrabInput()

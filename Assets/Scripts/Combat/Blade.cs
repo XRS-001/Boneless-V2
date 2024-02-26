@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using static EnumDeclaration;
@@ -73,8 +74,6 @@ public class Blade : MonoBehaviour
         if (checkColliders[0].transform.root.name != gameObject.name && canStab)
         {
             stabbedCollider = checkColliders[0];
-            stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
-            Instantiate(decal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), stabbedCollider.transform);
 
             Vector3 velocityDirection = Vector3.zero;
             switch (stabDirection)
@@ -166,10 +165,23 @@ public class Blade : MonoBehaviour
                 npc.piercedBy.Add(this);
                 npc.DealDamage(stabbedCollider.transform.tag, pierceDamage);
             }
+            stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
+            DecalProjector decalProjector = Instantiate(decal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), stabbedCollider.transform).GetComponent<DecalProjector>();
+            StartCoroutine(BloodOpacity(decalProjector));
         }
         yield return new WaitForSeconds(0.5f);
         if(stabbed)
             canStab = false;
+    }
+    IEnumerator BloodOpacity(DecalProjector decal)
+    {
+        float timer = 0;
+        while (timer < 0.1f)
+        {
+            decal.fadeFactor = Mathf.Lerp(0, 1, timer / 0.1f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
     private void OnDrawGizmosSelected()
     {

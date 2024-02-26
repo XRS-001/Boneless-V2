@@ -20365,7 +20365,7 @@ MonoBehaviour:
   - {fileID: 276302955}
   moveForceCrouch: 40
   moveForceWalk: 40
-  moveForceSprint: 90
+  moveForceSprint: 80
   angularDragOnMove: 50
   angularBreakDrag: 200
   zipLining: 0
@@ -26131,7 +26131,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9463a1d35c34c0a44b49ed8614a77474, type: 2}
+  - {fileID: 2100000, guid: b93a1b02a36ca6f4c8b90deb127c1237, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31742,7 +31742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCS:
   - {fileID: 3781964092912549764, guid: 125f1d85ed664624b969d9c263a7c547, type: 3}
-  - {fileID: 49792074823331329, guid: 87b0980ea9f4f5a4e980ec36f8a697a8, type: 3}
+  - {fileID: 4855383121750450409, guid: 87b0980ea9f4f5a4e980ec36f8a697a8, type: 3}
   - {fileID: 2633083933191605880, guid: d89b1b5a2278f814180e37b81f20ca45, type: 3}
   - {fileID: 5098387635651606777, guid: 6985b81aef2c0a34db81490d69e74ddf, type: 3}
   - {fileID: 3245971944264410865, guid: 62b24854e7785044aad0107a7ec80272, type: 3}
@@ -42658,7 +42658,7 @@ MonoBehaviour:
     leftGrab: {fileID: 0}
     rightHand: {fileID: 276302954}
     rightGrab: {fileID: 0}
-    offset: 0.75
+    offset: 0.5
     angleWeight: 0.5
     isGrabbable: 1
 --- !u!54 &490505053947440845

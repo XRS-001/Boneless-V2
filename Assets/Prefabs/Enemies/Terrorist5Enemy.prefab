@@ -44,7 +44,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46161230457778046}
   serializedVersion: 4
-  m_Mass: 11.115002
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -266,7 +266,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77492875127039506}
   serializedVersion: 4
-  m_Mass: 1.63125
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -945,7 +945,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259119464504184060}
   serializedVersion: 4
-  m_Mass: 5.23125
+  m_Mass: 7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1201,7 +1201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361967335690215650}
   serializedVersion: 4
-  m_Mass: 5.23125
+  m_Mass: 7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1556,7 +1556,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565471523471139988}
   serializedVersion: 4
-  m_Mass: 19.05
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1892,7 +1892,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826787059139746238}
   serializedVersion: 4
-  m_Mass: 19.05
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2220,7 +2220,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2357275562501099918}
   serializedVersion: 4
-  m_Mass: 1.8
+  m_Mass: 2.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2509,7 +2509,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2549321796940964193}
   serializedVersion: 4
-  m_Mass: 11.115
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2891,7 +2891,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3023254600814940911}
   serializedVersion: 4
-  m_Mass: 3.0375
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3472,7 +3472,7 @@ Transform:
   - {fileID: 6283418151219938284}
   - {fileID: 4131999783104688752}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7484075524344783033
 MonoBehaviour:
@@ -3577,7 +3577,7 @@ MonoBehaviour:
   visualizeTargetPose: 0
   mappingWeight: 1
   pinWeight: 0.6
-  muscleWeight: 0.6
+  muscleWeight: 0.4
   muscleSpring: 150
   muscleDamper: 150
   pinPow: 8
@@ -4672,7 +4672,6 @@ GameObject:
   - component: {fileID: 4765451195579825597}
   - component: {fileID: 4850029924774226373}
   - component: {fileID: 3911452757810407749}
-  - component: {fileID: 2831793110043597945}
   m_Layer: 11
   m_Name: hand_r
   m_TagString: Limb
@@ -4703,7 +4702,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5103878776713282566}
   serializedVersion: 4
-  m_Mass: 0.7425
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4845,42 +4844,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19, y: 0.1, z: 0.16}
   m_Center: {x: 0.12, y: -0.03, z: 0}
---- !u!114 &2831793110043597945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5103878776713282566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a193229b537e74f9fc7f7aa5984c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 3911452757810407749}
-  isGrabbing: 0
-  isHovering: 0
-  isTwoHandGrabbing: 0
-  handGrabbing: {fileID: 0}
-  secondHandGrabbing: {fileID: 0}
-  leftAttach:
-    leftPose: {fileID: 0}
-    leftAttachPosition: {x: 0, y: 0, z: 0}
-    leftAttachRotation: {x: 0, y: 0, z: 0}
-  rightAttach:
-    rightPose: {fileID: 0}
-    rightAttachPosition: {x: 0, y: 0, z: 0}
-    rightAttachRotation: {x: 0, y: 0, z: 0}
-  twoHanded: 1
-  dynamicSettings:
-    leftHand: {fileID: 0}
-    leftGrab: {fileID: 0}
-    rightHand: {fileID: 0}
-    rightGrab: {fileID: 0}
-    offset: 0.75
-    angleWeight: 0.5
-    isGrabbable: 1
 --- !u!1 &5153618856909286121
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,7 +5529,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026453493039465069}
   serializedVersion: 4
-  m_Mass: 1.63125
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5906,7 +5869,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.75
-  m_BaseOffset: -0.62
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &7651000020692149606
@@ -5953,7 +5916,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7651000020692149606}
   serializedVersion: 4
-  m_Mass: 1.8
+  m_Mass: 2.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6245,7 +6208,7 @@ MonoBehaviour:
   puppetMaster: {fileID: 0}
   deactivated: 0
   masterProps:
-    normalMode: 1
+    normalMode: 0
     mappingBlendSpeed: 15
     activateOnStaticCollisions: 0
     activateOnImpulse: 0
@@ -6254,11 +6217,11 @@ MonoBehaviour:
     m_Bits: 256
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 32511
+    m_Bits: 4294967295
   collisionThreshold: 0
   collisionResistance:
     mode: 0
-    floatValue: 100
+    floatValue: 150
     curve:
       serializedVersion: 2
       m_Curve:
@@ -6296,15 +6259,15 @@ MonoBehaviour:
   - layers:
       serializedVersion: 2
       m_Bits: 512
-    multiplier: 0.5
+    multiplier: 0.3
     collisionThreshold: 0
   - layers:
       serializedVersion: 2
       m_Bits: 192
-    multiplier: 1
+    multiplier: 0.8
     collisionThreshold: 0
   maxCollisions: 30
-  regainPinSpeed: 1
+  regainPinSpeed: 0.25
   boostFalloff: 1
   defaults:
     unpinParents: 0.9
@@ -6395,7 +6358,7 @@ MonoBehaviour:
       knockOutDistance: 100
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
-  knockOutDistance: 0.1
+  knockOutDistance: 0.5
   unpinnedMuscleWeightMlp: 0.4
   maxRigidbodyVelocity: 250
   pinWeightThreshold: 1
@@ -6406,12 +6369,12 @@ MonoBehaviour:
   blendToAnimationTime: 0.3
   maxGetUpVelocity: 0.4
   minGetUpDuration: 1.5
-  getUpCollisionResistanceMlp: 8
-  getUpRegainPinSpeedMlp: 5
-  getUpKnockOutDistanceMlp: 4
+  getUpCollisionResistanceMlp: 30
+  getUpRegainPinSpeedMlp: 30
+  getUpKnockOutDistanceMlp: 30
   getUpOffsetProne: {x: 0, y: 0, z: 0}
   getUpOffsetSupine: {x: 0, y: 0, z: 0}
-  isQuadruped: 1
+  isQuadruped: 0
   onGetUpProne:
     switchToBehaviour: 
     animations:
@@ -6500,7 +6463,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7871396300266831527}
   serializedVersion: 4
-  m_Mass: 8.235
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6701,7 +6664,6 @@ GameObject:
   - component: {fileID: 4527584878677984081}
   - component: {fileID: 1871534661409069587}
   - component: {fileID: 8066661595649450288}
-  - component: {fileID: 7396631927439284814}
   m_Layer: 11
   m_Name: hand_l
   m_TagString: Limb
@@ -6732,7 +6694,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8197683890831380680}
   serializedVersion: 4
-  m_Mass: 0.7425
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6874,42 +6836,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19, y: 0.1, z: 0.16}
   m_Center: {x: -0.12, y: 0.03, z: 0}
---- !u!114 &7396631927439284814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8197683890831380680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a193229b537e74f9fc7f7aa5984c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 8066661595649450288}
-  isGrabbing: 0
-  isHovering: 0
-  isTwoHandGrabbing: 0
-  handGrabbing: {fileID: 0}
-  secondHandGrabbing: {fileID: 0}
-  leftAttach:
-    leftPose: {fileID: 0}
-    leftAttachPosition: {x: 0, y: 0, z: 0}
-    leftAttachRotation: {x: 0, y: 0, z: 0}
-  rightAttach:
-    rightPose: {fileID: 0}
-    rightAttachPosition: {x: 0, y: 0, z: 0}
-    rightAttachRotation: {x: 0, y: 0, z: 0}
-  twoHanded: 1
-  dynamicSettings:
-    leftHand: {fileID: 0}
-    leftGrab: {fileID: 0}
-    rightHand: {fileID: 0}
-    rightGrab: {fileID: 0}
-    offset: 0.75
-    angleWeight: 0.5
-    isGrabbable: 1
 --- !u!1 &8284450549736490763
 GameObject:
   m_ObjectHideFlags: 0
@@ -7072,7 +6998,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9153759794263178606}
   serializedVersion: 4
-  m_Mass: 3.0375
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

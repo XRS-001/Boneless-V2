@@ -24,8 +24,9 @@ public class NPC : MonoBehaviour
     public float attackDistance;
     public enemyTypeEnum enemyType;
     private float distance;
+    private bool stunned = false;
     private bool canChase = true;
-    private bool canTurn = true;
+    private bool isStanding = true;
     public float despawnTime;
     private void Start()
     {
@@ -36,19 +37,19 @@ public class NPC : MonoBehaviour
         }
         if (behaviour)
         {
-            behaviour.onLoseBalance.unityEvent.AddListener(CanMoveFalse);
-            behaviour.onRegainBalance.unityEvent.AddListener(CanMoveTrue);
+            behaviour.onLoseBalance.unityEvent.AddListener(Fall);
+            behaviour.onRegainBalance.unityEvent.AddListener(Stand);
         }
     }
-    void CanMoveTrue()
+    void Stand()
     {
-        canTurn = false;
-        canChase = false;
+        isStanding = true;
+        puppet.angularLimits = false;
     }
-    void CanMoveFalse()
+    void Fall()
     {
-        canTurn = true;
-        canChase = true;
+        puppet.angularLimits = true;
+        isStanding = false;
     }
     public void DealDamage(string bodyPart, float damage)
     {
@@ -61,9 +62,16 @@ public class NPC : MonoBehaviour
                 health -= damage * 4;
                 break;
             case "Torso":
+                stunned = true;
                 health -= damage * 2;
+                animator.SetTrigger("Hit");
+                Invoke(nameof(UnStun), 1f);
                 break;
         }
+    }
+    void UnStun()
+    {
+        stunned = false;
     }
     private void Update()
     {
@@ -74,7 +82,7 @@ public class NPC : MonoBehaviour
         if(health <= 0 && puppet.state != PuppetMaster.State.Dead)
         {
             puppet.state = PuppetMaster.State.Dead;
-            puppet.muscleDamper = 10;
+            puppet.muscleDamper = 25;
             StartCoroutine(Destroy());
         }
         if (behaviour)
@@ -96,7 +104,7 @@ public class NPC : MonoBehaviour
             {
                 Invoke(nameof(DelayChase), 0.05f);
             }
-            if (!isGrabbing && distance > attackDistance && canChase)
+            if (!isGrabbing && distance > attackDistance && canChase && isStanding && !stunned)
             {
                 if (enemyType == enemyTypeEnum.aggresive)
                 {
@@ -133,14 +141,13 @@ public class NPC : MonoBehaviour
         animator.SetBool("Chasing", true);
         agent.SetDestination(player.position);
 
-        if(canTurn)
-            if (agent.remainingDistance > agent.stoppingDistance)
-            {
-                Vector3 lookPos = agent.steeringTarget - agent.transform.position;
-                lookPos.y = 0;
-                Quaternion rotation = Quaternion.LookRotation(lookPos);
-                agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 5f);
-            }
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            Vector3 lookPos = agent.steeringTarget - agent.transform.position;
+            lookPos.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 5f);
+        }
     }
     void AttackPlayer()
     {
