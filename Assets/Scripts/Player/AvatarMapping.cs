@@ -7,9 +7,6 @@ public class AvatarMapping : MonoBehaviour
     public Transform[] bones;
     public Transform[] targets;
 
-    public Transform[] twists;
-    public Transform[] twistTargets;
-
     // Update is called once per frame
     void LateUpdate()
     {
@@ -17,11 +14,6 @@ public class AvatarMapping : MonoBehaviour
         {
             bones[i].position = targets[i].position;
             bones[i].rotation = targets[i].rotation;
-        }
-        for (int i = 0; i < twists.Length; i++)
-        {
-            twists[i].position = twistTargets[i].position;
-            twists[i].rotation = twistTargets[i].rotation;
         }
     }
 }

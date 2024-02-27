@@ -48,25 +48,27 @@ public class Blade : MonoBehaviour
         }
         if (hitPoint)
             if (stabbed && Vector3.Distance(hitPoint.transform.position, transform.TransformPoint(piercePoint)) < 0.2f && !canStab)
+                UnStab();
+    }
+    public void UnStab()
+    {
+        stabbed = false;
+        Destroy(stabbedJoint);
+        Destroy(hitPoint);
+        NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
+        if (npc)
+        {
+            npc.piercedBy.Remove(this);
+            foreach (Collider ragdollCollider in npc.colliders)
             {
-                stabbed = false;
-                Destroy(stabbedJoint);
-                Destroy(hitPoint);
-                NPC npc = stabbedCollider.transform.root.GetComponent<NPC>();
-                if (npc)
+                foreach (Collider collider in colliders)
                 {
-                    npc.piercedBy.Remove(this);
-                    foreach (Collider ragdollCollider in npc.colliders)
-                    {
-                        foreach (Collider collider in colliders)
-                        {
-                            Physics.IgnoreCollision(collider, ragdollCollider, false);
-                        }
-                    }
+                    Physics.IgnoreCollision(collider, ragdollCollider, false);
                 }
-                StartCoroutine(DelayCanStab());
-                stabbedCollider = null;
             }
+        }
+        StartCoroutine(DelayCanStab());
+        stabbedCollider = null;
     }
     void TryStab()
     {

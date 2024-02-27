@@ -11,8 +11,10 @@ public class NPC : MonoBehaviour
 {
     public Collider[] colliders;
     public float health;
+    public bool dead;
     private float startingHealth;
     public bool canKill;
+    private float startDamper;
     public PuppetMaster puppet;
     public BehaviourPuppet behaviour;
     public NavMeshAgent agent;
@@ -28,8 +30,13 @@ public class NPC : MonoBehaviour
     private bool canChase = true;
     private bool isStanding = true;
     public float despawnTime;
+    public bool playHitSound;
+    public AudioClip[] hitAudios;
+    public AudioClip[] deathAudios;
+    public AudioSource hitAudioSource;
     private void Start()
     {
+        startDamper = puppet.muscleDamper;
         startingHealth = health;
         if (!player)
         {
@@ -43,11 +50,13 @@ public class NPC : MonoBehaviour
     }
     void Stand()
     {
+        puppet.muscleDamper = startDamper;
         isStanding = true;
         puppet.angularLimits = false;
     }
     void Fall()
     {
+        puppet.muscleDamper = 25;
         puppet.angularLimits = true;
         isStanding = false;
     }
@@ -57,6 +66,15 @@ public class NPC : MonoBehaviour
         {
             case "Limb":
                 health -= damage;
+
+                if (health > 0)
+                    hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
+                else if (!dead)
+                {
+                    hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
+                    dead = true;
+                }
+
                 break;
             case "Head":
                 health -= damage * 4;
@@ -64,10 +82,24 @@ public class NPC : MonoBehaviour
             case "Torso":
                 stunned = true;
                 health -= damage * 2;
-                animator.SetTrigger("Hit");
+
+                if (playHitSound)
+                {
+                    if (health > 0)
+                        hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
+                    else if (!dead)
+                    {
+                        hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
+                        dead = true;
+                    }
+                }
+
+                if (animator)
+                    animator.SetTrigger("Hit");
                 Invoke(nameof(UnStun), 1f);
                 break;
         }
+
     }
     void UnStun()
     {
@@ -137,7 +169,6 @@ public class NPC : MonoBehaviour
     }
     void FollowPlayer()
     {
-        animator.SetBool("Attacking", false);
         animator.SetBool("Chasing", true);
         agent.SetDestination(player.position);
 
@@ -148,13 +179,21 @@ public class NPC : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(lookPos);
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 5f);
         }
+        Vector3 localVelocity = agent.transform.InverseTransformPoint(agent.steeringTarget - agent.velocity).normalized;
+
+        animator.SetFloat("X", localVelocity.x);
+        animator.SetFloat("Y", localVelocity.z);
     }
     void AttackPlayer()
     {
         canChase = false;
         agent.SetDestination(agent.transform.position);
-        animator.SetBool("Attacking", true);
         agent.transform.LookAt(new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
+
+        Vector3 localVelocity = agent.transform.InverseTransformPoint(agent.steeringTarget - agent.velocity).normalized;
+
+        animator.SetFloat("X", localVelocity.x);
+        animator.SetFloat("Y", localVelocity.z);
     }
     void DelayChase()
     {

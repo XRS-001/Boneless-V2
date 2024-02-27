@@ -81,8 +81,8 @@ public class GrabPhysics : MonoBehaviour
                     foreach (ArmJoint joint in armJoints)
                     {
                         JointDrive newDrive = joint.startDrive;
-                        newDrive.positionDamper /= connectedMass / 8;
-                        newDrive.positionSpring /= connectedMass / 4;
+                        newDrive.positionDamper /= connectedMass / 6;
+                        newDrive.positionSpring /= connectedMass / 3;
 
                         joint.joint.angularXDrive = newDrive;
                         joint.joint.angularYZDrive = newDrive;
@@ -122,6 +122,10 @@ public class GrabPhysics : MonoBehaviour
     }
     void GenericGrab()
     {
+        if(distanceHovering && grab.GetComponent<Blade>())
+            if (grab.GetComponent<Blade>().stabbed)
+                grab.GetComponent<Blade>().UnStab();
+
         StartCoroutine(DelayGrab());
         foreach (Collider collider in grab.colliders)
         {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5478927030165874394}
   - component: {fileID: 1138836325686875207}
   - component: {fileID: 6658058179229224203}
+  - component: {fileID: 3610793274866099192}
   m_Layer: 11
   m_Name: thigh_r
   m_TagString: Limb
@@ -224,6 +225,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &3610793274866099192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46161230457778046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &77492875127039506
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,6 +932,7 @@ GameObject:
   - component: {fileID: 5566672391117026680}
   - component: {fileID: 243904692589418205}
   - component: {fileID: 6491550939904994300}
+  - component: {fileID: 1024277234591833064}
   m_Layer: 11
   m_Name: calf_l
   m_TagString: Limb
@@ -1125,6 +1144,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &1024277234591833064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259119464504184060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &1321668128469656628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1206,7 @@ GameObject:
   - component: {fileID: 6449526588800578029}
   - component: {fileID: 1111476541528113363}
   - component: {fileID: 1648214323931684599}
+  - component: {fileID: 6269601411126969175}
   m_Layer: 11
   m_Name: calf_r
   m_TagString: Limb
@@ -1381,6 +1418,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &6269601411126969175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361967335690215650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &1393317193410357758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,6 +1576,7 @@ GameObject:
   - component: {fileID: 6038077858778927178}
   - component: {fileID: 4711088959913267087}
   - component: {fileID: 1524274433821539804}
+  - component: {fileID: 6251353344718145365}
   m_Layer: 11
   m_Name: spine_02
   m_TagString: Torso
@@ -1713,6 +1768,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &6251353344718145365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565471523471139988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &1597364131631177180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1930,7 @@ GameObject:
   - component: {fileID: 1476349715826124735}
   - component: {fileID: 4163483192303381920}
   - component: {fileID: 917481926393084255}
+  - component: {fileID: 5496151857608535759}
   m_Layer: 11
   m_Name: pelvis
   m_TagString: Torso
@@ -2049,6 +2122,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &5496151857608535759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826787059139746238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &1874097904319707659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,6 +2279,7 @@ GameObject:
   - component: {fileID: 1458833921123432898}
   - component: {fileID: 1647006497930908198}
   - component: {fileID: 7223785902321836383}
+  - component: {fileID: 7043773108396718992}
   m_Layer: 11
   m_Name: lowerarm_l
   m_TagString: Limb
@@ -2400,6 +2491,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &7043773108396718992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2357275562501099918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &2482659158261452030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,6 +2586,7 @@ GameObject:
   - component: {fileID: 2951499627475542900}
   - component: {fileID: 7225310055737012585}
   - component: {fileID: 1792139476903780711}
+  - component: {fileID: 8403026041736075768}
   m_Layer: 11
   m_Name: thigh_l
   m_TagString: Limb
@@ -2689,6 +2798,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &8403026041736075768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549321796940964193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &2567599977442365188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,6 +2986,7 @@ GameObject:
   - component: {fileID: 8081716267053347078}
   - component: {fileID: 5370885271320710936}
   - component: {fileID: 752520012887925644}
+  - component: {fileID: 3076940947421864000}
   m_Layer: 11
   m_Name: upperarm_r
   m_TagString: Limb
@@ -3071,6 +3198,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &3076940947421864000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023254600814940911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &3031762165643511045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,6 +3647,7 @@ MonoBehaviour:
   - {fileID: 2727797291376905665}
   - {fileID: 6013663743721608413}
   health: 100
+  dead: 0
   canKill: 1
   puppet: {fileID: 4832323292894611451}
   behaviour: {fileID: 3903315502105071363}
@@ -3514,6 +3659,38 @@ MonoBehaviour:
   attackDistance: 0.5
   enemyType: 0
   despawnTime: 30
+  playHitSound: 1
+  hitAudios:
+  - {fileID: 8300000, guid: 5583e9c9a0afdf0408f9d0946666f85a, type: 3}
+  - {fileID: 8300000, guid: 572fe06c861000149bc4b51cc1fdb09d, type: 3}
+  - {fileID: 8300000, guid: 88b91714a2e2cbb428f61e18ca4d39d8, type: 3}
+  - {fileID: 8300000, guid: 80cc6816623c9a04580970e36613d8c4, type: 3}
+  - {fileID: 8300000, guid: cad57fcf83264a4489ae5c41b55e7a8b, type: 3}
+  - {fileID: 8300000, guid: 132005c60d8148440b6f375a773d8f8e, type: 3}
+  - {fileID: 8300000, guid: 50b441f111083504d90ad648f16723e0, type: 3}
+  - {fileID: 8300000, guid: 36104c8b981b4a349a1948b61c9e8a20, type: 3}
+  - {fileID: 8300000, guid: 14a883f5f8241cc4ca1f35fe54fef1d2, type: 3}
+  - {fileID: 8300000, guid: 62c41c4c89235bd42bf85b0e4c855d1a, type: 3}
+  - {fileID: 8300000, guid: c39ba448713aff147bdc2b9b4126b1d8, type: 3}
+  - {fileID: 8300000, guid: f549a9145c031244a89a2d36d5f18757, type: 3}
+  - {fileID: 8300000, guid: 9ef3f6cb1b48c67419812b50793d9da6, type: 3}
+  deathAudios:
+  - {fileID: 8300000, guid: 37670623b2aa89a4589af3d795088c80, type: 3}
+  - {fileID: 8300000, guid: 6857c17d0b39a594298d2c0ebc09f389, type: 3}
+  - {fileID: 8300000, guid: 9ac9e455e130968459fc7ff35a33428c, type: 3}
+  - {fileID: 8300000, guid: f325d26adff89d64cb93f78147635cf7, type: 3}
+  - {fileID: 8300000, guid: 8f4f375ffa0090842aeb8c5e2df71b5f, type: 3}
+  - {fileID: 8300000, guid: c302c20ebf79ed14d88d8d07ce9f7c3e, type: 3}
+  - {fileID: 8300000, guid: 2befdd9e638fca240b795c5cffb7aed2, type: 3}
+  - {fileID: 8300000, guid: 750dad2c35d71a44fb6d408b4d245bf8, type: 3}
+  - {fileID: 8300000, guid: 73a158e99ad07154280d61719abe8d6c, type: 3}
+  - {fileID: 8300000, guid: ecd29f4b49237634a8076c528b2a5694, type: 3}
+  - {fileID: 8300000, guid: 34c6c2a5121658d41883db4354057833, type: 3}
+  - {fileID: 8300000, guid: ab311aab76ae384488143d38eaef60fb, type: 3}
+  - {fileID: 8300000, guid: 91d90d87d4a340d4d9f4b28798993a96, type: 3}
+  - {fileID: 8300000, guid: b1def8c35ba07fb49bccee81e6bbfb92, type: 3}
+  - {fileID: 8300000, guid: b0ffcf6cc5c93b942a7482cd6470415a, type: 3}
+  hitAudioSource: {fileID: 6477013575614802486}
 --- !u!1 &4124392582080151352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,6 +4849,7 @@ GameObject:
   - component: {fileID: 4765451195579825597}
   - component: {fileID: 4850029924774226373}
   - component: {fileID: 3911452757810407749}
+  - component: {fileID: 7986276901268567101}
   m_Layer: 11
   m_Name: hand_r
   m_TagString: Limb
@@ -4844,6 +5022,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19, y: 0.1, z: 0.16}
   m_Center: {x: 0.12, y: -0.03, z: 0}
+--- !u!114 &7986276901268567101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103878776713282566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &5153618856909286121
 GameObject:
   m_ObjectHideFlags: 0
@@ -5498,6 +5693,7 @@ GameObject:
   - component: {fileID: 7511224103800441024}
   - component: {fileID: 6925906327607192127}
   - component: {fileID: 29481172282954881}
+  - component: {fileID: 6270560348172686504}
   m_Layer: 11
   m_Name: foot_l
   m_TagString: Limb
@@ -5650,6 +5846,23 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6270560348172686504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026453493039465069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &7104082083213000497
 GameObject:
   m_ObjectHideFlags: 0
@@ -5869,7 +6082,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.75
-  m_BaseOffset: 0
+  m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1 &7651000020692149606
@@ -5885,6 +6098,7 @@ GameObject:
   - component: {fileID: 3363376924838436691}
   - component: {fileID: 8684594263477703366}
   - component: {fileID: 306151277262385990}
+  - component: {fileID: 3852067139011555992}
   m_Layer: 11
   m_Name: lowerarm_r
   m_TagString: Limb
@@ -6096,6 +6310,23 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &3852067139011555992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651000020692149606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &7656881857649673394
 GameObject:
   m_ObjectHideFlags: 0
@@ -6432,6 +6663,8 @@ GameObject:
   - component: {fileID: 7503699808981655735}
   - component: {fileID: 6545559404577688711}
   - component: {fileID: 8202387415777983145}
+  - component: {fileID: 6477013575614802486}
+  - component: {fileID: 5564879762601918053}
   m_Layer: 11
   m_Name: head
   m_TagString: Head
@@ -6620,6 +6853,119 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!82 &6477013575614802486
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871396300266831527}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5564879762601918053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871396300266831527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &8181058358830582010
 GameObject:
   m_ObjectHideFlags: 0
@@ -6664,6 +7010,7 @@ GameObject:
   - component: {fileID: 4527584878677984081}
   - component: {fileID: 1871534661409069587}
   - component: {fileID: 8066661595649450288}
+  - component: {fileID: 3794450167487571165}
   m_Layer: 11
   m_Name: hand_l
   m_TagString: Limb
@@ -6836,6 +7183,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19, y: 0.1, z: 0.16}
   m_Center: {x: -0.12, y: 0.03, z: 0}
+--- !u!114 &3794450167487571165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197683890831380680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
 --- !u!1 &8284450549736490763
 GameObject:
   m_ObjectHideFlags: 0
@@ -6967,6 +7331,7 @@ GameObject:
   - component: {fileID: 3301629971148732315}
   - component: {fileID: 1085970846526204511}
   - component: {fileID: 8049398299127454545}
+  - component: {fileID: 1014961768062567911}
   m_Layer: 11
   m_Name: upperarm_l
   m_TagString: Limb
@@ -7178,3 +7543,20 @@ MonoBehaviour:
     offset: 0.75
     angleWeight: 0.5
     isGrabbable: 1
+--- !u!114 &1014961768062567911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153759794263178606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 812bdb44047012d46b7fae2f779c5a81, type: 3}
+  volumeModifier: 1.2
+  layers:
+    serializedVersion: 2
+    m_Bits: 712
