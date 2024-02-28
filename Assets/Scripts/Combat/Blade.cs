@@ -165,7 +165,7 @@ public class Blade : MonoBehaviour
             if (npc)
             {
                 npc.piercedBy.Add(this);
-                npc.DealDamage(stabbedCollider.transform.tag, pierceDamage);
+                npc.DealDamage(stabbedCollider.transform.tag, pierceDamage, false);
             }
             stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
             DecalProjector decalProjector = Instantiate(decal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), stabbedCollider.transform).GetComponent<DecalProjector>();

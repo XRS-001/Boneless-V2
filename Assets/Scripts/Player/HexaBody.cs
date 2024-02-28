@@ -21,6 +21,7 @@ public class HexaBody : MonoBehaviour
     public Transform trackedOffset;
     public GrabPhysics[] grabbing;
     public VRIK finalSolver;
+    public AudioClip footstepSound;
     [Header("Actionbased Controller")]
     public Transform CameraController;
     public ActionBasedController RightHandController;
@@ -87,8 +88,14 @@ public class HexaBody : MonoBehaviour
 
     void Start()
     {
+        finalSolver.solver.locomotion.onLeftFootstep.AddListener(PlayStepAudio);
+        finalSolver.solver.locomotion.onRightFootstep.AddListener(PlayStepAudio);
         additionalHeight = (0.5f * Monoball.transform.lossyScale.y) + (0.5f * Fender.transform.lossyScale.y) + (Head.transform.position.y - Chest.transform.position.y);
         previousHeadPosition = CameraController.localPosition;
+    }
+    void PlayStepAudio()
+    {
+        AudioSource.PlayClipAtPoint(footstepSound, finalSolver.transform.position, 0.2f);
     }
     void Update()
     {

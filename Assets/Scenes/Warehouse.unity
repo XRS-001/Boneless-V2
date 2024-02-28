@@ -20361,6 +20361,7 @@ MonoBehaviour:
   - {fileID: 2077718719}
   - {fileID: 276302960}
   finalSolver: {fileID: 5859119790419712338}
+  footstepSound: {fileID: 8300000, guid: 9e5ce0c66f47078489d947cf73c34e2c, type: 3}
   CameraController: {fileID: 1492801357}
   RightHandController: {fileID: 1631724693}
   trackedSolverRightTarget: {fileID: 333540493}
@@ -45782,6 +45783,7 @@ GameObject:
   - component: {fileID: 2144486509964595054}
   - component: {fileID: 2144486509964595056}
   - component: {fileID: 2144486509964595057}
+  - component: {fileID: 2144486509964595058}
   m_Layer: 11
   m_Name: mixamorig1:LeftArm
   m_TagString: Limb
@@ -50068,6 +50070,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &2144486509964595058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243296839739732243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &2157890871094344827
 GameObject:
   m_ObjectHideFlags: 0
@@ -57375,6 +57392,7 @@ GameObject:
   - component: {fileID: 5873663176728159966}
   - component: {fileID: 5873663176728159968}
   - component: {fileID: 5873663176728159969}
+  - component: {fileID: 5873663176728159970}
   m_Layer: 11
   m_Name: mixamorig1:RightLeg
   m_TagString: Limb
@@ -58982,6 +59000,7 @@ GameObject:
   - component: {fileID: 8402032827286001817}
   - component: {fileID: 8402032827286001819}
   - component: {fileID: 8402032827286001820}
+  - component: {fileID: 8402032827286001821}
   m_Layer: 11
   m_Name: mixamorig1:RightUpLeg
   m_TagString: Limb
@@ -68108,6 +68127,7 @@ GameObject:
   - component: {fileID: 8118104789604953519}
   - component: {fileID: 8118104789604953520}
   - component: {fileID: 8118104789604953521}
+  - component: {fileID: 8118104789604953522}
   m_Layer: 11
   m_Name: mixamorig1:Spine1
   m_TagString: Torso
@@ -69232,6 +69252,7 @@ GameObject:
   - component: {fileID: 5407406704833370451}
   - component: {fileID: 5407406704833370452}
   - component: {fileID: 5407406704833370453}
+  - component: {fileID: 5407406704833370454}
   m_Layer: 11
   m_Name: mixamorig1:Head
   m_TagString: Head
@@ -69539,6 +69560,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &5407406704833370454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407406704833370446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 2
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!4 &5411360484882739335
 Transform:
   m_ObjectHideFlags: 0
@@ -69914,6 +69950,7 @@ GameObject:
   - component: {fileID: 7032399069667834100}
   - component: {fileID: 7032399069667834102}
   - component: {fileID: 7032399069667834103}
+  - component: {fileID: 7032399069667834104}
   m_Layer: 11
   m_Name: mixamorig1:LeftForeArm
   m_TagString: Limb
@@ -70635,6 +70672,7 @@ GameObject:
   - component: {fileID: 5776542098071214502}
   - component: {fileID: 5776542098071214504}
   - component: {fileID: 5776542098071214505}
+  - component: {fileID: 5776542098071214506}
   m_Layer: 11
   m_Name: mixamorig1:LeftLeg
   m_TagString: Limb
@@ -70847,6 +70885,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &5776542098071214506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5776542098071214500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!33 &5778264149181853505
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -71672,7 +71725,7 @@ MonoBehaviour:
       maxRootAngleStanding: 90
       stepLengthMlp: 1
       footDistance: 0.25
-      stepThreshold: 0.1
+      stepThreshold: 0.3
       angleThreshold: 30
       comAngleMlp: 1
       maxVelocity: 0.4
@@ -72016,6 +72069,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &5873663176728159970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3759029271579401548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &5876590724794443210
 GameObject:
   m_ObjectHideFlags: 0
@@ -75676,6 +75744,7 @@ GameObject:
   - component: {fileID: 6733439093753092741}
   - component: {fileID: 6733439093753092743}
   - component: {fileID: 6733439093753092744}
+  - component: {fileID: 6733439093753092745}
   m_Layer: 11
   m_Name: mixamorig1:RightArm
   m_TagString: Limb
@@ -75888,6 +75957,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &6733439093753092745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6733439093753092739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!4 &6752427158071050073
 Transform:
   m_ObjectHideFlags: 0
@@ -76970,6 +77054,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &7032399069667834104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5512425828358407298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!4 &7032720078684333112
 Transform:
   m_ObjectHideFlags: 0
@@ -77358,6 +77457,7 @@ GameObject:
   - component: {fileID: 7095122937987061761}
   - component: {fileID: 7095122937987061762}
   - component: {fileID: 7095122937987061763}
+  - component: {fileID: 7095122937987061764}
   m_Layer: 11
   m_Name: mixamorig1:Hips
   m_TagString: Torso
@@ -77569,6 +77669,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &7095122937987061764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7095122937987061757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 1.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!4 &7100889911078006360
 Transform:
   m_ObjectHideFlags: 0
@@ -79592,6 +79707,7 @@ GameObject:
   - component: {fileID: 8247673683768614715}
   - component: {fileID: 8247673683768614717}
   - component: {fileID: 8247673683768614718}
+  - component: {fileID: 8247673683768614719}
   m_Layer: 11
   m_Name: mixamorig1:LeftUpLeg
   m_TagString: Limb
@@ -81213,6 +81329,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &8118104789604953522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108247241374940042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 1.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!64 &8129119297460490508
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -82580,6 +82711,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &8247673683768614719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615674646074883044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!4 &8249330304544018961
 Transform:
   m_ObjectHideFlags: 0
@@ -83546,6 +83692,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &8402032827286001821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4001853666969472974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!4 &8403086847710306743
 Transform:
   m_ObjectHideFlags: 0
@@ -86865,6 +87026,7 @@ GameObject:
   - component: {fileID: 9021297149247539211}
   - component: {fileID: 9021297149247539213}
   - component: {fileID: 9021297149247539214}
+  - component: {fileID: 9021297149247539215}
   m_Layer: 11
   m_Name: mixamorig1:RightForeArm
   m_TagString: Limb
@@ -87077,6 +87239,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &9021297149247539215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021297149247539209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!33 &9047173214161894965
 MeshFilter:
   m_ObjectHideFlags: 0

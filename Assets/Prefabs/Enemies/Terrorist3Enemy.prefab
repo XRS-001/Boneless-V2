@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 4582137042644911046}
   - component: {fileID: 2946192522889393520}
   - component: {fileID: 5519958062254548332}
+  - component: {fileID: 6751148515432622824}
   m_Layer: 11
   m_Name: calf_r
   m_TagString: Limb
@@ -539,6 +540,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &6751148515432622824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461906936853968875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &565378703874972443
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +601,7 @@ GameObject:
   - component: {fileID: 1182044386820472174}
   - component: {fileID: 7711490347315665008}
   - component: {fileID: 2182977816426810445}
+  - component: {fileID: 5874277473529005565}
   m_Layer: 11
   m_Name: calf_l
   m_TagString: Limb
@@ -813,6 +830,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &5874277473529005565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925513612334289124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &1372789288652297985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,6 +1072,7 @@ GameObject:
   - component: {fileID: 7647904300248412702}
   - component: {fileID: 8136626517276101710}
   - component: {fileID: 6177687141768372408}
+  - component: {fileID: 2252282523308695940}
   m_Layer: 11
   m_Name: upperarm_l
   m_TagString: Limb
@@ -1268,6 +1301,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &2252282523308695940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495863646730846895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &1564979283773359858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1623,7 @@ GameObject:
   - component: {fileID: 5179073600442419071}
   - component: {fileID: 7740328963248723076}
   - component: {fileID: 3755974486802415270}
+  - component: {fileID: 9124676293112181879}
   m_Layer: 11
   m_Name: thigh_l
   m_TagString: Limb
@@ -1803,6 +1852,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &9124676293112181879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965086083800257350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &2091674376644109036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3917,6 +3981,7 @@ GameObject:
   - component: {fileID: 7138257798203152891}
   - component: {fileID: 6534813339216635258}
   - component: {fileID: 6442866882235844443}
+  - component: {fileID: 4671606964662183089}
   m_Layer: 11
   m_Name: lowerarm_r
   m_TagString: Limb
@@ -4145,6 +4210,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &4671606964662183089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3643387428233171996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &3709251542810151858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4434,6 +4514,7 @@ GameObject:
   - component: {fileID: 4701511561385171569}
   - component: {fileID: 5068145626665594585}
   - component: {fileID: 5207043077369677147}
+  - component: {fileID: 654634640046044388}
   m_Layer: 11
   m_Name: head
   m_TagString: Head
@@ -4737,6 +4818,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &654634640046044388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355426348439237956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 1.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &4366724414899823333
 GameObject:
   m_ObjectHideFlags: 0
@@ -5324,11 +5420,6 @@ MonoBehaviour:
   collisionResistanceMultipliers:
   - layers:
       serializedVersion: 2
-      m_Bits: 8
-    multiplier: 0.2
-    collisionThreshold: 0
-  - layers:
-      serializedVersion: 2
       m_Bits: 512
     multiplier: 0.3
     collisionThreshold: 0
@@ -5904,6 +5995,7 @@ GameObject:
   - component: {fileID: 7252361720379268024}
   - component: {fileID: 2896247502739992474}
   - component: {fileID: 1767813625889661336}
+  - component: {fileID: 6770714362983755154}
   m_Layer: 11
   m_Name: thigh_r
   m_TagString: Limb
@@ -6132,6 +6224,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &6770714362983755154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096199886195834902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &6342999998789471791
 GameObject:
   m_ObjectHideFlags: 0
@@ -6412,6 +6519,7 @@ GameObject:
   - component: {fileID: 6655698366413115187}
   - component: {fileID: 2904443524489529642}
   - component: {fileID: 8015727018095125525}
+  - component: {fileID: 7491229209154684976}
   m_Layer: 11
   m_Name: spine_02
   m_TagString: Torso
@@ -6624,6 +6732,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &7491229209154684976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670201145000723610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 1.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &6859546562960337349
 GameObject:
   m_ObjectHideFlags: 0
@@ -6637,6 +6760,7 @@ GameObject:
   - component: {fileID: 6641132544387384678}
   - component: {fileID: 4874491587395963443}
   - component: {fileID: 2517984160232864119}
+  - component: {fileID: 2470072280594503303}
   m_Layer: 11
   m_Name: pelvis
   m_TagString: Torso
@@ -6845,6 +6969,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &2470072280594503303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859546562960337349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 1.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &6884850815805675708
 GameObject:
   m_ObjectHideFlags: 0
@@ -7277,6 +7416,7 @@ GameObject:
   - component: {fileID: 8734891226071354547}
   - component: {fileID: 1606484767615596163}
   - component: {fileID: 112082284850843926}
+  - component: {fileID: 4686222149372722606}
   m_Layer: 11
   m_Name: lowerarm_l
   m_TagString: Limb
@@ -7505,6 +7645,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &4686222149372722606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497176815275109134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &7537790069977471006
 GameObject:
   m_ObjectHideFlags: 0
@@ -7957,6 +8112,7 @@ GameObject:
   - component: {fileID: 1605031845379229540}
   - component: {fileID: 4377559901161996423}
   - component: {fileID: 3195931701364793551}
+  - component: {fileID: 5009922297917269628}
   m_Layer: 11
   m_Name: upperarm_r
   m_TagString: Limb
@@ -8185,6 +8341,21 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &5009922297917269628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8329017224343829056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2510a95e71156e443ab57f7a560b3ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitThreshold: 5
+  damageMultiplier: 0.5
+  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
 --- !u!1 &8548083339310794240
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class NPC : MonoBehaviour
     public bool dead;
     private float startingHealth;
     public bool canKill;
+    private bool canHit = true;
     private float startDamper;
     public PuppetMaster puppet;
     public BehaviourPuppet behaviour;
@@ -29,6 +30,8 @@ public class NPC : MonoBehaviour
     private bool stunned = false;
     private bool canChase = true;
     private bool isStanding = true;
+    private bool isAttacking = false;
+    private bool canPunch = true;
     public float despawnTime;
     public bool playHitSound;
     public AudioClip[] hitAudios;
@@ -60,46 +63,75 @@ public class NPC : MonoBehaviour
         puppet.angularLimits = true;
         isStanding = false;
     }
-    public void DealDamage(string bodyPart, float damage)
+    public void DealDamage(string bodyPart, float damage, bool blunt)
     {
-        switch(bodyPart)
-        {
-            case "Limb":
-                health -= damage;
+        if(canHit && !blunt)
+            switch (bodyPart)
+            {
+                case "Limb":
+                    health -= damage;
 
-                if (health > 0)
-                    hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
-                else if (!dead)
-                {
-                    hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
-                    dead = true;
-                }
-
-                break;
-            case "Head":
-                health -= damage * 4;
-                break;
-            case "Torso":
-                stunned = true;
-                health -= damage * 2;
-
-                if (playHitSound)
-                {
                     if (health > 0)
                         hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
                     else if (!dead)
                     {
                         hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
-                        dead = true;
                     }
-                }
+
+                    break;
+                case "Head":
+                    health -= damage * 4;
+                    break;
+                case "Torso":
+                    stunned = true;
+                    health -= damage * 2;
+
+                    if (playHitSound)
+                    {
+                        if (health > 0)
+                            hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
+                        else if (!dead)
+                        {
+                            hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
+                        }
+                    }
+
+                    if (animator)
+                        animator.SetTrigger("Hit");
+                    Invoke(nameof(UnStun), 1f);
+                    break;
+            }
+        else if (canHit)
+        {
+            health -= damage;
+            if(bodyPart == "Torso")
+            {
+                stunned = true;
 
                 if (animator)
                     animator.SetTrigger("Hit");
                 Invoke(nameof(UnStun), 1f);
-                break;
+            }
+
+            if (playHitSound)
+            {
+                if (health > 0)
+                    hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
+                else if (!dead)
+                {
+                    hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
+                }
+            }
         }
 
+        if (blunt)
+            StartCoroutine(DelayCanHit());
+    }
+    IEnumerator DelayCanHit()
+    {
+        canHit = false;
+        yield return new WaitForSeconds(0.25f);
+        canHit = true;
     }
     void UnStun()
     {
@@ -114,6 +146,7 @@ public class NPC : MonoBehaviour
         if(health <= 0 && puppet.state != PuppetMaster.State.Dead)
         {
             puppet.state = PuppetMaster.State.Dead;
+            dead = true;
             puppet.muscleDamper = 25;
             StartCoroutine(Destroy());
         }
@@ -151,7 +184,17 @@ public class NPC : MonoBehaviour
             {
                 AttackPlayer();
             }
-        }   
+        }
+        if (isAttacking && canPunch)
+        {
+            animator.SetTrigger("Punch");
+            canPunch = false;
+            Invoke(nameof(DelayCanPunch), 3);
+        }
+    }
+    void DelayCanPunch()
+    {
+        canPunch = true;
     }
     IEnumerator Destroy()
     {
@@ -169,6 +212,7 @@ public class NPC : MonoBehaviour
     }
     void FollowPlayer()
     {
+        isAttacking = false;
         animator.SetBool("Chasing", true);
         agent.SetDestination(player.position);
 
@@ -187,6 +231,7 @@ public class NPC : MonoBehaviour
     void AttackPlayer()
     {
         canChase = false;
+        isAttacking = true;
         agent.SetDestination(agent.transform.position);
         agent.transform.LookAt(new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
 
