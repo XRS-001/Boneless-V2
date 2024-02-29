@@ -71,11 +71,14 @@ public class NPC : MonoBehaviour
                 case "Limb":
                     health -= damage;
 
-                    if (health > 0)
-                        hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
-                    else if (!dead)
+                    if(playHitSound)
                     {
-                        hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
+                        if (health > 0)
+                            hitAudioSource.PlayOneShot(hitAudios[Random.Range(0, hitAudios.Length - 1)]);
+                        else if (!dead)
+                        {
+                            hitAudioSource.PlayOneShot(deathAudios[Random.Range(0, deathAudios.Length - 1)]);
+                        }
                     }
 
                     break;
@@ -167,7 +170,7 @@ public class NPC : MonoBehaviour
             distance = Vector3.Distance(agent.transform.position, new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
             if (distance > attackDistance && canChase == false)
             {
-                Invoke(nameof(DelayChase), 0.05f);
+                Invoke(nameof(DelayChase), 0.2f);
             }
             if (!isGrabbing && distance > attackDistance && canChase && isStanding && !stunned)
             {
@@ -187,14 +190,28 @@ public class NPC : MonoBehaviour
         }
         if (isAttacking && canPunch)
         {
-            animator.SetTrigger("Punch");
+            int randomNum = Random.Range(1, 3);
+            switch (randomNum)
+            {
+                case 1:
+                    animator.SetBool("Punch2", false);
+                    animator.SetBool("Punch1", true);
+                    break;
+
+                case 2:
+                    animator.SetBool("Punch1", false);
+                    animator.SetBool("Punch2", true);
+                    break;
+            }
             canPunch = false;
-            Invoke(nameof(DelayCanPunch), 3);
+            Invoke(nameof(DelayCanPunch), 1);
         }
     }
     void DelayCanPunch()
     {
         canPunch = true;
+        animator.SetBool("Punch1", false);
+        animator.SetBool("Punch2", false);
     }
     IEnumerator Destroy()
     {
@@ -214,6 +231,8 @@ public class NPC : MonoBehaviour
     {
         isAttacking = false;
         animator.SetBool("Chasing", true);
+        animator.SetBool("Attacking", false);
+
         agent.SetDestination(player.position);
 
         if (agent.remainingDistance > agent.stoppingDistance)
@@ -232,6 +251,7 @@ public class NPC : MonoBehaviour
     {
         canChase = false;
         isAttacking = true;
+        animator.SetBool("Attacking", true);
         agent.SetDestination(agent.transform.position);
         agent.transform.LookAt(new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
 

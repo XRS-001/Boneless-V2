@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class VRIKData
@@ -13,6 +15,17 @@ public class VRIKData
 }
 public class GameManager : MonoBehaviour
 {
+    [Header("Player")]
+    public float health;
+    public HexaBody body;
+    public AudioSource mouthAudio;
+    public AudioClip[] hitSounds;
+    public AudioClip[] deathSounds;
+    private float startingHealth;
+    private bool dead = false;
+    private bool canDamage = true;
+    public Volume postProcessingVolume;
+    private Vignette vignette;
     [Header("Default Targets")]
     public Transform defaultLeftHandTarget;
     public Transform defaultRightHandTarget;
@@ -45,6 +58,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI dummyCanKillText;
     private void Start()
     {
+        if (postProcessingVolume.profile.TryGet<Vignette>(out vignette))
+
+        startingHealth = health;
+        StartCoroutine(HealPlayer());
         if(externalCamera)
         {
             startPosition = externalCamera.transform.position;
@@ -57,8 +74,54 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
     }
+    void Kill()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    IEnumerator HealPlayer()
+    {
+        float timer = 0;
+        while (health > 0)
+        {
+            if (!canDamage)
+            {
+                timer = 0;
+            }
+            if (timer > 5)
+                health = Mathf.Clamp(health += Time.deltaTime * 4, 0, startingHealth);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+    public void DealDamage(float damage)
+    {
+        if (canDamage)
+        {
+            health -= damage;
+            mouthAudio.PlayOneShot(hitSounds[Random.Range(0, hitSounds.Length - 1)]);
+            StartCoroutine(DelayCanDamage());
+        }
+    }
+    IEnumerator DelayCanDamage()
+    {
+        canDamage = false;
+        yield return new WaitForSeconds(1);
+        canDamage = true;
+    }
     private void Update()
     {
+        vignette.intensity.value = Mathf.Lerp(0.3f, 0, health / startingHealth);
+        if(health <= 0 && !dead)
+        {
+            dead = true;
+            JointDrive jointDrive = body.Spine.yDrive;
+            jointDrive.positionSpring = 0;
+            body.Spine.yDrive = jointDrive;
+            blurImage.CrossFadeAlpha(1, 2, false);
+            mouthAudio.PlayOneShot(deathSounds[Random.Range(0, deathSounds.Length - 1)]);
+            Invoke(nameof(Kill), 3);
+        }
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
 
