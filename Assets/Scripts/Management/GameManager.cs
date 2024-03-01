@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public float health;
     public HexaBody body;
+    public bool canKill;
     public AudioSource mouthAudio;
     public AudioClip[] hitSounds;
     public AudioClip[] deathSounds;
@@ -58,7 +59,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI dummyCanKillText;
     private void Start()
     {
-        if (postProcessingVolume.profile.TryGet<Vignette>(out vignette))
+        if(postProcessingVolume)
+            if (postProcessingVolume.profile.TryGet<Vignette>(out vignette))
 
         startingHealth = health;
         StartCoroutine(HealPlayer());
@@ -111,8 +113,9 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        vignette.intensity.value = Mathf.Lerp(0.3f, 0, health / startingHealth);
-        if(health <= 0 && !dead)
+        if(vignette)
+            vignette.intensity.value = Mathf.Lerp(1f, 0, health / startingHealth);
+        if (health <= 0 && !dead && canKill)
         {
             dead = true;
             JointDrive jointDrive = body.Spine.yDrive;

@@ -25393,6 +25393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   body: {fileID: 1036415094}
+  canKill: 1
   mouthAudio: {fileID: 286862141}
   hitSounds:
   - {fileID: 8300000, guid: 164c4cd428e81554a89f938451aae22f, type: 3}
@@ -50230,8 +50231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!1 &2157890871094344827
 GameObject:
   m_ObjectHideFlags: 0
@@ -69720,8 +69720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 2
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 2.5
 --- !u!4 &5411360484882739335
 Transform:
   m_ObjectHideFlags: 0
@@ -71045,8 +71044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!33 &5778264149181853505
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -72229,8 +72227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!1 &5876590724794443210
 GameObject:
   m_ObjectHideFlags: 0
@@ -76117,8 +76114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!4 &6752427158071050073
 Transform:
   m_ObjectHideFlags: 0
@@ -77214,8 +77210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!4 &7032720078684333112
 Transform:
   m_ObjectHideFlags: 0
@@ -77829,8 +77824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 1.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 2
 --- !u!4 &7100889911078006360
 Transform:
   m_ObjectHideFlags: 0
@@ -81489,8 +81483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 1.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 2
 --- !u!64 &8129119297460490508
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -82871,8 +82864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!4 &8249330304544018961
 Transform:
   m_ObjectHideFlags: 0
@@ -83852,8 +83844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!4 &8403086847710306743
 Transform:
   m_ObjectHideFlags: 0
@@ -87399,8 +87390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitThreshold: 5
-  damageMultiplier: 0.5
-  decal: {fileID: 8087582733255711728, guid: f6612e49778df81479e8f486de340f35, type: 3}
+  damageMultiplier: 0.75
 --- !u!33 &9047173214161894965
 MeshFilter:
   m_ObjectHideFlags: 0

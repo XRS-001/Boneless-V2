@@ -167,24 +167,12 @@ public class Blade : MonoBehaviour
                 npc.piercedBy.Add(this);
                 npc.DealDamage(stabbedCollider.transform.tag, pierceDamage, false);
             }
-            stabbedCollider.Raycast(new Ray(transform.position, stabbedCollider.ClosestPoint(transform.TransformPoint(piercePoint)) - transform.position), out RaycastHit hitInfo, float.PositiveInfinity);
-            DecalProjector decalProjector = Instantiate(decal, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), stabbedCollider.transform).GetComponent<DecalProjector>();
-            StartCoroutine(BloodOpacity(decalProjector));
         }
         yield return new WaitForSeconds(0.5f);
         if(stabbed)
             canStab = false;
     }
-    IEnumerator BloodOpacity(DecalProjector decal)
-    {
-        float timer = 0;
-        while (timer < 0.1f)
-        {
-            decal.fadeFactor = Mathf.Lerp(0, 1, timer / 0.1f);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
