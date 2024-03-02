@@ -14,7 +14,6 @@ public class Blade : MonoBehaviour
     [Header("Stab Data")]
     public Collider[] colliders;
     public float pierceDamage;
-    public GameObject decal;
     [Tooltip("The axis of the blade")]
     public upDirection stabDirection;
     public Vector3 piercePoint;
@@ -46,9 +45,8 @@ public class Blade : MonoBehaviour
         {
             TryStab();
         }
-        if (hitPoint)
-            if (stabbed && Vector3.Distance(hitPoint.transform.position, transform.TransformPoint(piercePoint)) < 0.2f && !canStab)
-                UnStab();
+        if (stabbed && Vector3.Distance(hitPoint.transform.position, transform.TransformPoint(piercePoint)) < 0.2f && !canStab)
+            UnStab();
     }
     public void UnStab()
     {
@@ -99,7 +97,20 @@ public class Blade : MonoBehaviour
                 StartCoroutine(WaitToSFX());
 
                 hitPoint = new GameObject("HitPoint");
-                hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.2f));
+                switch (stabDirection)
+                {
+                    case upDirection.forward:
+                        hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z - 0.2f));
+                        break;
+
+                    case upDirection.up:
+                        hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y - 0.2f, piercePoint.z));
+                        break;
+
+                    case upDirection.right:
+                        hitPoint.transform.position = transform.TransformPoint(new Vector3(piercePoint.x - 0.2f, piercePoint.y, piercePoint.z));
+                        break;
+                }
                 hitPoint.transform.parent = stabbedCollider.transform;
 
                 foreach (Collider ragdollCollider in stabbedCollider.transform.root.GetComponentsInChildren<Collider>())
@@ -168,7 +179,7 @@ public class Blade : MonoBehaviour
                 npc.DealDamage(stabbedCollider.transform.tag, pierceDamage, false);
             }
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         if(stabbed)
             canStab = false;
     }
@@ -178,7 +189,20 @@ public class Blade : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         Gizmos.DrawSphere(transform.TransformPoint(piercePoint), 0.035f);
         Gizmos.color = new Color(0, 1, 0, 1f);
-        Gizmos.DrawRay(transform.TransformPoint(piercePoint), transform.TransformPoint(piercePoint) - transform.TransformPoint(new Vector3(piercePoint.x, piercePoint.y, piercePoint.z + limit)));
+        switch (stabDirection)
+        {
+            case upDirection.forward:
+                Gizmos.DrawRay(transform.TransformPoint(piercePoint), -transform.forward * limit);
+                break;
+
+            case upDirection.right:
+                Gizmos.DrawRay(transform.TransformPoint(piercePoint), -transform.right * limit);
+                break;
+
+            case upDirection.up:
+                Gizmos.DrawRay(transform.TransformPoint(piercePoint), -transform.up * limit);
+                break;
+        }
         Gizmos.color = new Color(1, 0, 0, 1f);
     }
 }
