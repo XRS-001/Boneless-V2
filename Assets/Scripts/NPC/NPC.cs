@@ -56,11 +56,13 @@ public class NPC : MonoBehaviour
         puppet.muscleDamper = startDamper;
         isStanding = true;
         puppet.angularLimits = false;
+        puppet.internalCollisions = false;
     }
     void Fall()
     {
         puppet.muscleDamper = 25;
         puppet.angularLimits = true;
+        puppet.internalCollisions = true;
         isStanding = false;
     }
     public void DealDamage(string bodyPart, float damage, bool blunt)

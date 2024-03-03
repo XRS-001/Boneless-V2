@@ -194,7 +194,20 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayGrab()
     {
-        if(distanceHovering)
+        if (grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        {
+            foreach (ArmJoint joint in armJoints)
+            {
+                joint.rb.isKinematic = true;
+            }
+            yield return new WaitForSeconds(0.01f);
+
+            foreach (ArmJoint joint in armJoints)
+            {
+                joint.rb.isKinematic = false;
+            }
+        }
+        if (distanceHovering)
         {
             foreach(Collider collider in grab.colliders)
             {
@@ -204,19 +217,6 @@ public class GrabPhysics : MonoBehaviour
             foreach (Collider collider in grab.colliders)
             {
                 collider.enabled = true;
-            }
-        }
-        if (grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
-        {
-            foreach (ArmJoint joint in armJoints)
-            {
-                joint.rb.isKinematic = true;
-            }
-            yield return new WaitForSeconds(0.001f);
-
-            foreach (ArmJoint joint in armJoints)
-            {
-                joint.rb.isKinematic = false;
             }
         }
         if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))

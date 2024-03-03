@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     private bool canDamage = true;
     public Volume postProcessingVolume;
     private Vignette vignette;
+    public GameObject[] characters;
+    private int currentIndex = 0;
     [Header("Default Targets")]
     public Transform defaultLeftHandTarget;
     public Transform defaultRightHandTarget;
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI fpsText;
     public NPC dummy;
     public TextMeshProUGUI dummyCanKillText;
+
     private void Start()
     {
         if(postProcessingVolume)
@@ -75,6 +78,26 @@ public class GameManager : MonoBehaviour
         }
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
+    }
+    public void CharacterChangeRight()
+    {
+        characters[currentIndex].SetActive(false);
+        currentIndex++;
+        if (currentIndex >= characters.Length)
+        {
+            currentIndex = 0;
+        }
+        characters[currentIndex].SetActive(true);
+    }
+    public void CharacterChangeLeft()
+    {
+        characters[currentIndex].SetActive(false);
+        currentIndex--;
+        if (currentIndex < 0)
+        {
+            currentIndex = characters.Length - 1;
+        }
+        characters[currentIndex].SetActive(true);
     }
     void Kill()
     {

@@ -1895,9 +1895,9 @@ MonoBehaviour:
   blendToAnimationTime: 0.3
   maxGetUpVelocity: 0.4
   minGetUpDuration: 1.5
-  getUpCollisionResistanceMlp: 30
-  getUpRegainPinSpeedMlp: 30
-  getUpKnockOutDistanceMlp: 30
+  getUpCollisionResistanceMlp: 50
+  getUpRegainPinSpeedMlp: 50
+  getUpKnockOutDistanceMlp: 50
   getUpOffsetProne: {x: 0, y: 0, z: 0}
   getUpOffsetSupine: {x: 0, y: 0, z: 0}
   isQuadruped: 0
@@ -2567,7 +2567,7 @@ Transform:
   - {fileID: 5530129559382833654}
   - {fileID: 8183631959254240345}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1071981637328530615
 MonoBehaviour:
