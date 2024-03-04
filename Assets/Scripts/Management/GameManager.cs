@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -27,8 +28,8 @@ public class GameManager : MonoBehaviour
     private bool canDamage = true;
     public Volume postProcessingVolume;
     private Vignette vignette;
-    public GameObject[] characters;
-    private int currentIndex = 0;
+    public GameObject menu;
+    public InputActionReference toggleMenu;
     [Header("Default Targets")]
     public Transform defaultLeftHandTarget;
     public Transform defaultRightHandTarget;
@@ -79,30 +80,25 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
     }
-    public void CharacterChangeRight()
+    public void ToggleMenu()
     {
-        characters[currentIndex].SetActive(false);
-        currentIndex++;
-        if (currentIndex >= characters.Length)
+        if (menu.activeInHierarchy)
         {
-            currentIndex = 0;
+            menu.SetActive(false);
         }
-        characters[currentIndex].SetActive(true);
-    }
-    public void CharacterChangeLeft()
-    {
-        characters[currentIndex].SetActive(false);
-        currentIndex--;
-        if (currentIndex < 0)
+        else
         {
-            currentIndex = characters.Length - 1;
+            menu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
+            menu.transform.position = new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z);
+            menu.SetActive(true);
         }
-        characters[currentIndex].SetActive(true);
     }
+
     void Kill()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     IEnumerator HealPlayer()
     {
         float timer = 0;
@@ -136,6 +132,24 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (menu)
+        {
+            bool toggledMenu = toggleMenu.action.WasPressedThisFrame();
+            if (toggledMenu)
+            {
+                ToggleMenu();
+            }
+            if (menu.activeInHierarchy)
+            {
+                Quaternion oldRotation = menu.transform.rotation;
+                menu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
+                Quaternion newRotation = menu.transform.rotation;
+
+                menu.transform.rotation = Quaternion.Slerp(oldRotation, newRotation, 0.1f);
+                menu.transform.position = Vector3.Lerp(menu.transform.position, new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z), 0.1f);
+            }
+        }
+
         if(vignette)
             vignette.intensity.value = Mathf.Lerp(1f, 0, health / startingHealth);
         if (health <= 0 && !dead && canKill)
