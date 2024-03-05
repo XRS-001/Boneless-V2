@@ -11490,7 +11490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360315768}
   m_LocalRotation: {x: 0.40557975, y: 0.579228, z: 0.40557975, w: 0.579228}
-  m_LocalPosition: {x: 0.035, y: 0.01, z: -0.1}
+  m_LocalPosition: {x: 0.01, y: 0.01, z: -0.125}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13130,7 +13130,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -20637,9 +20637,9 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 2
   m_AntialiasingQuality: 2
-  m_StopNaN: 1
+  m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 0
@@ -27759,7 +27759,7 @@ MonoBehaviour:
   trackedSolverLeftTarget: {fileID: 446748521}
   LeftTrackPadClicked: {fileID: -6390568391384303791, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  LeftTrackPadTouch: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  LeftTrackPadTouch: {fileID: -4491635751020109278, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   RightTrackPadTouched: {fileID: 4094392870818886190, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
@@ -34908,7 +34908,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.11666667
+  m_VoxelSize: 0.1
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: ed280b27abc78ac498e16adeb71a16ac, type: 2}
   m_BuildHeightMesh: 0
@@ -41757,7 +41757,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -48188,7 +48188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818269618}
   m_LocalRotation: {x: 0.579228, y: 0.4055798, z: 0.579228, w: 0.4055798}
-  m_LocalPosition: {x: -0.01, y: -0.03, z: -0.1}
+  m_LocalPosition: {x: -0.01, y: -0.03, z: -0.125}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75546,7 +75546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4051283670522104726}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 1.841, y: 0, z: -0.454}
+  m_LocalPosition: {x: 1.841, y: -0.019, z: -0.454}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -85248,7 +85248,7 @@ MonoBehaviour:
       shoulderRotationWeight: 1
       shoulderRotationMode: 0
       shoulderTwistWeight: 1
-      shoulderYawOffset: 45
+      shoulderYawOffset: 100
       shoulderPitchOffset: -30
       bendGoal: {fileID: 0}
       bendGoalWeight: 0
@@ -85270,7 +85270,7 @@ MonoBehaviour:
       shoulderRotationWeight: 1
       shoulderRotationMode: 0
       shoulderTwistWeight: 1
-      shoulderYawOffset: 45
+      shoulderYawOffset: 100
       shoulderPitchOffset: -30
       bendGoal: {fileID: 0}
       bendGoalWeight: 0
@@ -90726,8 +90726,8 @@ MonoBehaviour:
       shoulderRotationWeight: 1
       shoulderRotationMode: 0
       shoulderTwistWeight: 1
-      shoulderYawOffset: -30
-      shoulderPitchOffset: -50
+      shoulderYawOffset: 45
+      shoulderPitchOffset: -30
       bendGoal: {fileID: 0}
       bendGoalWeight: 0
       swivelOffset: 0
@@ -90747,8 +90747,8 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1.230658
-          value: 0.2059056
+          time: 1.3043275
+          value: 0.17940108
           inSlope: 0.40674856
           outSlope: 0.40674856
           tangentMode: 0
@@ -90758,8 +90758,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1.815575
           value: 0.4014553
-          inSlope: 0.3343205
-          outSlope: 0.3343205
+          inSlope: 0.434338
+          outSlope: 0.434338
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -90775,8 +90775,8 @@ MonoBehaviour:
       shoulderRotationWeight: 1
       shoulderRotationMode: 0
       shoulderTwistWeight: 1
-      shoulderYawOffset: -30
-      shoulderPitchOffset: -50
+      shoulderYawOffset: 45
+      shoulderPitchOffset: -30
       bendGoal: {fileID: 0}
       bendGoalWeight: 0
       swivelOffset: 0
@@ -90796,8 +90796,8 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1.230658
-          value: 0.2059056
+          time: 1.3043275
+          value: 0.17940108
           inSlope: 0.40674856
           outSlope: 0.40674856
           tangentMode: 0
@@ -90807,8 +90807,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1.815575
           value: 0.4014553
-          inSlope: 0.3343205
-          outSlope: 0.3343205
+          inSlope: 0.434338
+          outSlope: 0.434338
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334

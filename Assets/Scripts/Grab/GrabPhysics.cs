@@ -196,6 +196,11 @@ public class GrabPhysics : MonoBehaviour
     {
         if (grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
+            if(distanceHovering)
+                foreach (Collider collider in grab.colliders)
+                {
+                    collider.enabled = false;
+                }
             foreach (ArmJoint joint in armJoints)
             {
                 joint.rb.isKinematic = true;
@@ -206,19 +211,14 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = false;
             }
-        }
-        if (distanceHovering)
-        {
-            foreach(Collider collider in grab.colliders)
-            {
-                collider.enabled = false;
-            }
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.015f);
+
             foreach (Collider collider in grab.colliders)
             {
                 collider.enabled = true;
             }
         }
+
         if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
         {
             grab.transform.root.GetComponent<NPC>().isGrabbing = true;

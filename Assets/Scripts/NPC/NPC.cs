@@ -115,7 +115,7 @@ public class NPC : MonoBehaviour
 
                 if (animator)
                     animator.SetTrigger("Hit");
-                Invoke(nameof(UnStun), 1f);
+                Invoke(nameof(UnStun), 0.25f);
             }
 
             if (playHitSound)
