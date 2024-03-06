@@ -324,13 +324,13 @@ public class GrabPhysics : MonoBehaviour
             }
             else
             {
-                if (grab.handGrabbing == this)
-                {
-                    grab.handGrabbing = grab.secondHandGrabbing;
-                }
                 if (joint)
                 {
                     Destroy(joint);
+                }
+                if (grab.handGrabbing == this)
+                {
+                    grab.handGrabbing = grab.secondHandGrabbing;
                 }
 
                 grab.isTwoHandGrabbing = false;
