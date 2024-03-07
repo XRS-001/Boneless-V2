@@ -25,13 +25,14 @@ public class SetPose : MonoBehaviour
     {
         grabPhysics = GetComponent<GrabPhysics>();
     }
-    public void SetupPose()
+    public void SetupPose(HandData resettedHandData)
     {
         handData.thumbAnimator.enabled = false;
         handData.animator.enabled = false;
 
         SetHandDataValues(handData, pose);
-
+        if (resettedHandData)
+            handData = resettedHandData;
         StartCoroutine(SetHandDataRoutine(handData, finalHandRotation, finalFingerRotations, startingHandRotation, startingFingerRotations, false));
     }
     public void UnSetPose()

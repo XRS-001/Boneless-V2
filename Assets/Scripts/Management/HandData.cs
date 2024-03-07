@@ -30,7 +30,7 @@ public class HandData : MonoBehaviour
     private void Update()
     {
         if(handGrab)
-            if (handGrab.grab || handGrab.isGrabbing)
+            if (handGrab.isGrabbing)
                 if(handGrab.grab is GrabDynamic)
                     CreateDynamicPose();
     }

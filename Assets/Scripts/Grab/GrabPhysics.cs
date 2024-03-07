@@ -120,7 +120,7 @@ public class GrabPhysics : MonoBehaviour
             }
         }
     }
-    void GenericGrab()
+    void GenericGrab(HandData resettedHandData)
     {
         if(distanceHovering && grab.GetComponent<Blade>())
             if (grab.GetComponent<Blade>().stabbed)
@@ -147,7 +147,7 @@ public class GrabPhysics : MonoBehaviour
 
         grab.SetPose(handType);
         poseSetup.pose = grab.pose;
-        poseSetup.SetupPose();
+        poseSetup.SetupPose(resettedHandData);
 
         grab.SetAttachPoint(handType);
 
@@ -194,10 +194,11 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayGrab()
     {
-        if (grab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        GrabTwoAttach oldGrab = grab;
+        if (oldGrab.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
             if(distanceHovering)
-                foreach (Collider collider in grab.colliders)
+                foreach (Collider collider in oldGrab.colliders)
                 {
                     collider.enabled = false;
                 }
@@ -211,17 +212,20 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = false;
             }
-            yield return new WaitForSeconds(0.015f);
+            yield return new WaitForSeconds(0.5f);
 
-            foreach (Collider collider in grab.colliders)
+            if (distanceHovering)
             {
-                collider.enabled = true;
+                foreach (Collider collider in oldGrab.colliders)
+                {
+                    collider.enabled = true;
+                }
             }
         }
 
-        if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
+        if(oldGrab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
         {
-            grab.transform.root.GetComponent<NPC>().isGrabbing = true;
+            oldGrab.transform.root.GetComponent<NPC>().isGrabbing = true;
             hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
             hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
             hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
@@ -231,7 +235,7 @@ public class GrabPhysics : MonoBehaviour
             {
                 foreach(Collider collider in joint.colliders)
                 {
-                    foreach(Collider npcCollider in grab.transform.root.GetComponent<NPC>().colliders)
+                    foreach(Collider npcCollider in oldGrab.transform.root.GetComponent<NPC>().colliders)
                     {
                         Physics.IgnoreCollision(collider, npcCollider, true);
                     }
@@ -278,7 +282,7 @@ public class GrabPhysics : MonoBehaviour
         poseSetup.setDynamicPose = true;
         grab.SetPose(handType);
         poseSetup.pose = grab.pose;
-        poseSetup.SetupPose();
+        poseSetup.SetupPose(null);
 
         joint = gameObject.AddComponent<ConfigurableJoint>();
 
@@ -324,16 +328,34 @@ public class GrabPhysics : MonoBehaviour
             }
             else
             {
+                grab.isTwoHandGrabbing = false;
                 if (joint)
                 {
                     Destroy(joint);
                 }
-                if (grab.handGrabbing == this)
+                if (grab.handGrabbing == this && grab is GrabWithSecondaryGrip)
                 {
-                    grab.handGrabbing = grab.secondHandGrabbing;
-                }
+                    GrabTwoAttach oldGrab = grab;
+                    grab.secondHandGrabbing.UnGrab();
+                    grab.secondHandGrabbing.grab = oldGrab;
+                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                    grab.secondHandGrabbing.grab.handGrabbing = grab.secondHandGrabbing;
+                    GrabWithSecondaryGrip grabSecondary = grab as GrabWithSecondaryGrip;
 
-                grab.isTwoHandGrabbing = false;
+                    HandData h = grab.secondHandGrabbing.poseSetup.handData;
+                    if (grab.secondHandGrabbing.handType == handTypeEnum.Left)
+                    {
+                        grab.secondHandGrabbing.poseSetup.handData = grabSecondary.secondaryGripLeft.leftPose;
+                        grabSecondary.leftAttach = grabSecondary.primaryGripLeft;
+                    }
+                    else
+                    {
+                        grab.secondHandGrabbing.poseSetup.handData = grabSecondary.secondaryGripRight.rightPose;
+                        grabSecondary.rightAttach = grabSecondary.primaryGripRight;
+                    }
+
+                    grab.secondHandGrabbing.GenericGrab(h);
+                }
                 grab.secondHandGrabbing = null;
             }
             connectedMass = 0;
@@ -343,8 +365,8 @@ public class GrabPhysics : MonoBehaviour
             StartCoroutine(WaitTillGrab());
         else
             canGrab = true;
-        grab = null;
     }
+
     void CheckGrabInput()
     {
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
@@ -363,14 +385,14 @@ public class GrabPhysics : MonoBehaviour
                         {
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.handGrabbing = this;
-                            GenericGrab();
+                            GenericGrab(null);
                         }
                         else if (grab.twoHanded)
                         {
                             grab.isTwoHandGrabbing = true;
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.secondHandGrabbing = this;
-                            GenericGrab();
+                            GenericGrab(null);
                         }
                     }
                 }
@@ -380,14 +402,14 @@ public class GrabPhysics : MonoBehaviour
                     {
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.handGrabbing = this;
-                        GenericGrab();
+                        GenericGrab(null);
                     }
                     else if (grab.twoHanded)
                     {
                         grab.isTwoHandGrabbing = true;
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.secondHandGrabbing = this;
-                        GenericGrab();
+                        GenericGrab(null);
                     }
                 }
             }
