@@ -8,4 +8,17 @@ public class EnumDeclaration : MonoBehaviour
     public enum handTypeEnum { Left, Right }
     public enum upDirection { forward, up, right }
     public enum enemyTypeEnum { aggresive, passive, dummy }
+    public enum surfaceType
+    {
+        Plaster,
+        Metal,
+        Folliage,
+        Rock,
+        Wood,
+        Brick,
+        Concrete,
+        Dirt,
+        Glass,
+        Water
+    }
 }

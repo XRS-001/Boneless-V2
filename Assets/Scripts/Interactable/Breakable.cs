@@ -20,8 +20,10 @@ public class Breakable : MonoBehaviour
                 forceNeededToBreak -= collision.relativeVelocity.magnitude;
         }
 
-        if (forceNeededToBreak < 0)
+        if (forceNeededToBreak < 0 && collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
             Break(collision.relativeVelocity.magnitude * 2, collision.relativeVelocity, collision.GetContact(0).point);
+        else if (forceNeededToBreak < 0)
+            Break(0, collision.relativeVelocity, collision.GetContact(0).point);
     }
     public void Break(float breakForce, Vector3 velocity, Vector3 breakPoint)
     {

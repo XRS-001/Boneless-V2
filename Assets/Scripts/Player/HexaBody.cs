@@ -22,6 +22,7 @@ public class HexaBody : MonoBehaviour
     public GrabPhysics[] grabbing;
     public VRIK finalSolver;
     public AudioClip footstepSound;
+    public AudioClip jumpSound;
     [Header("Actionbased Controller")]
     public Transform CameraController;
     public ActionBasedController RightHandController;
@@ -263,6 +264,7 @@ public class HexaBody : MonoBehaviour
         vaulting = true;
         yield return new WaitForSeconds(0.35f);
 
+        AudioSource.PlayClipAtPoint(jumpSound, finalSolver.transform.position, 0.2f);
         Chest.GetComponent<Rigidbody>().useGravity = false;
         Monoball.GetComponent<Rigidbody>().useGravity = false;
         Fender.GetComponent<Rigidbody>().useGravity = false;
@@ -406,6 +408,7 @@ public class HexaBody : MonoBehaviour
     {
         CrouchTarget = new Vector3(0, highestCrouch - additionalHeight, 0);
         Spine.targetPosition = CrouchTarget;
+        AudioSource.PlayClipAtPoint(jumpSound, finalSolver.transform.position, 0.2f);
 
         StartCoroutine(SitUpRoutine());
     }

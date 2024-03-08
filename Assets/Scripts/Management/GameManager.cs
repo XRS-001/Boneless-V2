@@ -10,6 +10,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static EnumDeclaration;
 public class VRIKData
 {
     public VRIKCalibrator.CalibrationData ikData;
@@ -40,7 +41,14 @@ public class GameManager : MonoBehaviour
     private VRIKData vrikData = new VRIKData();
     public VRIKCalibratedData calibrator;
     public float height;
-
+    [System.Serializable]
+    public class ImpactEffect
+    {
+        public surfaceType material;
+        public GameObject impactEffect;
+    }
+    [Header("Effects")]
+    public ImpactEffect[] impactEffects;
     [Tooltip("The opaque black backround that loses opacity on start")]
     public Image blurImage;
     [Header("Camera")]
@@ -79,6 +87,16 @@ public class GameManager : MonoBehaviour
         }
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
+    }
+    public GameObject FindDecal(surfaceType material)
+    {
+        GameObject impactEffect = null;
+
+        foreach (ImpactEffect effect in impactEffects)
+            if (effect.material == material)
+                impactEffect = effect.impactEffect;
+
+        return impactEffect;
     }
     public void ToggleMenu()
     {
