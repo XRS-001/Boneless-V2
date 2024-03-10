@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8048187867997447582}
   - component: {fileID: 4499321319125833481}
   - component: {fileID: 6661100119739768104}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: PistolShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
-  volumeModifier: 2
+  volumeModifier: 1
   layers:
     serializedVersion: 2
     m_Bits: 4294967295

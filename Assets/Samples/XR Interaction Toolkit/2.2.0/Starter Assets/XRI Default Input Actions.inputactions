@@ -314,6 +314,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MagRelease",
+                    "type": "Button",
+                    "id": "49f6ac64-dac0-4bed-832e-02c0f9bb237f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -441,11 +450,22 @@
                 {
                     "name": "",
                     "id": "47c18ea7-8200-400d-b8b7-c798dc8094e5",
-                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d133ccc-1e84-4a1d-b07e-214c515d0130",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "MagRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -889,9 +909,18 @@
                 },
                 {
                     "name": "ThumbstickClick",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "1e4ec1ae-83ff-4655-abde-50728babb951",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MagRelease",
+                    "type": "Button",
+                    "id": "0a6416b1-2f33-4d3d-ac39-b18b3c1a7ea4",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1016,6 +1045,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "ThumbstickClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a62d8987-cc47-4183-a959-3d9c7099ce53",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "MagRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

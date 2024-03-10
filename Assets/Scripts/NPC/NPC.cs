@@ -102,7 +102,10 @@ public class NPC : MonoBehaviour
                     }
 
                     if (animator)
+                    {
+                        agent.SetDestination(agent.transform.position);
                         animator.SetTrigger("Hit");
+                    }
                     Invoke(nameof(UnStun), 1f);
                     break;
             }
@@ -112,9 +115,11 @@ public class NPC : MonoBehaviour
             if(bodyPart == "Torso")
             {
                 stunned = true;
-
                 if (animator)
+                {
+                    agent.SetDestination(agent.transform.position);
                     animator.SetTrigger("Hit");
+                }
                 Invoke(nameof(UnStun), 0.25f);
             }
 

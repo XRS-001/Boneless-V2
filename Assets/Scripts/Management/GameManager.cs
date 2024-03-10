@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         public surfaceType material;
         public GameObject impactEffect;
+        public GameObject decal;
     }
     [Header("Effects")]
     public ImpactEffect[] impactEffects;
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
     }
-    public GameObject FindDecal(surfaceType material)
+    public GameObject FindEffect(surfaceType material)
     {
         GameObject impactEffect = null;
 
@@ -97,6 +98,17 @@ public class GameManager : MonoBehaviour
                 impactEffect = effect.impactEffect;
 
         return impactEffect;
+    }
+    public GameObject FindDecal(surfaceType material)
+    {
+        GameObject impactDecal = null;
+
+        foreach (ImpactEffect effect in impactEffects)
+            if (effect.material == material)
+                if (effect.decal)
+                    impactDecal = effect.decal;
+
+        return impactDecal;
     }
     public void ToggleMenu()
     {
