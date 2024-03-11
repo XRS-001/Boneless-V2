@@ -15,4 +15,6 @@ public class BaseGrab : MonoBehaviour
     public GrabPhysics secondHandGrabbing;
     [NonSerialized]
     public HandData pose;
+    [Tooltip("Only applicable to non dynamic grabs")]
+    public bool indexFingerFreedom = true;
 }

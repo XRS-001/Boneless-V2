@@ -97,7 +97,7 @@ public class HandAnimator : MonoBehaviour
     {
         if (grabPhysics.grab)
         {
-            if (!(grabPhysics.grab is GrabDynamic))
+            if (!(grabPhysics.grab is GrabDynamic) && grabPhysics.grab.indexFingerFreedom)
             {
                 HandData h = grabPhysics.poseSetup.pose;
                 if (h)
@@ -105,6 +105,16 @@ public class HandAnimator : MonoBehaviour
                     indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);
                     indexFingerBones.index2.localRotation = Quaternion.Slerp(originalIndex2Rotation, h.indexFingerBones.index2.localRotation, triggeredValue);
                     indexFingerBones.index3.localRotation = Quaternion.Slerp(originalIndex3Rotation, h.indexFingerBones.index3.localRotation, triggeredValue);
+                }
+            }
+            else if (!(grabPhysics.grab is GrabDynamic))
+            {
+                HandData h = grabPhysics.poseSetup.pose;
+                if (h)
+                {
+                    indexFingerBones.index1.localRotation = h.indexFingerBones.index1.localRotation;
+                    indexFingerBones.index2.localRotation = h.indexFingerBones.index2.localRotation;
+                    indexFingerBones.index3.localRotation = h.indexFingerBones.index3.localRotation;
                 }
             }
         }
