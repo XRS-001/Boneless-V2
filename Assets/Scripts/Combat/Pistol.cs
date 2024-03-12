@@ -79,7 +79,7 @@ public class Pistol : MonoBehaviour
             slideJoint.targetPosition *= -1;
             slideReleased = true;
         }
-        if(ammo > 0 || bulletInChamber)
+        if(ammo > 0)
         {
             animatedMag.SetActive(true);
             animatedEmptyMag.SetActive(false);
