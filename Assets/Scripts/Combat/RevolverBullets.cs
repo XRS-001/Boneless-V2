@@ -4,28 +4,27 @@ using UnityEngine;
 [System.Serializable]
 public class RevolverBullet
 {
-    public ConfigurableJoint joint;
-    public Transform destroyJointTarget;
     public bool hasFired;
+    public FixedJoint joint;
     public GameObject bullet;
     public GameObject casing;
 }
 public class RevolverBullets : MonoBehaviour
 {
     public RevolverBullet[] revolverBullets;
+    public Transform target;
     // Update is called once per frame
     void Update()
     {
-        foreach(RevolverBullet bullet in revolverBullets)
+        if (Vector3.Distance(transform.position, target.position) < 0.0025f)
         {
-            if (bullet.joint)
+            foreach (RevolverBullet bullet in revolverBullets)
             {
-                if (Vector3.Distance(bullet.joint.transform.position, bullet.destroyJointTarget.position) < 0.0025f)
-                {
-                    bullet.joint.transform.parent = null;
-                    Destroy(bullet.joint);
-                }
+                Destroy(bullet.joint);
             }
+        }
+        foreach (RevolverBullet bullet in revolverBullets)
+        {
             if(bullet.hasFired)
             {
                 bullet.bullet.SetActive(false);

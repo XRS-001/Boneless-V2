@@ -8,6 +8,7 @@ public class RevolverLoader : MonoBehaviour
     public GameObject unLoaded;
     public bool isLoaded = true;
     public string loaderName;
+    public int ammo;
 
     // Update is called once per frame
     void Update()

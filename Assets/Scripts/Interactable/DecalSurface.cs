@@ -23,7 +23,7 @@ public class DecalSurface : MonoBehaviour
             decal.transform.position = position;
             decal.transform.rotation = rotation;
 
-            if (decal)
+            if (isActiveAndEnabled)
             {
                 StartCoroutine(DelayDecalAlpha(decal.GetComponentInChildren<MeshRenderer>()));
             }

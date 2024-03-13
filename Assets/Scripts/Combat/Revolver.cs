@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,9 +35,10 @@ public class Revolver : MonoBehaviour
     [Header("Loading")]
     public Transform loadingPoint;
     public GameObject bulletsLoaded;
-    public List<RevolverBullet> bulletsInGun = new List<RevolverBullet>();
     public float loadingRadius;
     public string loaderName;
+    private RevolverBullets bullets;
+    public GameObject bulletLoadAnimation;
 
 
     [Header("FX")]
@@ -65,34 +67,21 @@ public class Revolver : MonoBehaviour
     }
     private void Update()
     {
-        List<RevolverBullet> bulletsToRemove = new List<RevolverBullet>();
-
-        foreach (RevolverBullet bulletInGun in bulletsInGun)
+        if (bullets)
         {
-            if (!bulletInGun.joint)
+            if (!bullets.revolverBullets[0].joint)
             {
-                bulletsToRemove.Add(bulletInGun);
-            }
-            else
-            {
-                if (!hingeDown)
+                bullets.transform.parent.parent = null;
+                foreach (RevolverBullet bullet in bullets.revolverBullets)
                 {
-                    bulletInGun.joint.zMotion = ConfigurableJointMotion.Locked;
-                    bulletInGun.joint.anchor = new Vector3(0, 0, -0.02f);
+                    bullet.bullet.transform.parent.parent = null;
+                    bullet.bullet.transform.parent.GetComponent<Collider>().enabled = true;
                 }
-                else
-                {
-                    bulletInGun.joint.zMotion = ConfigurableJointMotion.Limited;
-                    bulletInGun.joint.anchor = new Vector3(0, 0, 0);
-                }
+                Destroy(bullets.transform.parent.gameObject);
+                bullets = null;
+                ammo = 0;
             }
         }
-
-        foreach (RevolverBullet bulletToRemove in bulletsToRemove)
-        {
-            bulletsInGun.Remove(bulletToRemove);
-        }
-
         if (grab.isGrabbing)
         {
             bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.8f;
@@ -145,11 +134,19 @@ public class Revolver : MonoBehaviour
     }
     void Load(RevolverLoader loader)
     {
+        animator.enabled = true;  
+        animator.Play("BulletsLoad");
         AudioSource.PlayClipAtPoint(loadSound, loadingPoint.position, 0.25f);
         loader.isLoaded = false;
-        RevolverBullets spawnedBullets = Instantiate(bulletsLoaded, loadingPoint).GetComponent<RevolverBullets>();
+        ammo = loader.ammo;
+        loader.ammo = 0;
+    }
+    public void LoadBullets()
+    {
+        bulletLoadAnimation.SetActive(false);
+        bullets = Instantiate(bulletsLoaded, loadingPoint).GetComponentInChildren<RevolverBullets>();
 
-        foreach (RevolverBullet bullet in spawnedBullets.revolverBullets)
+        foreach (RevolverBullet bullet in bullets.revolverBullets)
         {
             foreach (Collider collider in grab.colliders)
             {
@@ -157,21 +154,20 @@ public class Revolver : MonoBehaviour
             }
         }
 
-        spawnedBullets.transform.localPosition = Vector3.zero;
-        spawnedBullets.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        spawnedBullets.GetComponent<FixedJoint>().connectedBody = loadingPoint.parent.GetComponent<Rigidbody>();
-        spawnedBullets.GetComponent<FixedJoint>().connectedAnchor = loadingPoint.transform.parent.InverseTransformPoint(loadingPoint.transform.position);
-
-        foreach (RevolverBullet bullet in spawnedBullets.revolverBullets)
-        {
-            bulletsInGun.Add(bullet);
-        }
-        ammo = bulletsInGun.Count;
+        bullets.transform.localPosition = Vector3.zero;
+        bullets.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        bullets.GetComponent<ConfigurableJoint>().connectedBody = loadingPoint.parent.GetComponent<Rigidbody>();
+        bullets.GetComponent<ConfigurableJoint>().connectedAnchor = loadingPoint.transform.parent.InverseTransformPoint(loadingPoint.transform.position) + bullets.GetComponent<ConfigurableJoint>().connectedAnchor;
     }
     void Hinge()
     {
         if (!hingeDown)
         {
+            if (bullets)
+            {
+                bullets.GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Limited;
+                bullets.GetComponent<ConfigurableJoint>().anchor = Vector3.zero;
+            }
             hingeDown = true;
             JointSpring newSpring = new JointSpring();
 
@@ -180,9 +176,18 @@ public class Revolver : MonoBehaviour
             newSpring.targetPosition = hingeDownSpring.targetRotation;
 
             hinge.spring = newSpring;
+
+            canHinge = false;
+            Invoke(nameof(DelayCanHinge), 0.25f);
         }
         else
         {
+            if (bullets)
+            {
+                bullets.GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Locked;
+                bullets.GetComponent<ConfigurableJoint>().anchor = new Vector3(-0.02f, 0, 0);
+            }
+
             AudioSource.PlayClipAtPoint(hingeSound, loadingPoint.position, 0.15f);
             hingeDown = false;
             JointSpring newSpring = new JointSpring();
@@ -192,8 +197,6 @@ public class Revolver : MonoBehaviour
             newSpring.targetPosition = hingeUpSpring.targetRotation;
 
             hinge.spring = newSpring;
-            canHinge = false;
-            Invoke(nameof(DelayCanHinge), 1);
         }
     }
     void DelayCanHinge()
@@ -206,11 +209,10 @@ public class Revolver : MonoBehaviour
     }
     void Shoot()
     {
-        if (!hasPulledTrigger && !hingeDown && ammo > 0 && bulletsInGun.Count > 0)
+        if (!hasPulledTrigger && !hingeDown && ammo > 0 && bullets)
         {
             if (primed)
             {
-                bulletsInGun[bulletsInGun.Count - ammo].hasFired = true;
                 hasPulledTrigger = true;
                 if (ammo > 0 && primed)
                 {
@@ -226,6 +228,7 @@ public class Revolver : MonoBehaviour
                 {
                     animator.Play("Shoot");
                 }
+                bullets.revolverBullets[bullets.revolverBullets.Length - ammo - 1].hasFired = true;
                 Rigidbody spawnedBullet = Instantiate(bullet, firePoint.position, firePoint.rotation).GetComponent<Rigidbody>();
                 GameObject spawnedMuzzleFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
                 Destroy(spawnedMuzzleFlash, 1);
