@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrabWithSecondaryGrip : GrabTwoAttach
+public class GrabPistol : GrabTwoAttach
 {
     public LeftAttach secondaryGripLeft;
     [HideInInspector]

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-public class Pistol : MonoBehaviour
+public class GrabTwoGrip : MonoBehaviour
 {
     [Header("Shooting")]
     public GameObject bullet;
