@@ -15,6 +15,9 @@ public class Revolver : MonoBehaviour
     private bool hasPulledTrigger;
     private int ammo = 0;
     private bool primed = true;
+    public Transform hammer;
+    public float hammerUnPrimeDegrees;
+    private Quaternion initialHammerRot;
 
     [Header("Hinge")]
     public HingeJoint hinge;
@@ -63,6 +66,19 @@ public class Revolver : MonoBehaviour
             {
                 Physics.IgnoreCollision(collider, collider2);
             }
+        }
+        initialHammerRot = hammer.localRotation;
+    }
+    private void LateUpdate()
+    {
+        if (!primed)
+        {
+            hammer.localRotation = initialHammerRot;
+            hammer.RotateAround(hammer.position, hammer.right, hammerUnPrimeDegrees);
+        }
+        else
+        {
+            hammer.localRotation = initialHammerRot;
         }
     }
     private void Update()
@@ -184,6 +200,7 @@ public class Revolver : MonoBehaviour
         {
             if (bullets)
             {
+                //offset the bullets slightly into the chamber
                 bullets.GetComponent<ConfigurableJoint>().xMotion = ConfigurableJointMotion.Locked;
                 bullets.GetComponent<ConfigurableJoint>().anchor = new Vector3(-0.02f, 0, 0);
             }
@@ -218,14 +235,13 @@ public class Revolver : MonoBehaviour
                 {
                     ammo--;
                 }
-                animator.enabled = true;
                 if (ammo == 0)
                 {
                     primed = false;
-                    animator.Play("ShootUnPrime");
                 }
                 else
                 {
+                    animator.enabled = true;
                     animator.Play("Shoot");
                 }
                 bullets.revolverBullets[bullets.revolverBullets.Length - ammo - 1].hasFired = true;
@@ -246,8 +262,6 @@ public class Revolver : MonoBehaviour
             }
             else
             {
-                animator.enabled = true;
-                animator.Play("HammerPrime");
                 hasPulledTrigger = true;
                 AudioSource.PlayClipAtPoint(loadSound, firePoint.position, 0.25f);
                 primed = true;

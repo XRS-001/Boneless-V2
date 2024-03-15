@@ -136,7 +136,7 @@ public class GrabPhysics : MonoBehaviour
                 Physics.IgnoreLayerCollision(LayerMask.NameToLayer(
                     "RightHand"), LayerMask.NameToLayer("Interactable"));
         }
-        if (grab.gameObject.GetComponent<GrabTwoGrip>())
+        if (grab.gameObject.GetComponent<Pistol>())
         {
             if (handType == handTypeEnum.Left)
                 Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("GunSlide"));
@@ -395,7 +395,7 @@ public class GrabPhysics : MonoBehaviour
                 if (handType == handTypeEnum.Right)
                     Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"), false);
             }
-            if (oldGrab.gameObject.GetComponent<GrabTwoGrip>())
+            if (oldGrab.gameObject.GetComponent<Pistol>())
             {
                 if (handType == handTypeEnum.Left)
                     Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("GunSlide"), false);
@@ -442,7 +442,7 @@ public class GrabPhysics : MonoBehaviour
                     if (handType == handTypeEnum.Right)
                         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"), false);
                 }
-                if (oldGrab.gameObject.GetComponent<GrabTwoGrip>())
+                if (oldGrab.gameObject.GetComponent<Pistol>())
                 {
                     if (handType == handTypeEnum.Left)
                         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("GunSlide"), false);

@@ -19,7 +19,7 @@ public class BulletImpact : MonoBehaviour
             GameObject bloodWound = Instantiate(bloodWounds[Random.Range(0, bloodWounds.Length - 1)], collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal), collision.transform);
             Destroy(bloodWound, 5f);
         }
-        AudioSource.PlayClipAtPoint(sound, collision.contacts[0].point);
+        AudioSource.PlayClipAtPoint(sound, collision.contacts[0].point, 0.3f);
         Destroy(gameObject);
     }
 }

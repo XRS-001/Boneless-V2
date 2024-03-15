@@ -331,7 +331,7 @@ public class HexaBody : MonoBehaviour
     }
     private void RotatePlayer()
     {
-        Chest.transform.rotation = Quaternion.Euler(0, chest.eulerAngles.y, 0);
+        Chest.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(Chest.transform.rotation.y, chest.eulerAngles.y, 0.1f), 0);
     }
     //-----HexaBody Movement---------------------------------------------------------------------------------
     private void MovePlayerViaController()
@@ -434,7 +434,7 @@ public class HexaBody : MonoBehaviour
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.075f, highestCrouch - additionalHeight);
+        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.2f, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
     }
 }
