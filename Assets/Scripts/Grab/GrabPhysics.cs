@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 using static GrabPhysics;
+using System.Transactions;
 
 public class GrabPhysics : MonoBehaviour
 {
@@ -136,7 +137,7 @@ public class GrabPhysics : MonoBehaviour
                 Physics.IgnoreLayerCollision(LayerMask.NameToLayer(
                     "RightHand"), LayerMask.NameToLayer("Interactable"));
         }
-        if (grab.gameObject.GetComponent<Pistol>())
+        if (grab.gameObject.GetComponent<GenericFirearm>())
         {
             if (handType == handTypeEnum.Left)
                 Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("GunSlide"));
@@ -185,6 +186,11 @@ public class GrabPhysics : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Euler(grab.attachRotation);
+        }
+        GrabSecondaryGrip grabSecondary = grab as GrabSecondaryGrip;
+        if(grabSecondary)
+        {
+            grabSecondary.isPrimaryGrabbing = true;
         }
 
         configJoint.xMotion = ConfigurableJointMotion.Locked;
@@ -340,6 +346,9 @@ public class GrabPhysics : MonoBehaviour
                 }
                 grab.handGrabbing = null;
                 grab.isGrabbing = false;
+                GrabSecondaryGrip grabSecondary = grab as GrabSecondaryGrip;
+                if (grabSecondary)
+                        grabSecondary.isPrimaryGrabbing = false;
             }
             else
             {
@@ -348,32 +357,39 @@ public class GrabPhysics : MonoBehaviour
                 {
                     Destroy(joint);
                 }
-                if (grab.handGrabbing == this && grab is GrabPistol)
+                GrabSecondaryGrip grabSecondary = grab as GrabSecondaryGrip;
+                if (grab.handGrabbing == this && grabSecondary)
                 {
-                    GrabTwoAttach oldGrab = grab;
-                    grab.secondHandGrabbing.UnGrab();
-                    grab.secondHandGrabbing.grab = oldGrab;
-                    StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
-                    grab.secondHandGrabbing.grab.handGrabbing = grab.secondHandGrabbing;
-                    GrabPistol grabSecondary = grab as GrabPistol;
-
-                    HandData h = grab.secondHandGrabbing.poseSetup.handData;
-                    if (grab.secondHandGrabbing.handType == handTypeEnum.Left)
+                    if (grabSecondary.disconnectSecondaryOnUnGrab)
                     {
-                        grab.secondHandGrabbing.poseSetup.handData = grabSecondary.secondaryGripLeft.leftPose;
-                        grabSecondary.leftAttach = grabSecondary.primaryGripLeft;
+                        grabSecondary.isPrimaryGrabbing = true;
+                        GrabTwoAttach oldGrab = grab;
+                        grab.secondHandGrabbing.UnGrab();
+                        grab.secondHandGrabbing.grab = oldGrab;
+                        StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
+                        grab.secondHandGrabbing.grab.handGrabbing = grab.secondHandGrabbing;
+
+                        HandData h = grab.secondHandGrabbing.poseSetup.handData;
+                        if (grab.secondHandGrabbing.handType == handTypeEnum.Left)
+                        {
+                            grab.secondHandGrabbing.poseSetup.handData = grabSecondary.secondaryGripLeft.leftPose;
+                            grabSecondary.leftAttach = grabSecondary.primaryGripLeft;
+                        }
+                        else
+                        {
+                            grab.secondHandGrabbing.poseSetup.handData = grabSecondary.secondaryGripRight.rightPose;
+                            grabSecondary.rightAttach = grabSecondary.primaryGripRight;
+                        }
+
+                        grab.secondHandGrabbing.GenericGrab(h);
                     }
                     else
                     {
-                        grab.secondHandGrabbing.poseSetup.handData = grabSecondary.secondaryGripRight.rightPose;
-                        grabSecondary.rightAttach = grabSecondary.primaryGripRight;
+                        grabSecondary.isPrimaryGrabbing = false;
                     }
-
-                    grab.secondHandGrabbing.GenericGrab(h);
                 }
                 grab.secondHandGrabbing = null;
             }
-            connectedMass = 0;
             HandleDrive(false);
         }
         if (grab is GrabDynamic)
@@ -395,7 +411,7 @@ public class GrabPhysics : MonoBehaviour
                 if (handType == handTypeEnum.Right)
                     Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"), false);
             }
-            if (oldGrab.gameObject.GetComponent<Pistol>())
+            if (oldGrab.gameObject.GetComponent<GenericFirearm>())
             {
                 if (handType == handTypeEnum.Left)
                     Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("GunSlide"), false);
@@ -442,7 +458,7 @@ public class GrabPhysics : MonoBehaviour
                     if (handType == handTypeEnum.Right)
                         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"), false);
                 }
-                if (oldGrab.gameObject.GetComponent<Pistol>())
+                if (oldGrab.gameObject.GetComponent<GenericFirearm>())
                 {
                     if (handType == handTypeEnum.Left)
                         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("GunSlide"), false);

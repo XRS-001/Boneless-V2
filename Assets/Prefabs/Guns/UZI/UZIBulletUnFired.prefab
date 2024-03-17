@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3676394692687829362
+--- !u!1 &3554474212361280286
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 195350376950501807}
-  - component: {fileID: 1769380986945616565}
-  - component: {fileID: 3474521679915774136}
-  - component: {fileID: 8592627230469342837}
-  - component: {fileID: 5476505458244852087}
-  m_Layer: 15
-  m_Name: ShotgunAmmoUsed
+  - component: {fileID: 7329071489898717228}
+  - component: {fileID: 8062648175307130337}
+  - component: {fileID: 6325762426035018370}
+  - component: {fileID: 1110511541977286963}
+  - component: {fileID: 1892745215110333949}
+  m_Layer: 0
+  m_Name: UZIBulletUnFired
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &195350376950501807
+--- !u!4 &7329071489898717228
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676394692687829362}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 3554474212361280286}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1769380986945616565
+--- !u!33 &8062648175307130337
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676394692687829362}
-  m_Mesh: {fileID: -2850074755327657584, guid: c08217ada97bedd4a834e236ef957796, type: 3}
---- !u!23 &3474521679915774136
+  m_GameObject: {fileID: 3554474212361280286}
+  m_Mesh: {fileID: 7807538432633192378, guid: 22c6099e928bbdb4da82a45ae620d68d, type: 3}
+--- !u!23 &6325762426035018370
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676394692687829362}
+  m_GameObject: {fileID: 3554474212361280286}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b6d43de49c3dc842b3fb78fa70d416d, type: 2}
+  - {fileID: 2100000, guid: 97a44dbee48e09e45a26cba9020f9198, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,15 +85,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &8592627230469342837
+--- !u!54 &1110511541977286963
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676394692687829362}
+  m_GameObject: {fileID: 3554474212361280286}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -112,13 +112,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!65 &5476505458244852087
+--- !u!65 &1892745215110333949
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676394692687829362}
+  m_GameObject: {fileID: 3554474212361280286}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -131,5 +131,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.030425817, y: 0.09357128, z: 0.030365773}
-  m_Center: {x: 0, y: 0, z: -0.0000000074505797}
+  m_Size: {x: 0.012163197, y: 0.012096588, z: 0.03405332}
+  m_Center: {x: 0.00000023422763, y: 0.000051562667, z: 0.01705654}

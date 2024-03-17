@@ -1,21 +1,25 @@
 using RootMotion.FinalIK;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
-public class Pistol : MonoBehaviour
+public class GenericFirearm : MonoBehaviour
 {
     [Header("Shooting")]
     public GameObject bullet;
     public Transform firePoint;
     public GameObject casing;
+    public GameObject casingUnFired;
     public Transform casingEjectPoint;
     public float casingEjectForce;
     private int ammo = 0;
     private bool bulletInChamber;
     private bool shooting;
+    public bool fullAuto;
+    public float fullAutoBulletsPerSecond;
     [Header("Slide")]
     public GrabTwoAttach slide;
     public float slideThreshold;
@@ -44,7 +48,7 @@ public class Pistol : MonoBehaviour
     [Header("Forces")]
     public float bulletForce;
     public float recoilForce;
-    private GrabTwoAttach grab;
+    private GrabSecondaryGrip grab;
 
     [System.Serializable]
     public class Attachment
@@ -68,7 +72,7 @@ public class Pistol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grab = GetComponent<GrabTwoAttach>();
+        grab = GetComponent<GrabSecondaryGrip>();
     }
 
     // Update is called once per frame
@@ -141,7 +145,7 @@ public class Pistol : MonoBehaviour
                 if (collider.transform.root.GetComponent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.root.up, transform.TransformDirection(magazineEnterPoint - magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.root.GetComponent<GrabTwoAttach>().isGrabbing)
                     MagazineEnter(collider.transform.root.GetComponent<GrabTwoAttach>());
 
-        if (grab.isGrabbing)
+        if (grab.isPrimaryGrabbing)
         {
             bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.8f;
             bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.8f;
@@ -154,11 +158,30 @@ public class Pistol : MonoBehaviour
 
             if (!slide.isGrabbing)
             {
-                if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft)
-                    Shoot();
+                if (!fullAuto)
+                {
+                    if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft)
+                        Shoot();
 
-                else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasPulledTriggerRight)
-                    Shoot();
+                    else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasPulledTriggerRight)
+                        Shoot();
+                }
+                else if (ammo > 0)
+                {
+                    if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft && !hasPulledTrigger)
+                        StartCoroutine(ShootFullAuto(true));
+
+                    else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasPulledTriggerRight && !hasPulledTrigger)
+                        StartCoroutine(ShootFullAuto(false));
+                }
+                else
+                {
+                    if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft)
+                        Shoot();
+
+                    else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasPulledTriggerRight)
+                        Shoot();
+                }
             }
             if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasMagReleasedLeft && magazineInGun)
                 MagazineExit();
@@ -245,49 +268,75 @@ public class Pistol : MonoBehaviour
     {
         animator.enabled = false;
     }
+    IEnumerator ShootFullAuto(bool isLeftHand)
+    {
+        float timer = 0;
+        bool isFiring = true;
+        Shoot();
+        hasPulledTrigger = true;
+
+        while (isFiring)
+        {
+            if (isLeftHand)
+                isFiring = leftFire.action.ReadValue<float>() > 0.8f;
+            else
+                isFiring = rightFire.action.ReadValue<float>() > 0.8f;
+
+            timer += Time.deltaTime;
+            if(timer >= 1 / fullAutoBulletsPerSecond)
+            {
+                Shoot();
+                timer = 0;
+            }
+            yield return null;
+        }
+    }
     void Shoot()
     {
-        if(((ammo > 0 && primed) || bulletInChamber) && !hasPulledTrigger)
+        if((ammo > 0 && primed) || bulletInChamber)
         {
-            hasPulledTrigger = true;
-            shooting = true;
-            if (ammo > 0 && primed)
+            if (!hasPulledTrigger || fullAuto)
             {
-                ammo--;
-            }
-            animator.enabled = true;
-            animator.Play("Shoot");
-            Rigidbody spawnedBullet = Instantiate(bullet, firePoint.position, firePoint.rotation).GetComponent<Rigidbody>();
-            if (!isSilenced)
-            {
-                GameObject spawnedMuzzleFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
-                AudioSource.PlayClipAtPoint(fireSound, firePoint.position, 0.5f);
-                Destroy(spawnedMuzzleFlash, 1);
-            }
-            else
-                AudioSource.PlayClipAtPoint(fireSound, firePoint.position, 0.25f);
+                hasPulledTrigger = true;
+                shooting = true;
+                if (ammo > 0 && primed)
+                {
+                    ammo--;
+                }
+                animator.enabled = true;
+                animator.Play("Shoot");
+                Rigidbody spawnedBullet = Instantiate(bullet, firePoint.position, firePoint.rotation).GetComponent<Rigidbody>();
+                if (!isSilenced)
+                {
+                    GameObject spawnedMuzzleFlash = Instantiate(muzzleFlash, firePoint.position, firePoint.rotation, firePoint);
+                    AudioSource.PlayClipAtPoint(fireSound, firePoint.position, 0.5f);
+                    Destroy(spawnedMuzzleFlash, 1);
+                }
+                else
+                    AudioSource.PlayClipAtPoint(fireSound, firePoint.position, 0.25f);
 
-            foreach (Collider c in grab.colliders)
-            {
-                Physics.IgnoreCollision(c, spawnedBullet.GetComponent<Collider>());
-            }
+                foreach (Collider c in grab.colliders)
+                {
+                    Physics.IgnoreCollision(c, spawnedBullet.GetComponent<Collider>());
+                }
 
-            spawnedBullet.AddForce(firePoint.forward * bulletForce);
-            GetComponent<Rigidbody>().mass *= 10;
-            GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce);
-            slideJoint.targetPosition *= -1;
-            Invoke(nameof(RegainControl), 0.1f);
-            EjectCasing();
-
-            if (ammo == 0 && bulletInChamber && slideReleased)
-            {
-                AudioSource.PlayClipAtPoint(slideAudio, slide.transform.position, 0.25f);
-                bulletInChamber = false;
-                primed = false;
+                spawnedBullet.AddForce(firePoint.forward * bulletForce);
+                GetComponent<Rigidbody>().mass *= 10;
+                GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce);
                 slideJoint.targetPosition *= -1;
-                slideReleased = false;
+                Invoke(nameof(RegainControl), 0.1f);
+                EjectCasing();
+
+                if (ammo == 0 && bulletInChamber && slideReleased)
+                {
+                    AudioSource.PlayClipAtPoint(slideAudio, slide.transform.position, 0.25f);
+                    bulletInChamber = false;
+                    primed = false;
+                    slideJoint.targetPosition *= -1;
+                    slideReleased = false;
+                }
+                animator.enabled = false;
             }
-            animator.enabled = false;
         }
         else if (!hasPulledTrigger)
         {
@@ -304,13 +353,26 @@ public class Pistol : MonoBehaviour
     }
     public void EjectCasing()
     {
-        Rigidbody spawnedCasing = Instantiate(casing, casingEjectPoint.position, casingEjectPoint.rotation).GetComponent<Rigidbody>();
-        foreach (Collider c in grab.colliders)
+        Rigidbody spawnedCasing = null;
+        if (shooting)
         {
-            Physics.IgnoreCollision(c, spawnedCasing.GetComponent<Collider>());
+            spawnedCasing = Instantiate(casing, casingEjectPoint.position, casingEjectPoint.rotation).GetComponent<Rigidbody>();
+
         }
+        else
+        {
+            spawnedCasing = Instantiate(casingUnFired, casingEjectPoint.position, casingEjectPoint.rotation).GetComponent<Rigidbody>();
+        }
+
+        spawnedCasing.GetComponent<Collider>().enabled = false;
+        StartCoroutine(DelayCasingCollision(spawnedCasing.GetComponent<Collider>()));
         spawnedCasing.AddForce(casingEjectPoint.right * casingEjectForce);
         Destroy(spawnedCasing.gameObject, 10);
+    }
+    IEnumerator DelayCasingCollision(Collider casing)
+    {
+        yield return new WaitForSeconds(0.1f);
+        casing.enabled = true;
     }
     void RegainControl()
     {

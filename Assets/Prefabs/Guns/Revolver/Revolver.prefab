@@ -2032,7 +2032,7 @@ Transform:
   - {fileID: 5856306542812444067}
   - {fileID: 9020987810990099157}
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!54 &1054521318570713828
 Rigidbody:
@@ -2058,7 +2058,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &3988324536718895578
@@ -2125,6 +2125,8 @@ MonoBehaviour:
   firePoint: {fileID: 5856306542812444067}
   bulletForce: 5000
   recoilForce: 6000
+  hammer: {fileID: 617688126627764838}
+  hammerUnPrimeDegrees: 0
   hinge: {fileID: 7000388609523798494}
   hingeDownSpring:
     spring: 0.5

@@ -155,7 +155,6 @@ public class Shotgun : MonoBehaviour
     {
         if(ammo > 0)
         {
-            hasShot = false;
             EjectCasing();
         }
         AudioSource.PlayClipAtPoint(pumpAudio, pump.transform.position, 0.25f);
@@ -213,6 +212,7 @@ public class Shotgun : MonoBehaviour
         if (hasShot)
         {
             spawnedCasing = Instantiate(ammoShotPrefab, ammoEjectPoint.position, ammoEjectPoint.rotation).GetComponent<Rigidbody>();
+            hasShot = false;
         }
         else
         {
@@ -224,7 +224,10 @@ public class Shotgun : MonoBehaviour
         }
         spawnedCasing.AddForce(ammoEjectPoint.right * ammoEjectForce);
         Destroy(spawnedCasing.gameObject, 10);
-        spawnedCasing.GetComponent<ShotgunShell>().DelayCanEnter();
+        if (spawnedCasing.GetComponent<ShotgunShell>())
+        {
+            spawnedCasing.GetComponent<ShotgunShell>().DelayCanEnter();
+        }
         ammo--;
     }
     void RegainControl()

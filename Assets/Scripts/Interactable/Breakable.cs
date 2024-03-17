@@ -49,8 +49,8 @@ public class Breakable : MonoBehaviour
         breakables = breakableParent.GetComponentsInChildren<Rigidbody>().ToList();
         foreach (Rigidbody rb in breakables)
         {
-            rb.AddExplosionForce(breakForce, transform.position, 100);
-            rb.AddForce(velocity * 25);
+            rb.AddExplosionForce(Mathf.Clamp(breakForce, 0, 5000), transform.position, 100);
+            rb.AddForce(Vector3.ClampMagnitude(velocity * 25, 2500));
         }
     }
 }

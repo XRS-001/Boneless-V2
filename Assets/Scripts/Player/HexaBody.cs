@@ -120,8 +120,11 @@ public class HexaBody : MonoBehaviour
         RotatePlayer();
         RoomScaleMove();
         Climbing();
-    } 
-    
+    }
+    private void LateUpdate()
+    {
+        RotatePlayer();
+    }
     public void Zipline()
     {
         if (!detectGrounded.collided)
@@ -165,7 +168,7 @@ public class HexaBody : MonoBehaviour
         bool onSurface = false;
         foreach (TargetLimb limb in limbs)
         {
-            if (limb.isColliding)
+            if (limb.isColliding && limb.colliderColliding)
             {
                 GrabTwoAttach grab = limb.colliderColliding.GetComponent<GrabTwoAttach>();
                 if (!grab && limb.colliderColliding.transform.parent)
@@ -331,7 +334,7 @@ public class HexaBody : MonoBehaviour
     }
     private void RotatePlayer()
     {
-        Chest.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(Chest.transform.rotation.y, chest.eulerAngles.y, 0.1f), 0);
+        Chest.transform.rotation = Quaternion.Euler(0, chest.eulerAngles.y, 0);
     }
     //-----HexaBody Movement---------------------------------------------------------------------------------
     private void MovePlayerViaController()
@@ -434,7 +437,7 @@ public class HexaBody : MonoBehaviour
     //------Joint Controll-----------------------------------------------------------------------------------
     private void SpineContractionOnRealWorldCrouch()
     {
-        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.2f, highestCrouch - additionalHeight);
+        CrouchTarget.y = Mathf.Clamp(CameraController.transform.localPosition.y - additionalHeight, -0.1f, highestCrouch - additionalHeight);
         Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
     }
 }
