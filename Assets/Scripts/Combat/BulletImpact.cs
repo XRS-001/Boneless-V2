@@ -20,6 +20,6 @@ public class BulletImpact : MonoBehaviour
             Destroy(bloodWound, 5f);
         }
         AudioSource.PlayClipAtPoint(sound, collision.contacts[0].point, 0.3f);
-        Destroy(gameObject, 0.001f);
+        Destroy(gameObject);
     }
 }

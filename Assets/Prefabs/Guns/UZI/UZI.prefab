@@ -829,8 +829,8 @@ MonoBehaviour:
     leftAttachRotation: {x: 90, y: -18.47, z: -38.18}
   rightAttach:
     rightPose: {fileID: 5151032767200485649}
-    rightAttachPosition: {x: 0.07, y: 0.06, z: -0.04}
-    rightAttachRotation: {x: 90, y: -18.47, z: 38.18}
+    rightAttachPosition: {x: 0.07, y: 0.05, z: -0.04}
+    rightAttachRotation: {x: 90, y: 10.1, z: 38.18}
   twoHanded: 0
 --- !u!1 &980541609710262358
 GameObject:
@@ -939,6 +939,7 @@ GameObject:
   - component: {fileID: 27408546099174832}
   - component: {fileID: 4807328869508266135}
   - component: {fileID: 7898697972519459915}
+  - component: {fileID: 6842747804134244251}
   m_Layer: 9
   m_Name: UZI
   m_TagString: Untagged
@@ -969,7 +970,7 @@ Transform:
   - {fileID: 7752313945724119214}
   - {fileID: 2677201199075733414}
   m_Father: {fileID: 0}
-  m_RootOrder: 42
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!54 &8330814685387883600
 Rigidbody:
@@ -1067,10 +1068,12 @@ MonoBehaviour:
   bullet: {fileID: 2514580978177725733, guid: bbef5ad3bd5ad1742829ff71f8221ea8, type: 3}
   firePoint: {fileID: 5470821111100060059}
   casing: {fileID: 1994365415991716637, guid: 3d7450efb06d1c74b80cfa7f7ec3a1c0, type: 3}
+  casingUnFired: {fileID: 3554474212361280286, guid: 4ae0f903c1212d74fa6c8eb285c3050b,
+    type: 3}
   casingEjectPoint: {fileID: 7752313945724119214}
-  casingEjectForce: 100
+  casingEjectForce: 10
   fullAuto: 1
-  fullAutoBulletsPerSecond: 10
+  fullAutoBulletsPerSecond: 8
   slide: {fileID: 6013189384085619744}
   slideThreshold: 0.01
   slidePoint: {x: -0.00000006415778, y: 0.1336985, z: 0.051111028}
@@ -1091,7 +1094,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 63f6e3930063edc4ea9cc9fb20786545, type: 3}
   animator: {fileID: 7898697972519459915}
   bulletForce: 5000
-  recoilForce: 4000
+  recoilForce: 750
   attachments: []
   leftFire: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
@@ -1122,6 +1125,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6842747804134244251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003987891165779515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1018144718950925674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,7 +1597,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3788,7 +3808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5457996913401101198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0304, y: 0.1151, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4938,7 +4958,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1

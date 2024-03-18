@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4966571222754077762}
   - component: {fileID: 4505662235519937923}
   - component: {fileID: 3376307703985213699}
+  - component: {fileID: 5783753212540584435}
   m_Layer: 17
   m_Name: RevolverBullet (2)
   m_TagString: Untagged
@@ -99,6 +100,23 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &5783753212540584435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116174037360693528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &976541126921519916
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +327,7 @@ GameObject:
   - component: {fileID: 5130132310877723920}
   - component: {fileID: 5576948556790500406}
   - component: {fileID: 2296759800985652115}
+  - component: {fileID: 8628092284771539608}
   m_Layer: 17
   m_Name: RevolverBullet (1)
   m_TagString: Untagged
@@ -396,6 +415,23 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &8628092284771539608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911434621287611341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &2326615408154058823
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +444,7 @@ GameObject:
   - component: {fileID: 7132406490015836821}
   - component: {fileID: 4972943722077841326}
   - component: {fileID: 3269130215009321318}
+  - component: {fileID: 2919458388777659453}
   m_Layer: 17
   m_Name: RevolverBullet (3)
   m_TagString: Untagged
@@ -495,6 +532,23 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &2919458388777659453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326615408154058823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &2591131826514052921
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +644,7 @@ GameObject:
   - component: {fileID: 3207443018798614588}
   - component: {fileID: 5069864088111809812}
   - component: {fileID: 4808311908387438320}
+  - component: {fileID: 4200944582051594790}
   m_Layer: 17
   m_Name: RevolverBullet (5)
   m_TagString: Untagged
@@ -677,6 +732,23 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &4200944582051594790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304845174941460933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &4861552420953175127
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +1010,7 @@ GameObject:
   - component: {fileID: 5283413367017252803}
   - component: {fileID: 4977818358173179298}
   - component: {fileID: 1837481305574585146}
+  - component: {fileID: 3977570252426263070}
   m_Layer: 17
   m_Name: RevolverBullet (4)
   m_TagString: Untagged
@@ -1025,6 +1098,23 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &3977570252426263070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5823773825641965267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &5911142233254188249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1376,7 @@ GameObject:
   - component: {fileID: 8210630379188645672}
   - component: {fileID: 5656059439599057521}
   - component: {fileID: 969960540227518278}
+  - component: {fileID: 5352031319461346336}
   m_Layer: 17
   m_Name: RevolverBullet
   m_TagString: Untagged
@@ -1373,6 +1464,23 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &5352031319461346336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090854595755572293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7221934506973057066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1761,7 @@ Transform:
   - {fileID: 351777420514550039}
   - {fileID: 1836081630311329139}
   m_Father: {fileID: 0}
-  m_RootOrder: 41
+  m_RootOrder: 49
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8658505497844944645
 GameObject:

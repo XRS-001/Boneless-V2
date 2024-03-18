@@ -2773,7 +2773,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3116,7 +3116,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3161,6 +3161,7 @@ GameObject:
   - component: {fileID: 1683429050305254415}
   - component: {fileID: 4697535309963673326}
   - component: {fileID: 913358620117105418}
+  - component: {fileID: 8885473311048744685}
   m_Layer: 9
   m_Name: Shotgun
   m_TagString: Untagged
@@ -3218,7 +3219,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &1683429050305254415
@@ -3286,7 +3287,7 @@ MonoBehaviour:
   pumpAudio: {fileID: 8300000, guid: 50327f38277734648a1932d11ddfacbf, type: 3}
   ammoEnterSound: {fileID: 8300000, guid: bfc6c668ba106764aba800fc0363337d, type: 3}
   animator: {fileID: 913358620117105418}
-  ammoShotPrefab: {fileID: 3676394692687829362, guid: e9096a0f72beb60468a180b9075f88c3,
+  ammoShotPrefab: {fileID: 4801730681867358313, guid: e9096a0f72beb60468a180b9075f88c3,
     type: 3}
   ammoPrefab: {fileID: 2952797602542292393, guid: c9266b80b2acfda4c8686b56ea3454de,
     type: 3}
@@ -3323,6 +3324,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8885473311048744685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028074849663194984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7066336144415684263
 GameObject:
   m_ObjectHideFlags: 0

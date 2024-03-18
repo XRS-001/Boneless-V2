@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6325762426035018370}
   - component: {fileID: 1110511541977286963}
   - component: {fileID: 1892745215110333949}
+  - component: {fileID: -810852607401342394}
   m_Layer: 0
   m_Name: UZIBulletUnFired
   m_TagString: Untagged
@@ -133,3 +134,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.012163197, y: 0.012096588, z: 0.03405332}
   m_Center: {x: 0.00000023422763, y: 0.000051562667, z: 0.01705654}
+--- !u!114 &-810852607401342394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3554474212361280286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295

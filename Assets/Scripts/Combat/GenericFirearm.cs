@@ -123,9 +123,9 @@ public class GenericFirearm : MonoBehaviour
 
             Collider[] potentialAttachment = Physics.OverlapSphere(transform.TransformPoint(attachment.attachPoint), attachment.attachRadius);
             foreach(Collider collider in potentialAttachment)
-                if (collider.transform.root.GetComponent<GunAttachment>())
-                    if (collider.transform.root.GetComponent<GunAttachment>().attachmentName == attachment.attachmentName && !attachment.attached && collider.transform.GetComponent<GrabTwoAttach>().isGrabbing)
-                        if(collider.transform.GetComponent<GrabTwoAttach>().handGrabbing.handType == EnumDeclaration.handTypeEnum.Left)
+                if (collider.transform.GetComponentInParent<GunAttachment>())
+                    if (collider.transform.GetComponentInParent<GunAttachment>().attachmentName == attachment.attachmentName && !attachment.attached && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing)
+                        if(collider.transform.GetComponentInParent<GrabTwoAttach>().handGrabbing.handType == EnumDeclaration.handTypeEnum.Left)
                         {
                             bool hasPulledTrigger= leftFire.action.WasPressedThisFrame();
                             if (hasPulledTrigger)
@@ -141,14 +141,14 @@ public class GenericFirearm : MonoBehaviour
 
         Collider[] potentialMags = Physics.OverlapSphere(transform.TransformPoint(magazineEnterPoint), magazineEnterRadius);
         foreach (Collider collider in potentialMags)
-            if (collider.transform.root.GetComponent<Magazine>())
-                if (collider.transform.root.GetComponent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.root.up, transform.TransformDirection(magazineEnterPoint - magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.root.GetComponent<GrabTwoAttach>().isGrabbing)
-                    MagazineEnter(collider.transform.root.GetComponent<GrabTwoAttach>());
+            if (collider.transform.GetComponentInParent<Magazine>())
+                if (collider.transform.GetComponentInParent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.root.up, -transform.TransformDirection(magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing)
+                    MagazineEnter(collider.transform.GetComponentInParent<GrabTwoAttach>());
 
         if (grab.isPrimaryGrabbing)
         {
-            bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.8f;
-            bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.8f;
+            bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.95f;
+            bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.95f;
 
             if (!hasPulledTriggerRight && !hasPulledTriggerLeft)
                 hasPulledTrigger = false;
@@ -212,7 +212,7 @@ public class GenericFirearm : MonoBehaviour
         }
         attachmentOnGun.attached = true;
     }
-    public void SilencePistol()
+    public void Silence()
     {
         isSilenced = true;
     }
@@ -387,9 +387,9 @@ public class GenericFirearm : MonoBehaviour
         Gizmos.DrawLine(transform.TransformPoint(magazineEnterPoint), transform.TransformPoint(magazineEnterPoint) - transform.TransformDirection(magazineEnterDirection));
 
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        foreach (Attachment attachment in attachments)
-        {
-            Gizmos.DrawSphere(transform.TransformPoint(attachment.attachPoint), attachment.attachRadius);
-        }
+        if (attachments != null)
+            if (attachments.Length > 0)
+                foreach (Attachment attachment in attachments)
+                    Gizmos.DrawSphere(transform.TransformPoint(attachment.attachPoint), attachment.attachRadius);
     }
 }

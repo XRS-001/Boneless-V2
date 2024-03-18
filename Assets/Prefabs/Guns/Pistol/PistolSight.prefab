@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6174848771049764986}
   - component: {fileID: 7537781501541926302}
   - component: {fileID: 1394484660089682802}
+  - component: {fileID: 1952915445183125877}
   m_Layer: 9
   m_Name: PistolSight
   m_TagString: Untagged
@@ -56,7 +57,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -205,3 +206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentName: PistolSight
+--- !u!114 &1952915445183125877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407779757040529318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295

@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 6380739330273756027}
   - component: {fileID: 7403709191818828871}
   - component: {fileID: 1009206544170263085}
+  - component: {fileID: 6105874628817271301}
   m_Layer: 17
   m_Name: RevolverLoader
   m_TagString: Untagged
@@ -408,7 +409,7 @@ Transform:
   - {fileID: 1444818404053281688}
   - {fileID: 1820600703270457904}
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!54 &6380739330273756027
 Rigidbody:
@@ -434,7 +435,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &7403709191818828871
@@ -484,6 +485,23 @@ MonoBehaviour:
   isLoaded: 1
   loaderName: RevolverLoader
   ammo: 6
+--- !u!114 &6105874628817271301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2978283312443425547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3089180964777152544
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +827,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1

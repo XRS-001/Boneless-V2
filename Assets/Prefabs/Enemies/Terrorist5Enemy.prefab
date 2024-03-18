@@ -209,6 +209,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1143,6 +1144,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1432,6 +1434,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1797,6 +1800,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2166,6 +2170,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2550,6 +2555,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2872,6 +2878,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -3287,6 +3294,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -3736,7 +3744,7 @@ Transform:
   - {fileID: 6283418151219938284}
   - {fileID: 4131999783104688752}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7484075524344783033
 MonoBehaviour:
@@ -3873,8 +3881,8 @@ MonoBehaviour:
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.6
-  muscleWeight: 0.4
+  pinWeight: 0.7
+  muscleWeight: 0.5
   muscleSpring: 150
   muscleDamper: 150
   pinPow: 8
@@ -6414,6 +6422,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -6967,6 +6976,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -7672,6 +7682,7 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}

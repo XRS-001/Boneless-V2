@@ -457,7 +457,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1519,7 +1519,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462823733058059593}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 1.5187, y: 1.055, z: -0.5173}
   m_LocalScale: {x: 0.9000002, y: 0.9000002, z: 0.9}
   m_ConstrainProportionsScale: 0
@@ -1562,7 +1562,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &2050480897345925191
@@ -1618,6 +1618,8 @@ MonoBehaviour:
     rightPose: {fileID: 0}
     rightAttachPosition: {x: 0, y: 0, z: 0}
     rightAttachRotation: {x: 0, y: 0, z: 0}
+  isPrimaryGrabbing: 0
+  disconnectSecondaryOnUnGrab: 1
 --- !u!114 &1699288985809359326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1633,8 +1635,12 @@ MonoBehaviour:
   bullet: {fileID: 2514580978177725733, guid: bbef5ad3bd5ad1742829ff71f8221ea8, type: 3}
   firePoint: {fileID: 5817829700895528038}
   casing: {fileID: 8022948759539018256, guid: 8e6cd290abfd0fc4c934d5bd079db28c, type: 3}
+  casingUnFired: {fileID: 6274177791941291417, guid: 8ed60a789c60c1f4cb98adf7d45b8836,
+    type: 3}
   casingEjectPoint: {fileID: 4055035292126204625}
   casingEjectForce: 10
+  fullAuto: 0
+  fullAutoBulletsPerSecond: 7
   slide: {fileID: 8527673722943825600}
   slideThreshold: 0.015
   slidePoint: {x: -0.00008116166, y: 0.07584672, z: 0.05298004}
@@ -1665,8 +1671,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1699288985809359326}
-          m_TargetAssemblyTypeName: Pistol, Assembly-CSharp
-          m_MethodName: SilencePistol
+          m_TargetAssemblyTypeName: GenericFirearm, Assembly-CSharp
+          m_MethodName: Silence
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2376,7 +2382,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3686,7 +3692,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -4290,7 +4296,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -5495,7 +5501,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -7501,7 +7507,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1

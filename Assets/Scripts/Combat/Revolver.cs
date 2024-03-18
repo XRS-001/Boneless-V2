@@ -100,8 +100,8 @@ public class Revolver : MonoBehaviour
         }
         if (grab.isGrabbing)
         {
-            bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.8f;
-            bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.8f;
+            bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.95f;
+            bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.95f;
 
             if (!hasPulledTriggerRight && !hasPulledTriggerLeft)
                 hasPulledTrigger = false;

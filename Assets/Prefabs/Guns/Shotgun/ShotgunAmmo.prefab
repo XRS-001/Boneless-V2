@@ -596,7 +596,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2190183983743740630}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.079, z: 0}
+  m_LocalPosition: {x: 0, y: -0.0498, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -621,7 +621,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -731,6 +731,7 @@ GameObject:
   - component: {fileID: 2892340510833028168}
   - component: {fileID: 3482020609120973836}
   - component: {fileID: 8718907803319861082}
+  - component: {fileID: -3669387817044715243}
   m_Layer: 17
   m_Name: ShotgunAmmo
   m_TagString: Untagged
@@ -754,7 +755,7 @@ Transform:
   - {fileID: 5854095963481736765}
   - {fileID: 6333965598846205059}
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5402560237906309637
 Rigidbody:
@@ -803,7 +804,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.030425815, y: 0.08100287, z: 0.02575198}
-  m_Center: {x: -2.9084696e-18, y: -0.039231323, z: 0.0021838578}
+  m_Center: {x: -2.9084696e-18, y: -0.01, z: 0.0021838578}
 --- !u!114 &2892340510833028168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,12 +841,12 @@ MonoBehaviour:
   indexFingerFreedom: 0
   leftAttach:
     leftPose: {fileID: 1889053919547341464}
-    leftAttachPosition: {x: 0.03, y: -0.04, z: -0.09}
-    leftAttachRotation: {x: 49.3, y: -34.9, z: 0}
+    leftAttachPosition: {x: 0, y: -0.135, z: -0.03}
+    leftAttachRotation: {x: 0, y: 0, z: 20}
   rightAttach:
     rightPose: {fileID: 4661260435588458734}
-    rightAttachPosition: {x: -0.03, y: -0.04, z: -0.09}
-    rightAttachRotation: {x: 49.3, y: 34.9, z: 0}
+    rightAttachPosition: {x: -0.0025, y: -0.135, z: -0.03}
+    rightAttachRotation: {x: 0, y: 18.89, z: -15}
   twoHanded: 0
 --- !u!114 &8718907803319861082
 MonoBehaviour:
@@ -860,6 +861,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &-3669387817044715243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2952797602542292393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 51fcf928d40b7f943ba156c18dfe3280, type: 3}
   volumeModifier: 1
   layers:
     serializedVersion: 2

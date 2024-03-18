@@ -1217,7 +1217,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1300,7 +1300,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1523,6 +1523,7 @@ GameObject:
   - component: {fileID: 8386363480298508452}
   - component: {fileID: 7853297700521614784}
   - component: {fileID: 916019464531164827}
+  - component: {fileID: 3380571286267460741}
   m_Layer: 17
   m_Name: PistolMagazine
   m_TagString: Untagged
@@ -1550,7 +1551,7 @@ Transform:
   - {fileID: 474337684053525555}
   - {fileID: 744688787892375264}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8386363480298508452
 Rigidbody:
@@ -1626,6 +1627,23 @@ MonoBehaviour:
   ammo: 14
   magazine: {fileID: 6190093821407854611}
   emptyMagazine: {fileID: 6144757632138727941}
+--- !u!114 &3380571286267460741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953826432572419210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &7110829205070741274
 GameObject:
   m_ObjectHideFlags: 0

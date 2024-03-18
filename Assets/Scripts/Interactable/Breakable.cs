@@ -19,11 +19,13 @@ public class Breakable : MonoBehaviour
             else
                 forceNeededToBreak -= collision.relativeVelocity.magnitude;
         }
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Projectile"))
+                forceNeededToBreak -= collision.rigidbody.velocity.magnitude;
 
         if (forceNeededToBreak < 0 && collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
             Break(collision.relativeVelocity.magnitude * 2, collision.relativeVelocity, collision.GetContact(0).point);
         else if (forceNeededToBreak < 0)
-            Break(0, collision.relativeVelocity, collision.GetContact(0).point);
+            Break(collision.rigidbody.velocity.magnitude * 2, collision.relativeVelocity, collision.GetContact(0).point);
     }
     public void Break(float breakForce, Vector3 velocity, Vector3 breakPoint)
     {
@@ -49,8 +51,8 @@ public class Breakable : MonoBehaviour
         breakables = breakableParent.GetComponentsInChildren<Rigidbody>().ToList();
         foreach (Rigidbody rb in breakables)
         {
-            rb.AddExplosionForce(Mathf.Clamp(breakForce, 0, 5000), transform.position, 100);
-            rb.AddForce(Vector3.ClampMagnitude(velocity * 25, 2500));
+            rb.AddExplosionForce(Mathf.Clamp(breakForce, 0, 500), transform.position, 100);
+            rb.AddForce(Vector3.ClampMagnitude(velocity * 25, 250));
         }
     }
 }

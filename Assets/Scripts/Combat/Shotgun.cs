@@ -22,7 +22,6 @@ public class Shotgun : MonoBehaviour
     public float ammoEjectForce;
     public int ammoCapacity;
     private int ammo = 0;
-    private bool shooting;
     private bool hasShot;
     private bool primed;
 
@@ -103,8 +102,8 @@ public class Shotgun : MonoBehaviour
         }
         if (grab.isGrabbing)
         {
-            bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.8f;
-            bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.8f;
+            bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.95f;
+            bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.95f;
 
             if (!hasPulledTriggerRight && !hasPulledTriggerLeft)
                 hasPulledTrigger = false;
@@ -117,10 +116,10 @@ public class Shotgun : MonoBehaviour
         }
         Collider[] potentialMags = Physics.OverlapSphere(transform.TransformPoint(ammoEnterPoint), ammoEnterRadius);
         foreach (Collider collider in potentialMags)
-            if (collider.transform.root.GetComponent<ShotgunShell>())
-                if (collider.transform.root.GetComponent<ShotgunShell>().canEnterGun)
-                    if (collider.transform.root.GetComponent<ShotgunShell>().shellName == ammoName && ammo < ammoCapacity && atPumpEnd)
-                    AmmoEnter(collider.transform.root.GetComponent<GrabTwoAttach>());
+            if (collider.transform.GetComponentInParent<ShotgunShell>())
+                if (collider.transform.GetComponentInParent<ShotgunShell>().canEnterGun)
+                    if (collider.transform.GetComponentInParent<ShotgunShell>().shellName == ammoName && ammo < ammoCapacity && atPumpEnd)
+                    AmmoEnter(collider.transform.GetComponentInParent<GrabTwoAttach>());
 
         if (Vector3.Distance(pump.transform.localPosition, pumpPoint) < pumpThreshold / 2 && !hasShot)
         {
@@ -173,7 +172,6 @@ public class Shotgun : MonoBehaviour
         if (ammo > 0 && primed && !hasPulledTrigger)
         {
             hasPulledTrigger = true;
-            shooting = true;
             hasShot = true;
             primed = false;
             if (ammo > 0 && primed)
@@ -211,7 +209,8 @@ public class Shotgun : MonoBehaviour
         Rigidbody spawnedCasing = null;
         if (hasShot)
         {
-            spawnedCasing = Instantiate(ammoShotPrefab, ammoEjectPoint.position, ammoEjectPoint.rotation).GetComponent<Rigidbody>();
+            spawnedCasing = Instantiate(ammoShotPrefab, ammoEjectPoint.position, ammoEjectPoint.rotation).GetComponentInChildren<Rigidbody>();
+            Destroy(spawnedCasing.gameObject, 10);
             hasShot = false;
         }
         else
@@ -223,7 +222,6 @@ public class Shotgun : MonoBehaviour
             Physics.IgnoreCollision(c, spawnedCasing.GetComponent<Collider>());
         }
         spawnedCasing.AddForce(ammoEjectPoint.right * ammoEjectForce);
-        Destroy(spawnedCasing.gameObject, 10);
         if (spawnedCasing.GetComponent<ShotgunShell>())
         {
             spawnedCasing.GetComponent<ShotgunShell>().DelayCanEnter();
@@ -232,7 +230,6 @@ public class Shotgun : MonoBehaviour
     }
     void RegainControl()
     {
-        shooting = false;
         GetComponent<Rigidbody>().mass /= 10;
     }
     private void OnDrawGizmosSelected()
