@@ -7,7 +7,7 @@ internal class UVTextureAnimator : MonoBehaviour
 {
   public int Rows = 4; //tilesY
   public int Columns = 4; //tilesX
-  private float Fps = 80;
+  private float Fps = 50;
   public int OffsetMat = 0;
 
   public float StartDelay = 0;

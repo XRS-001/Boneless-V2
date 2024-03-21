@@ -230,7 +230,7 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = true;
             }
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.005f);
 
             foreach (ArmJoint joint in armJoints)
             {

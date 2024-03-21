@@ -142,9 +142,9 @@ public class Revolver : MonoBehaviour
             {
                 Collider[] potentialMags = Physics.OverlapSphere(loadingPoint.position, loadingRadius);
                 foreach (Collider collider in potentialMags)
-                    if (collider.transform.root.GetComponent<RevolverLoader>())
-                        if (collider.transform.root.GetComponent<RevolverLoader>().loaderName == loaderName && collider.transform.root.GetComponent<GrabTwoAttach>().isGrabbing && ammo == 0)
-                            Load(collider.transform.root.GetComponent<RevolverLoader>());
+                    if (collider.transform.GetComponentInParent<RevolverLoader>())
+                        if (collider.transform.GetComponentInParent<RevolverLoader>().loaderName == loaderName && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing && ammo == 0)
+                            Load(collider.transform.GetComponentInParent<RevolverLoader>());
             }
         }
     }

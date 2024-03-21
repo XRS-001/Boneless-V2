@@ -129,20 +129,20 @@ public class GenericFirearm : MonoBehaviour
                         {
                             bool hasPulledTrigger= leftFire.action.WasPressedThisFrame();
                             if (hasPulledTrigger)
-                                Attach(attachment, collider.transform.root.gameObject);
+                                Attach(attachment, collider.transform.GetComponentInParent<GunAttachment>().gameObject);
                         }
                         else
                         {
                             bool hasPulledTrigger = rightFire.action.WasPressedThisFrame();
                             if(hasPulledTrigger)
-                                Attach(attachment, collider.transform.root.gameObject);
+                                Attach(attachment, collider.transform.GetComponentInParent<GunAttachment>().gameObject);
                         }
         }
 
         Collider[] potentialMags = Physics.OverlapSphere(transform.TransformPoint(magazineEnterPoint), magazineEnterRadius);
         foreach (Collider collider in potentialMags)
             if (collider.transform.GetComponentInParent<Magazine>())
-                if (collider.transform.GetComponentInParent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.root.up, -transform.TransformDirection(magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing)
+                if (collider.transform.GetComponentInParent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.GetComponentInParent<Magazine>().transform.up, -transform.TransformDirection(magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing)
                     MagazineEnter(collider.transform.GetComponentInParent<GrabTwoAttach>());
 
         if (grab.isPrimaryGrabbing)
