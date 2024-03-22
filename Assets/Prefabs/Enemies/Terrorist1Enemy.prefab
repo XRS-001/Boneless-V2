@@ -2568,7 +2568,7 @@ Transform:
   - {fileID: 5530129559382833654}
   - {fileID: 8183631959254240345}
   m_Father: {fileID: 0}
-  m_RootOrder: 68
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1071981637328530615
 MonoBehaviour:
@@ -6028,8 +6028,8 @@ MonoBehaviour:
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.6
-  muscleWeight: 0.5
+  pinWeight: 0.7
+  muscleWeight: 0.7
   muscleSpring: 150
   muscleDamper: 150
   pinPow: 8
