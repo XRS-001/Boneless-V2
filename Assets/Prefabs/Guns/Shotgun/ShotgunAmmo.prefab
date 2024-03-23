@@ -755,7 +755,7 @@ Transform:
   - {fileID: 5854095963481736765}
   - {fileID: 6333965598846205059}
   m_Father: {fileID: 0}
-  m_RootOrder: 44
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5402560237906309637
 Rigidbody:
@@ -839,6 +839,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 0
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 1889053919547341464}
     leftAttachPosition: {x: 0, y: -0.135, z: -0.03}

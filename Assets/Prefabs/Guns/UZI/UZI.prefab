@@ -823,6 +823,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 0
+  despawn: 1
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 3391890281545556598}
     leftAttachPosition: {x: -0.07, y: 0.06, z: -0.08}
@@ -970,7 +972,7 @@ Transform:
   - {fileID: 7752313945724119214}
   - {fileID: 2677201199075733414}
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!54 &8330814685387883600
 Rigidbody:
@@ -1026,6 +1028,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 1
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 6611283168070827140}
     leftAttachPosition: {x: -0.02, y: 0, z: -0.08}
@@ -1086,6 +1090,7 @@ MonoBehaviour:
   magazineEnterRadius: 0.03
   magazineEnterDirection: {x: 0, y: -0.12, z: 0}
   magazineEnterThreshold: 0.7
+  canGrabMagazineWhileInGun: 1
   magazineEnterSound: {fileID: 8300000, guid: bfc6c668ba106764aba800fc0363337d, type: 3}
   animatedMag: {fileID: 1952392015483974819}
   animatedEmptyMag: {fileID: 1653798461061527482}
@@ -1557,7 +1562,7 @@ GameObject:
   - component: {fileID: 7761701171810471990}
   - component: {fileID: 6158107864004040155}
   - component: {fileID: 4308047785805914949}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1694,7 +1699,7 @@ GameObject:
   - component: {fileID: 3345173427084669838}
   m_Layer: 9
   m_Name: AnimatedMagazine
-  m_TagString: Untagged
+  m_TagString: MagazineInGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1780,7 +1785,7 @@ GameObject:
   - component: {fileID: 797695424203537765}
   - component: {fileID: 2410798303680172421}
   - component: {fileID: 2463188654994485128}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Full
   m_TagString: Untagged
   m_Icon: {fileID: 0}

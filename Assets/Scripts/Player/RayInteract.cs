@@ -84,22 +84,34 @@ public class RayInteract : MonoBehaviour
         eventData.position = new Vector2(Screen.width / 2, Screen.height / 2);
         EventSystem.current.RaycastAll(eventData, new List<RaycastResult>());
         ExecuteEvents.ExecuteHierarchy(uiElement, eventData, ExecuteEvents.pointerEnterHandler);
-        if (uiElement.GetComponent<Button>())
+        if (uiElement.GetComponent<Button>() || uiElement.GetComponentInParent<Button>())
         {
-            image = uiElement.GetComponent<Button>().targetGraphic;
+            if (uiElement.GetComponent<Button>())
+            {
+                image = uiElement.GetComponent<Button>().targetGraphic;
+            }
+            else if (uiElement.GetComponentInParent<Button>())
+            {
+                image = uiElement.GetComponentInParent<Button>().targetGraphic;
+            }
+        }
+        else
+        {
+            image = null;
         }
         if(image != null && !hasChangedOpacity)
         {
-            if (image.GetComponent<Button>())
+            if (image.GetComponent<Button>() || image.GetComponentInParent<Button>())
             {
                 Color color = image.color;
-                color.a /= 2;
+                color.a /= 1.1f;
                 image.color = color;
                 hasChangedOpacity = true;
             }
         }
         if (UIClickInput.action.ReadValue<float>() > 0.25f && !hasTouched)
         {
+            ChangeOpacity();
             ExecuteEvents.ExecuteHierarchy(uiElement, eventData, ExecuteEvents.pointerClickHandler);
             hasTouched = true;
         }
@@ -108,10 +120,10 @@ public class RayInteract : MonoBehaviour
     {
         if (image != null && hasChangedOpacity)
         {
-            if (image.GetComponent<Button>())
+            if (image.GetComponent<Button>() || image.GetComponentInParent<Button>())
             {
                 Color color = image.color;
-                color.a *= 2;
+                color.a *= 1.1f;
                 image.color = color;
                 hasChangedOpacity = false;
             }

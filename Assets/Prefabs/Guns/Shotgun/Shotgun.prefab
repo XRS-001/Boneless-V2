@@ -3193,7 +3193,7 @@ Transform:
   - {fileID: 6186568727661874092}
   - {fileID: 6144889726822013779}
   m_Father: {fileID: 0}
-  m_RootOrder: 35
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!54 &6371778729562323580
 Rigidbody:
@@ -3248,6 +3248,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 1
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 4147828200105228050}
     leftAttachPosition: {x: -0.034, y: 0.03, z: -0.04}
@@ -3278,7 +3280,7 @@ MonoBehaviour:
   - {fileID: 6186568727661874092}
   ammoEjectPoint: {fileID: 6144889726822013779}
   bulletForce: 3000
-  recoilForce: 5000
+  recoilForce: 2000
   ammoEjectForce: 150
   ammoCapacity: 6
   muzzleFlash: {fileID: 3298893614815858062, guid: cf3d989e998e0c04ba269516b215e166,
@@ -3816,6 +3818,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 0
+  despawn: 1
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 3327355908222881566}
     leftAttachPosition: {x: 0, y: 0.07, z: -0.1}

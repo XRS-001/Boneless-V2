@@ -515,7 +515,7 @@ Transform:
   m_GameObject: {fileID: 2871952939018154500}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 1.629, y: 0.9963, z: -1.273}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9000002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6404182328442443977}
@@ -524,7 +524,7 @@ Transform:
   - {fileID: 1137928010744264944}
   - {fileID: 8230978551719179335}
   m_Father: {fileID: 0}
-  m_RootOrder: 37
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!54 &1129671254419633204
 Rigidbody:
@@ -573,6 +573,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 0
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 3185456142078679065}
     leftAttachPosition: {x: -0.075, y: -0.12, z: -0.07}

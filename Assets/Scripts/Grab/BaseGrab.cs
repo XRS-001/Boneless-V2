@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class BaseGrab : MonoBehaviour
@@ -17,4 +18,21 @@ public class BaseGrab : MonoBehaviour
     public HandData pose;
     [Tooltip("Only applicable to non dynamic grabs")]
     public bool indexFingerFreedom = true;
+    public bool despawn;
+    public float despawnTime;
+
+    public IEnumerator Despawn()
+    {
+        float countdown = despawnTime;
+        while (countdown > 0)
+        {
+            countdown -= Time.deltaTime;
+            if (isGrabbing)
+            {
+                countdown = despawnTime;
+            }
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
 }

@@ -1536,7 +1536,7 @@ Transform:
   - {fileID: 5653325823817928624}
   - {fileID: 8608940331406244425}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!54 &609445558623033864
 Rigidbody:
@@ -1593,6 +1593,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 1
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 6899522062742906516}
     leftAttachPosition: {x: -0.02, y: 0, z: -0.08}
@@ -1653,6 +1655,7 @@ MonoBehaviour:
   magazineEnterRadius: 0.04
   magazineEnterDirection: {x: 0, y: -0.11, z: -0.04}
   magazineEnterThreshold: 0.7
+  canGrabMagazineWhileInGun: 0
   magazineEnterSound: {fileID: 8300000, guid: bfc6c668ba106764aba800fc0363337d, type: 3}
   animatedMag: {fileID: 2791064123424129133}
   animatedEmptyMag: {fileID: 8751656168925250189}
@@ -6045,6 +6048,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 0
+  despawn: 1
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 4686009156438047227}
     leftAttachPosition: {x: 0.04, y: 0.09, z: -0.085}

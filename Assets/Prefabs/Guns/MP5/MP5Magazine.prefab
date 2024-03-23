@@ -212,6 +212,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 0
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 1338381873224359730}
     leftAttachPosition: {x: -0.08, y: -0.14, z: 0.03}

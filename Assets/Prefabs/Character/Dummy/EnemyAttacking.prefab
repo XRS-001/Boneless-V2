@@ -936,6 +936,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1213,6 +1216,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1642,6 +1648,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2374,6 +2383,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -3387,7 +3399,7 @@ Transform:
   - {fileID: 4714083012445352575}
   - {fileID: 7130341102185233565}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &3706935098130074291
 MonoBehaviour:
@@ -3428,6 +3440,7 @@ MonoBehaviour:
   - {fileID: 9193158053830148758}
   - {fileID: 3584364020312839659}
   health: 100
+  dead: 0
   canKill: 1
   puppet: {fileID: 6446557493111316703}
   behaviour: {fileID: 5966327385470119969}
@@ -3435,9 +3448,14 @@ MonoBehaviour:
   animator: {fileID: 3165953371949189588}
   player: {fileID: 0}
   isGrabbing: 0
+  piercedBy: []
   attackDistance: 0.5
   enemyType: 0
   despawnTime: 30
+  playHitSound: 0
+  hitAudios: []
+  deathAudios: []
+  hitAudioSource: {fileID: 0}
 --- !u!1 &4779383359798231932
 GameObject:
   m_ObjectHideFlags: 0
@@ -3763,6 +3781,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -4137,6 +4158,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -4683,6 +4707,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -4985,6 +5012,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -5304,6 +5334,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -5550,6 +5583,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -6152,6 +6188,9 @@ MonoBehaviour:
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}

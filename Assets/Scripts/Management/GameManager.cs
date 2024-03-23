@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     private bool canDamage = true;
     public Volume postProcessingVolume;
     private Vignette vignette;
-    public GameObject menu;
     public InputActionReference toggleMenu;
     [Header("Default Targets")]
     public Transform defaultLeftHandTarget;
@@ -60,15 +59,18 @@ public class GameManager : MonoBehaviour
     public Transform player;
 
     [Header("UI")]
+    public GameObject menu;
     [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
+    public bool despawnItems = true;
+    public TextMeshProUGUI healthText;
     public GameObject sceneChangeButton;
+    public GameObject[] spawnableItems;
+    public Transform itemSpawnPoint;
     private AudioSource audioSource;
     public AudioClip UIClickSound;
     private bool altCameraFollow;
     private float deltaTime;
     public TextMeshProUGUI fpsText;
-    public NPC dummy;
-    public TextMeshProUGUI dummyCanKillText;
 
     private void Start()
     {
@@ -82,12 +84,29 @@ public class GameManager : MonoBehaviour
             startPosition = externalCamera.transform.position;
             startRotation = externalCamera.transform.rotation;
         }
-        if(dummy && dummyCanKillText)
-        {
-            dummyCanKillText.text = dummy.canKill.ToString();
-        }
         Application.targetFrameRate = 120;
         audioSource = GetComponent<AudioSource>();
+    }
+    public void IncreasePlayerHealth()
+    {
+        health += 10;
+        startingHealth += 10;
+    }
+    public void DecreasePlayerHealth()
+    {
+        health -= 10;
+        startingHealth -= 10;
+    }
+    public void SpawnItem(string itemName)
+    {
+        foreach(GameObject item in spawnableItems)
+        {
+            if(item.name == itemName && !Physics.CheckSphere(itemSpawnPoint.position, 0.01f))
+            {
+                Instantiate(item, itemSpawnPoint.position, itemSpawnPoint.rotation);
+                item.GetComponent<BaseGrab>().StartCoroutine(item.GetComponent<BaseGrab>().Despawn());
+            }
+        }
     }
     public GameObject FindEffect(surfaceType material)
     {
@@ -162,6 +181,10 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (healthText)
+        {
+            healthText.text = startingHealth.ToString();
+        }
         if (menu)
         {
             bool toggledMenu = toggleMenu.action.WasPressedThisFrame();
@@ -233,19 +256,7 @@ public class GameManager : MonoBehaviour
             height = 1.75f * calibrator.data.scale;
         }
     }
-    public void ToggleDummyKill()
-    {
-        if (dummy.canKill)
-        {
-            dummyCanKillText.text = "False";
-            dummy.canKill = false;
-        }
-        else
-        {
-            dummyCanKillText.text = "True";
-            dummy.canKill = true;
-        }
-    }
+
     public void CameraFollow()
     {
         if (altCameraFollow)

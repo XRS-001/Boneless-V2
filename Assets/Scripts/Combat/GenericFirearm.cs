@@ -37,9 +37,11 @@ public class GenericFirearm : MonoBehaviour
     public Vector3 magazineEnterDirection;
     public float magazineEnterThreshold;
     private bool magazineInGun;
+    public bool canGrabMagazineWhileInGun;
     public AudioClip magazineEnterSound;
     public GameObject animatedMag;
     public GameObject animatedEmptyMag;
+    private bool canEnter = true;
     [Header("FX")]
     public GameObject muzzleFlash;
     public AudioClip fireSound;
@@ -142,7 +144,7 @@ public class GenericFirearm : MonoBehaviour
         Collider[] potentialMags = Physics.OverlapSphere(transform.TransformPoint(magazineEnterPoint), magazineEnterRadius);
         foreach (Collider collider in potentialMags)
             if (collider.transform.GetComponentInParent<Magazine>())
-                if (collider.transform.GetComponentInParent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.GetComponentInParent<Magazine>().transform.up, -transform.TransformDirection(magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing)
+                if (collider.transform.GetComponentInParent<Magazine>().magazineName == magazineName && Vector3.Dot(collider.transform.GetComponentInParent<Magazine>().transform.up, -transform.TransformDirection(magazineEnterDirection).normalized) > magazineEnterThreshold && !magazineInGun && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing && canEnter)
                     MagazineEnter(collider.transform.GetComponentInParent<GrabTwoAttach>());
 
         if (grab.isPrimaryGrabbing)
@@ -212,6 +214,30 @@ public class GenericFirearm : MonoBehaviour
         }
         attachmentOnGun.attached = true;
     }
+    public void GrabMagazine(GrabPhysics grab)
+    {
+        if (canGrabMagazineWhileInGun)
+        {
+            Magazine mag = Instantiate(magazinePrefab, animatedMag.transform.position, animatedMag.transform.rotation).GetComponent<Magazine>();
+            mag.ammo = ammo;
+            grab.grab = mag.GetComponent<GrabTwoAttach>();
+            grab.GenericGrab(null, mag.GetComponent<Rigidbody>());
+            grab.grab.handGrabbing = grab;
+            magazineInGun = false;
+            animatedMag.transform.parent.gameObject.SetActive(false);
+            animator.enabled = true;
+            animator.Play("MagazineOut");
+            canEnter = false;
+            mag.GetComponentInChildren<Collider>().enabled = false;
+            StartCoroutine(DelayCanEnter(mag.GetComponentInChildren<Collider>()));
+        }
+    }
+    IEnumerator DelayCanEnter(Collider mag)
+    {
+        yield return new WaitForSeconds(1);
+        canEnter = true;
+        mag.enabled = true;
+    }
     public void Silence()
     {
         isSilenced = true;
@@ -234,11 +260,14 @@ public class GenericFirearm : MonoBehaviour
     }
     public void SpawnMag()
     {
-        Magazine spawnedMag = Instantiate(magazinePrefab, animatedMag.transform.parent.transform.position, animatedMag.transform.parent.transform.rotation).GetComponent<Magazine>();
-        spawnedMag.ammo = ammo;
-        ammo = 0;
-        animatedMag.transform.parent.gameObject.SetActive(false);
-        magazineInGun = false;
+        if (animatedMag.transform.parent.gameObject.activeInHierarchy)
+        {
+            Magazine spawnedMag = Instantiate(magazinePrefab, animatedMag.transform.parent.transform.position, animatedMag.transform.parent.transform.rotation).GetComponent<Magazine>();
+            spawnedMag.ammo = ammo;
+            ammo = 0;
+            animatedMag.transform.parent.gameObject.SetActive(false);
+            magazineInGun = false;
+        }
     }
 
     public void Slide()

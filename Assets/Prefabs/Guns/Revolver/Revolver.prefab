@@ -2033,7 +2033,7 @@ Transform:
   - {fileID: 5856306542812444067}
   - {fileID: 9020987810990099157}
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!54 &1054521318570713828
 Rigidbody:
@@ -2085,6 +2085,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 1
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 7912701951036419192}
     leftAttachPosition: {x: -0.02, y: 0, z: -0.11}
@@ -2129,7 +2131,7 @@ MonoBehaviour:
   bulletForce: 5000
   recoilForce: 6000
   hammer: {fileID: 617688126627764838}
-  hammerUnPrimeDegrees: 0
+  hammerUnPrimeDegrees: -30
   hinge: {fileID: 7000388609523798494}
   hingeDownSpring:
     spring: 0.5
@@ -2140,6 +2142,8 @@ MonoBehaviour:
     damper: 15
     targetRotation: 0
   hingeTarget: {fileID: 2201743385701302184}
+  loaderPrefab: {fileID: 2978283312443425547, guid: 405af61484511b3488ccc6dfca88d51d,
+    type: 3}
   loadingPoint: {fileID: 3046763122412130511}
   bulletsLoaded: {fileID: 8385284027948872584, guid: da29ac01dcb923047bc4334b51cefa2a,
     type: 3}

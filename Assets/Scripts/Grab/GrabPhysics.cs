@@ -49,6 +49,8 @@ public class GrabPhysics : MonoBehaviour
     private Joint joint;
     [HideInInspector]
     public GrabTwoAttach grab;
+    private MagazinePouch magazinePouch;
+    private GenericFirearm magazineGrabInGun;
     [HideInInspector]
     public bool canGrab = true;
 
@@ -121,8 +123,10 @@ public class GrabPhysics : MonoBehaviour
             }
         }
     }
-    void GenericGrab(HandData resettedHandData)
+    public void GenericGrab(HandData resettedHandData, Rigidbody customRigidbody)
     {
+        if (customRigidbody)
+            nearbyRigidbody = customRigidbody;
         if(distanceHovering && grab.GetComponent<Blade>())
             if (grab.GetComponent<Blade>().stabbed)
                 grab.GetComponent<Blade>().UnStab();
@@ -146,7 +150,14 @@ public class GrabPhysics : MonoBehaviour
                 Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("GunSlide"));
         }
 
-        AudioSource.PlayClipAtPoint(grabSound, closestCollider.ClosestPoint(transform.position));
+        if (!customRigidbody)
+        {
+            AudioSource.PlayClipAtPoint(grabSound, closestCollider.ClosestPoint(transform.position));
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(grabSound, transform.position);
+        }
 
         if (grab is GrabDynamic)
         {
@@ -174,14 +185,15 @@ public class GrabPhysics : MonoBehaviour
         HandleDrive(false);
         grab.isGrabbing = true;
 
-        if(nearbyRigidbody.mass >= 1)
+        if (nearbyRigidbody.mass >= 1)
             nearbyRigidbody.mass = 1;
+
         joint = gameObject.AddComponent<ConfigurableJoint>();
         ConfigurableJoint configJoint = joint as ConfigurableJoint;
 
         if (grab is not GrabDynamic)
         {
-            transform.rotation = (nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation));
+            transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
         }
         else
         {
@@ -202,9 +214,10 @@ public class GrabPhysics : MonoBehaviour
         configJoint.angularZMotion = ConfigurableJointMotion.Locked;
 
         configJoint.autoConfigureConnectedAnchor = false;
-        configJoint.connectedAnchor = grab.attachPoint;
         configJoint.connectedBody = nearbyRigidbody;
+        configJoint.connectedAnchor = grab.attachPoint;
         canGrab = false;
+        grab.StartCoroutine(grab.Despawn());
     }
     IEnumerator DelayGrab()
     {
@@ -381,7 +394,7 @@ public class GrabPhysics : MonoBehaviour
                             grabSecondary.rightAttach = grabSecondary.primaryGripRight;
                         }
 
-                        grab.secondHandGrabbing.GenericGrab(h);
+                        grab.secondHandGrabbing.GenericGrab(h, null);
                     }
                     else
                     {
@@ -499,7 +512,7 @@ public class GrabPhysics : MonoBehaviour
     {
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
         bool isGrabButtonPressedThisFrame = grabInputSource.action.WasPressedThisFrame();
-        if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && grab)
+        if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && grab && !magazinePouch && !magazineGrabInGun)
         {
             if (nearbyRigidbody)
             {
@@ -513,14 +526,14 @@ public class GrabPhysics : MonoBehaviour
                         {
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.handGrabbing = this;
-                            GenericGrab(null);
+                            GenericGrab(null, null);
                         }
                         else if (grab.twoHanded)
                         {
                             grab.isTwoHandGrabbing = true;
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.secondHandGrabbing = this;
-                            GenericGrab(null);
+                            GenericGrab(null, null);
                         }
                     }
                 }
@@ -530,14 +543,14 @@ public class GrabPhysics : MonoBehaviour
                     {
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.handGrabbing = this;
-                        GenericGrab(null);
+                        GenericGrab(null, null);
                     }
                     else if (grab.twoHanded)
                     {
                         grab.isTwoHandGrabbing = true;
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.secondHandGrabbing = this;
-                        GenericGrab(null);
+                        GenericGrab(null, null);
                     }
                 }
             }
@@ -545,6 +558,14 @@ public class GrabPhysics : MonoBehaviour
             {
                 GrabClimbable();
             }
+        }
+        else if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && magazinePouch)
+        {
+            magazinePouch.GrabMagazine(this);
+        }
+        else if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && magazineGrabInGun)
+        {
+            magazineGrabInGun.GrabMagazine(this);
         }
         else if (!isGrabButtonPressed && isGrabbing)
         {
@@ -571,13 +592,22 @@ public class GrabPhysics : MonoBehaviour
         {
             distanceHovering = false;
         }
+        for (int i = 0; i < colliders.Count; i++)
+        {
+            if ((colliders[i].CompareTag("MagazinePouch") || colliders[i].CompareTag("MagazineInGun")) && distanceHovering)
+            {
+                colliders.RemoveAt(i);
+            }
+        }
         closestCollider = null;
         nearbyRigidbody = null;
+        magazinePouch = null;
+        magazineGrabInGun = null;
         if (colliders.Count > 0)
         {
             closestCollider = FindClosestInteractable(colliders.ToArray());
             nearbyRigidbody = closestCollider.attachedRigidbody ?? null;
-            if (nearbyRigidbody)
+            if (nearbyRigidbody && !closestCollider.CompareTag("MagazinePouch") && !closestCollider.CompareTag("MagazineInGun"))
             {
                 grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
                 if (grab)
@@ -588,6 +618,14 @@ public class GrabPhysics : MonoBehaviour
                     }
                     else
                         grab.isHovering = true;
+            }
+            else if (closestCollider.CompareTag("MagazinePouch"))
+            {
+                magazinePouch = closestCollider.GetComponent<MagazinePouch>();
+            }
+            else if (closestCollider.CompareTag("MagazineInGun"))
+            {
+                magazineGrabInGun = closestCollider.GetComponentInParent<GenericFirearm>();
             }
             else
             {

@@ -36,6 +36,7 @@ public class Revolver : MonoBehaviour
     private bool canHinge = true;
 
     [Header("Loading")]
+    public GameObject loaderPrefab;
     public Transform loadingPoint;
     public GameObject bulletsLoaded;
     public float loadingRadius;

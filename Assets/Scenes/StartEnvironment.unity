@@ -21887,21 +21887,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74502db96239c054fa165434c2dd1596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  body: {fileID: 0}
+  canKill: 0
+  mouthAudio: {fileID: 0}
+  hitSounds: []
+  deathSounds: []
+  postProcessingVolume: {fileID: 0}
+  toggleMenu: {fileID: 0}
   defaultLeftHandTarget: {fileID: 0}
   defaultRightHandTarget: {fileID: 0}
   leftDynamicPose: {fileID: 0}
   rightDynamicPose: {fileID: 0}
   calibrator: {fileID: 452711431}
   height: 0
+  impactEffects: []
   blurImage: {fileID: 1090313774}
   externalCamera: {fileID: 0}
   recordingIcon: {fileID: 0}
   player: {fileID: 0}
+  menu: {fileID: 0}
+  despawnItems: 1
+  healthText: {fileID: 0}
   sceneChangeButton: {fileID: 357027825}
+  spawnableItems: []
+  itemSpawnPoint: {fileID: 0}
   UIClickSound: {fileID: 0}
   fpsText: {fileID: 2114361127}
-  dummy: {fileID: 0}
-  dummyCanKillText: {fileID: 0}
 --- !u!82 &2145428188
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21912,7 +21924,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aad7a7fba16964d45be7c4ebe62a3ae1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eeae0f9732476ed419936a018c687f93, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1

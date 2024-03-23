@@ -1261,6 +1261,7 @@ GameObject:
   - component: {fileID: 7116605309782289634}
   - component: {fileID: 7287811277737536676}
   - component: {fileID: 862995858099566272}
+  - component: {fileID: 9006141879964396762}
   m_Layer: 17
   m_Name: AssaultRifleMag
   m_TagString: Untagged
@@ -1285,7 +1286,7 @@ Transform:
   - {fileID: 3585629443098354045}
   - {fileID: 3660460413805745196}
   m_Father: {fileID: 0}
-  m_RootOrder: 56
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &7859788649094021010
 MonoBehaviour:
@@ -1371,6 +1372,8 @@ MonoBehaviour:
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
   indexFingerFreedom: 1
+  despawn: 1
+  despawnTime: 60
   leftAttach:
     leftPose: {fileID: 2908729278786377409}
     leftAttachPosition: {x: -0.03, y: -0.05, z: -0.1}
@@ -1380,6 +1383,23 @@ MonoBehaviour:
     rightAttachPosition: {x: 0.03, y: -0.05, z: -0.1}
     rightAttachRotation: {x: 0, y: -90, z: -81.5}
   twoHanded: 0
+--- !u!114 &9006141879964396762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6149214991002731119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6171dfd440d79384499cc199fbe1288a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 544e8a9866f8b1e4fae30abe42d6db8f, type: 3}
+  volumeModifier: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &6299010513814516096
 GameObject:
   m_ObjectHideFlags: 0
