@@ -4047,14 +4047,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -9935,14 +9935,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 750
-    positionDamper: 50
+    positionSpring: 1125
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 750
-    positionDamper: 50
+    positionSpring: 1125
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -16059,6 +16059,75 @@ Transform:
   m_Father: {fileID: 1366033034}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &399840321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399840322}
+  - component: {fileID: 399840324}
+  - component: {fileID: 399840323}
+  m_Layer: 9
+  m_Name: MagazinePouch
+  m_TagString: MagazinePouch
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399840322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399840321}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1913685926253497699}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399840323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399840321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22944a4904a6d02478664789f9c3fcac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabs:
+  - {fileID: 2077718719}
+  - {fileID: 276302960}
+--- !u!135 &399840324
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399840321}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.05
+  m_Center: {x: 0.2, y: 0.04, z: 0.06}
 --- !u!1 &401376524
 GameObject:
   m_ObjectHideFlags: 0
@@ -22130,7 +22199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -8.8, y: -0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &652897135
@@ -22424,14 +22493,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -35776,7 +35845,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048073461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35792,7 +35861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 44.800003}
+  m_AnchoredPosition: {x: -0.3, y: 19.1}
   m_SizeDelta: {x: 461.67966, y: 241.83777}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1048226565
@@ -52527,14 +52596,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -63333,14 +63402,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1000
-    positionDamper: 50
+    positionSpring: 1500
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -71909,7 +71978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -11.3, y: -0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2076002528
@@ -72182,14 +72251,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 750
-    positionDamper: 50
+    positionSpring: 1125
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 750
-    positionDamper: 50
+    positionSpring: 1125
+    positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -75807,11 +75876,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1987061}
     m_Modifications:
-    - target: {fileID: 1078988784643387598, guid: ae2cbf56e0740d44bbb5948b9ce1643d,
-        type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5494136594895809669, guid: ae2cbf56e0740d44bbb5948b9ce1643d,
         type: 3}
       propertyPath: m_Name
@@ -81109,11 +81173,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MP5Silencer
       objectReference: {fileID: 0}
-    - target: {fileID: 677523593011669345, guid: 4143e5793e869aa4292ae8b2d2308821,
-        type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6852768867763462570, guid: 4143e5793e869aa4292ae8b2d2308821,
         type: 3}
       propertyPath: m_RootOrder
@@ -83441,6 +83500,7 @@ Transform:
   - {fileID: 5755560329790343945}
   - {fileID: 1287402377952121226}
   - {fileID: 1834985595}
+  - {fileID: 399840322}
   m_Father: {fileID: 1298500115068834429}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -89023,11 +89083,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AssaultRifle
       objectReference: {fileID: 0}
-    - target: {fileID: 2359261007414863754, guid: a3eb4599ed4495e4284b7456c5d6cd3b,
-        type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2491221484956625346, guid: a3eb4599ed4495e4284b7456c5d6cd3b,
         type: 3}
       propertyPath: handGrab
@@ -89102,11 +89157,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6267339786881800539, guid: a3eb4599ed4495e4284b7456c5d6cd3b,
-        type: 3}
-      propertyPath: despawn
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7893509642306572032, guid: a3eb4599ed4495e4284b7456c5d6cd3b,
         type: 3}
@@ -101872,6 +101922,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
+      propertyPath: despawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945389932646275694, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
+        type: 3}
       propertyPath: leftAttach.leftAttachPosition.x
       value: -0.66
       objectReference: {fileID: 0}
@@ -103833,11 +103888,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1987061}
     m_Modifications:
-    - target: {fileID: 2623149154119339021, guid: bfe314b437d10ca459816bf12395c2bc,
-        type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4169967196681633846, guid: bfe314b437d10ca459816bf12395c2bc,
         type: 3}
       propertyPath: m_RootOrder

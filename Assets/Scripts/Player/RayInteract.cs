@@ -103,10 +103,30 @@ public class RayInteract : MonoBehaviour
         {
             if (image.GetComponent<Button>() || image.GetComponentInParent<Button>())
             {
-                Color color = image.color;
-                color.a /= 1.1f;
-                image.color = color;
-                hasChangedOpacity = true;
+                if (image.GetComponent<Image>())
+                {
+                    if (image.GetComponent<Image>().sprite)
+                    {
+                        Color color = image.color;
+                        color.a /= 2;
+                        image.color = color;
+                        hasChangedOpacity = true;
+                    }
+                    else
+                    {
+                        Color color = image.color;
+                        color.a /= 1.1f;
+                        image.color = color;
+                        hasChangedOpacity = true;
+                    }
+                }
+                else
+                {
+                    Color color = image.color;
+                    color.a /= 2;
+                    image.color = color;
+                    hasChangedOpacity = true;
+                }
             }
         }
         if (UIClickInput.action.ReadValue<float>() > 0.25f && !hasTouched)
@@ -122,10 +142,30 @@ public class RayInteract : MonoBehaviour
         {
             if (image.GetComponent<Button>() || image.GetComponentInParent<Button>())
             {
-                Color color = image.color;
-                color.a *= 1.1f;
-                image.color = color;
-                hasChangedOpacity = false;
+                if (image.GetComponent<Image>())
+                {
+                    if (image.GetComponent<Image>().sprite)
+                    {
+                        Color color = image.color;
+                        color.a *= 2;
+                        image.color = color;
+                        hasChangedOpacity = false;
+                    }
+                    else
+                    {
+                        Color color = image.color;
+                        color.a *= 1.1f;
+                        image.color = color;
+                        hasChangedOpacity = false;
+                    }
+                }
+                else
+                {
+                    Color color = image.color;
+                    color.a *= 2;
+                    image.color = color;
+                    hasChangedOpacity = false;
+                }
             }
         }
     }

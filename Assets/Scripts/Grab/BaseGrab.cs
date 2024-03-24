@@ -23,16 +23,21 @@ public class BaseGrab : MonoBehaviour
 
     public IEnumerator Despawn()
     {
-        float countdown = despawnTime;
-        while (countdown > 0)
+        if (despawn)
         {
-            countdown -= Time.deltaTime;
-            if (isGrabbing)
+            float countdown = despawnTime;
+            while (countdown > 0)
             {
-                countdown = despawnTime;
+                countdown -= Time.deltaTime;
+                if (isGrabbing)
+                {
+                    countdown = despawnTime;
+                }
+                yield return null;
             }
-            yield return null;
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else
+            yield return null;
     }
 }

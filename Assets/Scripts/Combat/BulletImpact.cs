@@ -11,7 +11,7 @@ public class BulletImpact : MonoBehaviour
     {
         if (collision.collider.GetComponent<DecalSurface>())
         {
-            collision.collider.GetComponent<DecalSurface>().ImpactEffect(collision.contacts[0].point + Quaternion.LookRotation(collision.contacts[0].normal) * Vector3.forward / 20f, Quaternion.LookRotation(collision.contacts[0].normal), collision.transform);
+            collision.collider.GetComponent<DecalSurface>().ImpactEffect(collision.GetContact(0).point + Quaternion.LookRotation(collision.GetContact(0).normal) * Vector3.forward / 20f, Quaternion.LookRotation(collision.GetContact(0).normal), collision.transform);
         }
         else if (collision.collider.transform.root.GetComponent<NPC>())
         {

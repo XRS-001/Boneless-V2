@@ -2750,7 +2750,7 @@ MonoBehaviour:
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.7
+  pinWeight: 0.6
   muscleWeight: 0.7
   muscleSpring: 150
   muscleDamper: 150
@@ -5400,7 +5400,7 @@ MonoBehaviour:
   collisionThreshold: 0
   collisionResistance:
     mode: 0
-    floatValue: 150
+    floatValue: 225
     curve:
       serializedVersion: 2
       m_Curve:

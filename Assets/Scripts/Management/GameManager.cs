@@ -103,8 +103,8 @@ public class GameManager : MonoBehaviour
         {
             if(item.name == itemName && !Physics.CheckSphere(itemSpawnPoint.position, 0.01f))
             {
-                Instantiate(item, itemSpawnPoint.position, itemSpawnPoint.rotation);
-                item.GetComponent<BaseGrab>().StartCoroutine(item.GetComponent<BaseGrab>().Despawn());
+                BaseGrab spawnedItem = Instantiate(item, itemSpawnPoint.position, itemSpawnPoint.rotation).GetComponent<BaseGrab>();
+                spawnedItem.StartCoroutine(spawnedItem.Despawn());
             }
         }
     }

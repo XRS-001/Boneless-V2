@@ -220,8 +220,9 @@ public class GenericFirearm : MonoBehaviour
         {
             Magazine mag = Instantiate(magazinePrefab, animatedMag.transform.position, animatedMag.transform.rotation).GetComponent<Magazine>();
             mag.ammo = ammo;
+            ammo = 0;
             grab.grab = mag.GetComponent<GrabTwoAttach>();
-            grab.GenericGrab(null, mag.GetComponent<Rigidbody>());
+            grab.GenericGrab(null, mag.GetComponent<Rigidbody>(), true);
             grab.grab.handGrabbing = grab;
             magazineInGun = false;
             animatedMag.transform.parent.gameObject.SetActive(false);
@@ -267,6 +268,7 @@ public class GenericFirearm : MonoBehaviour
             ammo = 0;
             animatedMag.transform.parent.gameObject.SetActive(false);
             magazineInGun = false;
+            spawnedMag.GetComponent<BaseGrab>().StartCoroutine(spawnedMag.GetComponent<BaseGrab>().Despawn());
         }
     }
 

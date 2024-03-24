@@ -41,5 +41,6 @@ public class DecalSurface : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        Destroy(decal.transform.parent.gameObject);
     }
 }

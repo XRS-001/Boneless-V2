@@ -123,7 +123,7 @@ public class GrabPhysics : MonoBehaviour
             }
         }
     }
-    public void GenericGrab(HandData resettedHandData, Rigidbody customRigidbody)
+    public void GenericGrab(HandData resettedHandData, Rigidbody customRigidbody, bool nonPhysical)
     {
         if (customRigidbody)
             nearbyRigidbody = customRigidbody;
@@ -190,7 +190,7 @@ public class GrabPhysics : MonoBehaviour
 
         joint = gameObject.AddComponent<ConfigurableJoint>();
         ConfigurableJoint configJoint = joint as ConfigurableJoint;
-
+        Quaternion oldRotation = transform.rotation;
         if (grab is not GrabDynamic)
         {
             transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
@@ -216,6 +216,8 @@ public class GrabPhysics : MonoBehaviour
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedBody = nearbyRigidbody;
         configJoint.connectedAnchor = grab.attachPoint;
+        if(nonPhysical)
+            transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.5f);
         canGrab = false;
         grab.StartCoroutine(grab.Despawn());
     }
@@ -243,7 +245,7 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = true;
             }
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.05f);
 
             foreach (ArmJoint joint in armJoints)
             {
@@ -394,7 +396,7 @@ public class GrabPhysics : MonoBehaviour
                             grabSecondary.rightAttach = grabSecondary.primaryGripRight;
                         }
 
-                        grab.secondHandGrabbing.GenericGrab(h, null);
+                        grab.secondHandGrabbing.GenericGrab(h, null, false);
                     }
                     else
                     {
@@ -526,14 +528,14 @@ public class GrabPhysics : MonoBehaviour
                         {
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.handGrabbing = this;
-                            GenericGrab(null, null);
+                            GenericGrab(null, null, false);
                         }
                         else if (grab.twoHanded)
                         {
                             grab.isTwoHandGrabbing = true;
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.secondHandGrabbing = this;
-                            GenericGrab(null, null);
+                            GenericGrab(null, null, false);
                         }
                     }
                 }
@@ -543,14 +545,14 @@ public class GrabPhysics : MonoBehaviour
                     {
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.handGrabbing = this;
-                        GenericGrab(null, null);
+                        GenericGrab(null, null, false);
                     }
                     else if (grab.twoHanded)
                     {
                         grab.isTwoHandGrabbing = true;
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.secondHandGrabbing = this;
-                        GenericGrab(null, null);
+                        GenericGrab(null, null, false);
                     }
                 }
             }
@@ -642,6 +644,13 @@ public class GrabPhysics : MonoBehaviour
             if(grab is GrabDynamic && distanceHovering)
             {
                 grab = null;
+            }
+            if (grab)
+            {
+                if (grab.isGrabbing && distanceHovering)
+                {
+                    grab = null;
+                }
             }
         }
     }
