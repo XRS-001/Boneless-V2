@@ -20,6 +20,8 @@ public class BaseGrab : MonoBehaviour
     public bool indexFingerFreedom = true;
     public bool despawn;
     public float despawnTime;
+    public bool canHolster;
+    public ItemHolster potentialHolster;
 
     public IEnumerator Despawn()
     {
@@ -39,5 +41,9 @@ public class BaseGrab : MonoBehaviour
         }
         else
             yield return null;
+    }
+    public virtual void Update()
+    {
+        potentialHolster = null;
     }
 }

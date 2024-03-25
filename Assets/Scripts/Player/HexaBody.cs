@@ -143,7 +143,7 @@ public class HexaBody : MonoBehaviour
     }
     void TransformSpineCollider()
     {
-        Chest.GetComponent<CapsuleCollider>().center = new Vector3(Chest.transform.InverseTransformPoint(chest.position).x, Chest.GetComponent<CapsuleCollider>().center.y, Chest.transform.InverseTransformPoint(chest.position).z);
+        Chest.GetComponent<CapsuleCollider>().center = new Vector3(Chest.transform.InverseTransformPoint(chest.position).x, Chest.GetComponent<CapsuleCollider>().center.y, Chest.transform.InverseTransformPoint(chest.position).z - 0.1f);
         Chest.GetComponent<CapsuleCollider>().height = Vector3.Distance(new Vector3(0, Head.transform.position.y, 0), new Vector3(0, Fender.transform.position.y, 0)) * 3f;
     }
     void Climbing()
@@ -292,7 +292,6 @@ public class HexaBody : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         vaulting = false;
-
     }
     void RoomScaleMove()
     {

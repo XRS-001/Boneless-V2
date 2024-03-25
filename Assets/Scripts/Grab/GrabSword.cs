@@ -24,8 +24,9 @@ public class GrabSword : GrabTwoAttach
         }
     }
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
         if (isHovering)
         {
             Vector3 positionLeft = transform.InverseTransformPoint(dynamicSettings.leftHand.position);

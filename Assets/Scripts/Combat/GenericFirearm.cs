@@ -222,7 +222,7 @@ public class GenericFirearm : MonoBehaviour
             mag.ammo = ammo;
             ammo = 0;
             grab.grab = mag.GetComponent<GrabTwoAttach>();
-            grab.GenericGrab(null, mag.GetComponent<Rigidbody>(), true);
+            grab.GenericGrab(null, mag.GetComponent<Rigidbody>());
             grab.grab.handGrabbing = grab;
             magazineInGun = false;
             animatedMag.transform.parent.gameObject.SetActive(false);

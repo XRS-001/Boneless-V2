@@ -212,6 +212,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1149,6 +1151,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1441,6 +1445,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -1809,6 +1815,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2181,6 +2189,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2568,6 +2578,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -2893,6 +2905,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -3311,6 +3325,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -3760,7 +3776,7 @@ Transform:
   - {fileID: 6283418151219938284}
   - {fileID: 4131999783104688752}
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7484075524344783033
 MonoBehaviour:
@@ -6441,6 +6457,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -6614,7 +6632,7 @@ MonoBehaviour:
   collisionThreshold: 0
   collisionResistance:
     mode: 0
-    floatValue: 225
+    floatValue: 275
     curve:
       serializedVersion: 2
       m_Curve:
@@ -6647,7 +6665,7 @@ MonoBehaviour:
   - layers:
       serializedVersion: 2
       m_Bits: 512
-    multiplier: 0.3
+    multiplier: 0.5
     collisionThreshold: 0
   - layers:
       serializedVersion: 2
@@ -6712,7 +6730,7 @@ MonoBehaviour:
       minPinWeight: 0
       disableColliders: 0
       regainPinSpeed: 1.5
-      collisionResistance: 0.5
+      collisionResistance: 0.3
       knockOutDistance: 0.5
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
@@ -6997,6 +7015,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -7705,6 +7725,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}

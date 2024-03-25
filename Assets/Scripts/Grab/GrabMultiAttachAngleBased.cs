@@ -25,8 +25,9 @@ public class GrabMultiAttachAngleBased : GrabTwoAttach
         primaryRightAttach.rightAttachPosition = rightAttach.rightAttachPosition; primaryRightAttach.rightAttachRotation = rightAttach.rightAttachRotation;
     }
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
         if (isHovering)
         {
             float dotLeft = 0;

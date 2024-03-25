@@ -45,7 +45,7 @@ public class MagazinePouch : MonoBehaviour
         {
             grab.grab = spawnedMag.GetComponent<GrabTwoAttach>();
             grab.grab.handGrabbing = grab;
-            grab.GenericGrab(null, spawnedMag.GetComponent<Rigidbody>(), true);
+            grab.GenericGrab(null, spawnedMag.GetComponent<Rigidbody>());
         }
     }
 }

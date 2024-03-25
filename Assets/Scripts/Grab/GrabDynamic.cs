@@ -40,8 +40,9 @@ public class GrabDynamic : GrabTwoAttach
         dynamicSettings.leftGrab = dynamicSettings.leftHand.GetComponent<GrabPhysics>(); dynamicSettings.rightGrab = dynamicSettings.rightHand.GetComponent<GrabPhysics>();
     }
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
         if (isHovering)
         {
             if (colliders.Length > 1 || !GetComponent<Collider>())

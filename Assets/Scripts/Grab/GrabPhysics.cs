@@ -51,6 +51,7 @@ public class GrabPhysics : MonoBehaviour
     public GrabTwoAttach grab;
     private MagazinePouch magazinePouch;
     private GenericFirearm magazineGrabInGun;
+    private ItemHolster holster;
     [HideInInspector]
     public bool canGrab = true;
 
@@ -123,7 +124,7 @@ public class GrabPhysics : MonoBehaviour
             }
         }
     }
-    public void GenericGrab(HandData resettedHandData, Rigidbody customRigidbody, bool nonPhysical)
+    public void GenericGrab(HandData resettedHandData, Rigidbody customRigidbody)
     {
         if (customRigidbody)
             nearbyRigidbody = customRigidbody;
@@ -216,8 +217,7 @@ public class GrabPhysics : MonoBehaviour
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedBody = nearbyRigidbody;
         configJoint.connectedAnchor = grab.attachPoint;
-        if(nonPhysical)
-            transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.5f);
         canGrab = false;
         grab.StartCoroutine(grab.Despawn());
     }
@@ -364,6 +364,10 @@ public class GrabPhysics : MonoBehaviour
                 GrabSecondaryGrip grabSecondary = grab as GrabSecondaryGrip;
                 if (grabSecondary)
                         grabSecondary.isPrimaryGrabbing = false;
+                if (grab.potentialHolster)
+                {
+                    grab.potentialHolster.Holster(grab.gameObject);
+                }
             }
             else
             {
@@ -396,7 +400,7 @@ public class GrabPhysics : MonoBehaviour
                             grabSecondary.rightAttach = grabSecondary.primaryGripRight;
                         }
 
-                        grab.secondHandGrabbing.GenericGrab(h, null, false);
+                        grab.secondHandGrabbing.GenericGrab(h, null);
                     }
                     else
                     {
@@ -514,7 +518,7 @@ public class GrabPhysics : MonoBehaviour
     {
         bool isGrabButtonPressed = grabInputSource.action.ReadValue<float>() > 0.1f;
         bool isGrabButtonPressedThisFrame = grabInputSource.action.WasPressedThisFrame();
-        if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && grab && !magazinePouch && !magazineGrabInGun)
+        if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && grab && !magazinePouch && !magazineGrabInGun && !holster)
         {
             if (nearbyRigidbody)
             {
@@ -528,14 +532,14 @@ public class GrabPhysics : MonoBehaviour
                         {
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.handGrabbing = this;
-                            GenericGrab(null, null, false);
+                            GenericGrab(null, null);
                         }
                         else if (grab.twoHanded)
                         {
                             grab.isTwoHandGrabbing = true;
                             StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                             grab.secondHandGrabbing = this;
-                            GenericGrab(null, null, false);
+                            GenericGrab(null, null);
                         }
                     }
                 }
@@ -545,14 +549,14 @@ public class GrabPhysics : MonoBehaviour
                     {
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.handGrabbing = this;
-                        GenericGrab(null, null, false);
+                        GenericGrab(null, null);
                     }
                     else if (grab.twoHanded)
                     {
                         grab.isTwoHandGrabbing = true;
                         StartCoroutine(IgnoreCollisionInteractables(closestCollider, nearbyColliders));
                         grab.secondHandGrabbing = this;
-                        GenericGrab(null, null, false);
+                        GenericGrab(null, null);
                     }
                 }
             }
@@ -568,6 +572,11 @@ public class GrabPhysics : MonoBehaviour
         else if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && magazineGrabInGun)
         {
             magazineGrabInGun.GrabMagazine(this);
+        }
+        else if (isGrabButtonPressedThisFrame && !isGrabbing && canGrab && holster)
+        {
+            if (holster.itemHolstered)
+                holster.GrabFromHolster(this);
         }
         else if (!isGrabButtonPressed && isGrabbing)
         {
@@ -596,7 +605,7 @@ public class GrabPhysics : MonoBehaviour
         }
         for (int i = 0; i < colliders.Count; i++)
         {
-            if ((colliders[i].CompareTag("MagazinePouch") || colliders[i].CompareTag("MagazineInGun")) && distanceHovering)
+            if ((colliders[i].CompareTag("MagazinePouch") || colliders[i].CompareTag("MagazineInGun") || colliders[i].CompareTag("Holster")) && distanceHovering)
             {
                 colliders.RemoveAt(i);
             }
@@ -605,11 +614,12 @@ public class GrabPhysics : MonoBehaviour
         nearbyRigidbody = null;
         magazinePouch = null;
         magazineGrabInGun = null;
+        holster = null;
         if (colliders.Count > 0)
         {
             closestCollider = FindClosestInteractable(colliders.ToArray());
             nearbyRigidbody = closestCollider.attachedRigidbody ?? null;
-            if (nearbyRigidbody && !closestCollider.CompareTag("MagazinePouch") && !closestCollider.CompareTag("MagazineInGun"))
+            if (nearbyRigidbody && !closestCollider.CompareTag("MagazinePouch") && !closestCollider.CompareTag("MagazineInGun") && !closestCollider.CompareTag("Holster"))
             {
                 grab = nearbyRigidbody.GetComponent<GrabTwoAttach>();
                 if (grab)
@@ -628,6 +638,10 @@ public class GrabPhysics : MonoBehaviour
             else if (closestCollider.CompareTag("MagazineInGun"))
             {
                 magazineGrabInGun = closestCollider.GetComponentInParent<GenericFirearm>();
+            }
+            else if (closestCollider.CompareTag("Holster"))
+            {
+                holster = closestCollider.GetComponent<ItemHolster>();
             }
             else
             {
