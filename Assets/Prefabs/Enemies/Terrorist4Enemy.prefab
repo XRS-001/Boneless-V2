@@ -1330,9 +1330,9 @@ MonoBehaviour:
   pinWeight: 0.6
   muscleWeight: 0.7
   muscleSpring: 150
-  muscleDamper: 150
+  muscleDamper: 200
   pinPow: 8
-  pinDistanceFalloff: 5
+  pinDistanceFalloff: 1
   angularPinning: 0
   updateJointAnchors: 1
   supportTranslationAnimation: 1
@@ -1930,7 +1930,7 @@ MonoBehaviour:
   collisionThreshold: 0
   collisionResistance:
     mode: 0
-    floatValue: 275
+    floatValue: 200
     curve:
       serializedVersion: 2
       m_Curve:
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   - layers:
       serializedVersion: 2
       m_Bits: 512
-    multiplier: 0.5
+    multiplier: 0.7
     collisionThreshold: 0
   - layers:
       serializedVersion: 2
@@ -1971,7 +1971,7 @@ MonoBehaviour:
     multiplier: 0.8
     collisionThreshold: 0
   maxCollisions: 30
-  regainPinSpeed: 0.25
+  regainPinSpeed: 5
   boostFalloff: 1
   defaults:
     unpinParents: 0.9
@@ -2028,8 +2028,8 @@ MonoBehaviour:
       minPinWeight: 0
       disableColliders: 0
       regainPinSpeed: 1.5
-      collisionResistance: 0.3
-      knockOutDistance: 0.5
+      collisionResistance: 0.1
+      knockOutDistance: 0.1
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
   - name: Foot
@@ -2062,10 +2062,10 @@ MonoBehaviour:
       knockOutDistance: 100
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
-  knockOutDistance: 0.2
-  unpinnedMuscleWeightMlp: 0.4
+  knockOutDistance: 0.06
+  unpinnedMuscleWeightMlp: 0.6
   maxRigidbodyVelocity: 250
-  pinWeightThreshold: 1
+  pinWeightThreshold: 0.2
   unpinnedMuscleKnockout: 1
   dropProps: 0
   canGetUp: 0
@@ -4967,9 +4967,10 @@ MonoBehaviour:
   agent: {fileID: 7807180623126293043}
   animator: {fileID: 812830018132992920}
   player: {fileID: 0}
+  playerGroundedPoint: {fileID: 0}
   isGrabbing: 0
   piercedBy: []
-  attackDistance: 0.7
+  attackDistance: 0.9
   enemyType: 0
   despawnTime: 30
   playHitSound: 1
@@ -7182,7 +7183,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7768320414563095687}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.25
+  m_Radius: 0.35
   m_Speed: 0.65
   m_Acceleration: 2
   avoidancePriority: 50

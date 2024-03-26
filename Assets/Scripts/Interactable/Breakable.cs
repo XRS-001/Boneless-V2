@@ -13,6 +13,7 @@ public class Breakable : MonoBehaviour
         if (collision.relativeVelocity.magnitude > 5f)
         {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable")
+                || collision.gameObject.layer == LayerMask.NameToLayer("NonInteractive")
                 || collision.gameObject.layer == LayerMask.NameToLayer("Default")
                 || collision.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
                 forceNeededToBreak -= collision.relativeVelocity.magnitude * 2;

@@ -1612,7 +1612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7631289456874239514}
   - component: {fileID: 902519604394689278}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Box (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2065,6 +2065,8 @@ MonoBehaviour:
   indexFingerFreedom: 1
   despawn: 1
   despawnTime: 60
+  canHolster: 1
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 4684014455312377205}
     leftAttachPosition: {x: -0.03, y: 0.01, z: -0.07}
@@ -2695,7 +2697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8969984989344218017}
   - component: {fileID: 3111079332635356567}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Box (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3174,6 +3176,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 1950969788362710039}
     leftAttachPosition: {x: -0.03, y: 0.34, z: -0.01}

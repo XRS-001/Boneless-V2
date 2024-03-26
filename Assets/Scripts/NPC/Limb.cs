@@ -16,7 +16,7 @@ public class Limb : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("LeftHand") || collision.collider.gameObject.layer == LayerMask.NameToLayer("RightHand") || collision.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("LeftHand") || collision.collider.gameObject.layer == LayerMask.NameToLayer("RightHand") || collision.collider.gameObject.layer == LayerMask.NameToLayer("Interactable") || collision.collider.gameObject.layer == LayerMask.NameToLayer("NonInteractive"))
         {
             if (collision.relativeVelocity.magnitude > hitThreshold && canHit)
             {

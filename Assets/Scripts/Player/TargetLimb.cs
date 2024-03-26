@@ -40,7 +40,7 @@ public class TargetLimb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Interactable") && collision.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Interactable") && collision.gameObject.layer != LayerMask.NameToLayer("NonInteractive") && collision.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
             isColliding = true;
             colliderColliding = collision.collider;
@@ -48,7 +48,7 @@ public class TargetLimb : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Interactable") && collision.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Interactable") && collision.gameObject.layer != LayerMask.NameToLayer("NonInteractive") && collision.gameObject.layer != LayerMask.NameToLayer("Ragdoll"))
         {
             isColliding = false;
         }

@@ -545,7 +545,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!1 &359942118726113884
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &6551533469921436570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   collisionThreshold: 0
   collisionResistance:
     mode: 0
-    floatValue: 275
+    floatValue: 200
     curve:
       serializedVersion: 2
       m_Curve:
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   - layers:
       serializedVersion: 2
       m_Bits: 512
-    multiplier: 0.5
+    multiplier: 0.7
     collisionThreshold: 0
   - layers:
       serializedVersion: 2
@@ -1798,7 +1798,7 @@ MonoBehaviour:
     multiplier: 0.8
     collisionThreshold: 0
   maxCollisions: 30
-  regainPinSpeed: 0.25
+  regainPinSpeed: 5
   boostFalloff: 1
   defaults:
     unpinParents: 0.9
@@ -1855,8 +1855,8 @@ MonoBehaviour:
       minPinWeight: 0
       disableColliders: 0
       regainPinSpeed: 1.5
-      collisionResistance: 0.3
-      knockOutDistance: 0.5
+      collisionResistance: 0.1
+      knockOutDistance: 0.1
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
   - name: Foot
@@ -1889,10 +1889,10 @@ MonoBehaviour:
       knockOutDistance: 100
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
-  knockOutDistance: 0.2
-  unpinnedMuscleWeightMlp: 0.4
+  knockOutDistance: 0.06
+  unpinnedMuscleWeightMlp: 0.6
   maxRigidbodyVelocity: 250
-  pinWeightThreshold: 1
+  pinWeightThreshold: 0.2
   unpinnedMuscleKnockout: 1
   dropProps: 0
   canGetUp: 0
@@ -2613,9 +2613,10 @@ MonoBehaviour:
   agent: {fileID: 1451911040192370710}
   animator: {fileID: 3173629731023776966}
   player: {fileID: 0}
+  playerGroundedPoint: {fileID: 0}
   isGrabbing: 0
   piercedBy: []
-  attackDistance: 0.7
+  attackDistance: 0.9
   enemyType: 0
   despawnTime: 30
   playHitSound: 1
@@ -2991,7 +2992,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &9052720099117681298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3113,7 +3114,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4654973632758005112}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.25
+  m_Radius: 0.35
   m_Speed: 0.65
   m_Acceleration: 2
   avoidancePriority: 50
@@ -3463,7 +3464,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &2897906520336293056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3761,7 +3762,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &2364036689829694058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4339,7 +4340,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &7656338994224669805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4736,7 +4737,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!1 &5103488997245792855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,7 +5105,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &2973674825192203251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5729,7 +5730,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &3129676574374234418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6062,10 +6063,10 @@ MonoBehaviour:
   mappingWeight: 1
   pinWeight: 0.6
   muscleWeight: 0.7
-  muscleSpring: 150
-  muscleDamper: 150
+  muscleSpring: 75
+  muscleDamper: 200
   pinPow: 8
-  pinDistanceFalloff: 5
+  pinDistanceFalloff: 1
   angularPinning: 0
   updateJointAnchors: 1
   supportTranslationAnimation: 1
@@ -6966,7 +6967,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &4241064902338268668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8158,7 +8159,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &3107347312818247097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8485,7 +8486,7 @@ MonoBehaviour:
   volumeModifier: 1.2
   layers:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 704
 --- !u!114 &1611637238139142532
 MonoBehaviour:
   m_ObjectHideFlags: 0

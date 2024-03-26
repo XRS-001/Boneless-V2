@@ -1595,6 +1595,8 @@ MonoBehaviour:
   indexFingerFreedom: 1
   despawn: 1
   despawnTime: 60
+  canHolster: 1
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 6899522062742906516}
     leftAttachPosition: {x: -0.02, y: 0, z: -0.08}
@@ -6050,6 +6052,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 4686009156438047227}
     leftAttachPosition: {x: 0.04, y: 0.09, z: -0.085}
@@ -6326,7 +6330,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7173933255737448720}
-  m_LocalRotation: {x: 0.014816608, y: 0.24841496, z: 0.3736756, w: 0.8935531}
+  m_LocalRotation: {x: -0.024840653, y: 0.12870911, z: 0.38787985, w: 0.91234106}
   m_LocalPosition: {x: -0.00021466799, y: 0.045777407, z: 0.000045667402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6334,7 +6338,7 @@ Transform:
   - {fileID: 3327986871653111254}
   m_Father: {fileID: 4556730000856948001}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -9.159, y: 27.445, z: 43.147}
+  m_LocalEulerAnglesHint: {x: -8.347, y: 12.585, z: 45.143}
 --- !u!1 &7303331725419103578
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 8482154758482582321}
   - component: {fileID: 4937221981118076768}
   - component: {fileID: 7460423285936407416}
-  - component: {fileID: 2359261007414863754}
   - component: {fileID: 4129124441440789032}
   m_Layer: 9
   m_Name: AssaultRifleSilencer
@@ -225,45 +224,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.040033408, y: 0.14064993, z: 0.040033337}
   m_Center: {x: -0.000001238659, y: -0.06976456, z: 0.00004159938}
---- !u!114 &2359261007414863754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289846279493367441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a193229b537e74f9fc7f7aa5984c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 7460423285936407416}
-  isGrabbing: 0
-  isHovering: 0
-  isTwoHandGrabbing: 0
-  handGrabbing: {fileID: 0}
-  secondHandGrabbing: {fileID: 0}
-  indexFingerFreedom: 1
-  despawn: 0
-  despawnTime: 0
-  leftAttach:
-    leftPose: {fileID: 0}
-    leftAttachPosition: {x: 0, y: 0, z: 0}
-    leftAttachRotation: {x: 0, y: 0, z: 0}
-  rightAttach:
-    rightPose: {fileID: 0}
-    rightAttachPosition: {x: 0, y: 0, z: 0}
-    rightAttachRotation: {x: 0, y: 0, z: 0}
-  twoHanded: 0
-  dynamicSettings:
-    leftHand: {fileID: 0}
-    leftGrab: {fileID: 0}
-    rightHand: {fileID: 0}
-    rightGrab: {fileID: 0}
-    offset: 0.5
-    angleWeight: 0.5
-    isGrabbable: 1
 --- !u!114 &4129124441440789032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +589,7 @@ GameObject:
   - component: {fileID: 8088074849405726624}
   - component: {fileID: 8959059091751978124}
   - component: {fileID: 8042215940895819757}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,6 +1041,8 @@ MonoBehaviour:
   indexFingerFreedom: 1
   despawn: 1
   despawnTime: 60
+  canHolster: 1
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 8201738413314904775}
     leftAttachPosition: {x: -0.03, y: 0, z: -0.08}
@@ -1842,7 +1804,7 @@ GameObject:
   - component: {fileID: 5531391614686156047}
   - component: {fileID: 4777344585851255138}
   - component: {fileID: 846657300182834527}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Cylinder (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1958,9 +1920,8 @@ GameObject:
   - component: {fileID: 1168212934934756183}
   - component: {fileID: 689575855635354356}
   - component: {fileID: 4261550364098320275}
-  - component: {fileID: 6267339786881800539}
   - component: {fileID: 8544889072927764145}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: AssaultRifleScope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2057,45 +2018,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1072122, y: 0.25407204, z: 0.09030831}
   m_Center: {x: -0.002913637, y: -0.0101469075, z: 0.03690321}
---- !u!114 &6267339786881800539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2381303073740031312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8a193229b537e74f9fc7f7aa5984c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 4261550364098320275}
-  isGrabbing: 0
-  isHovering: 0
-  isTwoHandGrabbing: 0
-  handGrabbing: {fileID: 0}
-  secondHandGrabbing: {fileID: 0}
-  indexFingerFreedom: 1
-  despawn: 0
-  despawnTime: 0
-  leftAttach:
-    leftPose: {fileID: 0}
-    leftAttachPosition: {x: 0, y: 0, z: 0}
-    leftAttachRotation: {x: 0, y: 0, z: 0}
-  rightAttach:
-    rightPose: {fileID: 0}
-    rightAttachPosition: {x: 0, y: 0, z: 0}
-    rightAttachRotation: {x: 0, y: 0, z: 0}
-  twoHanded: 0
-  dynamicSettings:
-    leftHand: {fileID: 0}
-    leftGrab: {fileID: 0}
-    rightHand: {fileID: 0}
-    rightGrab: {fileID: 0}
-    offset: 0.5
-    angleWeight: 0.5
-    isGrabbable: 1
 --- !u!114 &8544889072927764145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2152,7 +2074,7 @@ GameObject:
   - component: {fileID: 957526573792190525}
   - component: {fileID: 8819966122079961621}
   - component: {fileID: 5331385224913503869}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Cylinder (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3028,7 +2950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528649725021214595}
   - component: {fileID: 4838955613733026385}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Box (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4226,7 +4148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1418459780804262546}
   - component: {fileID: 6990511920755042431}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Box (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4552,6 +4474,8 @@ MonoBehaviour:
   indexFingerFreedom: 0
   despawn: 0
   despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 5260245365834379268}
     leftAttachPosition: {x: 0, y: -0.23, z: -0.05}
@@ -5026,7 +4950,7 @@ GameObject:
   - component: {fileID: 3332252799892917819}
   - component: {fileID: 2516281012778533503}
   - component: {fileID: 598244134213321399}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5524,7 +5448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1952143997006895029}
   - component: {fileID: 515341369422162452}
-  m_Layer: 9
+  m_Layer: 19
   m_Name: Box (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -136,11 +136,16 @@ public class GrabPhysics : MonoBehaviour
         if (grab.gameObject.layer == LayerMask.NameToLayer("GunSlide"))
         {
             if (handType == handTypeEnum.Left)
+            {
                 Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("Interactable"));
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("NonInteractive"));
+            }
 
             if (handType == handTypeEnum.Right)
-                Physics.IgnoreLayerCollision(LayerMask.NameToLayer(
-                    "RightHand"), LayerMask.NameToLayer("Interactable"));
+            {
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"));
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("NonInteractive"));
+            }
         }
         if (grab.gameObject.GetComponent<GenericFirearm>())
         {
@@ -217,7 +222,7 @@ public class GrabPhysics : MonoBehaviour
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedBody = nearbyRigidbody;
         configJoint.connectedAnchor = grab.attachPoint;
-        transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.3f);
         canGrab = false;
         grab.StartCoroutine(grab.Despawn());
     }
@@ -368,6 +373,7 @@ public class GrabPhysics : MonoBehaviour
                 {
                     grab.potentialHolster.Holster(grab.gameObject);
                 }
+                connectedMass = 0;
             }
             else
             {
@@ -407,6 +413,7 @@ public class GrabPhysics : MonoBehaviour
                         grabSecondary.isPrimaryGrabbing = false;
                     }
                 }
+                connectedMass = 0;
                 grab.secondHandGrabbing = null;
             }
             HandleDrive(false);
@@ -425,10 +432,16 @@ public class GrabPhysics : MonoBehaviour
             if (oldGrab.gameObject.layer == LayerMask.NameToLayer("GunSlide"))
             {
                 if (handType == handTypeEnum.Left)
+                {
                     Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("Interactable"), false);
+                    Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("NonInteractive"), false);
+                }
 
                 if (handType == handTypeEnum.Right)
+                {
                     Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"), false);
+                    Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("NonInteractive"), false);
+                }
             }
             if (oldGrab.gameObject.GetComponent<GenericFirearm>())
             {
@@ -472,10 +485,16 @@ public class GrabPhysics : MonoBehaviour
                 if (oldGrab.gameObject.layer == LayerMask.NameToLayer("GunSlide"))
                 {
                     if (handType == handTypeEnum.Left)
+                    {
                         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("Interactable"), false);
+                        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("LeftHand"), LayerMask.NameToLayer("NonInteractive"), false);
+                    }
 
                     if (handType == handTypeEnum.Right)
+                    {
                         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("Interactable"), false);
+                        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("RightHand"), LayerMask.NameToLayer("NonInteractive"), false);
+                    }
                 }
                 if (oldGrab.gameObject.GetComponent<GenericFirearm>())
                 {

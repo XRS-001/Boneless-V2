@@ -1328,7 +1328,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!65 &7287811277737536676
@@ -1374,6 +1374,8 @@ MonoBehaviour:
   indexFingerFreedom: 1
   despawn: 1
   despawnTime: 60
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 2908729278786377409}
     leftAttachPosition: {x: -0.03, y: -0.05, z: -0.1}

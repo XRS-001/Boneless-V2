@@ -21,6 +21,7 @@ public class NPC : MonoBehaviour
     public NavMeshAgent agent;
     public Animator animator;
     public Transform player;
+    public Transform playerGroundedPoint;
     public bool isGrabbing;
     public List<Blade> piercedBy = new List<Blade>();
     [Tooltip("The distance at which the enemy will begin attacking")]
@@ -42,9 +43,10 @@ public class NPC : MonoBehaviour
         startDamper = puppet.muscleDamper;
         startingHealth = health;
         if (!player)
-        {
             player = GameObject.Find("CameraDriven").transform;
-        }
+
+        if (!playerGroundedPoint)
+            playerGroundedPoint = GameObject.Find("PlayerGroundedPoint").transform;
         if (behaviour)
         {
             behaviour.onLoseBalance.unityEvent.AddListener(Fall);
@@ -174,7 +176,7 @@ public class NPC : MonoBehaviour
 
         if(enemyType != enemyTypeEnum.dummy)
         {
-            distance = Vector3.Distance(agent.transform.position, new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
+            distance = Vector3.Distance(agent.transform.position, playerGroundedPoint.position);
             if (distance > attackDistance && canChase == false)
             {
                 Invoke(nameof(DelayChase), 0.2f);
@@ -190,7 +192,7 @@ public class NPC : MonoBehaviour
                     FollowPlayer();
                 }
             }
-            if (isGrabbing || distance < attackDistance)
+            if (isGrabbing || distance < attackDistance && !stunned)
             {
                 AttackPlayer();
             }
@@ -240,7 +242,7 @@ public class NPC : MonoBehaviour
         animator.SetBool("Chasing", true);
         animator.SetBool("Attacking", false);
 
-        agent.SetDestination(player.position);
+        agent.SetDestination(new Vector3(player.position.x, agent.transform.position.y, player.position.z));
 
         if (agent.remainingDistance > agent.stoppingDistance)
         {
@@ -249,7 +251,7 @@ public class NPC : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(lookPos);
             agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 5f);
         }
-        Vector3 localVelocity = agent.transform.InverseTransformPoint(agent.steeringTarget - agent.velocity).normalized;
+        Vector3 localVelocity = agent.transform.InverseTransformDirection(agent.velocity).normalized;
 
         animator.SetFloat("X", localVelocity.x);
         animator.SetFloat("Y", localVelocity.z);
@@ -259,10 +261,10 @@ public class NPC : MonoBehaviour
         canChase = false;
         isAttacking = true;
         animator.SetBool("Attacking", true);
-        agent.SetDestination(agent.transform.position);
+        agent.SetDestination(Vector3.Lerp(new Vector3(player.position.x, agent.transform.position.y, player.position.z), agent.transform.position, 0.75f));
         agent.transform.LookAt(new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
 
-        Vector3 localVelocity = agent.transform.InverseTransformPoint(agent.steeringTarget - agent.velocity).normalized;
+        Vector3 localVelocity = agent.transform.InverseTransformDirection(agent.velocity).normalized;
 
         animator.SetFloat("X", localVelocity.x);
         animator.SetFloat("Y", localVelocity.z);

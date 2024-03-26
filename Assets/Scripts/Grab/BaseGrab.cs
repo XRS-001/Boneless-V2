@@ -21,6 +21,7 @@ public class BaseGrab : MonoBehaviour
     public bool despawn;
     public float despawnTime;
     public bool canHolster;
+    [HideInInspector]
     public ItemHolster potentialHolster;
 
     public IEnumerator Despawn()

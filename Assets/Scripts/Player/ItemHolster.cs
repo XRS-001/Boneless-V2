@@ -9,12 +9,16 @@ public class ItemHolster : MonoBehaviour
     public AudioClip holsterAudio;
     public void Holster(GameObject objectToHolster)
     {
-        itemHolstered = objectToHolster;
-        itemHolstered.SetActive(false);
-        AudioSource.PlayClipAtPoint(holsterAudio, transform.TransformPoint(GetComponent<SphereCollider>().center), 1);
+        if (!itemHolstered)
+        {
+            itemHolstered = objectToHolster;
+            itemHolstered.SetActive(false);
+            AudioSource.PlayClipAtPoint(holsterAudio, transform.TransformPoint(GetComponent<SphereCollider>().center), 1);
+        }
     }
     public void GrabFromHolster(GrabPhysics grab)
     {
+        itemHolstered.transform.position = grab.transform.position;
         itemHolstered.SetActive(true);
         StartCoroutine(Delay(grab));
     }
@@ -30,7 +34,7 @@ public class ItemHolster : MonoBehaviour
             itemHolstered = null;
             foreach(Collider collider in spawnedGrab.colliders)
                 collider.enabled = false;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             foreach (Collider collider in spawnedGrab.colliders)
                 collider.enabled = true;
         }

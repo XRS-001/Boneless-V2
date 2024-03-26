@@ -2087,6 +2087,8 @@ MonoBehaviour:
   indexFingerFreedom: 1
   despawn: 1
   despawnTime: 60
+  canHolster: 1
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 7912701951036419192}
     leftAttachPosition: {x: -0.02, y: 0, z: -0.11}

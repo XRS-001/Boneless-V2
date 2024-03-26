@@ -12597,6 +12597,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 166135557}
+  - {fileID: 1113838838}
   m_Father: {fileID: 1036415093}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13791,7 +13792,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 241663
+    m_Bits: 765951
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -16160,7 +16161,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.05
+  m_Radius: 0.1
   m_Center: {x: 0.2, y: 0.04, z: 0.06}
 --- !u!1 &401376524
 GameObject:
@@ -20600,7 +20601,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.15
-  m_Center: {x: 0.1, y: 0.1, z: -0.1}
+  m_Center: {x: 0.1, y: 0.15, z: -0.1}
 --- !u!114 &591245529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32812,6 +32813,11 @@ PrefabInstance:
       propertyPath: rightAttach.rightAttachRotation.z
       value: -81.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4649851066947310537, guid: 1ff36c47faacd93439bc9baa834bfc3b,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5688249327186814942, guid: 1ff36c47faacd93439bc9baa834bfc3b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -35831,7 +35837,7 @@ MonoBehaviour:
   trackedSolverLeftTarget: {fileID: 446748521}
   LeftTrackPadClicked: {fileID: -6390568391384303791, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  LeftTrackPadTouch: {fileID: -4491635751020109278, guid: c348712bda248c246b8c49b3db54643f,
+  LeftTrackPadTouch: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   RightTrackPadTouched: {fileID: 4094392870818886190, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
@@ -37683,6 +37689,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105451096}
   m_CullTransparentMesh: 1
+--- !u!1 &1113838837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113838838}
+  m_Layer: 3
+  m_Name: PlayerGroundedPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1113838838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113838837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.876, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 342587804}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1115527516
 GameObject:
   m_ObjectHideFlags: 0
@@ -40151,6 +40188,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   animator: {fileID: 0}
   player: {fileID: 0}
+  playerGroundedPoint: {fileID: 0}
   isGrabbing: 0
   piercedBy: []
   attackDistance: 0
@@ -46591,6 +46629,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7116605309782289634, guid: cf6e64f3f9439344ca46ce2f6b21fa0a,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54564,6 +54607,11 @@ PrefabInstance:
       propertyPath: rightAttach.rightAttachRotation.z
       value: -81.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4649851066947310537, guid: 1ff36c47faacd93439bc9baa834bfc3b,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5688249327186814942, guid: 1ff36c47faacd93439bc9baa834bfc3b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -56425,6 +56473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7116605309782289634, guid: cf6e64f3f9439344ca46ce2f6b21fa0a,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -62524,7 +62577,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.05
+  m_Radius: 0.1
   m_Center: {x: -0.2, y: 0.04, z: 0.06}
 --- !u!114 &1834985597
 MonoBehaviour:
@@ -64408,7 +64461,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.15
-  m_Center: {x: -0.1, y: 0.1, z: -0.1}
+  m_Center: {x: -0.1, y: 0.15, z: -0.1}
 --- !u!114 &1871337422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66513,7 +66566,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -77068,11 +77121,6 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 2077718719}
-    - target: {fileID: 3988324536718895578, guid: be36d98a95f37f149a75b4dfe3de3b99,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4450536288566372496, guid: be36d98a95f37f149a75b4dfe3de3b99,
         type: 3}
       propertyPath: m_Name
@@ -78837,11 +78885,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LightKarambit
-      objectReference: {fileID: 0}
-    - target: {fileID: 2360242484343753487, guid: 41998d95285fd9a45bfd1e6b7775d15a,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7158254737782851036, guid: 41998d95285fd9a45bfd1e6b7775d15a,
         type: 3}
@@ -83975,11 +84018,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PocketKnife
       objectReference: {fileID: 0}
-    - target: {fileID: 6935430976929548494, guid: bae244ad32ea27445b8aeb185c499146,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -89099,11 +89137,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 591027809}
     m_Modifications:
-    - target: {fileID: 135943592162801167, guid: 683cba2c75fa0334d9f11168adf36b3f,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2403106364627509976, guid: 683cba2c75fa0334d9f11168adf36b3f,
         type: 3}
       propertyPath: m_RootOrder
@@ -89161,11 +89194,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5824862897333377844, guid: 683cba2c75fa0334d9f11168adf36b3f,
         type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5824862897333377844, guid: 683cba2c75fa0334d9f11168adf36b3f,
-        type: 3}
       propertyPath: dynamicSettings.leftHand
       value: 
       objectReference: {fileID: 2077718713}
@@ -89174,20 +89202,10 @@ PrefabInstance:
       propertyPath: dynamicSettings.rightHand
       value: 
       objectReference: {fileID: 276302954}
-    - target: {fileID: 7338445507989159684, guid: 683cba2c75fa0334d9f11168adf36b3f,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8219528669865462247, guid: 683cba2c75fa0334d9f11168adf36b3f,
         type: 3}
       propertyPath: m_Name
       value: BarrelOrange
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219528669865462247, guid: 683cba2c75fa0334d9f11168adf36b3f,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9164102691049670432, guid: 683cba2c75fa0334d9f11168adf36b3f,
         type: 3}
@@ -89444,11 +89462,6 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
-    - target: {fileID: 4734147972338221383, guid: a3eb4599ed4495e4284b7456c5d6cd3b,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4829549073929600759, guid: a3eb4599ed4495e4284b7456c5d6cd3b,
         type: 3}
       propertyPath: handGrab
@@ -101081,21 +101094,36 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1361374408}
     m_Modifications:
-    - target: {fileID: 221044083995351872, guid: a8e9bf99b83848749af7cf473ea8dae4,
+    - target: {fileID: 262370393515497814, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
-      propertyPath: canHolster
-      value: 1
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1004812404917636162, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
+    - target: {fileID: 1579192088458769580, guid: a8e9bf99b83848749af7cf473ea8dae4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1950969788362710039, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
+    - target: {fileID: 2584731784756715249, guid: a8e9bf99b83848749af7cf473ea8dae4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2668156198450160884, guid: a8e9bf99b83848749af7cf473ea8dae4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 2885572497149077161, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: m_Name
@@ -101116,6 +101144,11 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 2077718719}
+    - target: {fileID: 5836616444605999274, guid: a8e9bf99b83848749af7cf473ea8dae4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 5856634855129070583, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: m_RootOrder
@@ -101176,6 +101209,11 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
+    - target: {fileID: 8605475067450170517, guid: a8e9bf99b83848749af7cf473ea8dae4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -103540,26 +103578,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 591027809}
     m_Modifications:
-    - target: {fileID: 1404950206115790588, guid: f435e6392b86ef14eaf17edc964e986c,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1908555756995049632, guid: f435e6392b86ef14eaf17edc964e986c,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2683555336925239749, guid: f435e6392b86ef14eaf17edc964e986c,
         type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1400071965}
-    - target: {fileID: 3637869775287186006, guid: f435e6392b86ef14eaf17edc964e986c,
-        type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3637869775287186006, guid: f435e6392b86ef14eaf17edc964e986c,
         type: 3}
       propertyPath: dynamicSettings.leftHand
@@ -103629,11 +103652,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarrelRed
-      objectReference: {fileID: 0}
-    - target: {fileID: 8181646910480242366, guid: f435e6392b86ef14eaf17edc964e986c,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -106558,11 +106576,6 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
-    - target: {fileID: 2050480897345925191, guid: 91b2d1b06b213f14886ca80d2f4cb4e1,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3235557191908445432, guid: 91b2d1b06b213f14886ca80d2f4cb4e1,
         type: 3}
       propertyPath: handGrab
@@ -109022,11 +109035,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3723056369241199579, guid: de180a35b8168b942ac59fbf58e439b2,
         type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3723056369241199579, guid: de180a35b8168b942ac59fbf58e439b2,
-        type: 3}
       propertyPath: dynamicSettings.leftHand
       value: 
       objectReference: {fileID: 2077718713}
@@ -109035,31 +109043,16 @@ PrefabInstance:
       propertyPath: dynamicSettings.rightHand
       value: 
       objectReference: {fileID: 276302954}
-    - target: {fileID: 3887068738446511177, guid: de180a35b8168b942ac59fbf58e439b2,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4133883550097888747, guid: de180a35b8168b942ac59fbf58e439b2,
         type: 3}
       propertyPath: m_Name
       value: BarrelBlue
-      objectReference: {fileID: 0}
-    - target: {fileID: 4133883550097888747, guid: de180a35b8168b942ac59fbf58e439b2,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6138759447967487266, guid: de180a35b8168b942ac59fbf58e439b2,
         type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1400071965}
-    - target: {fileID: 6492647584463949158, guid: de180a35b8168b942ac59fbf58e439b2,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -109631,11 +109624,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2965833974663517092, guid: 69621814e3a4bb14fa251597b2b73dc1,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2965833974663517092, guid: 69621814e3a4bb14fa251597b2b73dc1,
         type: 3}
@@ -110697,11 +110685,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 591027809}
     m_Modifications:
-    - target: {fileID: 1698049193365187791, guid: 54f591499f006354fa952a4aff09aea5,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3481491934054699225, guid: 54f591499f006354fa952a4aff09aea5,
         type: 3}
       propertyPath: m_RootOrder
@@ -110759,11 +110742,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4333713324608308457, guid: 54f591499f006354fa952a4aff09aea5,
         type: 3}
-      propertyPath: despawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4333713324608308457, guid: 54f591499f006354fa952a4aff09aea5,
-        type: 3}
       propertyPath: dynamicSettings.leftHand
       value: 
       objectReference: {fileID: 2077718713}
@@ -110781,16 +110759,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarrelGreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 5553905462437328075, guid: 54f591499f006354fa952a4aff09aea5,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6305821442901586663, guid: 54f591499f006354fa952a4aff09aea5,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -111810,11 +111778,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6856568000346277626, guid: a998b6b3a179a36418d06529bc2f85bb,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -116559,11 +116522,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5697192974182215219, guid: df44a642c0814794681ace9f94d8f2c7,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5726475967161606444, guid: df44a642c0814794681ace9f94d8f2c7,
         type: 3}
       propertyPath: m_Name
@@ -118682,11 +118640,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 1683429050305254415, guid: 01fd82bc7b4ddd14090c7e767a710885,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3327355908222881566, guid: 01fd82bc7b4ddd14090c7e767a710885,
         type: 3}
       propertyPath: handGrab
@@ -118831,11 +118784,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1595554891}
     m_Modifications:
-    - target: {fileID: 1732536467267989661, guid: 8042b462dab53b446b2fedfb04fa149b,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6439356794172671104, guid: 8042b462dab53b446b2fedfb04fa149b,
         type: 3}
       propertyPath: m_Name
@@ -122452,11 +122400,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1595554891}
     m_Modifications:
-    - target: {fileID: 2097540165423362197, guid: 43ceb3b63bbf8694f81628423b4ff269,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6089968478498877014, guid: 43ceb3b63bbf8694f81628423b4ff269,
         type: 3}
       propertyPath: m_Name
@@ -125015,11 +124958,6 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 2077718719}
-    - target: {fileID: 7471094512813921476, guid: 77aa431b720d31c47ad2e39f5d8027a5,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8590710872720538477, guid: 77aa431b720d31c47ad2e39f5d8027a5,
         type: 3}
       propertyPath: handGrab
@@ -125598,11 +125536,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2043658573}
     m_Modifications:
-    - target: {fileID: 27408546099174832, guid: 67581223658dec74da603e2b84fb3422,
-        type: 3}
-      propertyPath: canHolster
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 384507006667820977, guid: 67581223658dec74da603e2b84fb3422,
         type: 3}
       propertyPath: handGrab
