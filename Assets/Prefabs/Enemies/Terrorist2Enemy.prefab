@@ -4364,7 +4364,7 @@ MonoBehaviour:
     enableInternalCollisionsOnKill: 1
   mode: 0
   blendTime: 0.1
-  fixTargetTransforms: 1
+  fixTargetTransforms: 0
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
@@ -4375,8 +4375,8 @@ MonoBehaviour:
   pinPow: 8
   pinDistanceFalloff: 1
   angularPinning: 0
-  updateJointAnchors: 1
-  supportTranslationAnimation: 1
+  updateJointAnchors: 0
+  supportTranslationAnimation: 0
   angularLimits: 0
   internalCollisions: 1
   muscles:
@@ -5357,7 +5357,7 @@ Transform:
   - {fileID: 6142044094974112443}
   - {fileID: 9222919139298498557}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2510159723865037989
 MonoBehaviour:
@@ -7252,9 +7252,9 @@ MonoBehaviour:
   puppetMaster: {fileID: 0}
   deactivated: 0
   masterProps:
-    normalMode: 0
+    normalMode: 1
     mappingBlendSpeed: 15
-    activateOnStaticCollisions: 0
+    activateOnStaticCollisions: 1
     activateOnImpulse: 0
   groundLayers:
     serializedVersion: 2

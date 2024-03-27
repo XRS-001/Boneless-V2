@@ -157,6 +157,11 @@ public class NPC : MonoBehaviour
         }
         if(health <= 0 && puppet.state != PuppetMaster.State.Dead)
         {
+            if (GameObject.Find("GameManager").GetComponent<GameManager>().waveRunning)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().enemiesFought ++;
+                GameObject.Find("GameManager").GetComponent<GameManager>().enemiesActive --;
+            }
             puppet.state = PuppetMaster.State.Dead;
             dead = true;
             puppet.muscleDamper = 25;
