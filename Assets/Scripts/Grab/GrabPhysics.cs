@@ -5,9 +5,6 @@ using static EnumDeclaration;
 using System.Linq;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEngine.UIElements;
-using static GrabPhysics;
-using System.Transactions;
 
 public class GrabPhysics : MonoBehaviour
 {
@@ -196,7 +193,6 @@ public class GrabPhysics : MonoBehaviour
 
         joint = gameObject.AddComponent<ConfigurableJoint>();
         ConfigurableJoint configJoint = joint as ConfigurableJoint;
-        Quaternion oldRotation = transform.rotation;
         if (grab is not GrabDynamic)
         {
             transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
@@ -222,7 +218,6 @@ public class GrabPhysics : MonoBehaviour
         configJoint.autoConfigureConnectedAnchor = false;
         configJoint.connectedBody = nearbyRigidbody;
         configJoint.connectedAnchor = grab.attachPoint;
-        transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.3f);
         canGrab = false;
         grab.StartCoroutine(grab.Despawn());
     }

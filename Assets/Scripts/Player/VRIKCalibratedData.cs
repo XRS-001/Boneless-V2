@@ -24,18 +24,9 @@ public class VRIKCalibratedData : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.C) || calibrateHeight.action.WasPressedThisFrame() && SceneManager.GetActiveScene().name == "StartEnvironment")
+        if (calibrateHeight.action.WasPressedThisFrame() && SceneManager.GetActiveScene().name == "StartEnvironment")
         {
             data = VRIKCalibrator.Calibrate(ik, centerEyeAnchor, leftHandAnchor, rightHandAnchor, headAnchorPositionOffset, headAnchorRotationOffset, handAnchorPositionOffset, handAnchorRotationOffset, scaleMlp);
-        }
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            if (data.scale == 0f)
-            {
-                Debug.LogError("Avatar needs to be calibrated before RecalibrateScale is called.");
-            }
-            VRIKCalibrator.RecalibrateScale(ik, data, scaleMlp);
         }
     }
     private void Start()

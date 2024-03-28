@@ -55,7 +55,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -100,12 +100,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliders:
-  - {fileID: 0}
+  - {fileID: 4007502445762254059}
   isGrabbing: 0
   isHovering: 0
   isTwoHandGrabbing: 0
   handGrabbing: {fileID: 0}
   secondHandGrabbing: {fileID: 0}
+  indexFingerFreedom: 1
+  despawn: 0
+  despawnTime: 0
+  canHolster: 0
+  potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 0}
     leftAttachPosition: {x: 0, y: 0, z: 0}
@@ -194,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 4980567919823648208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9067917987868719038}

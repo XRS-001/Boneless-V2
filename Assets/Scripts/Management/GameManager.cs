@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
                         int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                         GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
                         enemy.SetActive(false);
-                        yield return new WaitForSeconds(0.1f);
+                        yield return new WaitForSeconds(0.5f);
                         enemy.SetActive(true);
                     }
                     float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
@@ -222,7 +222,10 @@ public class GameManager : MonoBehaviour
                         enemiesActive++;
                         yield return new WaitForSeconds(2);
                         int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
-                        Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                        GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                        enemy.SetActive(false);
+                        yield return new WaitForSeconds(0.5f);
+                        enemy.SetActive(true);
                     }
                     float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
                     if (timeLeft < 1 && !isFadingAudio)
@@ -253,7 +256,10 @@ public class GameManager : MonoBehaviour
                         enemiesActive++;
                         yield return new WaitForSeconds(1);
                         int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
-                        Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                        GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                        enemy.SetActive(false);
+                        yield return new WaitForSeconds(0.5f);
+                        enemy.SetActive(true);
                     }
                     float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
                     if (timeLeft < 1 && !isFadingAudio)
@@ -547,6 +553,6 @@ public class GameManager : MonoBehaviour
     public void ChangeScene(string scene)
     {
         SaveData();
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }
 }
