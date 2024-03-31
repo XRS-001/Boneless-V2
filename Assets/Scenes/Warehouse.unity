@@ -26616,7 +26616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &698500432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38325,9 +38325,9 @@ MonoBehaviour:
   - {fileID: 98672272}
   - {fileID: 1849339580}
   - {fileID: 276302955}
-  moveForceCrouch: 60
-  moveForceWalk: 60
-  moveForceSprint: 100
+  moveForceCrouch: 40
+  moveForceWalk: 40
+  moveForceSprint: 70
   angularDragOnMove: 50
   angularBreakDrag: 200
   zipLining: 0
@@ -50842,6 +50842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   body: {fileID: 1036415094}
+  playerSpawnPoint: {x: 0, y: 1.03, z: -2.11}
   canKill: 1
   mouthAudio: {fileID: 286862141}
   hitSounds:
@@ -108551,36 +108552,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1361374408}
     m_Modifications:
-    - target: {fileID: 262370393515497814, guid: a8e9bf99b83848749af7cf473ea8dae4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 19
-      objectReference: {fileID: 0}
     - target: {fileID: 1004812404917636162, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
-    - target: {fileID: 1579192088458769580, guid: a8e9bf99b83848749af7cf473ea8dae4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 19
-      objectReference: {fileID: 0}
     - target: {fileID: 1950969788362710039, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
-    - target: {fileID: 2584731784756715249, guid: a8e9bf99b83848749af7cf473ea8dae4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 2668156198450160884, guid: a8e9bf99b83848749af7cf473ea8dae4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 19
-      objectReference: {fileID: 0}
     - target: {fileID: 2885572497149077161, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: m_Name
@@ -108601,11 +108582,6 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 2077718719}
-    - target: {fileID: 5836616444605999274, guid: a8e9bf99b83848749af7cf473ea8dae4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 19
-      objectReference: {fileID: 0}
     - target: {fileID: 5856634855129070583, guid: a8e9bf99b83848749af7cf473ea8dae4,
         type: 3}
       propertyPath: m_RootOrder
@@ -108666,11 +108642,6 @@ PrefabInstance:
       propertyPath: handGrab
       value: 
       objectReference: {fileID: 276302960}
-    - target: {fileID: 8605475067450170517, guid: a8e9bf99b83848749af7cf473ea8dae4,
-        type: 3}
-      propertyPath: m_Layer
-      value: 19
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

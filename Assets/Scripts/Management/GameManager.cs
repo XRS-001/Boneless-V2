@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public float health;
     public HexaBody body;
+    public Vector3 playerSpawnPoint;
     public bool canKill;
     public AudioSource mouthAudio;
     public AudioClip[] hitSounds;
@@ -188,11 +189,14 @@ public class GameManager : MonoBehaviour
                     {
                         enemiesActive++;
                         yield return new WaitForSeconds(3);
-                        int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
-                        GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
-                        enemy.SetActive(false);
-                        yield return new WaitForSeconds(0.5f);
-                        enemy.SetActive(true);
+                        if (enemiesFought < 15)
+                        {
+                            int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
+                            GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                            enemy.SetActive(false);
+                            yield return new WaitForSeconds(0.5f);
+                            enemy.SetActive(true);
+                        }
                     }
                     float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
                     if (timeLeft < 1 && !isFadingAudio)
@@ -221,11 +225,14 @@ public class GameManager : MonoBehaviour
                     {
                         enemiesActive++;
                         yield return new WaitForSeconds(2);
-                        int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
-                        GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
-                        enemy.SetActive(false);
-                        yield return new WaitForSeconds(0.5f);
-                        enemy.SetActive(true);
+                        if (enemiesFought < 25)
+                        {
+                            int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
+                            GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                            enemy.SetActive(false);
+                            yield return new WaitForSeconds(0.5f);
+                            enemy.SetActive(true);
+                        }
                     }
                     float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
                     if (timeLeft < 1 && !isFadingAudio)
@@ -255,11 +262,14 @@ public class GameManager : MonoBehaviour
                     {
                         enemiesActive++;
                         yield return new WaitForSeconds(1);
-                        int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
-                        GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
-                        enemy.SetActive(false);
-                        yield return new WaitForSeconds(0.5f);
-                        enemy.SetActive(true);
+                        if(enemiesFought < 35)
+                        {
+                            int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
+                            GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
+                            enemy.SetActive(false);
+                            yield return new WaitForSeconds(0.5f);
+                            enemy.SetActive(true);
+                        }
                     }
                     float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
                     if (timeLeft < 1 && !isFadingAudio)

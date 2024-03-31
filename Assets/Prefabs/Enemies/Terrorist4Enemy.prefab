@@ -1327,9 +1327,9 @@ MonoBehaviour:
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.6
-  muscleWeight: 0.7
-  muscleSpring: 150
+  pinWeight: 0.5
+  muscleWeight: 0.6
+  muscleSpring: 50
   muscleDamper: 200
   pinPow: 8
   pinDistanceFalloff: 1
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   deactivated: 0
   masterProps:
     normalMode: 1
-    mappingBlendSpeed: 15
+    mappingBlendSpeed: 0
     activateOnStaticCollisions: 1
     activateOnImpulse: 0
   groundLayers:
@@ -1930,7 +1930,7 @@ MonoBehaviour:
   collisionThreshold: 0
   collisionResistance:
     mode: 0
-    floatValue: 200
+    floatValue: 250
     curve:
       serializedVersion: 2
       m_Curve:
@@ -2029,7 +2029,7 @@ MonoBehaviour:
       disableColliders: 0
       regainPinSpeed: 1.5
       collisionResistance: 0.1
-      knockOutDistance: 0.1
+      knockOutDistance: 0.05
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
   - name: Foot
@@ -2062,7 +2062,7 @@ MonoBehaviour:
       knockOutDistance: 100
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
-  knockOutDistance: 0.06
+  knockOutDistance: 0.1
   unpinnedMuscleWeightMlp: 0.6
   maxRigidbodyVelocity: 250
   pinWeightThreshold: 0.2
@@ -4929,7 +4929,7 @@ Transform:
   - {fileID: 6310659494536131374}
   - {fileID: 342480201479673067}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1600020645216480223
 MonoBehaviour:

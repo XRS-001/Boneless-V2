@@ -1116,7 +1116,7 @@ MonoBehaviour:
   potentialHolster: {fileID: 0}
   leftAttach:
     leftPose: {fileID: 9020585989051155858}
-    leftAttachPosition: {x: -0.06, y: 0.13, z: 0.175}
+    leftAttachPosition: {x: -0.05, y: 0.13, z: 0.175}
     leftAttachRotation: {x: 80, y: 0, z: 0}
   rightAttach:
     rightPose: {fileID: 3545742560824430687}
@@ -7021,7 +7021,7 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
   animator: {fileID: 3356723771108309332}
   bulletForce: 10000
-  recoilForce: 500
+  recoilForce: 1000
   attachments:
   - attachPoint: {x: 0, y: 0.18, z: 0.06}
     attachRadius: 0.035
