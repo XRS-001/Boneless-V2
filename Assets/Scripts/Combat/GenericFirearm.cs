@@ -352,7 +352,7 @@ public class GenericFirearm : MonoBehaviour
                 }
 
                 spawnedBullet.AddForce(firePoint.forward * bulletForce);
-                GetComponent<Rigidbody>().mass *= 10;
+                GetComponent<Rigidbody>().mass *= 20;
                 GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce);
                 slideJoint.targetPosition *= -1;
                 Invoke(nameof(RegainControl), 0.1f);
@@ -409,7 +409,7 @@ public class GenericFirearm : MonoBehaviour
     {
         shooting = false;
         slideJoint.targetPosition *= -1;
-        GetComponent<Rigidbody>().mass /= 10;
+        GetComponent<Rigidbody>().mass /= 20;
     }
     private void OnDrawGizmosSelected()
     {

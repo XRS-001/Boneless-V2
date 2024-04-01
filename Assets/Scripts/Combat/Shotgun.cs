@@ -193,7 +193,7 @@ public class Shotgun : MonoBehaviour
 
                 spawnedBullet.AddForce(firePoints[i].forward * bulletForce);
             }
-            GetComponent<Rigidbody>().mass *= 10;
+            GetComponent<Rigidbody>().mass *= 20;
             GetComponent<Rigidbody>().AddTorque(-transform.right * recoilForce);
             Invoke(nameof(RegainControl), 0.1f);
 
@@ -230,7 +230,7 @@ public class Shotgun : MonoBehaviour
     }
     void RegainControl()
     {
-        GetComponent<Rigidbody>().mass /= 10;
+        GetComponent<Rigidbody>().mass /= 20;
     }
     private void OnDrawGizmosSelected()
     {

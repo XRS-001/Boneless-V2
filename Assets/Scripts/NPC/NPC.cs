@@ -20,7 +20,6 @@ public class NPC : MonoBehaviour
     public BehaviourPuppet behaviour;
     public NavMeshAgent agent;
     public Animator animator;
-    public Transform player;
     public Transform playerGroundedPoint;
     public bool isGrabbing;
     public List<Blade> piercedBy = new List<Blade>();
@@ -42,8 +41,6 @@ public class NPC : MonoBehaviour
     {
         startDamper = puppet.muscleDamper;
         startingHealth = health;
-        if (!player)
-            player = GameObject.Find("CameraDriven").transform;
 
         if (!playerGroundedPoint)
             playerGroundedPoint = GameObject.Find("PlayerGroundedPoint").transform;
@@ -247,14 +244,14 @@ public class NPC : MonoBehaviour
         animator.SetBool("Chasing", true);
         animator.SetBool("Attacking", false);
 
-        agent.SetDestination(new Vector3(player.position.x, agent.transform.position.y, player.position.z));
+        agent.SetDestination(new Vector3(playerGroundedPoint.position.x, agent.transform.position.y, playerGroundedPoint.position.z));
 
         if (agent.remainingDistance > agent.stoppingDistance)
         {
             Vector3 lookPos = agent.steeringTarget - agent.transform.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 5f);
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, rotation, Time.deltaTime * 10f);
         }
         Vector3 localVelocity = agent.transform.InverseTransformDirection(agent.velocity).normalized;
 
@@ -266,8 +263,8 @@ public class NPC : MonoBehaviour
         canChase = false;
         isAttacking = true;
         animator.SetBool("Attacking", true);
-        agent.SetDestination(Vector3.Lerp(new Vector3(player.position.x, agent.transform.position.y, player.position.z), agent.transform.position, 0.75f));
-        agent.transform.LookAt(new Vector3(player.position.x, agent.transform.position.y, player.transform.position.z));
+        agent.SetDestination(Vector3.Lerp(new Vector3(playerGroundedPoint.position.x, agent.transform.position.y, playerGroundedPoint.position.z), agent.transform.position, 0.75f));
+        agent.transform.LookAt(new Vector3(playerGroundedPoint.position.x, agent.transform.position.y, playerGroundedPoint.transform.position.z));
 
         Vector3 localVelocity = agent.transform.InverseTransformDirection(agent.velocity).normalized;
 

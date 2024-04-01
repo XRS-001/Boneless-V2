@@ -301,6 +301,7 @@ public class GameManager : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        waveRunning = false;
     }
     public void StartWave(string difficulty)
     {

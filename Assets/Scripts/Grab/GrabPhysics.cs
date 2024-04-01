@@ -82,8 +82,8 @@ public class GrabPhysics : MonoBehaviour
                     foreach (ArmJoint joint in armJoints)
                     {
                         JointDrive newDrive = joint.startDrive;
-                        newDrive.positionDamper /= connectedMass / 6;
-                        newDrive.positionSpring /= connectedMass / 3;
+                        newDrive.positionDamper /= connectedMass / 8;
+                        newDrive.positionSpring /= connectedMass / 4;
 
                         joint.joint.angularXDrive = newDrive;
                         joint.joint.angularYZDrive = newDrive;
@@ -92,7 +92,7 @@ public class GrabPhysics : MonoBehaviour
                     foreach (ArmJoint joint in armJoints)
                     {
                         JointDrive newDrive = joint.startDrive;
-                        newDrive.positionDamper /= connectedMass / 4;
+                        newDrive.positionDamper /= connectedMass / 6;
                         newDrive.positionSpring /= connectedMass / 2;
 
                         joint.joint.angularXDrive = newDrive;
@@ -245,7 +245,7 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = true;
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.005f);
 
             foreach (ArmJoint joint in armJoints)
             {
@@ -255,7 +255,8 @@ public class GrabPhysics : MonoBehaviour
 
             foreach (Collider collider in oldGrab.colliders)
             {
-                collider.enabled = true;
+                if(collider)
+                    collider.enabled = true;
             }
         }
 

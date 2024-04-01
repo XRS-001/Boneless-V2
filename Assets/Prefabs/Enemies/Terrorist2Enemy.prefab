@@ -842,7 +842,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0b76d0faf9101ac4ab8e53dc8912febb, type: 3}
   m_Controller: {fileID: 9100000, guid: 141d40a64f3a3c241a66490470a26083, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -4370,7 +4370,7 @@ MonoBehaviour:
   mappingWeight: 1
   pinWeight: 0.5
   muscleWeight: 0.6
-  muscleSpring: 50
+  muscleSpring: 200
   muscleDamper: 200
   pinPow: 8
   pinDistanceFalloff: 1
@@ -5400,13 +5400,12 @@ MonoBehaviour:
   behaviour: {fileID: 3973994499524756440}
   agent: {fileID: 794552494505586812}
   animator: {fileID: 4151478016295989558}
-  player: {fileID: 0}
   playerGroundedPoint: {fileID: 0}
   isGrabbing: 0
   piercedBy: []
   attackDistance: 0.9
   enemyType: 0
-  despawnTime: 30
+  despawnTime: 10
   playHitSound: 1
   hitAudios:
   - {fileID: 8300000, guid: 5583e9c9a0afdf0408f9d0946666f85a, type: 3}

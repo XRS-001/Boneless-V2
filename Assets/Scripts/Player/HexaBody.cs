@@ -403,7 +403,7 @@ public class HexaBody : MonoBehaviour
         {
             CrouchTarget.y -= crouchSpeed * Time.fixedDeltaTime;
             Spine.targetPosition = new Vector3(0, CrouchTarget.y, 0);
-            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - 4.5f, 0), 0.005f);
+            trackedOffset.transform.localPosition = Vector3.Lerp(trackedOffset.transform.localPosition, new Vector3(0, 0 - 2.4f, 0), 0.005f);
         }
     }
     private void JumpSitUp()

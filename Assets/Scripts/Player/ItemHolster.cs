@@ -24,7 +24,9 @@ public class ItemHolster : MonoBehaviour
     }
     IEnumerator Delay(GrabPhysics grab)
     {
-        yield return new WaitForSeconds(0.1f);
+        grab.canGrab = false;
+        yield return new WaitForSeconds(0.01f);
+        grab.canGrab = true;
         if(itemHolstered)
         {
             GrabTwoAttach spawnedGrab = itemHolstered.GetComponent<GrabTwoAttach>();
@@ -32,11 +34,6 @@ public class ItemHolster : MonoBehaviour
             grab.GenericGrab(null, spawnedGrab.GetComponent<Rigidbody>());
             grab.grab.handGrabbing = grab;
             itemHolstered = null;
-            foreach(Collider collider in spawnedGrab.colliders)
-                collider.enabled = false;
-            yield return new WaitForSeconds(1f);
-            foreach (Collider collider in spawnedGrab.colliders)
-                collider.enabled = true;
         }
     }
     private void LateUpdate()
