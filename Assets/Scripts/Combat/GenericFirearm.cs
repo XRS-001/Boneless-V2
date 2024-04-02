@@ -160,7 +160,7 @@ public class GenericFirearm : MonoBehaviour
 
             if (!slide.isGrabbing)
             {
-                if (!fullAuto)
+                if (!fullAuto && !animator.enabled)
                 {
                     if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft)
                         Shoot();
@@ -168,7 +168,7 @@ public class GenericFirearm : MonoBehaviour
                     else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasPulledTriggerRight)
                         Shoot();
                 }
-                else if (ammo > 0)
+                else if (ammo > 0 && !animator.enabled)
                 {
                     if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft && !hasPulledTrigger)
                         StartCoroutine(ShootFullAuto(true));
@@ -176,7 +176,7 @@ public class GenericFirearm : MonoBehaviour
                     else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasPulledTriggerRight && !hasPulledTrigger)
                         StartCoroutine(ShootFullAuto(false));
                 }
-                else
+                else if (!animator.enabled)
                 {
                     if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasPulledTriggerLeft)
                         Shoot();
@@ -185,11 +185,14 @@ public class GenericFirearm : MonoBehaviour
                         Shoot();
                 }
             }
-            if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasMagReleasedLeft && magazineInGun)
-                MagazineExit();
+            if (!animator.enabled && !shooting)
+            {
+                if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasMagReleasedLeft && magazineInGun)
+                    MagazineExit();
 
-            else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasMagReleasedRight && magazineInGun)
-                MagazineExit();
+                else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasMagReleasedRight && magazineInGun)
+                    MagazineExit();
+            }
         }
         if (Vector3.Distance(slide.transform.localPosition, slidePoint) < slideThreshold && !animator.enabled)
         {

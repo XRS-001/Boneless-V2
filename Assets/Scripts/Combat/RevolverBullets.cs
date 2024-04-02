@@ -16,7 +16,7 @@ public class RevolverBullets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, target.position) < 0.0025f)
+        if (Vector3.Distance(transform.position, target.position) < 0.01f)
         {
             foreach (RevolverBullet bullet in revolverBullets)
             {

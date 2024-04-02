@@ -10403,17 +10403,17 @@ AudioReverbZone:
   m_Enabled: 1
   m_MinDistance: 0
   m_MaxDistance: 30
-  m_ReverbPreset: 10
+  m_ReverbPreset: 16
   m_Room: -1000
-  m_RoomHF: -698
-  m_DecayTime: 7.24
-  m_DecayHFRatio: 0.33
-  m_Reflections: -1166
-  m_ReflectionsDelay: 0.02
-  m_Reverb: 16
-  m_ReverbDelay: 0.03
+  m_RoomHF: -3300
+  m_DecayTime: 1.49
+  m_DecayHFRatio: 0.54
+  m_Reflections: -2560
+  m_ReflectionsDelay: 0.162
+  m_Reverb: -229
+  m_ReverbDelay: 0.088
   m_HFReference: 5000
-  m_Diffusion: 100
+  m_Diffusion: 79
   m_Density: 100
   m_LFReference: 250
   m_RoomLF: 0
@@ -46557,7 +46557,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 119a43b60e220eb4d8a65147ebc09d51, type: 3}
   - {fileID: 8300000, guid: e46a512ba76ec47469d7ebabd3e419be, type: 3}
   waveAudioSource: {fileID: 1400071968}
-  defaultMusic: {fileID: 8300000, guid: 71d2a80cdc6ef498382c752076137c8c, type: 3}
+  defaultMusic: {fileID: 8300000, guid: 0523ddfa8b9ff4752a7cc9257dd4e272, type: 3}
   enemySpawnPoints:
   - {fileID: 1471052729}
   - {fileID: 1238709654}
@@ -46600,7 +46600,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 71d2a80cdc6ef498382c752076137c8c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0523ddfa8b9ff4752a7cc9257dd4e272, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -77622,8 +77622,8 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1.3043275
-          value: 0.17940108
+          time: 1.2442536
+          value: 0.19792525
           inSlope: 0.40674856
           outSlope: 0.40674856
           tangentMode: 0
@@ -77631,10 +77631,10 @@ MonoBehaviour:
           inWeight: 0.29418212
           outWeight: 1
         - serializedVersion: 3
-          time: 1.815575
-          value: 0.4014553
-          inSlope: 0.434338
-          outSlope: 0.434338
+          time: 1.6439289
+          value: 0.5018276
+          inSlope: 0.7603732
+          outSlope: 0.7603732
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -77671,8 +77671,8 @@ MonoBehaviour:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1.3043275
-          value: 0.17940108
+          time: 1.2442536
+          value: 0.19792525
           inSlope: 0.40674856
           outSlope: 0.40674856
           tangentMode: 0
@@ -77680,10 +77680,10 @@ MonoBehaviour:
           inWeight: 0.29418212
           outWeight: 1
         - serializedVersion: 3
-          time: 1.815575
-          value: 0.4014553
-          inSlope: 0.434338
-          outSlope: 0.434338
+          time: 1.6439289
+          value: 0.5018276
+          inSlope: 0.7603732
+          outSlope: 0.7603732
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334

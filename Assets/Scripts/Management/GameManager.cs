@@ -183,13 +183,13 @@ public class GameManager : MonoBehaviour
         switch (difficulty)
         {
             case "Easy":
-                while (enemiesFought < 15)
+                while (enemiesFought + enemiesActive < 15)
                 {
                     if(enemiesActive < 1)
                     {
                         enemiesActive++;
                         yield return new WaitForSeconds(3);
-                        if (enemiesFought < 15)
+                        if (enemiesFought + enemiesActive < 15)
                         {
                             int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                             GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
@@ -219,13 +219,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Medium":
-                while (enemiesFought < 25)
+                while (enemiesFought + enemiesActive < 25)
                 {
                     if (enemiesActive < 2)
                     {
                         enemiesActive++;
                         yield return new WaitForSeconds(2);
-                        if (enemiesFought < 25)
+                        if (enemiesFought + enemiesActive < 25)
                         {
                             int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                             GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
@@ -256,13 +256,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Hard":
-                while (enemiesFought < 35)
+                while (enemiesFought + enemiesActive < 35)
                 {
                     if (enemiesActive < 3)
                     {
                         enemiesActive++;
                         yield return new WaitForSeconds(1);
-                        if(enemiesFought < 35)
+                        if(enemiesFought + enemiesActive < 35)
                         {
                             int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                             GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
