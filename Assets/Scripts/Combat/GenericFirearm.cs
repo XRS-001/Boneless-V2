@@ -152,7 +152,10 @@ public class GenericFirearm : MonoBehaviour
             bool hasPulledTriggerLeft = leftFire.action.ReadValue<float>() > 0.95f;
             bool hasPulledTriggerRight = rightFire.action.ReadValue<float>() > 0.95f;
 
-            if (!hasPulledTriggerRight && !hasPulledTriggerLeft)
+            if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && !hasPulledTriggerLeft)
+                hasPulledTrigger = false;
+
+            else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && !hasPulledTriggerRight)
                 hasPulledTrigger = false;
 
             bool hasMagReleasedLeft = leftMagRelease.action.WasPressedThisFrame();
@@ -187,10 +190,10 @@ public class GenericFirearm : MonoBehaviour
             }
             if (!animator.enabled && !shooting)
             {
-                if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasMagReleasedLeft && magazineInGun)
+                if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Left && hasMagReleasedLeft && magazineInGun && !hasPulledTriggerLeft)
                     MagazineExit();
 
-                else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasMagReleasedRight && magazineInGun)
+                else if (grab.handGrabbing.handType == EnumDeclaration.handTypeEnum.Right && hasMagReleasedRight && magazineInGun && !hasPulledTriggerRight)
                     MagazineExit();
             }
         }

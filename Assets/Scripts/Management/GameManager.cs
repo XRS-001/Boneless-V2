@@ -411,7 +411,8 @@ public class GameManager : MonoBehaviour
     {
         if (volumeText)
         {
-            waveAudioSource.volume = volume;
+            if(waveAudioSource)
+                waveAudioSource.volume = volume;
             volumeText.text = value.ToString("0.0");
         }
         if (healthText)
