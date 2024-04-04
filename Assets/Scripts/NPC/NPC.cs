@@ -194,7 +194,7 @@ public class NPC : MonoBehaviour
                     FollowPlayer();
                 }
             }
-            if (isGrabbing || distance < attackDistance && !stunned)
+            if (isGrabbing || distance < attackDistance && !stunned && isStanding)
             {
                 AttackPlayer();
             }

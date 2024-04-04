@@ -56,7 +56,6 @@ public class GrabPhysics : MonoBehaviour
     public bool isGrabbing = false;
     [HideInInspector]
     public bool isClimbing = false;
-    public float connectedMass { get; private set; }
 
     Collider[] nearbyColliders;
     Collider closestCollider;
@@ -72,43 +71,9 @@ public class GrabPhysics : MonoBehaviour
         }
         poseSetup = GetComponent<SetPose>();
     }
-    void HandleDrive(bool climbing)
+    void HandleDrive(bool exiting)
     {
-        if(!climbing)
-        {
-            if (connectedMass > 1)
-            {
-                if(grab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
-                    foreach (ArmJoint joint in armJoints)
-                    {
-                        JointDrive newDrive = joint.startDrive;
-                        newDrive.positionDamper /= connectedMass / 8;
-                        newDrive.positionSpring /= connectedMass / 4;
-
-                        joint.joint.angularXDrive = newDrive;
-                        joint.joint.angularYZDrive = newDrive;
-                    }
-                else
-                    foreach (ArmJoint joint in armJoints)
-                    {
-                        JointDrive newDrive = joint.startDrive;
-                        newDrive.positionDamper /= connectedMass / 6;
-                        newDrive.positionSpring /= connectedMass / 2;
-
-                        joint.joint.angularXDrive = newDrive;
-                        joint.joint.angularYZDrive = newDrive;
-                    }
-            }
-            else
-            {
-                foreach (ArmJoint joint in armJoints)
-                {
-                    joint.joint.angularXDrive = joint.startDrive;
-                    joint.joint.angularYZDrive = joint.startDrive;
-                }
-            }
-        }
-        else
+        if (!exiting)
         {
             foreach (ArmJoint joint in armJoints)
             {
@@ -118,6 +83,14 @@ public class GrabPhysics : MonoBehaviour
 
                 joint.joint.angularXDrive = newDrive;
                 joint.joint.angularYZDrive = newDrive;
+            }
+        }
+        else
+        {
+            foreach (ArmJoint joint in armJoints)
+            {
+                joint.joint.angularXDrive = joint.startDrive;
+                joint.joint.angularYZDrive = joint.startDrive;
             }
         }
     }
@@ -176,23 +149,18 @@ public class GrabPhysics : MonoBehaviour
         isGrabbing = true;
         if (!grab.isGrabbing)
         {
-            connectedMass = nearbyRigidbody.mass;
             grabColliding = grab.AddComponent<CheckColliding>();
         }
         else
         {
-            connectedMass = grab.handGrabbing.connectedMass;
             grabColliding = grab.GetComponent<CheckColliding>();
         }
 
-        HandleDrive(false);
         grab.isGrabbing = true;
-
-        if (nearbyRigidbody.mass >= 1)
-            nearbyRigidbody.mass = 1;
 
         joint = gameObject.AddComponent<ConfigurableJoint>();
         ConfigurableJoint configJoint = joint as ConfigurableJoint;
+        Quaternion oldRotation = transform.rotation;
         if (grab is not GrabDynamic)
         {
             transform.rotation = nearbyRigidbody.rotation * Quaternion.Euler(grab.attachRotation);
@@ -220,6 +188,15 @@ public class GrabPhysics : MonoBehaviour
         configJoint.connectedAnchor = grab.attachPoint;
         canGrab = false;
         grab.StartCoroutine(grab.Despawn());
+        if(!magazinePouch && !holster)
+        {
+            if(!grab.GetComponent<GrabSecondaryGrip>())
+                transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.75f);
+            else if (grab.GetComponent<GrabSecondaryGrip>().disconnectSecondaryOnUnGrab)
+                    transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.75f);
+            else if (!grab.GetComponent<GrabSecondaryGrip>().isPrimaryGrabbing)
+                transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.75f);
+        }
     }
     IEnumerator DelayGrab()
     {
@@ -260,30 +237,33 @@ public class GrabPhysics : MonoBehaviour
             }
         }
 
-        if(oldGrab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
+        if (oldGrab)
         {
-            oldGrab.transform.root.GetComponent<NPC>().isGrabbing = true;
-            hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
-            hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
-            hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
-            hexaBody.Head.GetComponent<Rigidbody>().isKinematic = true;
-
-            foreach (ArmJoint joint in armJoints)
+            if (oldGrab.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
             {
-                foreach(Collider collider in joint.colliders)
+                oldGrab.transform.root.GetComponent<NPC>().isGrabbing = true;
+                hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = true;
+                hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = true;
+                hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = true;
+                hexaBody.Head.GetComponent<Rigidbody>().isKinematic = true;
+
+                foreach (ArmJoint joint in armJoints)
                 {
-                    foreach(Collider npcCollider in oldGrab.transform.root.GetComponent<NPC>().colliders)
+                    foreach (Collider collider in joint.colliders)
                     {
-                        Physics.IgnoreCollision(collider, npcCollider, true);
+                        foreach (Collider npcCollider in oldGrab.transform.root.GetComponent<NPC>().colliders)
+                        {
+                            Physics.IgnoreCollision(collider, npcCollider, true);
+                        }
                     }
                 }
-            }
-            yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.1f);
 
-            hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
-            hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
-            hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = false;
-            hexaBody.Head.GetComponent<Rigidbody>().isKinematic = false;
+                hexaBody.Monoball.GetComponent<Rigidbody>().isKinematic = false;
+                hexaBody.Chest.GetComponent<Rigidbody>().isKinematic = false;
+                hexaBody.Fender.GetComponent<Rigidbody>().isKinematic = false;
+                hexaBody.Head.GetComponent<Rigidbody>().isKinematic = false;
+            }
         }
     }
     public void GrabClimbable()
@@ -311,7 +291,7 @@ public class GrabPhysics : MonoBehaviour
         }
 
         grab.SetAttachPoint(handType);
-        HandleDrive(true);
+        HandleDrive(false);
 
         isGrabbing = true;
         grab.isGrabbing = true;
@@ -353,7 +333,6 @@ public class GrabPhysics : MonoBehaviour
 
                 if (nearbyRigidbody)
                 {
-                    nearbyRigidbody.mass = connectedMass;
                     Destroy(grabColliding);
                 }
                 if (joint)
@@ -369,7 +348,6 @@ public class GrabPhysics : MonoBehaviour
                 {
                     grab.potentialHolster.Holster(grab.gameObject);
                 }
-                connectedMass = 0;
             }
             else
             {
@@ -409,10 +387,9 @@ public class GrabPhysics : MonoBehaviour
                         grabSecondary.isPrimaryGrabbing = false;
                     }
                 }
-                connectedMass = 0;
                 grab.secondHandGrabbing = null;
             }
-            HandleDrive(false);
+            HandleDrive(true);
         }
         if (grab is GrabDynamic)
             StartCoroutine(WaitTillGrab());
@@ -702,10 +679,6 @@ public class GrabPhysics : MonoBehaviour
             if (grab.isGrabbing && spawnedIcon)
             {
                 Destroy(spawnedIcon);
-            }
-            if (nearbyRigidbody && isGrabbing)
-            {
-                nearbyRigidbody.AddForce(Vector3.down * connectedMass);
             }
         }
         else if (spawnedIcon)

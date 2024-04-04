@@ -99,7 +99,7 @@ public class HandAnimator : MonoBehaviour
         {
             if (!(grabPhysics.grab is GrabDynamic) && grabPhysics.grab.indexFingerFreedom)
             {
-                HandData h = grabPhysics.poseSetup.pose;
+                HandData h = grabPhysics?.poseSetup?.pose;
                 if (h)
                 {
                     indexFingerBones.index1.localRotation = Quaternion.Slerp(originalIndex1Rotation, h.indexFingerBones.index1.localRotation, triggeredValue);

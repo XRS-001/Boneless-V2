@@ -79,10 +79,10 @@ public class GameManager : MonoBehaviour
     [Header("Waves")]
     public GameObject[] waveUIElements;
     public GameObject[] enemies;
-    public AudioClip[] waveAudio;
-    public AudioSource waveAudioSource;
+    public AudioSource[] waveAudio;
+    private AudioSource audioPlaying;
+    public AudioSource defaultAudio;
     private bool isFadingAudio;
-    public AudioClip defaultMusic;
     public Transform[] enemySpawnPoints;
     public int enemiesActive;
     public int enemiesFought;
@@ -125,26 +125,41 @@ public class GameManager : MonoBehaviour
     {
         isFadingAudio = true;
         float timer = 0;
-        while(timer < 1)
+        if (!audioPlaying)
         {
-            waveAudioSource.volume = Mathf.Lerp(volume, 0, timer / 1);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        waveAudioSource.Stop();
-        if (waveMusic)
-        {
-            waveAudioSource.clip = waveAudio[Random.Range(0, waveAudio.Length)];
+            while (timer < 1)
+            {
+                defaultAudio.volume = Mathf.Lerp(volume, 0, timer / 1);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            defaultAudio.Stop();
+            audioPlaying = waveAudio[Random.Range(0, waveAudio.Length)];
         }
         else
         {
-            waveAudioSource.clip = defaultMusic;
+            while (timer < 1)
+            {
+                audioPlaying.volume = Mathf.Lerp(volume, 0, timer / 1);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            audioPlaying.Stop();
         }
-        waveAudioSource.Play();
+
+        if (waveMusic)
+        {
+            audioPlaying = waveAudio[Random.Range(0, waveAudio.Length)];
+        }
+        else
+        {
+            audioPlaying = defaultAudio;
+        }
+        audioPlaying.Play();
         timer = 0;
         while (timer < 1)
         {
-            waveAudioSource.volume = Mathf.Lerp(0, volume, timer / 1);
+            audioPlaying.volume = Mathf.Lerp(0, volume, timer / 1);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -152,7 +167,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator WaveRoutine(string difficulty)
     {
-        foreach(GameObject gameObject in enemiesLeftUIElements)
+        foreach (GameObject gameObject in enemiesLeftUIElements)
         {
             gameObject.SetActive(true);
             gameObject.GetComponent<Graphic>()?.CrossFadeAlpha(0, 0, false);
@@ -183,22 +198,21 @@ public class GameManager : MonoBehaviour
         switch (difficulty)
         {
             case "Easy":
-                while (enemiesFought + enemiesActive < 15)
+                while (enemiesFought < 15)
                 {
                     if(enemiesActive < 1)
                     {
-                        enemiesActive++;
-                        yield return new WaitForSeconds(3);
-                        if (enemiesFought + enemiesActive < 15)
+                        yield return new WaitForSeconds(1);
+                        if ((enemiesActive + enemiesFought) < 15)
                         {
+                            enemiesActive++;
                             int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                             GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
-                            enemy.SetActive(false);
                             yield return new WaitForSeconds(0.5f);
                             enemy.SetActive(true);
                         }
                     }
-                    float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
+                    float timeLeft = audioPlaying.clip.length - audioPlaying.time;
                     if (timeLeft < 1 && !isFadingAudio)
                         StartCoroutine(FadeMusic(true));
 
@@ -206,6 +220,7 @@ public class GameManager : MonoBehaviour
 
                     yield return null;
                 }
+
                 StartCoroutine(FadeMusic(false));
                 foreach (GameObject gameObject in waveUIElements)
                 {
@@ -219,22 +234,22 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Medium":
-                while (enemiesFought + enemiesActive < 25)
+                while (enemiesFought < 25)
                 {
                     if (enemiesActive < 2)
                     {
-                        enemiesActive++;
-                        yield return new WaitForSeconds(2);
-                        if (enemiesFought + enemiesActive < 25)
+                        yield return new WaitForSeconds(0.75f);
+                        if ((enemiesActive + enemiesFought) < 25)
                         {
+                            enemiesActive++;
                             int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                             GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
-                            enemy.SetActive(false);
                             yield return new WaitForSeconds(0.5f);
                             enemy.SetActive(true);
                         }
                     }
-                    float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
+
+                    float timeLeft = audioPlaying.clip.length - audioPlaying.time;
                     if (timeLeft < 1 && !isFadingAudio)
                         StartCoroutine(FadeMusic(true));
 
@@ -242,6 +257,7 @@ public class GameManager : MonoBehaviour
 
                     yield return null;
                 }
+
                 StartCoroutine(FadeMusic(false));
 
                 foreach (GameObject gameObject in waveUIElements)
@@ -256,22 +272,21 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "Hard":
-                while (enemiesFought + enemiesActive < 35)
+                while (enemiesFought < 35)
                 {
                     if (enemiesActive < 3)
                     {
-                        enemiesActive++;
-                        yield return new WaitForSeconds(1);
-                        if(enemiesFought + enemiesActive < 35)
+                        yield return new WaitForSeconds(0.5f);
+                        if((enemiesActive + enemiesFought) < 35)
                         {
+                            enemiesActive++;
                             int randomSpawn = Random.Range(0, enemySpawnPoints.Length);
                             GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], enemySpawnPoints[randomSpawn].position, enemySpawnPoints[randomSpawn].rotation);
-                            enemy.SetActive(false);
                             yield return new WaitForSeconds(0.5f);
                             enemy.SetActive(true);
                         }
                     }
-                    float timeLeft = waveAudioSource.clip.length - waveAudioSource.time;
+                    float timeLeft = audioPlaying.clip.length - audioPlaying.time;
                     if (timeLeft < 1 && !isFadingAudio)
                         StartCoroutine(FadeMusic(true));
 
@@ -279,6 +294,7 @@ public class GameManager : MonoBehaviour
 
                     yield return null;
                 }
+
                 StartCoroutine(FadeMusic(false));
                 foreach (GameObject gameObject in waveUIElements)
                 {
@@ -411,8 +427,8 @@ public class GameManager : MonoBehaviour
     {
         if (volumeText)
         {
-            if(waveAudioSource)
-                waveAudioSource.volume = volume;
+            if(audioPlaying)
+                audioPlaying.volume = volume;
             volumeText.text = value.ToString("0.0");
         }
         if (healthText)

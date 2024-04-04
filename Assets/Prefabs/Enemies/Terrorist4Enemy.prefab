@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4243089484131354880}
   - component: {fileID: 28273446575481556}
   - component: {fileID: 7181677166524430357}
+  - component: {fileID: 2851587279251960950}
   m_Layer: 11
   m_Name: upperarm_l
   m_TagString: Untagged
@@ -163,7 +164,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298397637781250299}
   serializedVersion: 4
-  m_Mass: 2.025
+  m_Mass: 4
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -379,6 +380,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &2851587279251960950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298397637781250299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &388684054562017384
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +523,7 @@ GameObject:
   - component: {fileID: 2801658405283044079}
   - component: {fileID: 3950499085437879667}
   - component: {fileID: 4386838883437385842}
+  - component: {fileID: 8944245520248891999}
   m_Layer: 11
   m_Name: hand_l
   m_TagString: Untagged
@@ -539,7 +554,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480907997772793016}
   serializedVersion: 4
-  m_Mass: 0.495
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -698,6 +713,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &8944245520248891999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480907997772793016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &537433889577450851
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,6 +741,7 @@ GameObject:
   - component: {fileID: 3550538725918080730}
   - component: {fileID: 6527405567689983296}
   - component: {fileID: 183678244083622970}
+  - component: {fileID: 6209169602096849575}
   m_Layer: 11
   m_Name: thigh_l
   m_TagString: Untagged
@@ -744,7 +773,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537433889577450851}
   serializedVersion: 4
-  m_Mass: 7.4100003
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -960,6 +989,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &6209169602096849575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537433889577450851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &545475254738178911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1327,7 +1369,7 @@ MonoBehaviour:
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.5
+  pinWeight: 0.6
   muscleWeight: 0.6
   muscleSpring: 200
   muscleDamper: 200
@@ -2487,6 +2529,7 @@ GameObject:
   - component: {fileID: 904346830143028675}
   - component: {fileID: 8024810740750966848}
   - component: {fileID: 7768899082307768114}
+  - component: {fileID: 4299584927806577598}
   m_Layer: 11
   m_Name: foot_l
   m_TagString: Untagged
@@ -2656,6 +2699,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &4299584927806577598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2245944096800037478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &2315776081594031843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,6 +2792,7 @@ GameObject:
   - component: {fileID: 4369298656027383166}
   - component: {fileID: 2402426266082906521}
   - component: {fileID: 4221024343530153497}
+  - component: {fileID: 3313275231979853077}
   m_Layer: 11
   m_Name: head
   m_TagString: Untagged
@@ -2767,7 +2824,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2426924937841451847}
   serializedVersion: 4
-  m_Mass: 5.4900002
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3056,6 +3113,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 2.5
+--- !u!114 &3313275231979853077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2426924937841451847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &2427303093744477019
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,6 +3417,7 @@ GameObject:
   - component: {fileID: 5615397423286401233}
   - component: {fileID: 2925808248138424256}
   - component: {fileID: 3285861577986583538}
+  - component: {fileID: 7699149013081114420}
   m_Layer: 11
   m_Name: lowerarm_l
   m_TagString: Untagged
@@ -3378,7 +3449,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2784694042209718520}
   serializedVersion: 4
-  m_Mass: 1.2
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3594,6 +3665,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &7699149013081114420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784694042209718520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &2800182956926626333
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,6 +3914,7 @@ GameObject:
   - component: {fileID: 7772090852060354987}
   - component: {fileID: 2862487858141210886}
   - component: {fileID: 3282589933027788825}
+  - component: {fileID: 6775177665410752576}
   m_Layer: 11
   m_Name: thigh_r
   m_TagString: Untagged
@@ -3861,7 +3946,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3103095109272267041}
   serializedVersion: 4
-  m_Mass: 7.410001
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4077,6 +4162,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &6775177665410752576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103095109272267041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &3302016472062937659
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,6 +4402,7 @@ GameObject:
   - component: {fileID: 991200962222025463}
   - component: {fileID: 3077832017265795488}
   - component: {fileID: 1796469379481992249}
+  - component: {fileID: 6259294393231491230}
   m_Layer: 11
   m_Name: upperarm_r
   m_TagString: Untagged
@@ -4335,7 +4434,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3812040549514816803}
   serializedVersion: 4
-  m_Mass: 2.025
+  m_Mass: 4
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4551,6 +4650,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &6259294393231491230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812040549514816803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &4010820748480267816
 GameObject:
   m_ObjectHideFlags: 0
@@ -5082,6 +5194,7 @@ GameObject:
   - component: {fileID: 6921939777878054427}
   - component: {fileID: 7601705729833793566}
   - component: {fileID: 7071731351917085344}
+  - component: {fileID: 6184371602900385466}
   m_Layer: 11
   m_Name: pelvis
   m_TagString: Untagged
@@ -5116,7 +5229,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4990747621148040435}
   serializedVersion: 4
-  m_Mass: 12.700001
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5309,6 +5422,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 2
+--- !u!114 &6184371602900385466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4990747621148040435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &5068183535252357708
 GameObject:
   m_ObjectHideFlags: 0
@@ -5485,6 +5611,7 @@ GameObject:
   - component: {fileID: 344868648171033201}
   - component: {fileID: 3101734053014537287}
   - component: {fileID: 3998256647768599217}
+  - component: {fileID: 5501064594048390148}
   m_Layer: 11
   m_Name: calf_l
   m_TagString: Untagged
@@ -5732,6 +5859,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &5501064594048390148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621349425141068178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &5694197310584615243
 GameObject:
   m_ObjectHideFlags: 0
@@ -5746,6 +5886,7 @@ GameObject:
   - component: {fileID: 3481695380655209666}
   - component: {fileID: 2183860209817967120}
   - component: {fileID: 770873760533861654}
+  - component: {fileID: 1462245462968804806}
   m_Layer: 11
   m_Name: spine_02
   m_TagString: Untagged
@@ -5780,7 +5921,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5694197310584615243}
   serializedVersion: 4
-  m_Mass: 12.700001
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5973,6 +6114,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 2
+--- !u!114 &1462245462968804806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5694197310584615243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &5823100561293897346
 GameObject:
   m_ObjectHideFlags: 0
@@ -6020,6 +6174,7 @@ GameObject:
   - component: {fileID: 1738018794561396807}
   - component: {fileID: 1608576270817275560}
   - component: {fileID: 997437496502196077}
+  - component: {fileID: 2002356693978210169}
   m_Layer: 11
   m_Name: lowerarm_r
   m_TagString: Untagged
@@ -6051,7 +6206,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5873157852938012705}
   serializedVersion: 4
-  m_Mass: 1.2
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6267,6 +6422,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &2002356693978210169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5873157852938012705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &6072054664164861192
 GameObject:
   m_ObjectHideFlags: 0
@@ -6505,6 +6673,7 @@ GameObject:
   - component: {fileID: 6434311943135971943}
   - component: {fileID: 1781832823943160377}
   - component: {fileID: 2810926493909180019}
+  - component: {fileID: 6247427172476073386}
   m_Layer: 11
   m_Name: calf_r
   m_TagString: Untagged
@@ -6752,6 +6921,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &6247427172476073386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422579518938498751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &6450876981125797154
 GameObject:
   m_ObjectHideFlags: 0
@@ -6765,6 +6947,7 @@ GameObject:
   - component: {fileID: 8290411046312554981}
   - component: {fileID: 3798409251367640051}
   - component: {fileID: 2286096517535700061}
+  - component: {fileID: 6848442189333203501}
   m_Layer: 11
   m_Name: hand_r
   m_TagString: Untagged
@@ -6795,7 +6978,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6450876981125797154}
   serializedVersion: 4
-  m_Mass: 0.49500003
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6954,6 +7137,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &6848442189333203501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450876981125797154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &6857524410519302989
 GameObject:
   m_ObjectHideFlags: 0
@@ -7302,6 +7498,7 @@ GameObject:
   - component: {fileID: 3632902890479166494}
   - component: {fileID: 7297257404151360225}
   - component: {fileID: 2584458649372127766}
+  - component: {fileID: 6036162361574477431}
   m_Layer: 11
   m_Name: foot_r
   m_TagString: Untagged
@@ -7471,6 +7668,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &6036162361574477431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312250317811728812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &8407393023228904134
 GameObject:
   m_ObjectHideFlags: 0

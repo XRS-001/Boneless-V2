@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6658058179229224203}
   - component: {fileID: 3610793274866099192}
   - component: {fileID: 7153553521624761731}
+  - component: {fileID: 2989603716516562954}
   m_Layer: 11
   m_Name: thigh_r
   m_TagString: Limb
@@ -262,6 +263,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &2989603716516562954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46161230457778046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &77492875127039506
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +968,7 @@ GameObject:
   - component: {fileID: 6491550939904994300}
   - component: {fileID: 1024277234591833064}
   - component: {fileID: 742606353159828698}
+  - component: {fileID: 1471783010991544449}
   m_Layer: 11
   m_Name: calf_l
   m_TagString: Limb
@@ -1201,6 +1216,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &1471783010991544449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259119464504184060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &1321668128469656628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1276,7 @@ GameObject:
   - component: {fileID: 1648214323931684599}
   - component: {fileID: 6269601411126969175}
   - component: {fileID: 6030327374911221549}
+  - component: {fileID: 5731722260541687181}
   m_Layer: 11
   m_Name: calf_r
   m_TagString: Limb
@@ -1495,6 +1524,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &5731722260541687181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361967335690215650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &1393317193410357758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,6 +1680,7 @@ GameObject:
   - component: {fileID: 1524274433821539804}
   - component: {fileID: 6251353344718145365}
   - component: {fileID: 7879516027012032019}
+  - component: {fileID: 4143254981417141450}
   m_Layer: 11
   m_Name: spine_02
   m_TagString: Torso
@@ -1865,6 +1908,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 2
+--- !u!114 &4143254981417141450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565471523471139988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &1597364131631177180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,6 +2068,7 @@ GameObject:
   - component: {fileID: 917481926393084255}
   - component: {fileID: 5496151857608535759}
   - component: {fileID: 3904893276905715479}
+  - component: {fileID: 5143551614763548474}
   m_Layer: 11
   m_Name: pelvis
   m_TagString: Torso
@@ -2239,6 +2296,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 2
+--- !u!114 &5143551614763548474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826787059139746238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &1874097904319707659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,6 +2451,7 @@ GameObject:
   - component: {fileID: 7223785902321836383}
   - component: {fileID: 7043773108396718992}
   - component: {fileID: 8789513116689076878}
+  - component: {fileID: 8686357978851833216}
   m_Layer: 11
   m_Name: lowerarm_l
   m_TagString: Limb
@@ -2628,6 +2699,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &8686357978851833216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2357275562501099918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &2482659158261452030
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,6 +2792,7 @@ GameObject:
   - component: {fileID: 1792139476903780711}
   - component: {fileID: 8403026041736075768}
   - component: {fileID: 1979577060824367429}
+  - component: {fileID: 2544334216825481160}
   m_Layer: 11
   m_Name: thigh_l
   m_TagString: Limb
@@ -2955,6 +3040,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &2544334216825481160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549321796940964193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &2567599977442365188
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,6 +3226,7 @@ GameObject:
   - component: {fileID: 752520012887925644}
   - component: {fileID: 3076940947421864000}
   - component: {fileID: 1366758268358924502}
+  - component: {fileID: 1119883579098640298}
   m_Layer: 11
   m_Name: upperarm_r
   m_TagString: Limb
@@ -3375,6 +3474,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &1119883579098640298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3023254600814940911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &3031762165643511045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3913,7 +4025,7 @@ MonoBehaviour:
   solverIterationCount: 5
   visualizeTargetPose: 0
   mappingWeight: 1
-  pinWeight: 0.5
+  pinWeight: 0.6
   muscleWeight: 0.6
   muscleSpring: 200
   muscleDamper: 200
@@ -5010,6 +5122,7 @@ GameObject:
   - component: {fileID: 4850029924774226373}
   - component: {fileID: 3911452757810407749}
   - component: {fileID: 7986276901268567101}
+  - component: {fileID: 2093256830434331403}
   m_Layer: 11
   m_Name: hand_r
   m_TagString: Limb
@@ -5199,6 +5312,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &2093256830434331403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103878776713282566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &5153618856909286121
 GameObject:
   m_ObjectHideFlags: 0
@@ -5854,6 +5980,7 @@ GameObject:
   - component: {fileID: 6925906327607192127}
   - component: {fileID: 29481172282954881}
   - component: {fileID: 6270560348172686504}
+  - component: {fileID: 2116338663862773193}
   m_Layer: 11
   m_Name: foot_l
   m_TagString: Limb
@@ -6023,6 +6150,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &2116338663862773193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026453493039465069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &7104082083213000497
 GameObject:
   m_ObjectHideFlags: 0
@@ -6260,6 +6400,7 @@ GameObject:
   - component: {fileID: 306151277262385990}
   - component: {fileID: 3852067139011555992}
   - component: {fileID: 8860810133723177452}
+  - component: {fileID: 800360512500920058}
   m_Layer: 11
   m_Name: lowerarm_r
   m_TagString: Limb
@@ -6507,6 +6648,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &800360512500920058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651000020692149606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &7656881857649673394
 GameObject:
   m_ObjectHideFlags: 0
@@ -6841,6 +6995,7 @@ GameObject:
   - component: {fileID: 6477013575614802486}
   - component: {fileID: 5564879762601918053}
   - component: {fileID: 1550242504537420054}
+  - component: {fileID: 8783166902892927035}
   m_Layer: 11
   m_Name: head
   m_TagString: Head
@@ -7161,6 +7316,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 2.5
+--- !u!114 &8783166902892927035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871396300266831527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &8181058358830582010
 GameObject:
   m_ObjectHideFlags: 0
@@ -7206,6 +7374,7 @@ GameObject:
   - component: {fileID: 1871534661409069587}
   - component: {fileID: 8066661595649450288}
   - component: {fileID: 3794450167487571165}
+  - component: {fileID: 1437267935771706922}
   m_Layer: 11
   m_Name: hand_l
   m_TagString: Limb
@@ -7395,6 +7564,19 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 712
+--- !u!114 &1437267935771706922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197683890831380680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
 --- !u!1 &8284450549736490763
 GameObject:
   m_ObjectHideFlags: 0
@@ -7528,6 +7710,7 @@ GameObject:
   - component: {fileID: 8049398299127454545}
   - component: {fileID: 1014961768062567911}
   - component: {fileID: 4043907582674573240}
+  - component: {fileID: 5583617421854856061}
   m_Layer: 11
   m_Name: upperarm_l
   m_TagString: Limb
@@ -7775,3 +7958,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitThreshold: 5
   damageMultiplier: 0.75
+--- !u!114 &5583617421854856061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153759794263178606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53442a7a5f785b4592371c72b4b2673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slicedClip: {fileID: 8300000, guid: 477bd3bf77608a7449ad66bc98add2c8, type: 3}
