@@ -145,6 +145,7 @@ public class GrabPhysics : MonoBehaviour
         poseSetup.SetupPose(resettedHandData);
 
         grab.SetAttachPoint(handType);
+        HandleDrive(false);
 
         isGrabbing = true;
         if (!grab.isGrabbing)
@@ -188,7 +189,7 @@ public class GrabPhysics : MonoBehaviour
         configJoint.connectedAnchor = grab.attachPoint;
         canGrab = false;
         grab.StartCoroutine(grab.Despawn());
-        if(!magazinePouch && !holster)
+        if(!magazinePouch && !holster && grab is not GrabDynamic)
         {
             if(!grab.GetComponent<GrabSecondaryGrip>())
                 transform.rotation = Quaternion.Slerp(transform.rotation, oldRotation, 0.75f);
@@ -685,6 +686,8 @@ public class GrabPhysics : MonoBehaviour
         {
             Destroy(spawnedIcon);
         }
+        if (nearbyRigidbody && isGrabbing)
+            nearbyRigidbody.AddForce((Vector3.down * nearbyRigidbody.mass * 5) + Vector3.down);
     }
     void HoverIcon()
     {

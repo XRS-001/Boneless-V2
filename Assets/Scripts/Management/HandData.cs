@@ -29,10 +29,10 @@ public class HandData : MonoBehaviour
     }
     private void Update()
     {
-        if(handGrab)
+        if (handGrab)
             if (handGrab.grab)
-                if(handGrab.grab is GrabDynamic)
-                    CreateDynamicPose();
+                if (handGrab.grab is GrabDynamic)
+                    Invoke(nameof(CreateDynamicPose), 0.01f);
     }
     void CreateDynamicPose()
     {

@@ -427,6 +427,8 @@ public class GameManager : MonoBehaviour
     {
         if (volumeText)
         {
+            if(defaultAudio)
+                defaultAudio.volume = volume;
             if(audioPlaying)
                 audioPlaying.volume = volume;
             volumeText.text = value.ToString("0.0");

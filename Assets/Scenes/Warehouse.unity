@@ -55296,7 +55296,7 @@ MonoBehaviour:
   waveUIElements: []
   enemies: []
   waveAudio: []
-  defaultAudio: {fileID: 0}
+  defaultAudio: {fileID: 1400071968}
   enemySpawnPoints: []
   enemiesActive: 0
   enemiesFought: 0
@@ -109846,7 +109846,7 @@ PrefabInstance:
     - target: {fileID: 721445438599454550, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 721445438599454550, guid: 4f5c58a571b159e4fb9b25f3eb0c1823,
         type: 3}
@@ -129464,7 +129464,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8153223848652055873}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -130091,7 +130091,7 @@ PrefabInstance:
     - target: {fileID: 6364178876009395306, guid: 43ceb3b63bbf8694f81628423b4ff269,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.007586
+      value: -1.028
       objectReference: {fileID: 0}
     - target: {fileID: 6364178876009395306, guid: 43ceb3b63bbf8694f81628423b4ff269,
         type: 3}
@@ -130101,7 +130101,7 @@ PrefabInstance:
     - target: {fileID: 6364178876009395306, guid: 43ceb3b63bbf8694f81628423b4ff269,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.0085561
+      value: 1.977
       objectReference: {fileID: 0}
     - target: {fileID: 6364178876009395306, guid: 43ceb3b63bbf8694f81628423b4ff269,
         type: 3}
