@@ -17,7 +17,8 @@ public class RayInteract : MonoBehaviour
 
     private Graphic image;
     private GameObject element;
-    private bool hasChangedOpacity;
+    [HideInInspector]
+    public bool hasChangedOpacity;
     private bool hasTouched;
     private void Start()
     {

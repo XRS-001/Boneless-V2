@@ -48463,6 +48463,9 @@ MonoBehaviour:
   recordingIcon: {fileID: 306958612}
   player: {fileID: 286862140}
   menu: {fileID: 2090029134}
+  rayInteracts:
+  - {fileID: 2097748252}
+  - {fileID: 2038557615}
   despawnItems: 0
   healthText: {fileID: 1239593197}
   sceneChangeButton: {fileID: 0}
@@ -69168,6 +69171,7 @@ MonoBehaviour:
   point3: {fileID: 2104364864}
   lineRenderer: {fileID: 2038557616}
   vertexCount: 6
+  hasChangedOpacity: 0
 --- !u!120 &2038557616
 LineRenderer:
   serializedVersion: 2
@@ -71019,6 +71023,7 @@ MonoBehaviour:
   point3: {fileID: 2031438172}
   lineRenderer: {fileID: 2097748253}
   vertexCount: 6
+  hasChangedOpacity: 0
 --- !u!120 &2097748253
 LineRenderer:
   serializedVersion: 2

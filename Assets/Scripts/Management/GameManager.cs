@@ -1,9 +1,6 @@
-using RootMotion.Demos;
 using RootMotion.FinalIK;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -63,6 +60,8 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public GameObject menu;
+    private GameObject spawnedMenu;
+    public RayInteract[] rayInteracts;
     [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
     public bool despawnItems = true;
     public TextMeshProUGUI healthText;
@@ -375,15 +374,19 @@ public class GameManager : MonoBehaviour
     }
     public void ToggleMenu()
     {
-        if (menu.activeInHierarchy)
+        if (spawnedMenu)
         {
-            menu.SetActive(false);
+            foreach (RayInteract ray in rayInteracts)
+                ray.hasChangedOpacity = false;
+            spawnedMenu.SetActive(false);
+            Destroy(spawnedMenu);
         }
         else
         {
-            menu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
-            menu.transform.position = new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z);
-            menu.SetActive(true);
+            spawnedMenu = Instantiate(menu, menu.transform.parent);
+            spawnedMenu.SetActive(true);
+            spawnedMenu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
+            spawnedMenu.transform.position = new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z);
         }
     }
 
@@ -444,14 +447,14 @@ public class GameManager : MonoBehaviour
             {
                 ToggleMenu();
             }
-            if (menu.activeInHierarchy)
+            if(spawnedMenu)
             {
-                Quaternion oldRotation = menu.transform.rotation;
-                menu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
-                Quaternion newRotation = menu.transform.rotation;
+                Quaternion oldRotation = spawnedMenu.transform.rotation;
+                spawnedMenu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
+                Quaternion newRotation = spawnedMenu.transform.rotation;
 
-                menu.transform.rotation = Quaternion.Slerp(oldRotation, newRotation, 0.1f);
-                menu.transform.position = Vector3.Lerp(menu.transform.position, new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z), 0.1f);
+                spawnedMenu.transform.rotation = Quaternion.Slerp(oldRotation, newRotation, 0.1f);
+                spawnedMenu.transform.position = Vector3.Lerp(spawnedMenu.transform.position, new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z), 0.1f);
             }
         }
 
