@@ -73,7 +73,7 @@ public class GrabPhysics : MonoBehaviour
     }
     void HandleDrive(bool exiting)
     {
-        if (!exiting)
+        if (!exiting && nearbyRigidbody.mass > 1)
         {
             foreach (ArmJoint joint in armJoints)
             {
