@@ -3874,6 +3874,7 @@ MonoBehaviour:
   point3: {fileID: 745771431}
   lineRenderer: {fileID: 348067821}
   vertexCount: 6
+  hasChangedOpacity: 0
 --- !u!120 &348067821
 LineRenderer:
   serializedVersion: 2
@@ -18922,6 +18923,7 @@ MonoBehaviour:
   point3: {fileID: 1617489014}
   lineRenderer: {fileID: 1871201761}
   vertexCount: 6
+  hasChangedOpacity: 0
 --- !u!120 &1871201761
 LineRenderer:
   serializedVersion: 2
@@ -21889,6 +21891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   body: {fileID: 0}
+  playerSpawnPoint: {x: 0, y: 0, z: 0}
   canKill: 0
   mouthAudio: {fileID: 0}
   hitSounds: []
@@ -21908,24 +21911,24 @@ MonoBehaviour:
   recordingIcon: {fileID: 0}
   player: {fileID: 0}
   menu: {fileID: 0}
+  rayInteracts: []
   despawnItems: 1
-  healthText: {fileID: 0}
   sceneChangeButton: {fileID: 357027825}
   spawnableItems: []
   itemSpawnPoint: {fileID: 0}
   audioSource: {fileID: 0}
   UIClickSound: {fileID: 0}
   fpsText: {fileID: 2114361127}
-  volumeText: {fileID: 0}
   waveUIElements: []
   enemies: []
   waveAudio: []
-  waveAudioSource: {fileID: 0}
-  defaultMusic: {fileID: 0}
+  defaultAudio: {fileID: 0}
   enemySpawnPoints: []
   enemiesActive: 0
   enemiesFought: 0
   waveRunning: 0
+  enemiesLeftUIElements: []
+  enemiesLeftText: {fileID: 0}
 --- !u!82 &2145428188
 AudioSource:
   m_ObjectHideFlags: 0

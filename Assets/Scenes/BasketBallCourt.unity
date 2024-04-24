@@ -48467,7 +48467,6 @@ MonoBehaviour:
   - {fileID: 2097748252}
   - {fileID: 2038557615}
   despawnItems: 0
-  healthText: {fileID: 1239593197}
   sceneChangeButton: {fileID: 0}
   spawnableItems:
   - {fileID: 214888083680420335, guid: a998b6b3a179a36418d06529bc2f85bb, type: 3}
@@ -48499,7 +48498,6 @@ MonoBehaviour:
   audioSource: {fileID: 1400071969}
   UIClickSound: {fileID: 8300000, guid: 85a9530aaf0749f4eb573b4c81cb0191, type: 3}
   fpsText: {fileID: 833885238}
-  volumeText: {fileID: 635216089}
   waveUIElements:
   - {fileID: 8370284}
   - {fileID: 714507760}
@@ -70587,6 +70585,7 @@ GameObject:
   - component: {fileID: 2090029138}
   - component: {fileID: 2090029137}
   - component: {fileID: 2090029136}
+  - component: {fileID: 2090029139}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -70677,6 +70676,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2090029139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090029134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73334aecb8bbad64e83e39d82281703f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 1239593197}
+  volumeText: {fileID: 635216089}
+  timeText: {fileID: 713631293}
+  fpsText: {fileID: 833885238}
 --- !u!1 &2090219690
 GameObject:
   m_ObjectHideFlags: 0

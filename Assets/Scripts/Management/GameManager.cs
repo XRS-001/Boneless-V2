@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public RayInteract[] rayInteracts;
     [Tooltip("The \"done\" button at the start after calculating height (will be null if not in start scene)")]
     public bool despawnItems = true;
-    public TextMeshProUGUI healthText;
+    private TextMeshProUGUI healthText;
     public GameObject sceneChangeButton;
     public GameObject[] spawnableItems;
     public Transform itemSpawnPoint;
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     private bool altCameraFollow;
     private float deltaTime;
     public TextMeshProUGUI fpsText;
-    public TextMeshProUGUI volumeText;
+    private TextMeshProUGUI volumeText;
     private float value = 0.5f;
     [Header("Waves")]
     public GameObject[] waveUIElements;
@@ -384,6 +384,11 @@ public class GameManager : MonoBehaviour
         else
         {
             spawnedMenu = Instantiate(menu, menu.transform.parent);
+            healthText = spawnedMenu.GetComponent<SettingsTexts>().healthText;
+            volumeText = spawnedMenu.GetComponent<SettingsTexts>().volumeText;
+            GetComponent<TimeDisplay>().text = spawnedMenu.GetComponent<SettingsTexts>().timeText;
+            fpsText = spawnedMenu.GetComponent<SettingsTexts>().fpsText;
+
             spawnedMenu.SetActive(true);
             spawnedMenu.transform.LookAt(new Vector3(player.position.x, body.Fender.transform.position.y + 1, player.position.z));
             spawnedMenu.transform.position = new Vector3((player.position + player.transform.forward).x, body.Fender.transform.position.y + 1, (player.position + player.transform.forward).z);
