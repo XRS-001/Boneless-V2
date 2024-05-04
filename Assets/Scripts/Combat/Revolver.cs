@@ -43,7 +43,7 @@ public class Revolver : MonoBehaviour
     public string loaderName;
     private RevolverBullets bullets;
     public GameObject bulletLoadAnimation;
-
+    private bool canLoad = true;
 
     [Header("FX")]
     public GameObject muzzleFlash;
@@ -97,6 +97,7 @@ public class Revolver : MonoBehaviour
                 Destroy(bullets.transform.parent.gameObject);
                 bullets = null;
                 ammo = 0;
+                Invoke(nameof(DelayCanLoad), 0.5f);
             }
         }
         if (grab.isGrabbing)
@@ -147,13 +148,18 @@ public class Revolver : MonoBehaviour
                 Collider[] potentialMags = Physics.OverlapSphere(loadingPoint.position, loadingRadius);
                 foreach (Collider collider in potentialMags)
                     if (collider.transform.GetComponentInParent<RevolverLoader>())
-                        if (collider.transform.GetComponentInParent<RevolverLoader>().loaderName == loaderName && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing && ammo == 0)
+                        if (collider.transform.GetComponentInParent<RevolverLoader>().loaderName == loaderName && collider.transform.GetComponentInParent<GrabTwoAttach>().isGrabbing && ammo == 0 && canLoad && collider.transform.GetComponentInParent<RevolverLoader>().isLoaded)
                             Load(collider.transform.GetComponentInParent<RevolverLoader>());
             }
         }
     }
+    void DelayCanLoad()
+    {
+        canLoad = true;
+    }
     void Load(RevolverLoader loader)
     {
+        canLoad = false;
         animator.enabled = true;  
         animator.Play("BulletsLoad");
         AudioSource.PlayClipAtPoint(loadSound, loadingPoint.position, 0.25f);
@@ -261,7 +267,7 @@ public class Revolver : MonoBehaviour
 
                 spawnedBullet.AddForce(firePoint.forward * bulletForce);
                 GetComponent<Rigidbody>().mass *= 20;
-                GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce);
+                GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce * 1.5f);
                 Invoke(nameof(RegainControl), 0.2f);
             }
             else

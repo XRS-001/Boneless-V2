@@ -3444,13 +3444,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -8444,13 +8444,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1125
+    positionSpring: 1600
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1125
+    positionSpring: 1600
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -11399,7 +11399,7 @@ ConfigurableJoint:
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 16500
+    positionSpring: 19000
     positionDamper: 500
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -11552,7 +11552,7 @@ Rigidbody:
   m_GameObject: {fileID: 342587803}
   serializedVersion: 4
   m_Mass: 30
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -12792,7 +12792,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360315768}
   m_LocalRotation: {x: 0.40557975, y: 0.579228, z: 0.40557975, w: 0.579228}
-  m_LocalPosition: {x: -0.01, y: 0.01, z: -0.125}
+  m_LocalPosition: {x: -0.01, y: -0.013077727, z: -0.15916753}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14270,7 +14270,7 @@ Rigidbody:
   m_GameObject: {fileID: 395463273}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -23112,13 +23112,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -36441,8 +36441,8 @@ MonoBehaviour:
   - {fileID: 1849339580}
   - {fileID: 276302955}
   moveForceCrouch: 40
-  moveForceWalk: 40
-  moveForceSprint: 70
+  moveForceWalk: 50
+  moveForceSprint: 80
   angularDragOnMove: 50
   angularBreakDrag: 200
   zipLining: 0
@@ -40686,7 +40686,7 @@ Rigidbody:
   m_GameObject: {fileID: 1172708311}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -47148,8 +47148,8 @@ GameObject:
   - component: {fileID: 1381814855}
   - component: {fileID: 1381814854}
   - component: {fileID: 1381814853}
-  - component: {fileID: 1381814852}
   - component: {fileID: 1381814856}
+  - component: {fileID: 1381814857}
   m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
@@ -47157,28 +47157,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1381814852
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381814851}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1381814853
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -47258,6 +47236,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: 6
   gameManager: {fileID: 1400071965}
+--- !u!65 &1381814857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381814851}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.76694775, z: 10}
+  m_Center: {x: 0, y: -0.38347387, z: 0}
 --- !u!1 &1384358876
 GameObject:
   m_ObjectHideFlags: 0
@@ -53018,13 +53017,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -60871,7 +60870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818269618}
   m_LocalRotation: {x: 0.579228, y: 0.4055798, z: 0.579228, w: 0.4055798}
-  m_LocalPosition: {x: -0.03, y: -0.03, z: -0.125}
+  m_LocalPosition: {x: -0.03, y: -0.025716094, z: -0.16600776}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62186,13 +62185,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1500
+    positionSpring: 2000
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
@@ -66392,7 +66391,7 @@ Rigidbody:
   m_GameObject: {fileID: 1951543673}
   serializedVersion: 4
   m_Mass: 30
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -69550,13 +69549,13 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 1125
+    positionSpring: 1600
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 1125
+    positionSpring: 1600
     positionDamper: 75
     maximumForce: 3.4028233e+38
     useAcceleration: 0

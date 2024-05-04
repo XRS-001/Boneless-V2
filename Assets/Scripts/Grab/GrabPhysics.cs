@@ -73,24 +73,27 @@ public class GrabPhysics : MonoBehaviour
     }
     void HandleDrive(bool exiting)
     {
-        if (!exiting && nearbyRigidbody.mass > 1)
+        if (nearbyRigidbody)
         {
-            foreach (ArmJoint joint in armJoints)
+            if (!exiting && nearbyRigidbody.mass > 1)
             {
-                JointDrive newDrive = joint.startDrive;
+                foreach (ArmJoint joint in armJoints)
+                {
+                    JointDrive newDrive = joint.startDrive;
 
-                newDrive.positionDamper *= 2;
+                    newDrive.positionDamper *= 2;
 
-                joint.joint.angularXDrive = newDrive;
-                joint.joint.angularYZDrive = newDrive;
+                    joint.joint.angularXDrive = newDrive;
+                    joint.joint.angularYZDrive = newDrive;
+                }
             }
-        }
-        else
-        {
-            foreach (ArmJoint joint in armJoints)
+            else
             {
-                joint.joint.angularXDrive = joint.startDrive;
-                joint.joint.angularYZDrive = joint.startDrive;
+                foreach (ArmJoint joint in armJoints)
+                {
+                    joint.joint.angularXDrive = joint.startDrive;
+                    joint.joint.angularYZDrive = joint.startDrive;
+                }
             }
         }
     }
@@ -223,7 +226,7 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = true;
             }
-            yield return new WaitForSeconds(0.005f);
+            yield return new WaitForSeconds(0.01f);
 
             foreach (ArmJoint joint in armJoints)
             {
@@ -399,7 +402,7 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayExit(GrabTwoAttach oldGrab)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         if (!isGrabbing && oldGrab)
         {

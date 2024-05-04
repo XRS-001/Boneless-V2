@@ -148,17 +148,8 @@ public class HexaBody : MonoBehaviour
     }
     void Climbing()
     {
-        bool isClimbing = false;
-        foreach (GrabPhysics grab in grabbing)
-        {
-            if (grab.isClimbing)
-            {
-                isClimbing = true;
-            }
-        }
         if (detectGrounded.collided)
         {
-            isClimbing = false;
             finalSolver.solver.locomotion.weight = Mathf.Lerp(finalSolver.solver.locomotion.weight, 1, 0.1f);
         }
         else
@@ -216,50 +207,20 @@ public class HexaBody : MonoBehaviour
                     }
                 }
             }
-            if (!vaulting && !isClimbing && !zipLining)
-            {
-                float drag = Mathf.Clamp(1 / Monoball.GetComponent<Rigidbody>().velocity.magnitude, 10, float.PositiveInfinity);
-
-                Head.GetComponent<Rigidbody>().drag = drag;
-                Monoball.GetComponent<Rigidbody>().drag = drag;
-                Spine.GetComponent<Rigidbody>().drag = drag;
-                Fender.GetComponent<Rigidbody>().drag = drag;
-            }
-            else if (isClimbing)
-            {
-                Head.GetComponent<Rigidbody>().drag = 5;
-                Monoball.GetComponent<Rigidbody>().drag = 5;
-                Spine.GetComponent<Rigidbody>().drag = 5;
-                Fender.GetComponent<Rigidbody>().drag = 5;
-            }
-            else
-            {
-                Head.GetComponent<Rigidbody>().drag = 0;
-                Monoball.GetComponent<Rigidbody>().drag = 0;
-                Spine.GetComponent<Rigidbody>().drag = 0;
-                Fender.GetComponent<Rigidbody>().drag = 0;
-            }
         }
-        else if (detectGrounded.collided)
+        if (detectGrounded.collided)
         {
-            Head.GetComponent<Rigidbody>().drag = 5;
-            Monoball.GetComponent<Rigidbody>().drag = 5;
-            Spine.GetComponent<Rigidbody>().drag = 5;
-            Fender.GetComponent<Rigidbody>().drag = 5;
-        }
-        else if (isClimbing)
-        {
-            Head.GetComponent<Rigidbody>().drag = 5;
-            Monoball.GetComponent<Rigidbody>().drag = 5;
-            Spine.GetComponent<Rigidbody>().drag = 5;
-            Fender.GetComponent<Rigidbody>().drag = 5;
+            Chest.GetComponent<Rigidbody>().drag = 3;
+            Monoball.GetComponent<Rigidbody>().drag = 3;
+            Fender.GetComponent<Rigidbody>().drag = 3;
+            Head.GetComponent<Rigidbody>().drag = 3;
         }
         else
         {
-            Head.GetComponent<Rigidbody>().drag = 0;
-            Monoball.GetComponent<Rigidbody>().drag = 0;
-            Spine.GetComponent<Rigidbody>().drag = 0;
-            Fender.GetComponent<Rigidbody>().drag = 0;
+            Chest.GetComponent<Rigidbody>().drag = 1;
+            Monoball.GetComponent<Rigidbody>().drag = 1;
+            Fender.GetComponent<Rigidbody>().drag = 1;
+            Head.GetComponent<Rigidbody>().drag = 1;
         }
     }
     IEnumerator Vault()

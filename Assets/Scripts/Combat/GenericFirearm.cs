@@ -359,7 +359,7 @@ public class GenericFirearm : MonoBehaviour
 
                 spawnedBullet.AddForce(firePoint.forward * bulletForce);
                 GetComponent<Rigidbody>().mass *= 20;
-                GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce);
+                GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce * 1.5f);
                 slideJoint.targetPosition *= -1;
                 Invoke(nameof(RegainControl), 0.1f);
                 EjectCasing();
