@@ -268,7 +268,7 @@ public class Revolver : MonoBehaviour
                 spawnedBullet.AddForce(firePoint.forward * bulletForce);
                 GetComponent<Rigidbody>().mass *= 20;
                 GetComponent<Rigidbody>().AddTorque(-firePoint.right * recoilForce * 1.5f);
-                Invoke(nameof(RegainControl), 0.2f);
+                Invoke(nameof(RegainControl), 0.1f);
             }
             else
             {

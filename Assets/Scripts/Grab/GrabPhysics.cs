@@ -402,7 +402,7 @@ public class GrabPhysics : MonoBehaviour
     }
     IEnumerator DelayExit(GrabTwoAttach oldGrab)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         if (!isGrabbing && oldGrab)
         {

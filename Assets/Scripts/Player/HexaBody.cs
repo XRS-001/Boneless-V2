@@ -129,7 +129,7 @@ public class HexaBody : MonoBehaviour
     {
         if (!detectGrounded.collided)
         {
-            Monoball.GetComponent<Rigidbody>().AddForce(Physics.gravity * 50);
+            Monoball.GetComponent<Rigidbody>().AddForce(Physics.gravity * 125);
             zipLining = true;
         }
     }
