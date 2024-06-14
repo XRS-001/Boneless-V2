@@ -81,7 +81,8 @@ public class GrabPhysics : MonoBehaviour
                 {
                     JointDrive newDrive = joint.startDrive;
 
-                    newDrive.positionDamper *= 2;
+                    newDrive.positionSpring *= 1.5f;
+                    newDrive.positionDamper *= 3f;
 
                     joint.joint.angularXDrive = newDrive;
                     joint.joint.angularYZDrive = newDrive;
@@ -93,6 +94,30 @@ public class GrabPhysics : MonoBehaviour
                 {
                     joint.joint.angularXDrive = joint.startDrive;
                     joint.joint.angularYZDrive = joint.startDrive;
+                }
+            }
+        }
+        else
+        {
+            if (exiting)
+            {
+                foreach (ArmJoint joint in armJoints)
+                {
+                    joint.joint.angularXDrive = joint.startDrive;
+                    joint.joint.angularYZDrive = joint.startDrive;
+                }
+            }
+            else
+            {
+                foreach (ArmJoint joint in armJoints)
+                {
+                    JointDrive newDrive = joint.startDrive;
+
+                    newDrive.positionSpring *= 3f;
+                    newDrive.positionDamper *= 10f;
+
+                    joint.joint.angularXDrive = newDrive;
+                    joint.joint.angularYZDrive = newDrive;
                 }
             }
         }
@@ -226,17 +251,16 @@ public class GrabPhysics : MonoBehaviour
             {
                 joint.rb.isKinematic = true;
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
 
             foreach (ArmJoint joint in armJoints)
             {
                 joint.rb.isKinematic = false;
             }
-            yield return new WaitForSeconds(0.5f);
-
+            yield return new WaitForSeconds(0.4f);
             foreach (Collider collider in oldGrab.colliders)
             {
-                if(collider)
+                if (collider)
                     collider.enabled = true;
             }
         }
@@ -439,6 +463,11 @@ public class GrabPhysics : MonoBehaviour
                             Physics.IgnoreCollision(collider, armCollider, false);
                         }
                     }
+                }
+                foreach (Collider collider in oldGrab.colliders)
+                {
+                    if (collider)
+                        collider.enabled = true;
                 }
             }
             else
@@ -754,7 +783,7 @@ public class GrabPhysics : MonoBehaviour
         {
             Physics.IgnoreCollision(collider, colliderToIgnore, true);
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (Collider colliderToIgnore in collidersToIgnore)
         {

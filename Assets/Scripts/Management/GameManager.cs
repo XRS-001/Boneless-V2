@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Valve.VR;
 using static EnumDeclaration;
 public class VRIKData
 {
@@ -74,6 +75,9 @@ public class GameManager : MonoBehaviour
     private float deltaTime;
     public TextMeshProUGUI fpsText;
     private TextMeshProUGUI volumeText;
+    private TextMeshProUGUI turnModeText;
+    private TextMeshProUGUI smoothTurnSpeedText;
+    private TextMeshProUGUI snapTurnDegreeText;
     private float value = 0.5f;
     [Header("Waves")]
     public GameObject[] waveUIElements;
@@ -107,6 +111,20 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        if (!SteamVR.active)
+        {
+            SteamVR.Initialize();
+        }
+
+        if (GameObject.Find("SavedPlayerData"))
+        {
+            CrossScenePlayerData data = GameObject.Find("SavedPlayerData").GetComponent<CrossScenePlayerData>();
+            body.turnType = data.turnType;
+            body.smoothTurnSpeed = data.smoothTurnSpeed;
+            body.snapTurnDegree = data.snapTurnDegree;
+            Destroy(GameObject.Find("SavedPlayerData"));
+        }
+
         volume = value;
         if(postProcessingVolume)
             if (postProcessingVolume.profile.TryGet<Vignette>(out vignette))
@@ -318,6 +336,53 @@ public class GameManager : MonoBehaviour
         }
         waveRunning = false;
     }
+    public void ChangeTurnMode(bool up)
+    {
+        if (up)
+        {
+            switch(body.turnType)
+            {
+                case turnType.none:
+                    body.turnType = turnType.snap;
+                    break;
+                case turnType.snap:
+                    body.turnType = turnType.smooth;
+                    break;
+                case turnType.smooth:
+                    body.turnType = turnType.none;
+                    break;
+            }
+        }
+        else
+        {
+            switch (body.turnType)
+            {
+                case turnType.none:
+                    body.turnType = turnType.smooth;
+                    break;
+                case turnType.smooth:
+                    body.turnType = turnType.snap;
+                    break;
+                case turnType.snap:
+                    body.turnType = turnType.none;
+                    break;
+            }
+        }
+    }
+    public void SetSmoothTurnSpeed(bool up)
+    {
+        if (up)
+            body.smoothTurnSpeed += 1;
+        else if (body.smoothTurnSpeed != 0)
+            body.smoothTurnSpeed -= 1;
+    }
+    public void SetSnapTurnDegree(bool up)
+    {
+        if (up)
+            body.snapTurnDegree += 10;
+        else if (body.snapTurnDegree != 0)
+            body.snapTurnDegree -= 10;
+    }
     public void StartWave(string difficulty)
     {
         if (!waveRunning)
@@ -384,8 +449,12 @@ public class GameManager : MonoBehaviour
         else
         {
             spawnedMenu = Instantiate(menu, menu.transform.parent);
+            recordingIcon = spawnedMenu.GetComponent<SettingsTexts>().recordingIcon;
             healthText = spawnedMenu.GetComponent<SettingsTexts>().healthText;
             volumeText = spawnedMenu.GetComponent<SettingsTexts>().volumeText;
+            turnModeText = spawnedMenu.GetComponent<SettingsTexts>().turnModeText;
+            smoothTurnSpeedText = spawnedMenu.GetComponent<SettingsTexts>().smoothTurnSpeedText;
+            snapTurnDegreeText = spawnedMenu.GetComponent<SettingsTexts>().snapTurnDegreeText;
             GetComponent<TimeDisplay>().text = spawnedMenu.GetComponent<SettingsTexts>().timeText;
             fpsText = spawnedMenu.GetComponent<SettingsTexts>().fpsText;
 
@@ -478,12 +547,40 @@ public class GameManager : MonoBehaviour
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
 
+        if (turnModeText && snapTurnDegreeText && smoothTurnSpeedText)
+        {
+            switch (body.turnType)
+            {
+                case turnType.none:
+                    turnModeText.text = "off";
+                    break;
+
+                case turnType.snap:
+                    turnModeText.text = "snap";
+                    break;
+
+                case turnType.smooth:
+                    turnModeText.text = "smooth";
+                    break;
+            }
+            snapTurnDegreeText.text = body.snapTurnDegree.ToString();
+            smoothTurnSpeedText.text = body.smoothTurnSpeed.ToString();
+        }
+
         if (fpsText)
         {
             fpsText.text = string.Format("{0:0.} fps", fps);
         }
         if (externalCamera)
         {
+            if (externalCamera.enabled && recordingIcon)
+            {
+                recordingIcon.SetActive(true);
+            }
+            else if (recordingIcon)
+            {
+                recordingIcon.SetActive(false);
+            }
             if (altCameraFollow)
             {
                 Quaternion previousRotation = externalCamera.transform.rotation;
@@ -534,12 +631,10 @@ public class GameManager : MonoBehaviour
         {
             if (externalCamera.enabled)
             {
-                recordingIcon.SetActive(false);
                 externalCamera.enabled = false;
             }
             else
             {
-                recordingIcon.SetActive(true);
                 externalCamera.enabled = true;
             }
         }
@@ -590,6 +685,15 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeScene(string scene)
     {
+        if (body)
+        {
+            GameObject dataObject = new GameObject("SavedPlayerData");
+            dataObject.AddComponent<CrossScenePlayerData>();
+            dataObject.GetComponent<CrossScenePlayerData>().turnType = body.turnType;
+            dataObject.GetComponent<CrossScenePlayerData>().smoothTurnSpeed = body.smoothTurnSpeed;
+            dataObject.GetComponent<CrossScenePlayerData>().snapTurnDegree = body.snapTurnDegree;
+            DontDestroyOnLoad(dataObject);
+        }
         SaveData();
         SceneManager.LoadScene(scene, LoadSceneMode.Single);
     }

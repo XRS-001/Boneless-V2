@@ -9,4 +9,8 @@ public class SettingsTexts : MonoBehaviour
     public TextMeshProUGUI volumeText;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI fpsText;
+    public TextMeshProUGUI turnModeText;
+    public TextMeshProUGUI smoothTurnSpeedText;
+    public TextMeshProUGUI snapTurnDegreeText;
+    public GameObject recordingIcon;
 }

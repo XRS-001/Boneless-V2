@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Camera: {fileID: 69769642}
   m_OriginBaseGameObject: {fileID: 4454750}
   m_CameraFloorOffsetObject: {fileID: 828951570}
-  m_RequestedTrackingOriginMode: 0
+  m_RequestedTrackingOriginMode: 2
   m_CameraYOffset: 0
 --- !u!1 &5106206
 GameObject:
@@ -5395,7 +5395,7 @@ MonoBehaviour:
   rightHandAnchor: {fileID: 1994593117}
   handAnchorPositionOffset: {x: 0, y: 0, z: 0}
   handAnchorRotationOffset: {x: 0, y: -90, z: -90}
-  scaleMlp: 1.075
+  scaleMlp: 1.1
   data:
     scale: 0
     head:

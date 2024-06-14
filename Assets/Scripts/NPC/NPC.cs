@@ -215,7 +215,7 @@ public class NPC : MonoBehaviour
                     break;
             }
             canPunch = false;
-            Invoke(nameof(DelayCanPunch), 1);
+            Invoke(nameof(DelayCanPunch), 0.5f);
         }
     }
     void DelayCanPunch()

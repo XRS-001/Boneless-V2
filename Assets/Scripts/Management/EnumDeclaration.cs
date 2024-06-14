@@ -21,4 +21,5 @@ public class EnumDeclaration : MonoBehaviour
         Glass,
         Water
     }
+    public enum turnType { none, smooth, snap}
 }

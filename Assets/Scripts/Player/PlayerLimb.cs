@@ -13,7 +13,7 @@ public class PlayerLimb : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ragdoll"))
         {
-            if (collision.relativeVelocity.magnitude > hitThreshold)
+            if (collision.relativeVelocity.magnitude > hitThreshold && !collision.collider.transform.root.GetComponent<NPC>().dead)
             {
                 gameManager.DealDamage(damage);
             }

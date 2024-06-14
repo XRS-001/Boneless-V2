@@ -80,7 +80,7 @@ PlayerSettings:
   androidFullscreenMode: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
-  runInBackground: 0
+  runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
@@ -92,7 +92,7 @@ PlayerSettings:
   bakeCollisionMeshes: 1
   forceSingleInstance: 0
   useFlipModelSwapchain: 1
-  resizableWindow: 0
+  resizableWindow: 1
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
   gpuSkinning: 1
@@ -138,9 +138,9 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.1
   preloadedAssets:
-  - {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
   - {fileID: 6711166093318596888, guid: f9228b1b4a5303d4bb3816edae2fd685, type: 2}
   - {fileID: 11400000, guid: d11085e9cf8ab95498684320056a3618, type: 2}
+  - {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
   - {fileID: -4684544740340070790, guid: 54c65ba58f3eef24b9b399648fc9b1d8, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
