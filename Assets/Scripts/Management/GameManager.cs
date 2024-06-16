@@ -466,7 +466,7 @@ public class GameManager : MonoBehaviour
 
     void Kill()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ChangeScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator HealPlayer()
