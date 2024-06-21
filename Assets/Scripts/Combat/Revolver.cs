@@ -240,6 +240,8 @@ public class Revolver : MonoBehaviour
         {
             if (primed)
             {
+                ForceTubeVRInterface.Shoot(255, 255, 0.1f, ForceTubeVRChannel.pistol1);
+                ForceTubeVRInterface.Shoot(255, 255, 0.1f, ForceTubeVRChannel.rifle);
                 hasPulledTrigger = true;
                 if (ammo > 0 && primed)
                 {

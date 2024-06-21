@@ -171,6 +171,8 @@ public class Shotgun : MonoBehaviour
     {
         if (ammo > 0 && primed && !hasPulledTrigger)
         {
+            ForceTubeVRInterface.Shoot(255, 255, 0.1f, ForceTubeVRChannel.pistol1);
+            ForceTubeVRInterface.Shoot(255, 255, 0.1f, ForceTubeVRChannel.rifle);
             hasPulledTrigger = true;
             hasShot = true;
             primed = false;

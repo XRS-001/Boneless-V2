@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        ForceTubeVRInterface.InitAsync(false);
         if (!SteamVR.active)
         {
             SteamVR.Initialize();

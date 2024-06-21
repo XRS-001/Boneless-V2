@@ -334,6 +334,8 @@ public class GenericFirearm : MonoBehaviour
         {
             if (!hasPulledTrigger || fullAuto)
             {
+                ForceTubeVRInterface.Shoot(255, 255, 0.1f, ForceTubeVRChannel.pistol1);
+                ForceTubeVRInterface.Shoot(255, 255, 0.1f, ForceTubeVRChannel.rifle);
                 hasPulledTrigger = true;
                 shooting = true;
                 if (ammo > 0 && primed)
